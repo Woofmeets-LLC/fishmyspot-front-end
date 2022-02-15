@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "food-truck";
+    src: url("/fonts/food-truck-signage-regular.ttf");
+}
+@font-face {
+    font-family: "trade-gothic";
+    src: url("/fonts/Trade-Gothic-LT.ttf");
+}
+@font-face {
+    font-family: "trade-gothic-bold";
+    src: url("/fonts/Trade-Gothic-LT-Bold.ttf");
+}
