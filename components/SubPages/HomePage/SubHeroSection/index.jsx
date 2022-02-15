@@ -2,9 +2,9 @@ import React from 'react';
 
 const SubHeroSection = () => {
     return (
-        <div>
+        <section>
             This is hero section
-        </div>
+        </section>
     );
 };
 
