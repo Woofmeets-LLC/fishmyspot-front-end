@@ -8,20 +8,25 @@ const Header = () => {
     return (
         <header className="sticky top-0 z-[1000] bg-white shadow">
             <div className="relative container flex items-center h-[70px] 2xl:h-[85px] 3xl:h-[102px]">
-                <div className="flex items-center w-[95px] 2xl:w-[118px] 3xl:w-[134px] h-full mr-4 2xl:mr-6">
-                    <img
-                        src="/images/logo.png"
-                        className="w-full"
-                        alt="logo" />
-                </div>
+                <Link href="/">
+                    <a>
+                        <div className="flex items-center w-[95px] 2xl:w-[118px] 3xl:w-[134px] h-full mr-4 2xl:mr-6">
+                            <img
+                                src="/images/logo.png"
+                                className="w-full"
+                                alt="logo" />
+                        </div>
+                    </a>
+                </Link>
                 <div className="hidden md:flex items-center w-[300px] lg:w-[500px] 2xl:w-[620px] 3xl:w-[818px] h-full border-l px-8 lg:px-16">
                     <div className="flex w-full h-8 xl:h-[35px] 2xl:h-[42px] 3xl:h-[47px] border rounded">
                         <span className="flex justify-center items-center h-full w-8 2xl:w-10">
-                            <AiOutlineSearch className="xl:text-xl 2xl:text-2xl" />
+                            <AiOutlineSearch className="text-primary xl:text-xl 2xl:text-2xl" />
                         </span>
                         <input
                             className="block w-full appearance-none p-1 bg-transparent border-none text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            type="text" />
+                            type="text"
+                            placeholder="Search..." />
                     </div>
                 </div>
                 <div
@@ -55,7 +60,7 @@ const Header = () => {
                     </button>
                 </div>
             </div>
-        </header>
+        </header >
     );
 };
 
