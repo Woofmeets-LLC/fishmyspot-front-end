@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 
+
 const Header = () => {
     const [isActive, setIsActive] = useState();
     return (
@@ -23,7 +24,9 @@ const Header = () => {
                             type="text" />
                     </div>
                 </div>
-                <div className={`absolute md:static top-[74px] right-0 md:flex md:items-center w-[150px] md:w-auto md:h-[70px] 2xl:h-[85px] 3xl:h-[102px] md:ml-auto space-y-2 md:space-y-0 md:space-x-10 bg-white ${isActive ? "p-2 rounded border md:border-0" : "h-0 overflow-hidden p-0"}`}>
+                <div
+                    style={{ transition: "all 0.2s ease!important" }}
+                    className={`absolute md:static top-[74px] right-0 block md:flex md:items-center w-[150px] md:w-auto md:h-[70px] 2xl:h-[85px] 3xl:h-[102px] md:ml-auto space-y-2 md:space-y-0 md:space-x-10 bg-white transition transform px-2 ${isActive ? "h-auto py-2 rounded border md:border-0" : "h-0 overflow-hidden py-0"}`}>
                     <Link href="/list-your-spot" >
                         <a className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</a>
                     </Link>
