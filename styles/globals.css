@@ -14,3 +14,20 @@
     font-family: "trade-gothic-bold";
     src: url("/fonts/Trade-Gothic-LT-Bold.ttf");
 }
+
+/* rc slider css [start] */
+.rc-slider-track.rc-slider-track-1 {
+    @apply bg-primary;
+}
+.rc-slider-handle.rc-slider-handle-1,
+.rc-slider-handle.rc-slider-handle-2 {
+    @apply border-primary;
+}
+
+.rc-slider-handle:active,
+.rc-slider-handle:hover,
+.rc-slider-handle-click-focused,
+.rc-slider-handle-dragging {
+    @apply border-primary shadow-none !important;
+}
+/* rc slider css [end] */
