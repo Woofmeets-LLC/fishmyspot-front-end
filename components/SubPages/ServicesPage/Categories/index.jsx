@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { FaStar } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import PriceSlider from '../PriceSlider';
+import CategoriesItem from '../CategoriesItem';
+import DropDown from '../DropDown';
 
 const CategoryList = [
     {
@@ -12,7 +17,13 @@ const CategoryList = [
         ],
     },
     {
-        id: 1,
+        id: 2,
+        title: 'Price range',
+        min: 1,
+        max: 100,
+    },
+    {
+        id: 3,
         title: 'Type fish',
         options: [
             'Fish Name',
@@ -21,16 +32,18 @@ const CategoryList = [
         ],
     },
     {
-        id: 1,
+        id: 4,
         title: 'User rating',
         options: [
-            'One',
-            'Two',
-            'Three'
+            'One star',
+            'Two star',
+            'Three star',
+            'Four star',
+            'Five star'
         ],
     },
     {
-        id: 1,
+        id: 5,
         title: 'Experience',
         options: [
             'Beginning Fishing Lesson',
@@ -39,60 +52,86 @@ const CategoryList = [
             'Family Fun Day'
         ],
     },
-]
+];
+
+const variants = {
+    hidden: {
+        opacity: 0,
+        y: -15,
+    },
+    visible: {
+        y: 5,
+        opacity: 1,
+        transition: {
+            delay: 0.2,
+            duration: 1,
+            type: 'spring',
+            stiffness: 120
+        }
+    }
+};
+
+const hoverVariants = {
+    hover: {
+        scale: 1.1,
+        originX: 0,
+        transition: {
+            type: 'spring',
+            stiffness: 200,
+        }
+    }
+}
 
 const Categories = () => {
-    const [show, setShow] = useState(false);
+    const [title, setTitle] = useState('');
+    // const [isPrice, setIsPrice] = useState(false);
+    const [isDropDown, setIsDropDown] = useState(false);
 
-    const handleToggle = () => {
-        setShow(!show);
+    const handleToggle = (e) => {
+        setTitle(e.target.innerText);
+        setIsDropDown(!isDropDown);
     }
 
     return (
         <div className="flex space-x-4 mt-16 mb-14">
+            <div className='text-base font-trade-gothic text-primary'>
+                <PriceSlider />
+            </div>
             {
                 CategoryList.length > 0 ? (
                     CategoryList.map(category => (
                         <div key={category.id} className='text-base font-trade-gothic text-primary'>
                             <div className='relative'>
-                                <div
-                                    className='flex items-center border border-[#a8a8a8] rounded-3xl py-2 px-5 cursor-pointer'
-                                    onClick={handleToggle}
-                                >
-                                    {category.title}
-                                    <IoIosArrowDown className='ml-2' />
-                                </div>
                                 {
-                                    show && (
-                                        <div className='bg-white py-7 pl-4 pr-10 z-50 rounded-lg'>
+                                    category.title !== 'Price range' && (
+                                        <div
+                                            className='flex items-center border border-[#a8a8a8] rounded-3xl py-2 px-5 cursor-pointer'
+                                            onClick={handleToggle}
+                                        >
+                                            {category.title}
                                             {
-                                                category?.options?.map((option, i) => (
-                                                    <div
-                                                        key={i}
-                                                        className='flex items-center space-x-2 text-base font-trade-gothic-bold'
-                                                    >
-                                                        <input
-                                                            type="checkbox"
-                                                            name={option}
-                                                            id={option}
-                                                            value={option}
-                                                            className="accent-secondary w-5 h-5"
-                                                        />
-                                                        <label htmlFor={option}>{option}</label>
-                                                    </div>
-                                                ))
+                                                isDropDown && title === category.title ?
+                                                    <IoIosArrowUp className='ml-2' /> :
+                                                    <IoIosArrowDown className='ml-2' />
                                             }
                                         </div>
+                                        // <CategoriesItem title={category.title} onClick={(e) => console.log(e.target.innerText)} />
                                     )
                                 }
+
+
+                                {title === category.title && isDropDown && (
+                                    <DropDown title={title} options={category.options} />
+                                )}
                             </div>
                         </div>
+
                     ))
                 ) : (
                     <div>No List Found</div>
                 )
             }
-        </div>
+        </div >
     );
 };
 
