@@ -1,17 +1,14 @@
 import React from 'react';
 import PropertyCard from '../../../Common/PropertyCard';
-import Categories from '../Categories';
+import styles from './SubServices.module.css';
 
 const SubServices = () => {
     return (
-        <div className='container'>
-            <Categories />
-            <div className='grid grid-cols-4 gap-x-7 gap-y-14'>
-                <PropertyCard />
-                <PropertyCard />
-                <PropertyCard />
-                <PropertyCard />
-            </div>
+        <div className={styles['services-container']}>
+            <PropertyCard />
+            <PropertyCard />
+            <PropertyCard />
+            <PropertyCard />
         </div>
     );
 };
