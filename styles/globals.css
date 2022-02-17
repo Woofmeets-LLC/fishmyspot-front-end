@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "food-truck";
+    src: url("/fonts/food-truck-signage-regular.ttf");
+}
+@font-face {
+    font-family: "trade-gothic";
+    src: url("/fonts/Trade-Gothic-LT.ttf");
+}
+@font-face {
+    font-family: "trade-gothic-bold";
+    src: url("/fonts/Trade-Gothic-LT-Bold.ttf");
+}
+
+/* rc slider css [start] */
+.rc-slider-track.rc-slider-track-1 {
+    @apply bg-primary;
+}
+.rc-slider-handle.rc-slider-handle-1,
+.rc-slider-handle.rc-slider-handle-2 {
+    @apply border-primary;
+}
+
+.rc-slider-handle:active,
+.rc-slider-handle:hover,
+.rc-slider-handle-click-focused,
+.rc-slider-handle-dragging {
+    @apply border-primary shadow-none !important;
+}
+/* rc slider css [end] */
+
+/* input field  */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+/* 
+=========== [ custom scroll bar ] ==============  
+Chrome
+*/
+.sidebar::-webkit-scrollbar {
+    width: 7px;
+}
+.sidebar::-webkit-scrollbar-track {
+    background: #ddd;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    @apply bg-secondary rounded-[7px] cursor-pointer;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+    @apply bg-yellow-500;
+}
+/* Custom scroll bar Firefox */
+.sidebar {
+    overflow-y: auto;
+    scrollbar-color: #f7be32 #ddd !important;
+    scrollbar-width: 9px !important;
+}
