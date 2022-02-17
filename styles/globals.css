@@ -40,6 +40,29 @@ input::-webkit-inner-spin-button {
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+/* 
+=========== [ custom scroll bar ] ==============  
+Chrome
+*/
+.sidebar::-webkit-scrollbar {
+    width: 7px;
+}
+.sidebar::-webkit-scrollbar-track {
+    background: #ddd;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    @apply bg-secondary rounded-[7px] cursor-pointer;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+    @apply bg-yellow-500;
+}
+/* Custom scroll bar Firefox */
+.sidebar {
+    overflow-y: auto;
+    scrollbar-color: #f7be32 #ddd !important;
+    scrollbar-width: 9px !important;
 }
