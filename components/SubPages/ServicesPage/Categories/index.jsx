@@ -32,9 +32,10 @@ const Categories = () => {
                 }
             })
             router.push('/services?' + queryString.stringify(parsedQuery, { arrayFormat: 'comma', skipNull: true }));
-            setFirstTime(false)
 
         }
+        setFirstTime(false)
+
     }, [])
 
 

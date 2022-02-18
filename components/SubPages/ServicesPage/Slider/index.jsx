@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Range } from 'rc-slider';
 import { motion } from 'framer-motion';
 import 'rc-slider/assets/index.css';
+import styles from './Slider.module.css';
 
 const variants = {
   hidden: {
@@ -37,10 +38,10 @@ const Slider = ({
       initial="hidden"
       animate="visible"
       exit="hidden"
-      className='absolute bg-white py-3 px-4 z-50 rounded-lg shadow border-gray-100'>
+      className={styles['slider-container']}>
 
       <div className='text-base font-trade-gothic-bold'>
-        <div className='text-lg md:text-2xl font-trade-gothic-bold text-primary mb-2'>
+        <div className={styles['slider-title']}>
           <h3>Price range:</h3>
         </div>
 
@@ -56,7 +57,7 @@ const Slider = ({
                 price: [e.target.value, prevState.price[1]]
               }
             })}
-            className='w-10 sm:w-16 md:w-20 focus:outline-none border-b-2 border-b-secondary text-base md:text-lg font-trade-gothic text-primary text-center'
+            className={styles['slider-input']}
           />
           <input
             value={value[1]}
@@ -68,7 +69,7 @@ const Slider = ({
                 price: [prevState.price[0], e.target.value]
               }
             })}
-            className='w-10 sm:w-16 md:w-20 focus:outline-none border-b-2 border-b-secondary text-base md:text-lg font-trade-gothic text-primary text-center'
+            className={styles['slider-input']}
           />
         </div>
 
@@ -82,7 +83,7 @@ const Slider = ({
           />
         </div>
 
-        <div className='flex justify-between items-center text-sm md:text-base text-primary mt-6'>
+        <div className={styles['slider-buttons-area']}>
           <span
             className='font-trade-gothic cursor-pointer'
             onClick={handlePriceClear}

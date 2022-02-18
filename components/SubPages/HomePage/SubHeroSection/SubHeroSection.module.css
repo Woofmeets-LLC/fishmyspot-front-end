@@ -8,5 +8,5 @@
 }
 
 .hero-button {
-  @apply bg-secondary text-white text-xs sm:text-sm lg:text-base py-2 px-4 lg:py-3 lg:px-6 rounded font-trade-gothic-bold;
+  @apply bg-secondary text-white text-xs sm:text-sm lg:text-base py-1 px-2 sm:py-2 sm:px-4 lg:py-3 lg:px-6 rounded font-trade-gothic-bold;
 }
