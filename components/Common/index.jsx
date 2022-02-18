@@ -1,5 +1,5 @@
+import PropertyCard from "./PropertyCard";
 import Modal from './CustomModal/Modal';
-import ExampleComponent from './ExampleComponent';
 import FormCheckbox from './FormElements/FormCheckbox';
 import FormInput from './FormElements/FormInput';
 import FormOption from './FormElements/FormSelectBox/FormOption';
@@ -9,7 +9,6 @@ import ResetPasswordModal from './Modals/ResetPasswordModal';
 import SignUpModal from './Modals/SignUpModal';
 
 export {
-    ExampleComponent,
     Modal,
     SignUpModal,
     LoginModal,
@@ -17,6 +16,7 @@ export {
     FormSelect,
     FormOption,
     FormCheckbox,
+    PropertyCard,
     ResetPasswordModal
 };
 

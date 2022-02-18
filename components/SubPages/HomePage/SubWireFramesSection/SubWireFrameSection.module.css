@@ -1,0 +1,19 @@
+.wireframe-container {
+  @apply py-6 sm:py-8 md:py-10 lg:py-16 xl:py-20 2xl:py-32;
+}
+
+.wireframe-content-area {
+  @apply col-span-12 md:col-span-5 order-2 md:order-1 pt-4 sm:pt-5 md:pb-6 lg:pb-14 xl:pt-9 xl:pb-32 2xl:pt-12 2xl:pb-44;
+}
+
+.wireframe-content-wrapper {
+  @apply md:w-[280px] lg:w-[300px] xl:w-[360px] 2xl:w-[450px] space-y-2 sm:space-y-3 md:space-y-4;
+}
+
+.wireframe-content-heading {
+  @apply text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-food-truck text-primary;
+}
+
+.wireframe-content {
+  @apply text-sm sm:text-base 2xl:text-xl text-highlight-1 font-trade-gothic;
+}
