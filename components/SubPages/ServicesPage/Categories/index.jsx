@@ -5,73 +5,66 @@ import TypeFish from '../TypeFish';
 import UserRating from '../UserRating';
 import Experience from '../Experience';
 import { useRouter } from 'next/router';
+import queryString from 'query-string';
 import styles from './Categories.module.css';
 
 const Categories = () => {
     const router = useRouter();
-    const { query } = router;
+    const [firstTime, setFirstTime] = useState(true)
 
-    const [selectedCities, setSelectedCities] = useState([]);
-    const [typeFish, setTypeFish] = useState([]);
-    const [ratings, setRatings] = useState([]);
-    const [experience, setExperience] = useState([]);
-    const [priceRange, setPriceRange] = useState([0, 1000]);
+    const [query, setQuery] = useState({ location: [], typeFish: [], rating: [], experience: [], price: [0, 1000] });
 
     useEffect(() => {
-        if (query?.locations) {
-            setSelectedCities(query?.locations ? JSON.parse(`${query?.locations}`) : []);
-        }
-        if (query?.typeFish) {
-            setTypeFish(query?.typeFish ? JSON.parse(`${query?.typeFish}`) : []);
-        }
-        if (query?.rating) {
-            setRatings(query?.rating ? JSON.parse(`${query?.rating}`) : []);
-        }
-        if (query?.experience) {
-            setExperience(query?.experience ? JSON.parse(`${query?.experience}`) : []);
-        }
-        if (query?.price) {
-            setPriceRange(query?.price ? JSON.parse(`${query?.price}`) : []);
-        }
+        if (!firstTime) router.push('/services?' + queryString.stringify(query, { arrayFormat: 'comma', skipNull: true }));
+
     }, [query]);
 
-    const queryAddress = `/services?locations=${JSON.stringify(selectedCities)}&typeFish=${JSON.stringify(
-        typeFish)}&rating=${JSON.stringify(ratings)}&userExperience=${JSON.stringify(experience)}
-    `;
-
     useEffect(() => {
-        if (selectedCities?.length) {
-            router.push(queryAddress, undefined, { scroll: false });
+        if (typeof window !== 'undefined' && window.location.search) {
+            const parsed = queryString.parse(window.location.search, { arrayFomate: 'comma' })
+            for (const p in parsed) {
+                parsed[p] = parsed[p].split(',')
+            }
+            const parsedQuery = { ...query, ...parsed }
+            setQuery((prevState) => {
+                return {
+                    ...parsedQuery
+                }
+            })
+            router.push('/services?' + queryString.stringify(parsedQuery, { arrayFormat: 'comma', skipNull: true }));
+            setFirstTime(false)
+
         }
-    }, [queryAddress]);
+    }, [])
+
 
     const handlePriceClear = () => {
-        setPriceRange([0, 1000]);
+        setQuery({ ...query, price: [0, 1000] })
     }
 
 
     return (
         <div className={styles['categories-container']}>
             <Location
-                selectedCities={selectedCities}
-                setSelectedCities={setSelectedCities}
+                selectedCities={query.location}
+                setSelectedCities={setQuery}
             />
             <PriceSlider
-                priceRange={priceRange}
-                setPriceRange={setPriceRange}
+                priceRange={query.price}
+                setPriceRange={setQuery}
                 handlePriceClear={handlePriceClear}
             />
             <TypeFish
-                typeFish={typeFish}
-                setTypeFish={setTypeFish}
+                typeFish={query.typeFish}
+                setTypeFish={setQuery}
             />
             <UserRating
-                ratings={ratings}
-                setRatings={setRatings}
+                ratings={query.rating}
+                setRatings={setQuery}
             />
             <Experience
-                experience={experience}
-                setExperience={setExperience}
+                experience={query.experience}
+                setExperience={setQuery}
             />
         </div >
     );

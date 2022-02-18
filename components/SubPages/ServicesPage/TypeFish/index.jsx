@@ -46,10 +46,20 @@ const TypeFish = ({ typeFish, setTypeFish }) => {
 
     if (findFish !== undefined) {
       const filterTypeFish = typeFish?.filter(fish => fish !== fishName);
-      setTypeFish(filterTypeFish);
+      setTypeFish((prevState) => {
+        return {
+          ...prevState,
+          typeFish: filterTypeFish
+        }
+      });
     }
     else {
-      setTypeFish([...typeFish, fishName]);
+      setTypeFish((prevState) => {
+        return {
+          ...prevState,
+          typeFish: [...prevState.typeFish, fishName]
+        }
+      });
     }
   }
 

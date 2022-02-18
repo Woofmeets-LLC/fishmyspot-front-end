@@ -8,7 +8,12 @@ const PriceSlider = ({ priceRange, setPriceRange, handlePriceClear }) => {
   const [isDropDown, setIsDropDown] = useState(false);
 
   const onSliderChange = (priceValue) => {
-    setPriceRange(priceValue);
+    setPriceRange((prevState) => {
+      return {
+        ...prevState,
+        price: priceValue
+      }
+    });
   };
 
   return (

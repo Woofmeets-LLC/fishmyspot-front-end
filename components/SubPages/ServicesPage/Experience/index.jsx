@@ -52,10 +52,20 @@ const Experience = ({ experience, setExperience }) => {
 
     if (findExperience !== undefined) {
       const filterExperience = experience?.filter(e => e !== exp);
-      setExperience(filterExperience);
+      setExperience((prevState) => {
+        return {
+          ...prevState,
+          experience: filterExperience
+        }
+      });
     }
     else {
-      setExperience([...experience, exp]);
+      setExperience((prevState) => {
+        return {
+          ...prevState,
+          experience: [...prevState.experience, exp]
+        }
+      });
     }
   }
 

@@ -47,10 +47,20 @@ const UserRating = ({ ratings, setRatings }) => {
     const findRating = ratings?.length > 0 ? ratings?.find(r => r === rating) : undefined;
     if (findRating !== undefined) {
       const filterRatings = ratings?.filter(r => r !== rating);
-      setRatings(filterRatings);
+      setRatings((prevState) => {
+        return {
+          ...prevState,
+          rating: filterRatings
+        }
+      });
     }
     else {
-      setRatings([...ratings, rating]);
+      setRatings((prevState) => {
+        return {
+          ...prevState,
+          rating: [...prevState.rating, rating]
+        }
+      });
     }
   }
 

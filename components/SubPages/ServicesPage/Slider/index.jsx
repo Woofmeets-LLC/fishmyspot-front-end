@@ -29,13 +29,7 @@ const Slider = ({
   handlePriceClear,
 }) => {
 
-  // min max value
-  const [minValue, setMinValue] = useState(value[0]);
-  const [maxValue, setMaxValue] = useState(value[1]);
 
-  useEffect(() => {
-    setValue([minValue, maxValue]);
-  }, [minValue, maxValue]);
 
   return (
     <motion.div
@@ -56,14 +50,24 @@ const Slider = ({
             min={0}
             max={value[1]}
             type="number"
-            onChange={(e) => setMinValue(e.target.value ? parseInt(e.target.value) : 0)}
+            onChange={(e) => setValue((prevState) => {
+              return {
+                ...prevState,
+                price: [e.target.value, prevState.price[1]]
+              }
+            })}
             className='w-10 sm:w-16 md:w-20 focus:outline-none border-b-2 border-b-secondary text-base md:text-lg font-trade-gothic text-primary text-center'
           />
           <input
             value={value[1]}
             min={value[0]}
             type="number"
-            onChange={(e) => setMaxValue(e.target?.value ? parseInt(e.target.value) : 0)}
+            onChange={(e) => setValue((prevState) => {
+              return {
+                ...prevState,
+                price: [prevState.price[0], e.target.value]
+              }
+            })}
             className='w-10 sm:w-16 md:w-20 focus:outline-none border-b-2 border-b-secondary text-base md:text-lg font-trade-gothic text-primary text-center'
           />
         </div>

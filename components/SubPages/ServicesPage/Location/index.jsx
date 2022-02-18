@@ -44,10 +44,20 @@ const Location = ({ selectedCities, setSelectedCities }) => {
 
     if (findCity !== undefined) {
       const filterCity = selectedCities?.filter(city => city !== cityName);
-      setSelectedCities(filterCity);
+      setSelectedCities((prevState) => {
+        return {
+          ...prevState,
+          location: filterCity
+        }
+      });
     }
     else {
-      setSelectedCities([...selectedCities, cityName]);
+      setSelectedCities((prevState) => {
+        return {
+          ...prevState,
+          location: [...prevState.location, cityName]
+        }
+      });
     }
   }
 
