@@ -55,14 +55,11 @@ Chrome
     background: #ddd;
 }
 .sidebar::-webkit-scrollbar-thumb {
-    @apply bg-secondary rounded-[7px] cursor-pointer;
-}
-.sidebar::-webkit-scrollbar-thumb:hover {
-    @apply bg-yellow-500;
+    @apply bg-highlight-3 rounded-[7px] cursor-pointer;
 }
 /* Custom scroll bar Firefox */
 .sidebar {
     overflow-y: auto;
-    scrollbar-color: #f7be32 #ddd !important;
+    scrollbar-color: #7baed4 #ddd !important;
     scrollbar-width: 9px !important;
 }

@@ -1,3 +1,4 @@
+import { enableBodyScroll } from 'body-scroll-lock';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { FaFacebookF, FaTimes } from 'react-icons/fa';
@@ -37,20 +38,25 @@ const SignUpModal = () => {
         console.log(values);
     }
 
+    const handleClose = () => {
+        dispatch(setCloseSignUpModal());
+        enableBodyScroll(document?.body);
+    }
+
     return (
         <Modal
             isOpen={showSignUpModal}
             isOverflowY={false}
             rounded={15}
-            onClose={() => dispatch(setCloseSignUpModal())}>
-            <div className="sm:w-[350px] smd:w-[420px] md:w-[500px] 2xl:w-[593px] min-h-[400px] max-h-[90vh] p-2 pl-8 xl:pl-10 2xl:pl-14 3xl:pl-20 pr-6 xl:pr-8 2xl:pr-12 3xl:pr-[72px] py-8 3xl:py-10">
-                <div className="text-right -mt-3 -mr-1 mb-2">
-                    <button onClick={() => dispatch(setCloseSignUpModal())}>
-                        <FaTimes />
-                    </button>
-                </div>
-                <div className="sidebar min-h-[310px] max-h-[73vh] pr-2">
-                    <h2 className="font-food-truck text-3xl xl:text-4xl 2xl:text-[44px] 3xl:text-5xl text-primary text-center mb-5">CREATE AN ACCOUNT</h2>
+            onClose={handleClose}>
+            <div className="text-right pt-3 pr-5 mb-3">
+                <button onClick={handleClose}>
+                    <FaTimes />
+                </button>
+            </div>
+            <h2 className="font-food-truck text-3xl xl:text-4xl 2xl:text-[44px] 3xl:text-5xl text-primary text-center">CREATE AN ACCOUNT</h2>
+            <div className="sm:w-[350px] smd:w-[420px] md:w-[500px] 2xl:w-[593px] min-h-[300px] max-h-[90vh] pl-8 xl:pl-10 2xl:pl-14 3xl:pl-20 pr-6 xl:pr-8 2xl:pr-12 3xl:pr-[72px] pt-4 pb-10 3xl:pt-6 3xl:pb-10">
+                <div className="sidebar min-h-[200px] max-h-[57vh] pr-2">
 
                     {/* Formik form  */}
                     <Formik

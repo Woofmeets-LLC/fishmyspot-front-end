@@ -1,12 +1,13 @@
-import PropertyCard from "./PropertyCard";
 import Modal from './CustomModal/Modal';
 import FormCheckbox from './FormElements/FormCheckbox';
 import FormInput from './FormElements/FormInput';
 import FormOption from './FormElements/FormSelectBox/FormOption';
 import FormSelect from './FormElements/FormSelectBox/FormSelect';
+import MultiStepForm from './FormElements/MultiStepForm';
 import LoginModal from './Modals/LogInModal';
 import ResetPasswordModal from './Modals/ResetPasswordModal';
 import SignUpModal from './Modals/SignUpModal';
+import PropertyCard from "./PropertyCard";
 
 export {
     Modal,
@@ -16,7 +17,8 @@ export {
     FormSelect,
     FormOption,
     FormCheckbox,
+    MultiStepForm,
+    ResetPasswordModal,
     PropertyCard,
-    ResetPasswordModal
 };
 

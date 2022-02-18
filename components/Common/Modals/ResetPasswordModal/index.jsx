@@ -1,3 +1,4 @@
+import { enableBodyScroll } from 'body-scroll-lock';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
@@ -23,7 +24,7 @@ const ResetPasswordModal = () => {
         console.log(values);
     }
     const handleClose = () => {
-        console.log('close');
+        enableBodyScroll(document?.body);
         setIsOpen(false);
     }
     return (
@@ -32,12 +33,13 @@ const ResetPasswordModal = () => {
             isOverflowY={false}
             rounded={15}
             onClose={handleClose}>
-            <div className="sm:w-[350px] smd:w-[420px] md:w-[500px] 2xl:w-[593px] min-h-[400px] max-h-[90vh] p-2 pl-8 xl:pl-10 2xl:pl-14 3xl:pl-20 pr-6 xl:pr-8 2xl:pr-12 3xl:pr-[72px] py-8 3xl:py-10">
-                <div className="text-right -mt-3 -mr-1 mb-2">
-                    <button onClick={handleClose}>
-                        <FaTimes />
-                    </button>
-                </div>
+            <div className="text-right pt-3 pr-5 mb-3">
+                <button onClick={handleClose}>
+                    <FaTimes />
+                </button>
+            </div>
+            <div className="sm:w-[350px] smd:w-[420px] md:w-[500px] 2xl:w-[593px] min-h-[300px] max-h-[90vh] pl-8 xl:pl-10 2xl:pl-14 3xl:pl-20 pr-6 xl:pr-8 2xl:pr-12 3xl:pr-[72px] pb-10 3xl:pb-10">
+
                 <div className="sidebar min-h-[310px] max-h-[73vh] pr-2">
                     <div className="pb-8">
                         <div className="mb-2 2xl:mb-4">
