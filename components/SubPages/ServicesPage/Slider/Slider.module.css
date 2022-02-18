@@ -1,0 +1,15 @@
+.slider-container {
+  @apply absolute bg-white py-3 px-4 z-50 rounded-lg shadow border-gray-100;
+}
+
+.slider-title {
+  @apply text-lg md:text-2xl font-trade-gothic-bold text-primary mb-2;
+}
+
+.slider-input {
+  @apply w-10 sm:w-16 md:w-20 focus:outline-none border-b-2 border-b-secondary text-base md:text-lg font-trade-gothic text-primary text-center;
+}
+
+.slider-buttons-area {
+  @apply flex justify-between items-center text-sm md:text-base text-primary mt-6;
+}

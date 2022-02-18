@@ -1,19 +1,72 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PriceSlider from '../PriceSlider';
 import Location from '../Location';
 import TypeFish from '../TypeFish';
 import UserRating from '../UserRating';
 import Experience from '../Experience';
+import { useRouter } from 'next/router';
+import queryString from 'query-string';
+import styles from './Categories.module.css';
 
 const Categories = () => {
+    const router = useRouter();
+    const [firstTime, setFirstTime] = useState(true)
+
+    const [query, setQuery] = useState({ location: [], typeFish: [], rating: [], experience: [], price: [0, 1000] });
+
+    useEffect(() => {
+        if (!firstTime) router.push('/services?' + queryString.stringify(query, { arrayFormat: 'comma', skipNull: true }));
+
+    }, [query]);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.location.search) {
+            const parsed = queryString.parse(window.location.search, { arrayFomate: 'comma' })
+            for (const p in parsed) {
+                parsed[p] = parsed[p].split(',')
+            }
+            const parsedQuery = { ...query, ...parsed }
+            setQuery((prevState) => {
+                return {
+                    ...parsedQuery
+                }
+            })
+            router.push('/services?' + queryString.stringify(parsedQuery, { arrayFormat: 'comma', skipNull: true }));
+
+        }
+        setFirstTime(false)
+
+    }, [])
+
+
+    const handlePriceClear = () => {
+        setQuery({ ...query, price: [0, 1000] })
+    }
+
 
     return (
-        <div className="flex flex-wrap space-x-2 space-y-2 md:space-y-0 md:space-x-3 lg:space-x-4 mt-16 mb-14">
-            <Location />
-            <PriceSlider />
-            <TypeFish />
-            <UserRating />
-            <Experience />
+        <div className={styles['categories-container']}>
+            <Location
+                selectedCities={query.location}
+                setSelectedCities={setQuery}
+            />
+            <PriceSlider
+                priceRange={query.price}
+                setPriceRange={setQuery}
+                handlePriceClear={handlePriceClear}
+            />
+            <TypeFish
+                typeFish={query.typeFish}
+                setTypeFish={setQuery}
+            />
+            <UserRating
+                ratings={query.rating}
+                setRatings={setQuery}
+            />
+            <Experience
+                experience={query.experience}
+                setExperience={setQuery}
+            />
         </div >
     );
 };

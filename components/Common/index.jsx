@@ -1,5 +1,4 @@
 import Modal from './CustomModal/Modal';
-import ExampleComponent from './ExampleComponent';
 import FormCheckbox from './FormElements/FormCheckbox';
 import FormInput from './FormElements/FormInput';
 import FormOption from './FormElements/FormSelectBox/FormOption';
@@ -8,9 +7,9 @@ import MultiStepForm from './FormElements/MultiStepForm';
 import LoginModal from './Modals/LogInModal';
 import ResetPasswordModal from './Modals/ResetPasswordModal';
 import SignUpModal from './Modals/SignUpModal';
+import PropertyCard from "./PropertyCard";
 
 export {
-    ExampleComponent,
     Modal,
     SignUpModal,
     LoginModal,
@@ -20,5 +19,7 @@ export {
     FormCheckbox,
     MultiStepForm,
     ResetPasswordModal,
+    PropertyCard,
+    ResetPasswordModal
 };
 
