@@ -1,5 +1,4 @@
 import React from 'react';
-import { Image } from '../../../Common';
 import styles from './SubHeroSection.module.css';
 
 const SubHeroSection = () => {
@@ -7,8 +6,8 @@ const SubHeroSection = () => {
         <section className='mt-12'>
             <div className="relative">
                 <div className='w-full rounded-xl overflow-hidden'>
-                    <Image
-                        imageUrl={"/images/fatherSonFishing.jpg"}
+                    <img
+                        src={"/images/fatherSonFishing.jpg"}
                         title="Banner"
                         className='w-full 3xl:h-[704px] 3xl:object-cover'
                     />

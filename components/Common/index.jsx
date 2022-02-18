@@ -7,7 +7,6 @@ import FormSelect from './FormElements/FormSelectBox/FormSelect';
 import LoginModal from './Modals/LogInModal';
 import ResetPasswordModal from './Modals/ResetPasswordModal';
 import SignUpModal from './Modals/SignUpModal';
-import Image from "./Image";
 
 export {
     Modal,
@@ -18,7 +17,6 @@ export {
     FormOption,
     FormCheckbox,
     PropertyCard,
-    Image,
     ResetPasswordModal
 };
 
