@@ -5,6 +5,7 @@ import FormInput from './FormElements/FormInput';
 import FormOption from './FormElements/FormSelectBox/FormOption';
 import FormSelect from './FormElements/FormSelectBox/FormSelect';
 import LoginModal from './Modals/LogInModal';
+import ResetPasswordModal from './Modals/ResetPasswordModal';
 import SignUpModal from './Modals/SignUpModal';
 import Image from "./Image";
 
@@ -17,6 +18,7 @@ export {
     FormOption,
     FormCheckbox,
     PropertyCard,
-    Image
+    Image,
+    ResetPasswordModal
 };
 
