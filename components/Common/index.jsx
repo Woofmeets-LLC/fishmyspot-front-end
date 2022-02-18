@@ -20,6 +20,5 @@ export {
     MultiStepForm,
     ResetPasswordModal,
     PropertyCard,
-    ResetPasswordModal
 };
 
