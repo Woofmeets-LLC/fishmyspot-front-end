@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import styles from '../Categories/Categories.module.css';
 
 const variants = {
   hidden: {
@@ -21,7 +22,7 @@ const variants = {
 
 const hoverVariants = {
   hover: {
-    scale: 1.1,
+    scale: 1.03,
     originX: 0,
     transition: {
       type: 'spring',
@@ -30,63 +31,85 @@ const hoverVariants = {
   }
 };
 
-const Experience = () => {
+const Experience = ({ experience, setExperience }) => {
 
   const [isDropDown, setIsDropDown] = useState(false);
   const options = [
     'Beginning Fishing Lesson',
-    'Boat',
     'Beginning Fishing Instruction For Family',
-    'Family Fun Day'
+    'Boat',
+    'Boat Rental',
+    'Family Fun Day',
+    '1+ Extra Angler',
+    '2+ Extra Angler',
+    'Canoe/ Kayak',
+    'Night Fishing',
+    'Camping'
   ];
+
+  const experienceAddOrRemove = (exp) => {
+    const findExperience = experience?.length > 0 ? experience?.find(e => e === exp) : undefined;
+
+    if (findExperience !== undefined) {
+      const filterExperience = experience?.filter(e => e !== exp);
+      setExperience(filterExperience);
+    }
+    else {
+      setExperience([...experience, exp]);
+    }
+  }
 
   return (
     <div>
       <div
-        className='flex items-center border border-[#a8a8a8] rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary'
+        className={styles['list-item']}
         onClick={() => setIsDropDown(!isDropDown)}
       >
         Experience
         {
           isDropDown ?
-            <IoIosArrowUp className='ml-2' /> :
-            <IoIosArrowDown className='ml-2' />
+            <IoIosArrowUp /> :
+            <IoIosArrowDown />
         }
       </div>
-      {
-        isDropDown &&
-        (<motion.div
-          variants={variants}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          className='absolute bg-white pt-5 pl-4 pr-6 z-50 rounded-lg'>
-          {
-            options?.map((option, i) => (
-              <div
-                key={i}
-                className='flex items-center space-x-3 mb-4 text-base font-trade-gothic-bold'
-              >
-                <input
-                  type={"checkbox"}
-                  name={option}
-                  id={option}
-                  value={option}
-                  className="accent-secondary w-5 h-5"
-                />
-                <motion.label
-                  htmlFor={option}
-                  variants={hoverVariants}
-                  whileHover="hover"
+      <AnimatePresence>
+        {
+          isDropDown &&
+          (<motion.div
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className={styles['dropdown']}>
+            {
+              options?.map((option, i) => (
+                <div
+                  key={i}
+                  className={styles['dropdown-item']}
                 >
-                  {option}
-                </motion.label>
+                  <input
+                    type={"checkbox"}
+                    name={option}
+                    id={option}
+                    value={option}
+                    checked={experience?.includes(option) ? true : false}
+                    onChange={() => experienceAddOrRemove(option)}
+                    className="accent-secondary w-4 h-4 md:w-5 md:h-5"
+                  />
+                  <motion.label
+                    htmlFor={option}
+                    variants={hoverVariants}
+                    whileHover="hover"
+                  >
+                    {option}
+                  </motion.label>
 
-              </div>
-            ))
-          }
-        </motion.div>)
-      }
+                </div>
+              ))
+            }
+          </motion.div>)
+        }
+      </AnimatePresence>
     </div>
   );
 };

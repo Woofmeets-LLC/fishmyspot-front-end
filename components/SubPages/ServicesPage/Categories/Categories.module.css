@@ -1,0 +1,19 @@
+.categories-container {
+  @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-7 3xl:grid-cols-8 gap-4 pt-16 mb-14;
+}
+
+.list-item {
+  @apply flex items-center justify-between border border-gray-300  rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary;
+}
+
+.dropdown {
+  @apply absolute bg-white pt-5 pl-4 pr-6 z-50 rounded-lg shadow border-gray-100;
+}
+
+.dropdown-item {
+  @apply flex items-center space-x-3 mb-4 text-sm md:text-base font-trade-gothic-bold;
+}
+
+.user-rating {
+  @apply grid grid-cols-2 items-center space-x-3 mb-4 text-sm md:text-base font-trade-gothic-bold;
+}

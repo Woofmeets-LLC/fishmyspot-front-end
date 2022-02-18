@@ -1,5 +1,5 @@
 import React from 'react';
-import PropertyCard from '../../../Common/PropertyCard';
+import { PropertyCard } from '../../../Common';
 import styles from './SubServices.module.css';
 
 const SubServices = () => {

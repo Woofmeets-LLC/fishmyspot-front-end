@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Range } from 'rc-slider';
 import { motion } from 'framer-motion';
 import 'rc-slider/assets/index.css';
@@ -20,52 +20,76 @@ const variants = {
   }
 };
 
-const Slider = () => {
+const Slider = ({
+  value,
+  onSliderChange,
+  setValue,
+  min,
+  max,
+  handlePriceClear,
+}) => {
+
+  // min max value
+  const [minValue, setMinValue] = useState(value[0]);
+  const [maxValue, setMaxValue] = useState(value[1]);
+
+  useEffect(() => {
+    setValue([minValue, maxValue]);
+  }, [minValue, maxValue]);
+
   return (
     <motion.div
       variants={variants}
       initial="hidden"
       animate="visible"
       exit="hidden"
-      className='absolute w-[216px] bg-white pt-3 px-4 z-50 rounded-lg'>
+      className='absolute bg-white py-3 px-4 z-50 rounded-lg shadow border-gray-100'>
 
-      <div
-        className='mb-4 text-base font-trade-gothic-bold'
-      >
-        <div className='text-2xl font-trade-gothic-bold text-primary mb-2'>
+      <div className='text-base font-trade-gothic-bold'>
+        <div className='text-lg md:text-2xl font-trade-gothic-bold text-primary mb-2'>
           <h3>Price range:</h3>
         </div>
 
-        <div className='flex justify-between mb-4'>
+        <div className='flex justify-between space-x-10 mb-4'>
           <input
-            value={35}
+            value={value[0]}
             min={0}
-            max={100}
+            max={value[1]}
             type="number"
-            onChange={(e) => console.log(e.target.value)}
-            className='focus:outline-none border-b-2 border-b-secondary text-lg font-trade-gothic text-primary text-center'
+            onChange={(e) => setMinValue(e.target.value ? parseInt(e.target.value) : 0)}
+            className='w-10 sm:w-16 md:w-20 focus:outline-none border-b-2 border-b-secondary text-base md:text-lg font-trade-gothic text-primary text-center'
           />
           <input
-            value={250}
-            min={0}
-            max={1000}
+            value={value[1]}
+            min={value[0]}
             type="number"
-            onChange={(e) => console.log(e.target.value)}
-            className='focus:outline-none border-b-2 border-b-secondary text-lg font-trade-gothic text-primary text-center'
+            onChange={(e) => setMaxValue(e.target?.value ? parseInt(e.target.value) : 0)}
+            className='w-10 sm:w-16 md:w-20 focus:outline-none border-b-2 border-b-secondary text-base md:text-lg font-trade-gothic text-primary text-center'
           />
         </div>
 
-        <div className='w-full'>
+        <div>
           <Range
+            min={min}
+            max={max}
             allowCross={false}
-            defaultValue={[0, 100]}
-            onChange={(e) => console.log(e.target)}
+            value={value}
+            onChange={onSliderChange}
           />
         </div>
 
-        <div className='flex justify-between items-center text-base text-primary mt-6'>
-          <span className='font-trade-gothic cursor-pointer'>Clear</span>
-          <span className='font-trade-gothic-bold cursor-pointer'>Apply</span>
+        <div className='flex justify-between items-center text-sm md:text-base text-primary mt-6'>
+          <span
+            className='font-trade-gothic cursor-pointer'
+            onClick={handlePriceClear}
+          >
+            Clear
+          </span>
+          <span
+            className='font-trade-gothic-bold cursor-pointer'
+          >
+            Apply
+          </span>
         </div>
       </div>
     </motion.div>

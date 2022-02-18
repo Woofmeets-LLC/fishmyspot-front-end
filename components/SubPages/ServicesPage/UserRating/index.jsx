@@ -1,7 +1,8 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import styles from '../Categories/Categories.module.css';
 
 const variants = {
   hidden: {
@@ -22,7 +23,7 @@ const variants = {
 
 const hoverVariants = {
   hover: {
-    scale: 1.1,
+    scale: 1.03,
     originX: 0,
     transition: {
       type: 'spring',
@@ -31,7 +32,7 @@ const hoverVariants = {
   }
 };
 
-const UserRating = () => {
+const UserRating = ({ ratings, setRatings }) => {
 
   const [isDropDown, setIsDropDown] = useState(false);
   const options = [
@@ -42,63 +43,83 @@ const UserRating = () => {
     'Five star'
   ];
 
+  const ratingsAddOrRemove = (rating) => {
+    const findRating = ratings?.length > 0 ? ratings?.find(r => r === rating) : undefined;
+    if (findRating !== undefined) {
+      const filterRatings = ratings?.filter(r => r !== rating);
+      setRatings(filterRatings);
+    }
+    else {
+      setRatings([...ratings, rating]);
+    }
+  }
+
+
   return (
     <div className='ml-0'>
       <div
-        className='flex items-center border border-[#a8a8a8] rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary'
+        className={styles['list-item']}
         onClick={() => setIsDropDown(!isDropDown)}
       >
         User rating
         {
           isDropDown ?
-            <IoIosArrowUp className='ml-2' /> :
-            <IoIosArrowDown className='ml-2' />
+            <IoIosArrowUp /> :
+            <IoIosArrowDown />
         }
       </div>
-      {
-        isDropDown && (
-          <motion.div
-            variants={variants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            className='absolute bg-white pt-5 pl-4 pr-6 z-50 rounded-lg'>
-            {
-              options?.map((option, i) => (
-                <div
-                  key={i}
-                  className='flex items-center space-x-3 mb-4 text-base font-trade-gothic-bold'
-                >
-                  <input
-                    type={"checkbox"}
-                    name={option}
-                    id={option}
-                    value={option}
-                    className="accent-secondary w-5 h-5"
-                  />
-                  <motion.label
-                    htmlFor={option}
-                    variants={hoverVariants}
-                    whileHover="hover"
+      <AnimatePresence>
+        {
+          isDropDown && (
+            <motion.div
+              variants={variants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              className={styles['dropdown']}>
+              {
+                options?.map((option, i) => (
+                  <div
+                    key={i}
+                    className={styles['user-rating']}
                   >
-                    {option}
-                  </motion.label>
-                  {
-                    Array.from({ length: i + 1 }, (_, i) => i + 1).map(star => (
-                      <span
-                        key={star + 100}
-                        className="text-base text-secondary"
+                    <div className='flex items-center space-x-2'>
+                      <input
+                        type={"checkbox"}
+                        name={option}
+                        id={option}
+                        value={option}
+                        checked={ratings?.includes(option) ? true : false}
+                        onChange={() => ratingsAddOrRemove(option)}
+                        className="accent-secondary w-4 h-4 md:w-5 md:h-5"
+                      />
+                      <motion.label
+                        htmlFor={option}
+                        variants={hoverVariants}
+                        whileHover="hover"
                       >
-                        <FaStar className='inline-block -mr-2' />
-                      </span>
-                    ))
-                  }
-                </div>
-              ))
-            }
-          </motion.div>
-        )
-      }
+                        {option}
+                      </motion.label>
+                    </div>
+                    <div className='flex items-center space-x-3'>
+                      {
+                        Array.from({ length: i + 1 }, (_, i) => i + 1).map(star => (
+                          <span
+                            key={star + 100}
+                            className="text-base text-secondary"
+                          >
+                            <FaStar className='inline-block -mr-2' />
+                          </span>
+                        ))
+                      }
+                    </div>
+                  </div>
+                ))
+              }
+            </motion.div>
+          )
+        }
+      </AnimatePresence>
     </div>
   );
 };

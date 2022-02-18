@@ -1,8 +1,6 @@
-import ExampleComponent from './ExampleComponent';
-import Test from './Test';
+import PropertyCard from "./PropertyCard";
 
 export {
-    ExampleComponent,
-    Test
+    PropertyCard,
 };
 
