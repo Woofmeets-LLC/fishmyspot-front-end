@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import * as Yup from 'yup';
+import * as yup from 'yup';
 import ForgetPasswordForm from './ForgetPasswordForm';
 
 const ForgetPasswordContainer = () => {
@@ -10,8 +10,8 @@ const ForgetPasswordContainer = () => {
         email: "",
     }
 
-    const validationSchema = Yup.object().shape({
-        email: Yup.string().email().required("Required"),
+    const validationSchema = yup.object().shape({
+        email: yup.string().email().required("Required"),
     });
 
 

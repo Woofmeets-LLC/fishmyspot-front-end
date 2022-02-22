@@ -1,6 +1,7 @@
 import Modal from './CustomModal/Modal';
 import FormCheckbox from './FormElements/FormCheckbox';
 import FormInput from './FormElements/FormInput';
+import FormRadioButtons from './FormElements/FormRadioButtons/FormRadioButtons';
 import FormOption from './FormElements/FormSelectBox/FormOption';
 import FormSelect from './FormElements/FormSelectBox/FormSelect';
 import MultiStepForm from './FormElements/MultiStepForm';
@@ -15,6 +16,7 @@ export {
     LoginModal,
     FormInput,
     FormSelect,
+    FormRadioButtons,
     FormOption,
     FormCheckbox,
     MultiStepForm,
