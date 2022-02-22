@@ -63,3 +63,17 @@ Chrome
     scrollbar-color: #7baed4 #ddd !important;
     scrollbar-width: 9px !important;
 }
+
+
+/* swiper */
+.mySwiper {
+    padding-bottom: 86px!important;
+}
+
+.swiper-pagination-bullet {
+    @apply w-4 h-4 mx-3 !important;
+}
+
+.swiper-pagination-bullet-active {
+    @apply bg-secondary !important;
+}

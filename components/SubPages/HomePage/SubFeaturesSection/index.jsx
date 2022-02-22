@@ -6,8 +6,8 @@ import styles from './SubFeaturesSection.module.css';
 
 const SubFeaturesSection = () => {
   return (
-    <section className={styles['features-container']}>
-      <div>
+    <section className='container'>
+      <div className={styles['features-container']}>
         <div className='text-center'>
           <h1 className={styles['features-heading']}>Two Line Header Example For Telling Features</h1>
         </div>
@@ -45,7 +45,6 @@ const SubFeaturesSection = () => {
               <p className={styles['features-content']}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit illo sint reiciendis recusandae ipsa fugiat suscipit ullam</p>
             </div>
           </div>
-
         </div>
       </div>
     </section>
