@@ -1,11 +1,13 @@
 import { enableBodyScroll } from 'body-scroll-lock';
 import { Form, Formik } from 'formik';
 import React from 'react';
+import toast from 'react-hot-toast';
 import { FaFacebookF, FaTimes } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
-import * as Yup from 'yup';
+import * as yup from 'yup';
 import { Modal } from '../..';
+import { getSdk } from '../../../../sharetribe/sharetribeSDK';
 import { setCloseSignUpModal, setShowLoginModal } from '../../../../store/slices/modalsSlice';
 import SignUpForm from './SignUpForm';
 
@@ -23,19 +25,32 @@ const SignUpModal = () => {
         isAgree: ""
     }
 
-    const validationSchema = Yup.object().shape({
-        firstName: Yup.string().required("Required"),
-        lastName: Yup.string().required("Required"),
-        email: Yup.string().email().required("Required"),
-        password: Yup.string().required("Required").min(8, "Too Short!"),
-        gender: Yup.string().required("Required"),
-        type: Yup.string().required("Required"),
-        isAgree: Yup.boolean().oneOf([true], "You must agree!").required("Required"),
+    const validationSchema = yup.object().shape({
+        firstName: yup.string().required("Required"),
+        lastName: yup.string().required("Required"),
+        email: yup.string().email().required("Required"),
+        password: yup.string().required("Required").min(8, "Too Short!"),
+        gender: yup.string().required("Required"),
+        type: yup.string().required("Required"),
+        isAgree: yup.boolean().oneOf([true], "You must agree!").required("Required"),
     });
 
 
     const handleSubmit = (values, helpers) => {
-        console.log(values);
+        getSdk().currentUser.create({
+            email: values?.email,
+            password: values?.password,
+            firstName: values?.firstName,
+            lastName: values?.lastName,
+            publicData: {
+                gender: values?.gender,
+                account_type: values?.type
+            }
+        }, {
+            expand: true
+        }).then(console.log).catch(() => {
+            toast("Email is already taken!", { type: "error" });
+        })
     }
 
     const handleClose = () => {

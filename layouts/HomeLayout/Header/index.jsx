@@ -1,8 +1,10 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { LoginModal, SignUpModal } from '../../../components/Common';
+import { login } from '../../../store/slices/authSlice';
 import { setShowLoginModal, setShowSignUpModal } from '../../../store/slices/modalsSlice';
 
 
@@ -12,10 +14,14 @@ const Header = () => {
 
     // Dispatch
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(login())
+    }, [])
     return (
         <>
             <SignUpModal />
             <LoginModal />
+            <Toaster />
             <header className="sticky top-0 z-[1000] bg-white shadow">
                 <div className="relative container flex items-center h-[70px] 2xl:h-[85px] 3xl:h-[102px]">
                     <Link href="/">

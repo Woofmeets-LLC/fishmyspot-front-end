@@ -4,7 +4,7 @@ import React from 'react';
 const FormInput = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
-        <div className="mb-3">
+        <div className="mb-4">
             <label
                 htmlFor={props.name}
                 className="block text-[16px] text-primary font-trade-gothic-bold capitalize mb-2"
