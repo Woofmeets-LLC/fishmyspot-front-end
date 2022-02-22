@@ -1,9 +1,12 @@
+import axios from 'axios';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
-import * as Yup from 'yup';
+import * as yup from 'yup';
+import { getSdk } from '../../../../sharetribe/sharetribeSDK';
 import { setShowSignUpModal } from '../../../../store/slices/modalsSlice';
 import LoginForm from './LoginForm';
 
@@ -20,15 +23,30 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
         password: ""
     }
 
-    const validationSchema = Yup.object().shape({
-        email: Yup.string().email().required("Required"),
-        password: Yup.string().required("Required").min(8, "Too Short!")
+    const validationSchema = yup.object().shape({
+        email: yup.string().email().required("Required"),
+        password: yup.string().required("Required").min(8, "Too Short!")
     });
 
 
     const handleSubmit = (values, helpers) => {
-        const loginInfo = { ...values, type: isAngler ? "ANGLER" : "OWNER" };
-        console.log(loginInfo);
+        const loginInfo = { ...values, type: isAngler ? "angler" : "owner" };
+        axios.post('/api/users/type-verification', loginInfo)
+            .then(res => {
+                getSdk()
+                    ?.login({ username: loginInfo.email, password: loginInfo.password })
+                    ?.then(loginData => {
+                        if (typeof (window) !== "undefined") {
+                            window.location.reload();
+                        }
+                    })
+                    ?.catch(err => {
+                        toast("Login failed", { type: "error" });
+                    });
+            })
+            .catch(err => {
+                toast("User not found", { type: "error" });
+            })
     }
     return (
         <>
@@ -61,7 +79,7 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
                         </button>
                         <button
                             type="submit"
-                            className="block w-full bg-highlight-3 text-white text-center font-trade-gothic-bold py-2 mt-5">Log In as {isAngler ? "Angler" : "Pond Owner"}</button>
+                            className="block w-full bg-secondary text-white text-center font-trade-gothic-bold py-2 mt-5">Log In as {isAngler ? "Angler" : "Pond Owner"}</button>
                     </Form>
                 </Formik>
 

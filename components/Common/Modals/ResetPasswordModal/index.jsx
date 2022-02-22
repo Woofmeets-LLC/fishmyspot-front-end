@@ -2,7 +2,7 @@ import { enableBodyScroll } from 'body-scroll-lock';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import * as Yup from 'yup';
+import * as yup from 'yup';
 import { Modal } from '../..';
 import ResetPasswordForm from './ResetPasswordForm';
 
@@ -14,8 +14,8 @@ const ResetPasswordModal = () => {
         email: "",
     }
 
-    const validationSchema = Yup.object().shape({
-        email: Yup.string().email().required("Required"),
+    const validationSchema = yup.object().shape({
+        email: yup.string().email().required("Required"),
     });
 
 
