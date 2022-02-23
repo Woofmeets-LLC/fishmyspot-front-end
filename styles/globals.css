@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "~slick-carousel/slick/slick.css"; 
+@import "~slick-carousel/slick/slick-theme.css";
+
 @font-face {
     font-family: "food-truck";
     src: url("/fonts/food-truck-signage-regular.ttf");
@@ -65,15 +68,48 @@ Chrome
 }
 
 
-/* swiper */
-.mySwiper {
-    padding-bottom: 86px!important;
+/* slider */
+.reviews-container .slick-list {
+    @apply pb-10 2xl:pb-20 !important;
 }
 
-.swiper-pagination-bullet {
-    @apply w-4 h-4 mx-3 !important;
+.reviews-container .slick-dots li button:before {
+    @apply text-[#6f6d71] text-base;
 }
 
-.swiper-pagination-bullet-active {
-    @apply bg-secondary !important;
+.reviews-container .slick-dots li.slick-active button:before {
+    @apply text-secondary !important;
+    opacity: .75;
+}
+
+.featured-spot-slider .slick-prev {
+    @apply left-0 lg:left-3 z-10 !important;
+}
+.featured-spot-slider .slick-next {
+    @apply right-0 lg:right-6 z-10 !important;
+}
+
+.featured-spot-slider .slick-prev:before, .featured-spot-slider .slick-next:before {
+    @apply text-secondary text-xl lg:text-3xl 2xl:text-4xl;
+}
+
+.featured-spot-slider .slick-list{
+    @apply py-14;
+}
+
+.featured-spot-slider .slick-slide.slick-active.slick-current{
+    @apply transform lg:-rotate-6 lg:translate-y-4;
+}
+
+.featured-spot-slider .slick-slide.slick-active.slick-current + .slick-slide.slick-active +  .slick-slide.slick-active{
+    @apply transform lg:rotate-6 lg:translate-y-4;
+}
+
+
+.featured-spot-slider .slick-slide.slick-active.slick-current + .featured-spot-slider .slick-slide.slick-active{
+    @apply lg:-translate-y-2;
+}
+
+.featured-spot-slider .slick-slide{
+    @apply transition-all duration-200 lg:px-5;
 }

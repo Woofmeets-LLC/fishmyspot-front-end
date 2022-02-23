@@ -1,5 +1,5 @@
 .review-area {
-  @apply bg-white shadow-md rounded-2xl pointer-events-none;
+  @apply bg-white shadow-xl rounded-2xl pointer-events-none mx-3;
 }
 
 .review-area-wrapper {
@@ -23,5 +23,5 @@
 }
 
 .review-description {
-  @apply text-sm md:text-base xl:text-lg 3xl:text-xl font-trade-gothic text-highlight-1;
+  @apply text-sm md:text-base 2xl:text-xl font-trade-gothic text-highlight-1;
 }

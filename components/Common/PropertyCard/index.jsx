@@ -28,8 +28,8 @@ const PropertyCard = () => {
                         </span>
                         <span className="font-trade-gothic text-highlight-1">location</span>
                     </div>
-                    <div className="my-2 h-14">
-                        <h4 className={styles['card-heading']}>OH-STARK COUNTY-NAVARRRE</h4>
+                    <div className="my-2 xl:w-[230px] 2xl:max-w-[240px] h-14">
+                        <h4 className={styles['card-heading']}>OH-STARK COUNTY-NAVARRE</h4>
                     </div>
                     <div className="flex justify-between">
                         <div className={styles.ratings}>

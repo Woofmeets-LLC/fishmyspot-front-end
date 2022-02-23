@@ -3,7 +3,7 @@
 }
 
 .list-item {
-  @apply flex items-center justify-between border border-gray-300  rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary;
+  @apply bg-white flex items-center justify-between border border-gray-300  rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary;
 }
 
 .dropdown {
