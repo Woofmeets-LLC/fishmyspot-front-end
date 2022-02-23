@@ -26,7 +26,6 @@
     "sharetribe-flex-integration-sdk": "^1.7.0",
     "sharetribe-flex-sdk": "^1.15.0",
     "slick-carousel": "^1.8.1",
-    "swiper": "^8.0.6",
     "yarn": "^1.22.17",
     "yup": "^0.32.11"
   },
