@@ -1,22 +1,21 @@
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LoginModal, SignUpModal } from '../../../components/Common';
-import { login } from '../../../store/slices/authSlice';
+import { logoutAction } from '../../../store/slices/authSlice';
 import { setShowLoginModal, setShowSignUpModal } from '../../../store/slices/modalsSlice';
 
 
 const Header = () => {
     // States
     const [isActive, setIsActive] = useState();
+    const { isLoggedIn, user } = useSelector(state => state.auth);
 
     // Dispatch
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(login())
-    }, [])
+
     return (
         <>
             <SignUpModal />
@@ -48,15 +47,28 @@ const Header = () => {
                     <div
                         style={{ transition: "all 0.2s ease!important" }}
                         className={`absolute md:static top-[74px] right-0 block md:flex md:items-center w-[150px] md:w-auto md:h-[70px] 2xl:h-[85px] 3xl:h-[102px] md:ml-auto space-y-2 md:space-y-0 md:space-x-10 bg-white transition transform px-2 ${isActive ? "h-auto py-2 rounded border md:border-0" : "h-0 overflow-hidden py-0"}`}>
-                        <Link href="/list-your-spot" >
-                            <a className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</a>
-                        </Link>
-                        <button
-                            onClick={() => dispatch(setShowSignUpModal())}
-                            className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">Sign-up</button>
-                        <button
-                            onClick={() => dispatch(setShowLoginModal())}
-                            className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">Log-in</button>
+                        {
+                            user?.profile?.publicData?.account_type === "angler"
+                                ? null
+                                : <Link href="/list-your-spot" >
+                                    <a className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</a>
+                                </Link>
+                        }
+
+                        {
+                            isLoggedIn
+                                ? <button
+                                    onClick={() => dispatch(logoutAction())}
+                                    className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">Sign Out</button>
+                                : <>
+                                    <button
+                                        onClick={() => !isLoggedIn && dispatch(setShowSignUpModal())}
+                                        className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">Sign-up</button>
+                                    <button
+                                        onClick={() => !isLoggedIn && dispatch(setShowLoginModal())}
+                                        className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">Log-in</button>
+                                </>
+                        }
                     </div>
                     <div className="block md:hidden ml-auto">
                         <button

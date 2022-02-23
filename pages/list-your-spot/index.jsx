@@ -1,13 +1,22 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
-import { MultiStepForm } from '../../components/Common';
+import { BackBtn, MultiStepForm, NextBtn } from '../../components/Common';
 import FormStep from '../../components/Common/FormElements/MultiStepForm/FormStep';
-import PondListing from '../../components/SubPages/ListYourSpotPage/PondListing';
-import PondOwnerDetails from '../../components/SubPages/ListYourSpotPage/PondOwnerDetails';
+import SubPondListing from '../../components/SubPages/ListYourSpotPage/SubPondListing';
+import SubPondOwnerDetails from '../../components/SubPages/ListYourSpotPage/SubPondOwnerDetails';
+import SubPondOwnerInfo from '../../components/SubPages/ListYourSpotPage/SubPondOwnerInfo';
+import SubPricing from '../../components/SubPages/ListYourSpotPage/SubPricing';
 import TopImageCard from '../../components/SubPages/ListYourSpotPage/TopImageCard';
 import HomeLayout from '../../layouts/HomeLayout';
+import { setShowSignUpModal } from '../../store/slices/modalsSlice';
 
 const ListYourPond = () => {
+    // Redux
+    const dispatch = useDispatch();
+    const { isLoggedIn } = useSelector(state => state.auth);
+
+
     const initialValues = {
         // Pond Listing
         acre: "",
@@ -33,26 +42,48 @@ const ListYourPond = () => {
             firstName: yup.string().required("First name is required"),
         }),
     }
-    const timelineArray = ["Pond listing", "Pond Owner Details", "Price", "Pond Owner Information", "Available time", "Description", "Access to Pond", "Amenities", "Agreement "];
+    const timelineArray = [
+        "Pond listing",
+        "Pond Owner Details",
+        "Price",
+        "Pond Owner Information",
+        "Available time",
+        "Description",
+        "Access to Pond",
+        "Amenities",
+        "Agreement"
+    ];
+
+    const stepControllerBtns = [
+        {},
+        {},
+        {
+            back: <BackBtn text="Go back" />, next: <NextBtn
+                text="List My Spot"
+                onClick={() => !isLoggedIn && dispatch(setShowSignUpModal())} />
+        }
+    ]
+
     return (
         <HomeLayout>
             <TopImageCard />
             <MultiStepForm
                 initialValues={initialValues}
                 timelineArray={timelineArray}
+                stepControllerBtns={stepControllerBtns}
                 successComponent={<div>Success</div>}
             >
                 <FormStep validationSchema={validationSchema.pondListing}>
-                    <PondListing />
+                    <SubPondListing />
                 </FormStep>
                 <FormStep validationSchema={validationSchema.pondOwnerDetails}>
-                    <PondOwnerDetails />
+                    <SubPondOwnerDetails />
                 </FormStep>
                 <FormStep>
-                    Step 3
+                    <SubPricing />
                 </FormStep>
                 <FormStep>
-                    Step 4
+                    <SubPondOwnerInfo />
                 </FormStep>
                 <FormStep>
                     Step 5

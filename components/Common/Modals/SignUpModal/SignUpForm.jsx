@@ -29,9 +29,6 @@ const SignUpForm = () => {
                         <Link href="/"><a className="ml-1 font-trade-gothic-bold border-b border-primary">Terms of use</a></Link></>
                 }
                 name="isAgree" />
-            <button
-                type="submit"
-                className="block w-full bg-highlight-3 text-white text-center font-trade-gothic-bold py-2 mt-5">Sign Up</button>
         </>
     );
 };

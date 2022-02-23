@@ -1,6 +1,6 @@
 import { enableBodyScroll } from 'body-scroll-lock';
 import { Form, Formik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaFacebookF, FaTimes } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
@@ -12,7 +12,11 @@ import { setCloseSignUpModal, setShowLoginModal } from '../../../../store/slices
 import SignUpForm from './SignUpForm';
 
 const SignUpModal = () => {
+    // States
+    const [isLoading, setIsLoading] = useState(false);
+
     const { showSignUpModal } = useSelector(state => state.modals);
+
     const dispatch = useDispatch();
 
     const initialValues = {
@@ -37,6 +41,7 @@ const SignUpModal = () => {
 
 
     const handleSubmit = (values, helpers) => {
+        setIsLoading(true);
         getSdk().currentUser.create({
             email: values?.email,
             password: values?.password,
@@ -48,7 +53,12 @@ const SignUpModal = () => {
             }
         }, {
             expand: true
-        }).then(console.log).catch(() => {
+        }).then((res) => {
+            setIsLoading(false)
+            toast("Sign up successful, you can login!", { type: "success" });
+            dispatch(setShowLoginModal());
+        }).catch(() => {
+            setIsLoading(false)
             toast("Email is already taken!", { type: "error" });
         })
     }
@@ -81,6 +91,20 @@ const SignUpModal = () => {
                         onSubmit={handleSubmit}>
                         <Form>
                             <SignUpForm />
+                            <button
+                                type="submit"
+                                className="flex justify-center items-center w-full bg-secondary text-white text-center font-trade-gothic-bold py-2 mt-5">
+                                {
+                                    isLoading &&
+                                    <span className="animate-spin flex justify-center items-center w-7">
+                                        <span className="rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></span>
+                                    </span>
+                                }
+                                {
+                                    isLoading
+                                        ? "Loading..."
+                                        : `Sign Up`
+                                }</button>
                         </Form>
                     </Formik>
 

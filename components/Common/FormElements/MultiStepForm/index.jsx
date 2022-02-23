@@ -1,5 +1,7 @@
 import { Form, Formik } from 'formik';
 import React, { Children, useState } from 'react';
+import BackBtn from './BackBtn';
+import NextBtn from './NextBtn';
 import TimeLineContainer from './TimeLine/TimeLineContainer';
 
 const MultiStepForm = ({
@@ -20,11 +22,11 @@ const MultiStepForm = ({
 
 
     return (
-        <div className="container py-10 2xl:py-32">
+        <div className="container md:px-10 xl:px-28 py-10 3xl:py-32">
             <div className="grid grid-cols-10 gap-8 lg:gap-0">
                 <TimeLineContainer step={step} timelineArray={timelineArray} />
 
-                <div className="col-span-10 lg:col-span-7">
+                <div className="col-span-10 lg:col-span-6">
                     <Formik
                         {...props}
                         validationSchema={currentChild.props.validationSchema}
@@ -63,28 +65,29 @@ const MultiStepForm = ({
                                                         ? false
                                                         : true
                                                     : true) && (
-                                                    <button
-                                                        onClick={() => setStep((prevStep) => prevStep - 1)}
-                                                        type="button"
-                                                        className="bg-secondary text-white font-trade-gothic-bold rounded py-2 px-6"
-                                                    >
-                                                        {stepControllerBtns.length > step
-                                                            ? stepControllerBtns[step]?.back
-                                                            : 'Back'}
-                                                    </button>
+                                                    stepControllerBtns.length > step
+                                                        ? <span
+                                                            onClick={() => setStep((prevStep) => prevStep - 1)}
+                                                            className="inline-block">
+                                                            {
+                                                                stepControllerBtns[step]?.back
+                                                                    ? stepControllerBtns[step]?.back
+                                                                    : <BackBtn />
+                                                            }
+                                                        </span>
+                                                        : <BackBtn
+                                                            onClick={() => setStep((prevStep) => prevStep - 1)} />
                                                 )}
                                         </div>
                                         <div className="flex justify-end">
                                             {!isLastStep && (
-                                                <button
-                                                    disabled={isSubmitting}
-                                                    type="submit"
-                                                    className=" bg-secondary text-white font-trade-gothic-bold rounded py-2 px-6"
-                                                >
-                                                    {stepControllerBtns.length > step
-                                                        ? stepControllerBtns[step]?.next
-                                                        : 'Continue'}
-                                                </button>
+                                                stepControllerBtns.length > step
+                                                    ? <span className="inline-block"> {
+                                                        stepControllerBtns[step]?.next
+                                                            ? stepControllerBtns[step]?.next
+                                                            : <NextBtn isSubmitting={isSubmitting} />
+                                                    } </span>
+                                                    : <NextBtn isSubmitting={isSubmitting} />
                                             )}
                                         </div>
                                     </div>
