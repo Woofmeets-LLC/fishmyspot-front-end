@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { getSdk } from '../../../../sharetribe/sharetribeSDK';
 import { setShowSignUpModal } from '../../../../store/slices/modalsSlice';
@@ -13,9 +13,9 @@ import LoginForm from './LoginForm';
 const LoginFormContainer = ({ setShowForgetPassword }) => {
     // States
     const [isAngler, setIsAngler] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     // Redux
-    const { showLoginModal } = useSelector(state => state.modals);
     const dispatch = useDispatch();
 
     const initialValues = {
@@ -30,21 +30,28 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
 
 
     const handleSubmit = (values, helpers) => {
+        // Setting loader
+        setIsLoading(true);
+
         const loginInfo = { ...values, type: isAngler ? "angler" : "owner" };
         axios.post('/api/users/type-verification', loginInfo)
             .then(res => {
                 getSdk()
                     ?.login({ username: loginInfo.email, password: loginInfo.password })
                     ?.then(loginData => {
+                        setIsLoading(false);
+
                         if (typeof (window) !== "undefined") {
                             window.location.reload();
                         }
                     })
                     ?.catch(err => {
+                        setIsLoading(false);
                         toast("Login failed", { type: "error" });
                     });
             })
             .catch(err => {
+                setIsLoading(false);
                 toast("User not found", { type: "error" });
             })
     }
@@ -60,7 +67,7 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
                     className={`w-1/2 pb-2 border-b-4 transition text-lg ${!isAngler ? "border-gray-300" : "border-secondary"}`}>Angler</button>
 
             </div>
-            <div className="sidebar min-h-[200px] max-h-[56vh] pr-2">
+            <div className="no-scrollbar min-h-[200px] max-h-[56vh] pr-2">
 
 
                 {/* Formik form  */}
@@ -78,8 +85,21 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
                             Forget password?
                         </button>
                         <button
-                            type="submit"
-                            className="block w-full bg-secondary text-white text-center font-trade-gothic-bold py-2 mt-5">Log In as {isAngler ? "Angler" : "Pond Owner"}</button>
+                            type={isLoading ? "button" : "submit"}
+                            className="flex justify-center items-center w-full bg-secondary text-white text-center font-trade-gothic-bold py-2 mt-5">
+                            {
+                                isLoading &&
+                                <span className="animate-spin flex justify-center items-center w-7">
+                                    <span className="rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></span>
+                                </span>
+                            }
+                            {
+                                isLoading
+                                    ? "Loading..."
+                                    : `Log In as ${isAngler ? "Angler" : "Pond Owner"}`
+                            }
+
+                        </button>
                     </Form>
                 </Formik>
 

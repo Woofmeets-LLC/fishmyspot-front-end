@@ -3,7 +3,7 @@ import TimeLineItem from './TimeLineItem';
 
 const TimeLineContainer = ({ step, timelineArray }) => {
     return (
-        <div className="col-span-10 lg:col-span-3">
+        <div className="col-span-10 lg:col-span-4">
             <div className="lg:ml-[72px]">
                 {
                     timelineArray?.map((title, index) => <TimeLineItem

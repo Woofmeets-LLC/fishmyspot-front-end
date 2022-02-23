@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormOption, FormRadioButtons, FormSelect } from '../../../Common';
 
-const PondListing = () => {
+const SubPondListing = () => {
     return (
         <div>
             <FormSelect label="Acre&#40;s&#41;" name="acre">
@@ -16,7 +16,7 @@ const PondListing = () => {
                 name="stocked-pond"
                 radioBtns={[{ title: "Yes", value: "yes" }, { title: "No", value: "no" }]} />
             <FormRadioButtons
-                containerClasses={"grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6"}
+                containerClasses={"grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4"}
                 label="Catch Requirements"
                 name="catch-requirements"
                 radioBtns={[{ title: "Catch & Keep", value: "catch-n-keep" }, { title: "Catch & Release", value: "catch-n-release" }]} />
@@ -24,4 +24,4 @@ const PondListing = () => {
     );
 };
 
-export default PondListing;
+export default SubPondListing;

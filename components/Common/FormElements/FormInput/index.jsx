@@ -7,7 +7,7 @@ const FormInput = ({ label, ...props }) => {
         <div className="mb-4">
             <label
                 htmlFor={props.name}
-                className="block text-[16px] text-primary font-trade-gothic-bold capitalize mb-2"
+                className="block text-lg text-primary font-trade-gothic-bold capitalize mb-2"
             >
                 {label}
             </label>

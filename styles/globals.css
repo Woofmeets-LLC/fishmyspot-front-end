@@ -52,19 +52,27 @@ input[type="number"] {
 Chrome
 */
 .sidebar::-webkit-scrollbar {
-    width: 7px;
+    width: 2px;
 }
 .sidebar::-webkit-scrollbar-track {
     background: #ddd;
 }
 .sidebar::-webkit-scrollbar-thumb {
-    @apply bg-highlight-3 rounded-[7px] cursor-pointer;
+    @apply bg-secondary rounded-[7px] cursor-pointer;
 }
 /* Custom scroll bar Firefox */
 .sidebar {
     overflow-y: auto;
-    scrollbar-color: #7baed4 #ddd !important;
-    scrollbar-width: 9px !important;
+    scrollbar-color: #f7be32 #ddd !important;
+    scrollbar-width: 2px !important;
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 

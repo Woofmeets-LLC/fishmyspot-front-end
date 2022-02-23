@@ -7,8 +7,8 @@ const Footer = () => {
         <footer className="bg-primary">
             <div className="container">
                 <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 md:gap-20 text-white py-10 xl:py-16 3xl:py-20">
-                    <div className="md:-mt-6 col-span-2">
-                        <div className="w-[134px] mb-8">
+                    <div className="md:-mt-6 col-span-2 md:col-span-1">
+                        <div className="w-[200px] mb-8">
                             <img className="w-full" src="/images/logo.png" alt="" />
                         </div>
                         <div className="font-trade-gothic">

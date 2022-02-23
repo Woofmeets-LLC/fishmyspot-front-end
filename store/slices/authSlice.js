@@ -24,6 +24,14 @@ const authSlice = createSlice({
         logout: (state) => {
             state.isLoggedIn = false;
             state.user = {};
+            getSdk()
+                ?.logout()
+                ?.then(loginRes => {
+                    console.log("Logout successful.")
+                })
+                ?.catch(err => {
+                    console.log("Logout failed.")
+                });
         },
     },
     extraReducers: (builder) => {
@@ -41,7 +49,7 @@ const authSlice = createSlice({
                 state.isLoggedIn = true;
                 state.user = action.payload.data.data.attributes;
                 state.isLoading = false;
-            }else{
+            } else {
                 state.isLoggedIn = false;
                 state.user = {};
                 state.isLoading = false;
