@@ -41,85 +41,84 @@ const ListYourPond = () => {
         availableTime: {
             sunday: {
                 hours: {
-                    "6am-11am": false,
+                    "6am-11am": true,
                     "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
+                    "4pm-9pm": true,
+                    "9pm-6am": true,
                     "all-hours": false,
                 }
             },
             monday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": false,
+                    "6am-11am": true,
                     "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
+                    "4pm-9pm": true,
+                    "9pm-6am": true,
                     "all-hours": false,
                 }
             },
             tuesday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": false,
+                    "6am-11am": true,
                     "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
+                    "4pm-9pm": true,
+                    "9pm-6am": true,
                     "all-hours": false,
                 }
             },
             wednesday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": false,
+                    "6am-11am": true,
                     "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
+                    "4pm-9pm": true,
+                    "9pm-6am": true,
                     "all-hours": false,
                 }
             },
             thursday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": false,
+                    "6am-11am": true,
                     "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
+                    "4pm-9pm": true,
+                    "9pm-6am": true,
                     "all-hours": false,
                 }
             },
             friday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": false,
+                    "6am-11am": true,
                     "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
+                    "4pm-9pm": true,
+                    "9pm-6am": true,
                     "all-hours": false,
                 }
             },
             saturday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": false,
+                    "6am-11am": true,
                     "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
+                    "4pm-9pm": true,
+                    "9pm-6am": true,
                     "all-hours": false,
                 }
             },
             everyday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": false,
+                    "6am-11am": true,
                     "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
+                    "4pm-9pm": true,
+                    "9pm-6am": true,
                     "all-hours": false,
                 }
             }
         },
-        hasAnyAvailableTime: false,
     }
     const validation = {
         pondListing: yup.object({

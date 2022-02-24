@@ -44,6 +44,11 @@ const MultiStepForm = ({
                                         isLoggedIn && setStep((s) => s + 1);
                                         break;
 
+                                    case 'Available time':
+                                        const isSelectedAny = Object.keys(values?.availableTime)?.map(key => (values?.availableTime[key]?.isSelected))?.includes(true);
+                                        isSelectedAny && setStep((s) => s + 1);
+                                        break;
+
                                     default:
                                         setStep((s) => s + 1);
                                         break;

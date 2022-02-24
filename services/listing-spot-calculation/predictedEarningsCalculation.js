@@ -60,6 +60,17 @@ export const weeklyEarningEstimation = (acre) => {
 
 /**
  *
+ * @param {number} fullDayEarningValue
+ * @description
+ * Formula is: ``full day rate * 7``
+ * @returns {number}
+ */
+ export const customWeeklyEarningEstimation = (fullDayEarningValue) => {
+  return Math.round(+fullDayEarningValue * 7);
+};
+
+/**
+ *
  * @param {number} acre
  * @typedef {Object} EstEarnings
  * @property {number} Weekly

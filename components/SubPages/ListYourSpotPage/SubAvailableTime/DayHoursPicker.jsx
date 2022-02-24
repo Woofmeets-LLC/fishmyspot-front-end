@@ -39,14 +39,8 @@ const DayHoursPicker = ({
     const [everydayField, everydayMeta, everydayHelpers] = useField({ name: "availableTime[everyday]" });
 
 
-    const handleDayClick = (e) => {
-        // field.onChange(e);
+    const handleDayClick = () => {
         helpers.setValue({ ...field.value, isSelected: !field.value.isSelected });
-        if (name == "availableTime[everyday]") {
-            console.log("everyday", name)
-        } else {
-            console.log(field)
-        }
     };
 
     const handleHoursChange = (option) => {
