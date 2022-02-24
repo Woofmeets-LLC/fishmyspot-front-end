@@ -7,7 +7,7 @@ import FormSelect from './FormElements/FormSelectBox/FormSelect';
 import MultiStepForm from './FormElements/MultiStepForm';
 import BackBtn from './FormElements/MultiStepForm/BackBtn';
 import NextBtn from './FormElements/MultiStepForm/NextBtn';
-import LoginModal from './Modals/LogInModal';
+import LoginModal from './Modals/LoginModal';
 import ResetPasswordModal from './Modals/ResetPasswordModal';
 import SignUpModal from './Modals/SignUpModal';
 import PropertyCard from "./PropertyCard";
