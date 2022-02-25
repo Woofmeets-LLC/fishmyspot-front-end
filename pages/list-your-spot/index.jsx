@@ -13,6 +13,7 @@ import HomeLayout from '../../layouts/HomeLayout';
 import { setShowSignUpModal } from '../../store/slices/modalsSlice';
 import SubWhereDidYouHearAboutUsSection
     from "../../components/SubPages/ListYourSpotPage/SubWhereDidYouHearAboutUsSection";
+import SubAgreementSection from "../../components/SubPages/ListYourSpotPage/SubAgreementSection";
 
 const ListYourPond = () => {
     // Redux
@@ -38,6 +39,8 @@ const ListYourPond = () => {
         city: "",
         state: "",
         phone: "",
+        terms: false,
+        licence: false,
         secondAddress: "no",
         // Available Time
         availableTime: {
@@ -140,6 +143,7 @@ const ListYourPond = () => {
 
         }
     }
+
     const validation = {
         pondListing: yup.object({
             acre: yup.string().required("Acre is required"),
@@ -164,7 +168,7 @@ const ListYourPond = () => {
             state: yup.string().required("Required!"),
             phone: yup.string().required("Required!"),
             secondAddress: yup.string().required("Required!"),
-        }),
+        })
     }
     const timelineArray = [
         "Pond listing",
@@ -227,10 +231,8 @@ const ListYourPond = () => {
                     <SubWhereDidYouHearAboutUsSection />
                 </FormStep>
                 <FormStep>
-                    Step 10
-                    <div className="">
-                        <button>Submit</button>
-                    </div>
+                    <SubAgreementSection />
+
                 </FormStep>
             </MultiStepForm>
         </HomeLayout>
