@@ -130,3 +130,33 @@ Chrome
 .icons svg {
     @apply text-2xl sm:text-3xl md:text-4xl 2xl:text-6xl text-secondary;
 }
+
+
+/* accordion */
+.accordion {
+    @apply border-none !important;
+}
+.accordion__item {
+    @apply mb-4 lg:mb-5 text-base lg:text-lg font-trade-gothic-bold text-primary !important;
+}
+
+.accordion__item + .accordion__item {
+    @apply border-t-0 !important;
+}
+.accordion__button {
+    @apply flex items-center justify-between bg-[#fcfcfc] xl:py-7 xl:pl-8 xl:pr-20 !important;
+    box-shadow: 0 1px 9px 0 rgba(123, 174, 212, 0.12);
+}
+.accordion__button:before {
+    @apply order-2;
+    transform: rotate(47deg) !important;
+}
+
+.accordion__button[aria-expanded='true']::before, .accordion__button[aria-selected='true']::before {
+    transform: rotate(224deg) !important;
+}
+
+.accordion__panel {
+    @apply xl:pl-8 xl:pr-32 xl:py-9 bg-[#fcfcfc] !important;
+    box-shadow: 0 1px 9px 0 rgba(123, 174, 212, 0.12);
+}
