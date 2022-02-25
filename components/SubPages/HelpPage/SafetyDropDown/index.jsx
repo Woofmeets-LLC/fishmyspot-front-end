@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import styles from '../Categories/Categories.module.css';
+import styles from '../SubSideBar/SubSideBar.module.css';
 
 const variants = {
   hidden: {
@@ -31,45 +31,22 @@ const hoverVariants = {
   }
 }
 
-const Location = ({ selectedCities, setSelectedCities }) => {
+const SafetyDropDown = () => {
   const [isDropDown, setIsDropDown] = useState(false);
   const options = [
-    'Florida',
-    'California',
-    'Georgia',
-    'Alabama',
-    'District of Columbia'
+    'Safety concerns',
+    'Safety tips and guidelines',
+    'Reporting issues',
+    'Government travel restrictions and advisories',
   ];
-
-  const cityAddOrRemove = (cityName) => {
-    const findCity = selectedCities?.length > 0 ? selectedCities?.find((city) => city === cityName) : undefined;
-
-    if (findCity !== undefined) {
-      const filterCity = selectedCities?.filter(city => city !== cityName);
-      setSelectedCities((prevState) => {
-        return {
-          ...prevState,
-          location: filterCity
-        }
-      });
-    }
-    else {
-      setSelectedCities((prevState) => {
-        return {
-          ...prevState,
-          location: [...prevState.location, cityName]
-        }
-      });
-    }
-  }
 
   return (
     <div>
       <div
-        className={styles['list-item']}
+        className={`${styles['list-item']} pt-7`}
         onClick={() => setIsDropDown(!isDropDown)}
       >
-        Location
+        Safety
         {
           isDropDown ?
             <IoIosArrowUp /> :
@@ -93,22 +70,13 @@ const Location = ({ selectedCities, setSelectedCities }) => {
                       key={i}
                       className={styles['dropdown-item']}
                     >
-                      <input
-                        type={"checkbox"}
-                        name={option}
-                        id={option}
-                        value={option}
-                        checked={selectedCities?.includes(option) ? true : false}
-                        onChange={() => cityAddOrRemove(option)}
-                        className="accent-secondary w-4 h-4 md:w-5 md:h-5"
-                      />
-                      <motion.label
+                      <motion.span
                         htmlFor={option}
                         variants={hoverVariants}
                         whileHover="hover"
                       >
                         {option}
-                      </motion.label>
+                      </motion.span>
 
                     </div>
                   )
@@ -122,4 +90,4 @@ const Location = ({ selectedCities, setSelectedCities }) => {
   );
 };
 
-export default Location;
+export default SafetyDropDown;
