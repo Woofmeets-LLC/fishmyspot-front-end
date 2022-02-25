@@ -4,6 +4,7 @@ import FormInput from './FormElements/FormInput';
 import FormRadioButtons from './FormElements/FormRadioButtons/FormRadioButtons';
 import FormOption from './FormElements/FormSelectBox/FormOption';
 import FormSelect from './FormElements/FormSelectBox/FormSelect';
+import FormTextarea from './FormElements/FormTextarea';
 import MultiStepForm from './FormElements/MultiStepForm';
 import BackBtn from './FormElements/MultiStepForm/BackBtn';
 import NextBtn from './FormElements/MultiStepForm/NextBtn';
@@ -21,6 +22,7 @@ export {
     FormRadioButtons,
     FormOption,
     FormCheckbox,
+    FormTextarea,
     MultiStepForm,
     BackBtn,
     NextBtn,
