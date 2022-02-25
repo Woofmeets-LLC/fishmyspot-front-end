@@ -4,9 +4,7 @@ import {useField} from "formik";
 
 const SubWhereDidYouHearAboutUsSection = () => {
     const [{value}, {initialValue}, {setValue}] = useField('promoteBy')
-    React.useEffect(() => {
-        console.log(value)
-    }, [value])
+
     const ChangeValue = (field, pushValue) => {
 
         if(field == 'email' || field == 'name'){
