@@ -11,6 +11,8 @@ import SubPricing from '../../components/SubPages/ListYourSpotPage/SubPricing';
 import TopImageCard from '../../components/SubPages/ListYourSpotPage/TopImageCard';
 import HomeLayout from '../../layouts/HomeLayout';
 import { setShowSignUpModal } from '../../store/slices/modalsSlice';
+import SubWhereDidYouHearAboutUsSection
+    from "../../components/SubPages/ListYourSpotPage/SubWhereDidYouHearAboutUsSection";
 
 const ListYourPond = () => {
     // Redux
@@ -119,6 +121,24 @@ const ListYourPond = () => {
                 }
             }
         },
+        // additional information
+        promoteBy: {
+            referral: {
+                state: false,
+                email: '',
+                name: ''
+            },
+            ad: {
+                state: false
+            },
+            mailer: {
+                state: false
+            },
+            radio: {
+                state: false
+            }
+
+        }
     }
     const validation = {
         pondListing: yup.object({
@@ -155,6 +175,7 @@ const ListYourPond = () => {
         "Description",
         "Access to Pond",
         "Amenities",
+        "Additional Information's",
         "Agreement"
     ];
 
@@ -199,10 +220,11 @@ const ListYourPond = () => {
                     Step 7
                 </FormStep>
                 <FormStep>
-                    Step 8
+                   step 8
                 </FormStep>
-                <FormStep>
-                    Step 9
+
+                <FormStep >
+                    <SubWhereDidYouHearAboutUsSection />
                 </FormStep>
                 <FormStep>
                     Step 10
