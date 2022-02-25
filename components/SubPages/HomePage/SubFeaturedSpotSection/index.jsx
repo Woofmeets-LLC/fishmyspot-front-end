@@ -23,7 +23,7 @@ const SubFeaturedSpotSection = () => {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 2
         }

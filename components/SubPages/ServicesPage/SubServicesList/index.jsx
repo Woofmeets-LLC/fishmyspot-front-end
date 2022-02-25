@@ -9,6 +9,10 @@ const SubServices = () => {
             <PropertyCard />
             <PropertyCard />
             <PropertyCard />
+            <PropertyCard />
+            <PropertyCard />
+            <PropertyCard />
+            <PropertyCard />
         </div>
     );
 };

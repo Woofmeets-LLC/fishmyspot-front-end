@@ -6,11 +6,11 @@ const PropertyCard = () => {
     return (
         <div className={styles['card-container']}>
             <div className="relative">
-                <div className="w-full">
+                <div className="w-full h-[190px] sm:h-auto">
                     <img
                         src="/images/pond2.jpg"
                         alt="Pond"
-                        className="w-full rounded-xl"
+                        className="w-full h-full object-cover rounded-xl"
                     />
                 </div>
                 <span className={styles.feature}>
@@ -28,7 +28,7 @@ const PropertyCard = () => {
                         </span>
                         <span className="font-trade-gothic text-highlight-1">location</span>
                     </div>
-                    <div className="my-2 xl:w-[230px] 2xl:max-w-[240px] h-14">
+                    <div className="mt-1 md:my-2 xl:w-[230px] 2xl:max-w-[240px] sm:h-14">
                         <h4 className={styles['card-heading']}>OH-STARK COUNTY-NAVARRE</h4>
                     </div>
                     <div className="flex justify-between">
