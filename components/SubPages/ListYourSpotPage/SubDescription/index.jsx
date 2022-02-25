@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { FormTextarea } from '../../../Common';
+import SubListingTextarea from '../SubListingTextarea';
 import FishDetails from './FishDetails';
 import OthersFish from './OthersFish';
 
@@ -8,8 +8,8 @@ const SubDescription = () => {
     const fishes = useSelector(state => state.listSpotContents.fishes);
     return (
         <div>
-            <FormTextarea label="Describe Pond" name="description" rows={5} placeholder="Please provide a brief description of your pond . This will assist FishMySpot with accurately listing your pond/lake on our website." />
-            <h2 className="block text-xl font-trade-gothic-bold text-primary mb-3">Check all fish that can be found in your pond:</h2>
+            <SubListingTextarea label="Describe Pond" name="description" rows={5} placeholder="Please provide a brief description of your pond . This will assist FishMySpot with accurately listing your pond/lake on our website." />
+            <h2 className="block text-2xl font-trade-gothic-bold text-primary mb-3">Check all fish that can be found in your pond:</h2>
             <div className="grid grid-cols-2 gap-6 mb-5">
                 {
                     fishes?.map(fish => {

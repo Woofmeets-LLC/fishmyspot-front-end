@@ -1,8 +1,8 @@
+import { useField } from "formik";
+import { motion } from "framer-motion";
 import React from "react";
-import {motion} from "framer-motion";
-import {useField} from "formik";
 
-const SubWhereDidYouHearAboutUsSection = () => {
+const WhereDidYouHearAboutUsSection = () => {
     const [{value}, {initialValue}, {setValue}] = useField('promoteBy')
 
     const ChangeValue = (field, pushValue) => {
@@ -81,4 +81,4 @@ const SubWhereDidYouHearAboutUsSection = () => {
     )
 }
 
-export default SubWhereDidYouHearAboutUsSection
+export default WhereDidYouHearAboutUsSection

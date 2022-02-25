@@ -4,15 +4,16 @@ import * as yup from 'yup';
 import { BackBtn, MultiStepForm, NextBtn } from '../../components/Common';
 import FormStep from '../../components/Common/FormElements/MultiStepForm/FormStep';
 import SubAccessToPond from '../../components/SubPages/ListYourSpotPage/SubAccessToPond';
+import SubAdditionalInformation from '../../components/SubPages/ListYourSpotPage/SubAdditionalInformation';
 import SubAgreementSection from "../../components/SubPages/ListYourSpotPage/SubAgreementSection";
+import SubAmenities from '../../components/SubPages/ListYourSpotPage/SubAmenities';
 import SubAvailableTime from '../../components/SubPages/ListYourSpotPage/SubAvailableTime';
 import SubDescription from '../../components/SubPages/ListYourSpotPage/SubDescription';
 import SubPondListing from '../../components/SubPages/ListYourSpotPage/SubPondListing';
 import SubPondOwnerDetails from '../../components/SubPages/ListYourSpotPage/SubPondOwnerDetails';
 import SubPondOwnerInfo from '../../components/SubPages/ListYourSpotPage/SubPondOwnerInfo';
 import SubPricing from '../../components/SubPages/ListYourSpotPage/SubPricing';
-import SubWhereDidYouHearAboutUsSection from "../../components/SubPages/ListYourSpotPage/SubWhereDidYouHearAboutUsSection";
-import TopImageCard from '../../components/SubPages/ListYourSpotPage/TopImageCard';
+import TopImageCard from '../../components/SubPages/ListYourSpotPage/SubTopImageCard';
 import HomeLayout from '../../layouts/HomeLayout';
 import { getRequest } from '../../services/requests';
 import { setFishes } from '../../store/slices/listSpotContentsSlice';
@@ -56,8 +57,6 @@ const ListYourPond = () => {
         city: "",
         state: "",
         phone: "",
-        terms: false,
-        licence: false,
         secondAddress: "no",
         // Available Time
         availableTime: {
@@ -152,7 +151,35 @@ const ListYourPond = () => {
         "ATP-description": "",
         "ATP-images-file": [],
         "ATP-images-base64": [],
+        // Amenities
+        amenities: {
+            "Canoe/kayak": false,
+            "Pavilion or Other Shelter": false,
+            "Grill": false,
+            "Restrooms": false,
+            "Pet Friendly": false,
+            "Picnic Tables": false,
+            "Dock": false,
+        },
+        otherAmenities: {
+            isSelected: false,
+            names: ""
+        },
+        addOns: {
+            "Pond Trawler/Metal Boat ($20)": false,
+            "Campsite ( $20 )": false,
+        },
+        otherAddOns: {
+            isSelected: false,
+            names: ""
+        },
+        "amenities-images-file": [],
+        "amenities-images-base64": [],
+
         // additional information
+        "additional-information-description": "",
+        "additional-images-file": [],
+        "additional-images-base64": [],
         promoteBy: {
             referral: {
                 state: false,
@@ -169,7 +196,10 @@ const ListYourPond = () => {
                 state: false
             }
 
-        }
+        },
+        // Agreement
+        terms: false,
+        license: false,
     }
 
     const validation = {
@@ -207,7 +237,7 @@ const ListYourPond = () => {
         "Description",
         "Access to Pond",
         "Amenities",
-        "Additional Information's",
+        "Additional Information",
         "Agreement"
     ];
 
@@ -218,7 +248,18 @@ const ListYourPond = () => {
             back: <BackBtn text="Go back" />, next: <NextBtn
                 text="List My Spot"
                 onClick={() => !isLoggedIn && dispatch(setShowSignUpModal())} />
-        }
+        },
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {
+            next: <NextBtn
+                // onClick={() => !isLoggedIn && dispatch(setShowSignUpModal())} 
+                text="List My Spot" />
+        },
     ]
 
 
@@ -253,15 +294,13 @@ const ListYourPond = () => {
                     <SubAccessToPond />
                 </FormStep>
                 <FormStep>
-                    step 8
+                    <SubAmenities />
                 </FormStep>
-
                 <FormStep >
-                    <SubWhereDidYouHearAboutUsSection />
+                    <SubAdditionalInformation />
                 </FormStep>
                 <FormStep>
                     <SubAgreementSection />
-
                 </FormStep>
             </MultiStepForm>
         </HomeLayout>

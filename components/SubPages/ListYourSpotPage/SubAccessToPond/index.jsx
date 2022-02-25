@@ -1,11 +1,11 @@
 import React from 'react';
-import { FormTextarea } from '../../../Common';
+import SubListingTextarea from '../SubListingTextarea';
 import AccessPondImages from './AccessPondImages';
 
 const SubAccessToPond = () => {
     return (
         <div>
-            <FormTextarea
+            <SubListingTextarea
                 label="Describe how to best access your spot"
                 name="ATP-description"
                 rows={5}

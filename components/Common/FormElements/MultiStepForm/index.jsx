@@ -14,7 +14,7 @@ const MultiStepForm = ({
     ...props
 }
 ) => {
-    const [step, setStep] = useState(5);
+    const [step, setStep] = useState(9);
     const [isSuccess, setIsSuccess] = useState(false);
     const childrenArray = Children.toArray(children);
     const currentChild = childrenArray[step];
@@ -48,6 +48,11 @@ const MultiStepForm = ({
                                     case 'Available time':
                                         const isSelectedAny = Object.keys(values?.availableTime)?.map(key => (values?.availableTime[key]?.isSelected))?.includes(true);
                                         isSelectedAny && setStep((s) => s + 1);
+                                        break;
+
+                                    case 'Agreement':
+                                        // const isSelectedAny = Object.keys(values?.availableTime)?.map(key => (values?.availableTime[key]?.isSelected))?.includes(true);
+                                        // isSelectedAny && setStep((s) => s + 1);
                                         break;
 
                                     default:

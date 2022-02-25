@@ -5,7 +5,7 @@ const FormRadioButtons = ({ label, name, radioBtns = [], containerClasses, ...pr
     const [field, meta] = useField({ name });
     return (
         <div className="mb-4">
-            <label htmlFor={name} className="block text-lg text-primary font-trade-gothic-bold capitalize mb-2">{label}</label>
+            <label htmlFor={name} className="block text-xl text-primary font-trade-gothic-bold capitalize mb-2">{label}</label>
             <div className={containerClasses ? containerClasses : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3"}>
                 {
                     radioBtns?.map((radioBtn, index) => {

@@ -2,11 +2,11 @@ import { useField } from 'formik';
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { onSelectFile } from '../../../../services/image-upload/imageUploadHandler';
-import UploadPhoto from './UploadPhoto';
+import UploadPhoto from '../SubAccessToPond/UploadPhoto';
 
-const AccessPondImages = () => {
-    const [fileField, fileMeta, fileHelpers] = useField({ name: "ATP-images-file" });
-    const [base64Field, base64Meta, base64Helpers] = useField({ name: "ATP-images-base64" });
+const AdditionalInfoPhotos = () => {
+    const [fileField, fileMeta, fileHelpers] = useField({ name: "additional-images-file" });
+    const [base64Field, base64Meta, base64Helpers] = useField({ name: "additional-images-base64" });
 
     const handleFileUpload = (e) => {
         onSelectFile(e).then((file) => {
@@ -23,10 +23,10 @@ const AccessPondImages = () => {
         fileHelpers.setValue(fileField.value.filter((photo, i) => i !== index));
         base64Helpers.setValue(base64Field.value.filter((photo, i) => i !== index));
     }
-
     return (
-        <>
-            <h2 className="text-primary font-trade-gothic-bold text-2xl mb-4">Upload Photos</h2>
+        <div className="mb-6">
+            <h2 className="text-primary font-trade-gothic-bold text-2xl mb-4">Upload Photos <sup
+                className={'text-yellow-500 text-sm'}>(optional)</sup></h2>
             <div className="grid sm:grid-cols-2 gap-5">
                 {
                     base64Field?.value?.map((image, index) => (
@@ -43,12 +43,10 @@ const AccessPondImages = () => {
                         </div>
                     ))
                 }
-                <UploadPhoto
-                    handleFileUpload={handleFileUpload}
-                    title={fileField?.value?.length > 0 ? "Choose an image" : "Choose an thumbnail"} />
+                <UploadPhoto handleFileUpload={handleFileUpload} />
             </div>
-        </>
+        </div>
     );
 };
 
-export default AccessPondImages;
+export default AdditionalInfoPhotos;
