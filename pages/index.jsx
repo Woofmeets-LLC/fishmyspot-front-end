@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import SubClientReviewSection from "../components/SubPages/HomePage/SubClientReviewSection";
 import SubFeaturedSpotSection from "../components/SubPages/HomePage/SubFeaturedSpotSection";
 import SubFeaturesSection from "../components/SubPages/HomePage/SubFeaturesSection";
+import SubFooterImageCard from "../components/SubPages/HomePage/SubFooterImageCard";
 import SubHeroSection from "../components/SubPages/HomePage/SubHeroSection";
 import SubListingYourSpotSection from "../components/SubPages/HomePage/SubListingYourSpotSection";
 import SubWireFramesSection from "../components/SubPages/HomePage/SubWireFramesSection";
@@ -17,6 +18,7 @@ const Home = () => {
             <SubFeaturedSpotSection />
             <SubClientReviewSection />
             <SubListingYourSpotSection />
+            <SubFooterImageCard />
         </HomeLayout>
     );
 };

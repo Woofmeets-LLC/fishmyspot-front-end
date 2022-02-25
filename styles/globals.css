@@ -98,7 +98,7 @@ Chrome
 }
 
 .featured-spot-slider .slick-prev:before, .featured-spot-slider .slick-next:before {
-    @apply text-secondary text-xl lg:text-3xl 2xl:text-4xl;
+    @apply text-secondary text-2xl lg:text-3xl 2xl:text-4xl;
 }
 
 .featured-spot-slider .slick-list{
@@ -120,4 +120,13 @@ Chrome
 
 .featured-spot-slider .slick-slide{
     @apply transition-all duration-200 lg:px-5;
+}
+
+.slick-slider.center.slick-initialized {
+    @apply px-5 lg:px-3;
+}
+
+/* settings icons */
+.icons svg {
+    @apply text-2xl sm:text-3xl md:text-4xl 2xl:text-6xl text-secondary;
 }

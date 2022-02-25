@@ -3,7 +3,7 @@ import React from 'react';
 const FeaturedSpot = () => {
   return (
     <div className='mx-3 xl:mx-5 shadow-xl rounded-xl overflow-hidden'>
-      <div className='w-full h-[150px] md:h-[180xp] 2xl:h-[227px] rounded-xl overflow-hidden'>
+      <div className='w-full h-[180px] lg:h-[160px] 2xl:h-[200px] 3xl:h-[227px] rounded-xl overflow-hidden'>
         <img src="/images/pond1.jpg" alt="Pond" className='w-full h-full 2xl:h-full' />
       </div>
       <div className='p-3 2xl:py-6 2xl:pl-4 2xl:pr-6'>
