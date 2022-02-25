@@ -4,12 +4,14 @@ import * as yup from 'yup';
 import { BackBtn, MultiStepForm, NextBtn } from '../../components/Common';
 import FormStep from '../../components/Common/FormElements/MultiStepForm/FormStep';
 import SubAccessToPond from '../../components/SubPages/ListYourSpotPage/SubAccessToPond';
+import SubAgreementSection from "../../components/SubPages/ListYourSpotPage/SubAgreementSection";
 import SubAvailableTime from '../../components/SubPages/ListYourSpotPage/SubAvailableTime';
 import SubDescription from '../../components/SubPages/ListYourSpotPage/SubDescription';
 import SubPondListing from '../../components/SubPages/ListYourSpotPage/SubPondListing';
 import SubPondOwnerDetails from '../../components/SubPages/ListYourSpotPage/SubPondOwnerDetails';
 import SubPondOwnerInfo from '../../components/SubPages/ListYourSpotPage/SubPondOwnerInfo';
 import SubPricing from '../../components/SubPages/ListYourSpotPage/SubPricing';
+import SubWhereDidYouHearAboutUsSection from "../../components/SubPages/ListYourSpotPage/SubWhereDidYouHearAboutUsSection";
 import TopImageCard from '../../components/SubPages/ListYourSpotPage/TopImageCard';
 import HomeLayout from '../../layouts/HomeLayout';
 import { getRequest } from '../../services/requests';
@@ -54,6 +56,8 @@ const ListYourPond = () => {
         city: "",
         state: "",
         phone: "",
+        terms: false,
+        licence: false,
         secondAddress: "no",
         // Available Time
         availableTime: {
@@ -148,7 +152,26 @@ const ListYourPond = () => {
         "ATP-description": "",
         "ATP-images-file": [],
         "ATP-images-base64": [],
+        // additional information
+        promoteBy: {
+            referral: {
+                state: false,
+                email: '',
+                name: ''
+            },
+            ad: {
+                state: false
+            },
+            mailer: {
+                state: false
+            },
+            radio: {
+                state: false
+            }
+
+        }
     }
+
     const validation = {
         pondListing: yup.object({
             acre: yup.string().required("Acre is required"),
@@ -173,7 +196,7 @@ const ListYourPond = () => {
             state: yup.string().required("Required!"),
             phone: yup.string().required("Required!"),
             secondAddress: yup.string().required("Required!"),
-        }),
+        })
     }
     const timelineArray = [
         "Pond listing",
@@ -184,6 +207,7 @@ const ListYourPond = () => {
         "Description",
         "Access to Pond",
         "Amenities",
+        "Additional Information's",
         "Agreement"
     ];
 
@@ -229,16 +253,15 @@ const ListYourPond = () => {
                     <SubAccessToPond />
                 </FormStep>
                 <FormStep>
-                    Step 8
+                    step 8
+                </FormStep>
+
+                <FormStep >
+                    <SubWhereDidYouHearAboutUsSection />
                 </FormStep>
                 <FormStep>
-                    Step 9
-                </FormStep>
-                <FormStep>
-                    Step 10
-                    <div className="">
-                        <button>Submit</button>
-                    </div>
+                    <SubAgreementSection />
+
                 </FormStep>
             </MultiStepForm>
         </HomeLayout>
