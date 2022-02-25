@@ -1,21 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { BackBtn, MultiStepForm, NextBtn } from '../../components/Common';
 import FormStep from '../../components/Common/FormElements/MultiStepForm/FormStep';
+import SubAccessToPond from '../../components/SubPages/ListYourSpotPage/SubAccessToPond';
 import SubAvailableTime from '../../components/SubPages/ListYourSpotPage/SubAvailableTime';
+import SubDescription from '../../components/SubPages/ListYourSpotPage/SubDescription';
 import SubPondListing from '../../components/SubPages/ListYourSpotPage/SubPondListing';
 import SubPondOwnerDetails from '../../components/SubPages/ListYourSpotPage/SubPondOwnerDetails';
 import SubPondOwnerInfo from '../../components/SubPages/ListYourSpotPage/SubPondOwnerInfo';
 import SubPricing from '../../components/SubPages/ListYourSpotPage/SubPricing';
 import TopImageCard from '../../components/SubPages/ListYourSpotPage/TopImageCard';
 import HomeLayout from '../../layouts/HomeLayout';
+import { getRequest } from '../../services/requests';
+import { setFishes } from '../../store/slices/listSpotContentsSlice';
 import { setShowSignUpModal } from '../../store/slices/modalsSlice';
 
 const ListYourPond = () => {
     // Redux
     const dispatch = useDispatch();
     const { isLoggedIn } = useSelector(state => state.auth);
+    const fishes = useSelector(state => state.listSpotContents.fishes);
+    const fishesObject = fishes?.map(fish => fish.name + "_" + fish.id)
+        ?.reduce((prevObj, key) => ({ ...prevObj, [key]: false }), {});
+
+    // Updating fishes image to redux
+    useEffect(() => {
+        getRequest('fishes')
+            .then(res => {
+                dispatch(setFishes(res.data));
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [])
 
 
     const initialValues = {
@@ -119,6 +137,17 @@ const ListYourPond = () => {
                 }
             }
         },
+        // Description
+        description: "",
+        fishes: fishesObject,
+        "others-fish": {
+            isSelected: false,
+            names: ""
+        },
+        // Access to Pond
+        "ATP-description": "",
+        "ATP-images-file": [],
+        "ATP-images-base64": [],
     }
     const validation = {
         pondListing: yup.object({
@@ -168,6 +197,7 @@ const ListYourPond = () => {
         }
     ]
 
+
     return (
         <HomeLayout>
             <TopImageCard />
@@ -193,10 +223,10 @@ const ListYourPond = () => {
                     <SubAvailableTime />
                 </FormStep>
                 <FormStep>
-                    Step 6
+                    <SubDescription />
                 </FormStep>
                 <FormStep>
-                    Step 7
+                    <SubAccessToPond />
                 </FormStep>
                 <FormStep>
                     Step 8

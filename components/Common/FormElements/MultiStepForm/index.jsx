@@ -14,7 +14,7 @@ const MultiStepForm = ({
     ...props
 }
 ) => {
-    const [step, setStep] = useState(4);
+    const [step, setStep] = useState(5);
     const [isSuccess, setIsSuccess] = useState(false);
     const childrenArray = Children.toArray(children);
     const currentChild = childrenArray[step];
@@ -34,6 +34,7 @@ const MultiStepForm = ({
                         validationSchema={currentChild.props.validationSchema}
                         enableReinitialize={true}
                         onSubmit={async (values, helpers) => {
+                            console.log(values);
                             if (isLastStep) {
                                 setIsSuccess(true);
                                 await props.onSubmit(values, helpers);
