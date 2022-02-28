@@ -1,5 +1,6 @@
 import { Form, Formik } from 'formik';
 import React, { Children, useState } from 'react';
+import { useSelector } from 'react-redux';
 import BackBtn from './BackBtn';
 import NextBtn from './NextBtn';
 import TimeLineContainer from './TimeLine/TimeLineContainer';
@@ -13,14 +14,15 @@ const MultiStepForm = ({
     ...props
 }
 ) => {
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState(9);
     const [isSuccess, setIsSuccess] = useState(false);
     const childrenArray = Children.toArray(children);
     const currentChild = childrenArray[step];
     const isFirstStep = step === 0;
     const isLastStep = step === timelineArray.length;
 
-
+    // Redux 
+    const { isLoggedIn } = useSelector(state => state.auth);
     return (
         <div className="container md:px-10 xl:px-28 py-10 3xl:py-32">
             <div className="grid grid-cols-10 gap-8 lg:gap-0">
@@ -32,14 +34,25 @@ const MultiStepForm = ({
                         validationSchema={currentChild.props.validationSchema}
                         enableReinitialize={true}
                         onSubmit={async (values, helpers) => {
+                            console.log(values);
                             if (isLastStep) {
                                 setIsSuccess(true);
                                 await props.onSubmit(values, helpers);
                             } else {
                                 // If we want to write custom logic for the next step then we have to write it here
                                 switch (timelineArray[step]) {
-                                    case 'Utilities & Feaures':
-                                        // Codes for how we handle the step
+                                    case 'Price':
+                                        isLoggedIn && setStep((s) => s + 1);
+                                        break;
+
+                                    case 'Available time':
+                                        const isSelectedAny = Object.keys(values?.availableTime)?.map(key => (values?.availableTime[key]?.isSelected))?.includes(true);
+                                        isSelectedAny && setStep((s) => s + 1);
+                                        break;
+
+                                    case 'Agreement':
+                                        // const isSelectedAny = Object.keys(values?.availableTime)?.map(key => (values?.availableTime[key]?.isSelected))?.includes(true);
+                                        // isSelectedAny && setStep((s) => s + 1);
                                         break;
 
                                     default:

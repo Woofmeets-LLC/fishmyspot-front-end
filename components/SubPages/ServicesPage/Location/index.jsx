@@ -34,9 +34,11 @@ const hoverVariants = {
 const Location = ({ selectedCities, setSelectedCities }) => {
   const [isDropDown, setIsDropDown] = useState(false);
   const options = [
-    'Dhaka',
-    'Barishal Barishal',
-    'Khulna'
+    'Florida',
+    'California',
+    'Georgia',
+    'Alabama',
+    'District of Columbia'
   ];
 
   const cityAddOrRemove = (cityName) => {

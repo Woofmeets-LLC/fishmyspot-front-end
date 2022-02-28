@@ -1,5 +1,5 @@
 .categories-container {
-  @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-7 3xl:grid-cols-8 gap-4 pt-16 mb-14;
+  @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-7 3xl:grid-cols-8 gap-4 py-6 md:py-10 xl:pt-16 xl:pb-14;
 }
 
 .list-item {
