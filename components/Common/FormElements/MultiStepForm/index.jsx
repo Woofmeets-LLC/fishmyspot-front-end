@@ -14,7 +14,7 @@ const MultiStepForm = ({
     ...props
 }
 ) => {
-    const [step, setStep] = useState(9);
+    const [step, setStep] = useState(0);
     const [isSuccess, setIsSuccess] = useState(false);
     const childrenArray = Children.toArray(children);
     const currentChild = childrenArray[step];
