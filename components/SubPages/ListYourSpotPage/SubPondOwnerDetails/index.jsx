@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormInput } from '../../../Common';
+import Autocomplete from "react-google-autocomplete";
 
 const SubPondOwnerDetails = () => {
     return (
@@ -13,6 +14,7 @@ const SubPondOwnerDetails = () => {
                 <FormInput name="halfDayRate" label="Half Day Rate" type="number" />
                 <FormInput name="fullDayRate" label="Full Day Rate" type="number" />
             </div>
+
         </div>
     );
 };
