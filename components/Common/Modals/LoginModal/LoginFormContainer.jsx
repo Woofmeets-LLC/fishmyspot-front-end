@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Form, Formik } from 'formik';
+import { useRouter } from "next/router";
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaFacebookF } from 'react-icons/fa';
@@ -7,6 +8,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { getSdk } from '../../../../sharetribe/sharetribeSDK';
+import { login } from '../../../../store/slices/authSlice';
 import { setShowSignUpModal } from '../../../../store/slices/modalsSlice';
 import LoginForm from './LoginForm';
 
@@ -14,6 +16,8 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
     // States
     const [isAngler, setIsAngler] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+
+    const router = useRouter();
 
     // Redux
     const dispatch = useDispatch();
@@ -42,7 +46,11 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
                         setIsLoading(false);
 
                         if (typeof (window) !== "undefined") {
-                            window.location.reload();
+                            if (router?.route == "/list-your-spot") {
+                                dispatch(login())
+                            } else {
+                                window.location.reload();
+                            }
                         }
                     })
                     ?.catch(err => {
