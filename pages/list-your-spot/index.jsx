@@ -56,6 +56,11 @@ const ListYourPond = () => {
         phone1: "",
         halfDayRate: '',
         fullDayRate: '',
+        latLng1: {
+            lat: '',
+            lng: ' ',
+            _sdkType: 'LatLng',
+        },
         // => Second address 
         firstName2: '',
         lastName2: '',
@@ -65,6 +70,11 @@ const ListYourPond = () => {
         city2: "",
         state2: "",
         phone2: "",
+        latLng2: {
+            lat: '',
+            lng: ' ',
+            _sdkType: 'LatLng',
+        },
 
         secondAddress: "no",
 
@@ -240,6 +250,10 @@ const ListYourPond = () => {
         description: yup.object({
             description: yup.string().required("Description is required"),
         }),
+        accessToPond: yup.object({
+            "ATP-description": yup.string().required("Description is required"),
+            "ATP-images-file": yup.array().min(2, 'You must upload at least 2 photos!'),
+        })
     }
     const timelineArray = [
         "Pond listing",
@@ -292,7 +306,7 @@ const ListYourPond = () => {
                 <FormStep validationSchema={validation.description}>
                     <SubDescription />
                 </FormStep>
-                <FormStep>
+                <FormStep validationSchema={validation.accessToPond}>
                     <SubAccessToPond />
                 </FormStep>
                 <FormStep>

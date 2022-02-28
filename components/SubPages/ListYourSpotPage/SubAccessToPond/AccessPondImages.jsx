@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useField } from 'formik';
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
@@ -8,7 +9,6 @@ const AccessPondImages = () => {
     const [fileField, fileMeta, fileHelpers] = useField({ name: "ATP-images-file" });
     const [base64Field, base64Meta, base64Helpers] = useField({ name: "ATP-images-base64" });
     const [atpImagesField, atpImagesMeta] = useField({ name: "ATP-images-file" });
-    const [atpDescriptionField, atpDescriptionMeta] = useField({ name: "ATP-description" });
 
     const handleFileUpload = (e) => {
         onSelectFile(e).then((file) => {
@@ -51,7 +51,11 @@ const AccessPondImages = () => {
 
             </div>
             <div className="text-gray-500 text-sm">Tip: Choose the top 2-4 photos of your home from different angles in good light that really show the Spot.</div>
-
+            {
+                atpImagesMeta?.touched && atpImagesMeta?.error ? (
+                    <div className="mt-2 text-red-500 text-sm">{atpImagesMeta?.error}</div>
+                ) : null
+            }
         </div>
     );
 };

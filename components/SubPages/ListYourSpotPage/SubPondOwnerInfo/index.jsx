@@ -5,44 +5,72 @@ import { FormInput, FormRadioButtons } from '../../../Common';
 
 
 const SubPondOwnerInfo = () => {
-    const [firstNameField] = useField({ name: "firstName" })
-    const [lastNameField] = useField({ name: "lastName" })
     const [fullDayRateField] = useField({ name: "fullDayRate" })
-    const [zipCodeField] = useField({ name: "zipCode" })
+
+    const [firstName1Field] = useField({ name: "firstName1" })
+    const [lastName1Field] = useField({ name: "lastName1" })
+    const [zipCode1Field, zipCode1Meta, zipCode1Helpers] = useField({ name: "zipCode1" })
+    const [address1Field, address1Meta, address1Helpers] = useField({ name: "address1" })
+    const [city1Field, city1Meta, city1Helpers] = useField({ name: "city1" })
+    const [state1Field, state1Meta, state1Helpers] = useField({ name: "state1" })
+    const [latLng1Field, latLng1Meta, latLng1Helpers] = useField({ name: "latLng1" })
 
     const [secondAddressField] = useField({ name: "secondAddress" })
     const [firstName2Field] = useField({ name: "firstName2" })
     const [lastName2Field] = useField({ name: "lastName2" })
     const [email2Field] = useField({ name: "email2" })
-    const [zipCode2Field] = useField({ name: "zipCode2" })
-    const [address2Field] = useField({ name: "address2" })
-    const [city2Field] = useField({ name: "city2" })
-    const [state2Field] = useField({ name: "state2" })
+    const [zipCode2Field, zipCode2Meta, zipCode2Helpers] = useField({ name: "zipCode2" })
+    const [address2Field, address2Meta, address2Helpers] = useField({ name: "address2" })
+    const [city2Field, city2Meta, city2Helpers] = useField({ name: "city2" })
+    const [state2Field, state2Meta, state2Helpers] = useField({ name: "state2" })
+    const [latLng2Field, latLng2Meta, latLng2Helpers] = useField({ name: "latLng2" })
     const [phone2Field] = useField({ name: "phone2" })
 
-    const getAddress = place => {
-        const address = {
-
+    const getAddress = (place, addressName) => {
+        if (addressName === "address1") {
+            address1Helpers.setValue(place.formatted_address);
+            place.address_components.forEach(component => {
+                if (component.types[0] === 'administrative_area_level_2') {
+                    // address.city = component.short_name
+                    city1Helpers.setValue(component?.short_name)
+                }
+                if (component.types[0] == 'postal_code') {
+                    // address.zip = component.short_name
+                    zipCode1Helpers.setValue(component?.short_name);
+                }
+                if (component.types[0] == 'administrative_area_level_1') {
+                    // address.state = component.short_name
+                    state1Helpers.setValue(component?.short_name)
+                }
+                // Setting the lat and lng values
+                latLng1Helpers.setValue({
+                    _sdkType: 'LatLng',
+                    lat: place.geometry.location.lat(),
+                    lng: place.geometry.location.lng(),
+                })
+                // address.lat = place.geometry.location.lat();
+                // address.lng = place.geometry.location.lng();
+            })
+        } else if (addressName === "address2") {
+            address2Helpers.setValue(place.formatted_address);
+            place.address_components.forEach(component => {
+                if (component.types[0] === 'administrative_area_level_2') {
+                    city2Helpers.setValue(component?.short_name)
+                }
+                if (component.types[0] == 'postal_code') {
+                    zipCode2Helpers.setValue(component?.short_name);
+                }
+                if (component.types[0] == 'administrative_area_level_1') {
+                    state2Helpers.setValue(component?.short_name)
+                }
+                // Setting the lat and lng values
+                latLng2Helpers.setValue({
+                    _sdkType: 'LatLng',
+                    lat: place.geometry.location.lat(),
+                    lng: place.geometry.location.lng(),
+                })
+            })
         }
-        place.address_components.forEach(component => {
-            if (component.types[0] === 'administrative_area_level_2') {
-                address.city = component.short_name
-            }
-
-            if (component.types[0] == 'postal_code') {
-                address.zip = component.short_name
-            }
-            if (component.types[0] == 'administrative_area_level_1') {
-                address.state = component.short_name
-            }
-
-            address.lat = place.geometry.location.lat();
-            address.lng = place.geometry.location.lng();
-
-
-        })
-        console.log(address)
-        return address
     }
 
     const checkEmptyFields = () => {
@@ -69,10 +97,10 @@ const SubPondOwnerInfo = () => {
     return (
         <div>
             <div className="text-center text-primary">
-                <h2 className="text-2xl font-trade-gothic-bold mb-5">{`${firstNameField?.value} ${lastNameField?.value}`},
+                <h2 className="text-2xl font-trade-gothic-bold mb-5">{`${firstName1Field?.value} ${lastName1Field?.value}`},
                     you could make</h2>
                 <h1 className="text-5xl font-trade-gothic-bold mb-8">$ {+fullDayRateField?.value * 7}</h1>
-                <p className="text-sm mb-10">by sharing your pond for 1 week in {zipCodeField?.value}.</p>
+                <p className="text-sm mb-10">by sharing your pond for 1 week in {zipCode1Field?.value}.</p>
             </div>
 
             <div className="grid grid-cols-2 gap-5 xl:gap-6">
@@ -91,11 +119,12 @@ const SubPondOwnerInfo = () => {
                     className="block w-full px-3 py-[5px] font-trade-gothic text-base text-primary bg-white bg-clip-padding bg-no-repeat  border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
                     apiKey={process.env.GOOGLE_MAP_API_KEY}
                     onPlaceSelected={(place) => {
-                        getAddress(place)
+                        getAddress(place, 'address1')
                     }}
                     options={{
                         types: 'ALL'
                     }}
+                    defaultValue={address1Field?.value}
 
                 />
             </div>
@@ -119,7 +148,27 @@ const SubPondOwnerInfo = () => {
                             <FormInput name="firstName2" label="First Name" placeholder="Enter your first name" />
                             <FormInput name="lastName2" label="Last Name" placeholder="Enter your last name" />
                         </div>
-                        <FormInput name="address2" label="Address" placeholder="Enter Your Address" />
+                        {/* <FormInput name="address2" label="Address" placeholder="Enter Your Address" /> */}
+                        <div className="mb-4">
+                            <label
+                                className="block text-lg text-primary font-trade-gothic-bold capitalize mb-2"
+                            >
+                                Address
+                            </label>
+                            <Autocomplete
+                                placeholder={'Enter Your Address'}
+                                className="block w-full px-3 py-[5px] font-trade-gothic text-base text-primary bg-white bg-clip-padding bg-no-repeat  border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none"
+                                apiKey={process.env.GOOGLE_MAP_API_KEY}
+                                onPlaceSelected={(place) => {
+                                    getAddress(place, 'address2')
+                                }}
+                                options={{
+                                    types: 'ALL'
+                                }}
+                                defaultValue={address2Field?.value}
+
+                            />
+                        </div>
                         <div className="grid grid-cols-3 gap-4 xl:gap-6">
                             <FormInput name="city2" label="City" placeholder="Please enter city" />
                             <FormInput name="state2" label="State" placeholder="Please enter state" />
