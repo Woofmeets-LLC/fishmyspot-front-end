@@ -8,6 +8,38 @@ const SubPondOwnerInfo = () => {
     const [lastNameField] = useField({ name: "lastName" })
     const [fullDayRateField] = useField({ name: "fullDayRate" })
     const [zipCodeField] = useField({ name: "zipCode" })
+
+    const [secondAddressField] = useField({ name: "secondAddress" })
+    const [firstName2Field] = useField({ name: "firstName2" })
+    const [lastName2Field] = useField({ name: "lastName2" })
+    const [email2Field] = useField({ name: "email2" })
+    const [zipCode2Field] = useField({ name: "zipCode2" })
+    const [address2Field] = useField({ name: "address2" })
+    const [city2Field] = useField({ name: "city2" })
+    const [state2Field] = useField({ name: "state2" })
+    const [phone2Field] = useField({ name: "phone2" })
+
+    const checkEmptyFields = () => {
+        if (secondAddressField?.value === "no") {
+            return false;
+        } else {
+            if (firstName2Field?.value &&
+                lastName2Field?.value &&
+                email2Field?.value &&
+                zipCode2Field?.value &&
+                address2Field?.value &&
+                city2Field?.value &&
+                state2Field?.value &&
+                phone2Field?.value) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    const isAnyFieldEmpty = checkEmptyFields();
+
     return (
         <div>
             <div className="text-center text-primary">
@@ -17,24 +49,46 @@ const SubPondOwnerInfo = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-5 xl:gap-6">
-                <FormInput name="firstName" label="First Name" placeholder="Enter your first name" />
-                <FormInput name="lastName" label="Last Name" placeholder="Enter your last name" />
+                <FormInput name="firstName1" label="First Name" placeholder="Enter your first name" />
+                <FormInput name="lastName1" label="Last Name" placeholder="Enter your last name" />
             </div>
-            <FormInput name="address" label="Address" placeholder="Enter Your Address" />
+            <FormInput name="address1" label="Address" placeholder="Enter Your Address" />
             <div className="grid grid-cols-3 gap-4 xl:gap-6">
-                <FormInput name="city" label="City" placeholder="Please enter city" />
-                <FormInput name="state" label="State" placeholder="Please enter state" />
-                <FormInput name="zipCode" label="zip" placeholder="Please enter zipCode" />
+                <FormInput name="city1" label="City" placeholder="Please enter city" />
+                <FormInput name="state1" label="State" placeholder="Please enter state" />
+                <FormInput name="zipCode1" label="zip" placeholder="Please enter zipCode" />
             </div>
-            <FormInput name="email" label="Email" placeholder="Please enter email" />
-            <FormInput name="phone" label="Phone" placeholder="Please enter phone" />
+            <FormInput name="email1" label="Email" placeholder="Please enter email" />
+            <FormInput name="phone1" label="Phone" placeholder="Please enter phone" />
             <FormRadioButtons
                 name="secondAddress"
                 radioBtns={[{ title: "Yes", value: "yes" }, { title: "No", value: "no" }]}
                 label="Do you need to add a second address for where you
             want to receive payment or add another contact to your
             listing? (Optional)" />
-
+            {
+                secondAddressField?.value === "yes" && (
+                    <div className="mt-6">
+                        <div className="grid grid-cols-2 gap-5 xl:gap-6">
+                            <FormInput name="firstName2" label="First Name" placeholder="Enter your first name" />
+                            <FormInput name="lastName2" label="Last Name" placeholder="Enter your last name" />
+                        </div>
+                        <FormInput name="address2" label="Address" placeholder="Enter Your Address" />
+                        <div className="grid grid-cols-3 gap-4 xl:gap-6">
+                            <FormInput name="city2" label="City" placeholder="Please enter city" />
+                            <FormInput name="state2" label="State" placeholder="Please enter state" />
+                            <FormInput name="zipCode2" label="zip" placeholder="Please enter zipCode" />
+                        </div>
+                        <FormInput name="email2" label="Email" placeholder="Please enter email" />
+                        <FormInput name="phone2" label="Phone" placeholder="Please enter phone" />
+                    </div>
+                )
+            }
+            {
+                isAnyFieldEmpty && (
+                    <div className="text-red-500 text-center mt-6">You must have to fill all fields</div>
+                )
+            }
         </div>
     );
 };

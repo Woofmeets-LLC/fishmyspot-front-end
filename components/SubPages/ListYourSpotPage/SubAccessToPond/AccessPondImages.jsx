@@ -7,6 +7,8 @@ import UploadPhoto from './UploadPhoto';
 const AccessPondImages = () => {
     const [fileField, fileMeta, fileHelpers] = useField({ name: "ATP-images-file" });
     const [base64Field, base64Meta, base64Helpers] = useField({ name: "ATP-images-base64" });
+    const [atpImagesField, atpImagesMeta] = useField({ name: "ATP-images-file" });
+    const [atpDescriptionField, atpDescriptionMeta] = useField({ name: "ATP-description" });
 
     const handleFileUpload = (e) => {
         onSelectFile(e).then((file) => {
@@ -25,7 +27,7 @@ const AccessPondImages = () => {
     }
 
     return (
-        <>
+        <div>
             <h2 className="text-primary font-trade-gothic-bold text-2xl mb-4">Upload Photos</h2>
             <div className="grid sm:grid-cols-2 gap-5">
                 {
@@ -46,8 +48,11 @@ const AccessPondImages = () => {
                 <UploadPhoto
                     handleFileUpload={handleFileUpload}
                     title={fileField?.value?.length > 0 ? "Choose an image" : "Choose an thumbnail"} />
+
             </div>
-        </>
+            <div className="text-gray-500 text-sm">Tip: Choose the top 2-4 photos of your home from different angles in good light that really show the Spot.</div>
+
+        </div>
     );
 };
 

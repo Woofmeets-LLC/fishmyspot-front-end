@@ -45,97 +45,107 @@ const ListYourPond = () => {
         "stocked-pond": "",
         "catch-requirements": "",
         // Pond Owner Details
-        firstName: '',
-        lastName: '',
-        email: '',
-        zipCode: '',
+        // => First address 
+        firstName1: '',
+        lastName1: '',
+        email1: '',
+        zipCode1: '',
+        address1: "",
+        city1: "",
+        state1: "",
+        phone1: "",
         halfDayRate: '',
         fullDayRate: '',
-        // Price
-        // Pond Owner Info
-        address: "",
-        city: "",
-        state: "",
-        phone: "",
+        // => Second address 
+        firstName2: '',
+        lastName2: '',
+        email2: '',
+        zipCode2: '',
+        address2: "",
+        city2: "",
+        state2: "",
+        phone2: "",
+
         secondAddress: "no",
+
         // Available Time
         availableTime: {
             sunday: {
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             monday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             tuesday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             wednesday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             thursday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             friday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             saturday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             everyday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             }
@@ -209,24 +219,27 @@ const ListYourPond = () => {
             "catch-requirements": yup.string().required("You have to select one of those"),
         }),
         pondOwnerDetails: yup.object({
-            firstName: yup.string().required("First name is required"),
-            lastName: yup.string().required("Last name is required"),
-            email: yup.string().email().required("Email is required"),
-            zipCode: yup.string().required("Zip code is required"),
+            firstName1: yup.string().required("First name is required"),
+            lastName1: yup.string().required("Last name is required"),
+            email1: yup.string().email().required("Email is required"),
+            zipCode1: yup.string().required("Zip code is required"),
             halfDayRate: yup.string().required("Required!"),
             fullDayRate: yup.string().required("Required!"),
         }),
         pondOwnerInfo: yup.object({
-            firstName: yup.string().required("First name is required"),
-            lastName: yup.string().required("Last name is required"),
-            email: yup.string().email().required("Email is required"),
-            zipCode: yup.string().required("Zip code is required"),
-            address: yup.string().required("Required!"),
-            city: yup.string().required("Required!"),
-            state: yup.string().required("Required!"),
-            phone: yup.string().required("Required!"),
+            firstName1: yup.string().required("First name is required"),
+            lastName1: yup.string().required("Last name is required"),
+            email1: yup.string().email().required("Email is required"),
+            zipCode1: yup.string().required("Zip code is required"),
+            address1: yup.string().required("Required!"),
+            city1: yup.string().required("Required!"),
+            state1: yup.string().required("Required!"),
+            phone1: yup.string().required("Required!"),
             secondAddress: yup.string().required("Required!"),
-        })
+        }),
+        description: yup.object({
+            description: yup.string().required("Description is required"),
+        }),
     }
     const timelineArray = [
         "Pond listing",
@@ -242,24 +255,13 @@ const ListYourPond = () => {
     ];
 
     const stepControllerBtns = [
-        {},
-        {},
+        {}, {},
         {
             back: <BackBtn text="Go back" />, next: <NextBtn
                 text="List My Spot"
                 onClick={() => !isLoggedIn && dispatch(setShowSignUpModal())} />
-        },
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {
-            next: <NextBtn
-                // onClick={() => !isLoggedIn && dispatch(setShowSignUpModal())} 
-                text="List My Spot" />
-        },
+        }, {}, {}, {}, {}, {}, {},
+        { next: <NextBtn text="List My Spot" /> },
     ]
 
 
@@ -287,7 +289,7 @@ const ListYourPond = () => {
                 <FormStep>
                     <SubAvailableTime />
                 </FormStep>
-                <FormStep>
+                <FormStep validationSchema={validation.description}>
                     <SubDescription />
                 </FormStep>
                 <FormStep>
