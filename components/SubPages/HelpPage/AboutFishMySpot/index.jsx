@@ -35,7 +35,7 @@ const hoverVariants = {
   }
 }
 
-const AboutFishMySpot = () => {
+const AboutFishMySpot = ({ setIsShow }) => {
   const [isDropDown, setIsDropDown] = useState(false);
 
   return (

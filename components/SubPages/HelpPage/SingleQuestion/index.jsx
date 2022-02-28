@@ -7,7 +7,7 @@ const SingleQuestion = ({ question }) => {
       <div className='text-sm mt-5'>
         <p>
           If you don't have an FishMySpot account yet, go to FishMySpot.com and click
-          <span class="text-blue-300 cursor-pointer">{" "}Sign Up.</span>
+          <span className="text-blue-300 cursor-pointer">{" "}Sign Up.</span>
         </p>
         <br />
         <p>
