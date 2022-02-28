@@ -1,34 +1,109 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Create a Merge Request
 
-## Getting Started
+When you push your feature branch and it is ready to be reviewed:
 
-First, run the development server:
+Create a Merge Request in Gitlab. Source Branch is your feature branch. Target branch is always DEV branch.
 
-```bash
-npm run dev
-# or
-yarn dev
+Title of the Merge Request will be [Jira-Ticket Number - Feature] ex. RR-34 Bug Fix Input Fields.
+
+Description should include link to Jira Ticket
+
+Assignee should be [Assign to Me]
+
+If the work is Front-End related, add all Front-End Engineers and Wasfi as reviewers.
+
+If the work is Back-End related, add all Back-End Engineers and Wasfi as reviewers.
+
+Make sure delete source branch is checked
+
+# Create Merge Request
+
+MAKE SURE TO MOVE THE Jira TICKET to Code Review stage
+
+# Situations
+
+Sometimes you may see Merge Request unable to Merge because Source branch is commits behind target branch. That means, after you pulled the Dev branch and made a copy of that branch locally, another team member merged their code into the Dev branch. Which means your branch is not up to date.
+
+# How to make it up to date
+
+- git checkout dev //checkout the dev branch
+- git pull  //to get the latest code from the remote repository in your local machine
+- git checkout [your feature branch]
+- git merge origin dev
+- // Hold [SHIFT] [+] [;] buttons on keyboard
+- // Press [w] [q] buttons in keyboard and then press [enter] button
+- git push
+
+When you go to the merge request in gitlab you will see the merge request updated with your branch up to date. There are other rebase and merge strategies you can do as well. This is just 1 of the strategy.
+
+# Merge Request Checklist
+
+- Merge request Title should be Jira Ticket number and feature. ex. RR-34 BUG fixing input fields
+
+- Reviewers are assigned.
+
+- Description includes link to Jira Ticket
+
+- Delete source branch is checked
+
+- After approval, merge request should be merged by you.
+
+- Move Jira Ticket to Code-Review. After you merge it, Move the ticket to QA lane or Done.
+
+- Any Merge Request created that still has work in progress should have the word Draft: in title.
+
+- Post Merge Request in project related channel as well
+
+- It is your responsibility to follow up with your merge request if nobody has approved it.
+
+# Run this project locally
+
+## Prerequisites
+
+- Node JS - V > 14.*
+- yarn - V > 1.22.*
+
+`Please make sure you have those installed on your system`
+
+# Please check the backend api url here
+
+```javascript
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Run application
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+*run these commands on your terminal on project root directory to start the application*
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- `yarn install --frozen-lockfile`
+## start development server
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- `yarn dev`
 
-## Learn More
+`Your application will be start on port 3000`
 
-To learn more about Next.js, take a look at the following resources:
+Now open this link to view application : http://localhost:3000
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## build it and run
+```shell
+yarn build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# start production server
+yarn start
+```
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Containerization (Docker)
+Please make sure some file content before dockerize.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+#### Run these command to make dockerisation
+```shell
+docker build -t fish_my_spot . && docker run -p 80:3000 -d fish_my_spot
+```
+
+--- IT'S DONE---
+
+
+
