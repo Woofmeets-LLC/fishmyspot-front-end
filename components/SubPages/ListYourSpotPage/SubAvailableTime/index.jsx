@@ -7,7 +7,7 @@ const SubAvailableTime = () => {
     const isSelectedAny = Object.keys(field?.value)?.map(key => (field?.value[key]?.isSelected))?.includes(true);
     return (
         <div>
-            <h2 className="block text-lg text-primary font-trade-gothic-bold capitalize mb-4">Check all days/times that your pond is available to fish:</h2>
+            <h2 className="block text-2xl text-primary font-trade-gothic-bold capitalize mb-4">Check all days/times that your pond is available to fish:</h2>
             <DayHoursPicker label="Sunday" name="availableTime[sunday]" />
             <DayHoursPicker label="Monday" name="availableTime[monday]" />
             <DayHoursPicker label="Tuesday" name="availableTime[tuesday]" />

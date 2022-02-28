@@ -7,10 +7,10 @@ const FormCheckbox = ({ label, ...props }) => {
         <div className="mb-4">
             <label
                 onChange={() => helpers.setValue(!field.value)}
-                className="block text-[16px] font-trade-gothic mb-2 cursor-pointer">
+                className="flex items-center text-[16px] font-trade-gothic-bold text-primary mb-2 cursor-pointer">
                 <input
                     type="checkbox"
-                    className="w-4 h-4 mr-2 "
+                    className="w-4 h-4 mr-2 accent-secondary"
                     {...field} {...props} />
                 {label}
             </label>
