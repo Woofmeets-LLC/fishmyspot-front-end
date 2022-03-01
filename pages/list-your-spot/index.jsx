@@ -15,7 +15,10 @@ import SubPondOwnerInfo from '../../components/SubPages/ListYourSpotPage/SubPond
 import SubPricing from '../../components/SubPages/ListYourSpotPage/SubPricing';
 import TopImageCard from '../../components/SubPages/ListYourSpotPage/SubTopImageCard';
 import HomeLayout from '../../layouts/HomeLayout';
+import { listingDataOrganizing } from '../../services/listing-spot-data-organiging/listingDataFormatting';
+import { listingImagesUpload } from '../../services/listing-spot-data-organiging/listingImageUpload';
 import { getRequest } from '../../services/requests';
+import { getSdk } from '../../sharetribe/sharetribeSDK';
 import { setFishes } from '../../store/slices/listSpotContentsSlice';
 import { setShowSignUpModal } from '../../store/slices/modalsSlice';
 
@@ -81,6 +84,7 @@ const ListYourPond = () => {
         // Available Time
         availableTime: {
             sunday: {
+                isSelected: false,
                 hours: {
                     "6am-11am": false,
                     "11am-4pm": false,
@@ -278,6 +282,29 @@ const ListYourPond = () => {
         { next: <NextBtn text="List My Spot" /> },
     ]
 
+    const handleSubmit = async (values, helpers) => {
+        // Data organizing without images
+        const newData = listingDataOrganizing(values);
+
+        // Formatting Images array and uploading
+        const allImages = [
+            ...values["ATP-images-file"],
+            ...values["amenities-images-file"],
+            ...values["additional-images-file"]
+        ];
+        const uploadedImages = await listingImagesUpload(allImages);
+        // Setting images uuids to newData
+        newData.images = uploadedImages?.success ? uploadedImages?.uuids : [];
+
+        // Creating listing
+        getSdk().ownListings.create(newData, { expand: true, include: ['images'] })
+            .then(listingRes => {
+                console.log(listingRes);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     return (
         <HomeLayout>
@@ -286,6 +313,7 @@ const ListYourPond = () => {
                 initialValues={initialValues}
                 timelineArray={timelineArray}
                 stepControllerBtns={stepControllerBtns}
+                onSubmit={handleSubmit}
                 successComponent={<div>Success</div>}
             >
                 <FormStep validationSchema={validation.pondListing}>
