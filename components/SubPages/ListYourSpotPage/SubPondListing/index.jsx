@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useField } from 'formik';
 import React, { useEffect } from 'react';
 import { fullDayEarningEstimation, halfEarningEstimation } from '../../../../services/listing-spot-calculation';

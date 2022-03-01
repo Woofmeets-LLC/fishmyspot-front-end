@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
@@ -15,7 +16,10 @@ import SubPondOwnerInfo from '../../components/SubPages/ListYourSpotPage/SubPond
 import SubPricing from '../../components/SubPages/ListYourSpotPage/SubPricing';
 import TopImageCard from '../../components/SubPages/ListYourSpotPage/SubTopImageCard';
 import HomeLayout from '../../layouts/HomeLayout';
+import { listingDataOrganizing } from '../../services/listing-spot-data-organiging/listingDataFormatting';
+import { listingImagesUpload } from '../../services/listing-spot-data-organiging/listingImageUpload';
 import { getRequest } from '../../services/requests';
+import { getSdk } from '../../sharetribe/sharetribeSDK';
 import { setFishes } from '../../store/slices/listSpotContentsSlice';
 import { setShowSignUpModal } from '../../store/slices/modalsSlice';
 
@@ -45,97 +49,118 @@ const ListYourPond = () => {
         "stocked-pond": "",
         "catch-requirements": "",
         // Pond Owner Details
-        firstName: '',
-        lastName: '',
-        email: '',
-        zipCode: '',
+        // => First address 
+        firstName1: '',
+        lastName1: '',
+        email1: '',
+        zipCode1: '',
+        address1: "",
+        city1: "",
+        state1: "",
+        phone1: "",
         halfDayRate: '',
         fullDayRate: '',
-        // Price
-        // Pond Owner Info
-        address: "",
-        city: "",
-        state: "",
-        phone: "",
+        latLng1: {
+            lat: '',
+            lng: ' ',
+            _sdkType: 'LatLng',
+        },
+        // => Second address 
+        firstName2: '',
+        lastName2: '',
+        email2: '',
+        zipCode2: '',
+        address2: "",
+        city2: "",
+        state2: "",
+        phone2: "",
+        latLng2: {
+            lat: '',
+            lng: ' ',
+            _sdkType: 'LatLng',
+        },
+
         secondAddress: "no",
+
         // Available Time
         availableTime: {
             sunday: {
+                isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             monday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             tuesday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             wednesday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             thursday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             friday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             saturday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             },
             everyday: {
                 isSelected: false,
                 hours: {
-                    "6am-11am": true,
+                    "6am-11am": false,
                     "11am-4pm": false,
-                    "4pm-9pm": true,
-                    "9pm-6am": true,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
                     "all-hours": false,
                 }
             }
@@ -209,23 +234,30 @@ const ListYourPond = () => {
             "catch-requirements": yup.string().required("You have to select one of those"),
         }),
         pondOwnerDetails: yup.object({
-            firstName: yup.string().required("First name is required"),
-            lastName: yup.string().required("Last name is required"),
-            email: yup.string().email().required("Email is required"),
-            zipCode: yup.string().required("Zip code is required"),
+            firstName1: yup.string().required("First name is required"),
+            lastName1: yup.string().required("Last name is required"),
+            email1: yup.string().email().required("Email is required"),
+            zipCode1: yup.string().required("Zip code is required"),
             halfDayRate: yup.string().required("Required!"),
             fullDayRate: yup.string().required("Required!"),
         }),
         pondOwnerInfo: yup.object({
-            firstName: yup.string().required("First name is required"),
-            lastName: yup.string().required("Last name is required"),
-            email: yup.string().email().required("Email is required"),
-            zipCode: yup.string().required("Zip code is required"),
-            address: yup.string().required("Required!"),
-            city: yup.string().required("Required!"),
-            state: yup.string().required("Required!"),
-            phone: yup.string().required("Required!"),
+            firstName1: yup.string().required("First name is required"),
+            lastName1: yup.string().required("Last name is required"),
+            email1: yup.string().email().required("Email is required"),
+            zipCode1: yup.string().required("Zip code is required"),
+            address1: yup.string().required("Required!"),
+            city1: yup.string().required("Required!"),
+            state1: yup.string().required("Required!"),
+            phone1: yup.string().required("Required!"),
             secondAddress: yup.string().required("Required!"),
+        }),
+        description: yup.object({
+            description: yup.string().required("Description is required"),
+        }),
+        accessToPond: yup.object({
+            "ATP-description": yup.string().required("Description is required"),
+            "ATP-images-file": yup.array().min(2, 'You must upload at least 2 photos!'),
         })
     }
     const timelineArray = [
@@ -242,26 +274,38 @@ const ListYourPond = () => {
     ];
 
     const stepControllerBtns = [
-        {},
-        {},
+        {}, {},
         {
             back: <BackBtn text="Go back" />, next: <NextBtn
                 text="List My Spot"
                 onClick={() => !isLoggedIn && dispatch(setShowSignUpModal())} />
-        },
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {
-            next: <NextBtn
-                // onClick={() => !isLoggedIn && dispatch(setShowSignUpModal())} 
-                text="List My Spot" />
-        },
+        }, {}, {}, {}, {}, {}, {},
+        { next: <NextBtn text="List My Spot" /> },
     ]
 
+    const handleSubmit = async (values, helpers) => {
+        // Data organizing without images
+        const newData = listingDataOrganizing(values);
+
+        // Formatting Images array and uploading
+        const allImages = [
+            ...values["ATP-images-file"],
+            ...values["amenities-images-file"],
+            ...values["additional-images-file"]
+        ];
+        const uploadedImages = await listingImagesUpload(allImages);
+        // Setting images uuids to newData
+        newData.images = uploadedImages?.success ? uploadedImages?.uuids : [];
+
+        // Creating listing
+        getSdk().ownListings.create(newData, { expand: true, include: ['images'] })
+            .then(listingRes => {
+                console.log(listingRes);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     return (
         <HomeLayout>
@@ -270,6 +314,7 @@ const ListYourPond = () => {
                 initialValues={initialValues}
                 timelineArray={timelineArray}
                 stepControllerBtns={stepControllerBtns}
+                onSubmit={handleSubmit}
                 successComponent={<div>Success</div>}
             >
                 <FormStep validationSchema={validation.pondListing}>
@@ -287,10 +332,10 @@ const ListYourPond = () => {
                 <FormStep>
                     <SubAvailableTime />
                 </FormStep>
-                <FormStep>
+                <FormStep validationSchema={validation.description}>
                     <SubDescription />
                 </FormStep>
-                <FormStep>
+                <FormStep validationSchema={validation.accessToPond}>
                     <SubAccessToPond />
                 </FormStep>
                 <FormStep>

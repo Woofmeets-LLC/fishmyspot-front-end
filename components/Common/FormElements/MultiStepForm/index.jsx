@@ -14,7 +14,7 @@ const MultiStepForm = ({
     ...props
 }
 ) => {
-    const [step, setStep] = useState(9);
+    const [step, setStep] = useState(0);
     const [isSuccess, setIsSuccess] = useState(false);
     const childrenArray = Children.toArray(children);
     const currentChild = childrenArray[step];
@@ -35,8 +35,8 @@ const MultiStepForm = ({
                         enableReinitialize={true}
                         onSubmit={async (values, helpers) => {
                             console.log(values);
-                            if (isLastStep) {
-                                setIsSuccess(true);
+                            if (step === (timelineArray.length - 1)) {
+                                // setIsSuccess(true);
                                 await props.onSubmit(values, helpers);
                             } else {
                                 // If we want to write custom logic for the next step then we have to write it here
@@ -45,9 +45,44 @@ const MultiStepForm = ({
                                         isLoggedIn && setStep((s) => s + 1);
                                         break;
 
+                                    case 'Pond Owner Information':
+                                        if (values?.secondAddress == 'no') {
+                                            setStep((s) => s + 1);
+                                        } else {
+                                            if (values.firstName2 &&
+                                                values.lastName2 &&
+                                                values.email2 &&
+                                                values.zipCode2 &&
+                                                values.address2 &&
+                                                values.city2 &&
+                                                values.state2 &&
+                                                values.phone2) {
+                                                setStep((s) => s + 1);
+                                            } else {
+                                                helpers?.setErrors({
+                                                    firstName2: 'Please fill all the fields',
+                                                })
+                                            }
+                                        }
+                                        break;
+
                                     case 'Available time':
                                         const isSelectedAny = Object.keys(values?.availableTime)?.map(key => (values?.availableTime[key]?.isSelected))?.includes(true);
-                                        isSelectedAny && setStep((s) => s + 1);
+                                        if (isSelectedAny) {
+                                            const isAnyNotSelectedHours = Object.keys(values?.availableTime)
+                                                ?.filter(key => values?.availableTime[key]?.isSelected)
+                                                ?.map(key => Object.values(values?.availableTime[key]?.hours)?.includes(true))
+                                                ?.includes(false);
+
+                                            !isAnyNotSelectedHours && setStep((s) => s + 1);
+                                        }
+                                        break;
+
+                                    case 'Description':
+                                        const isAnyDefaultFishSelected = Object.values(values?.fishes)?.includes(true);
+                                        const isAnyOthersFishFieldValid = values["others-fish"]?.isSelected ? (values["others-fish"]?.names != "") : true;
+
+                                        isAnyDefaultFishSelected && isAnyOthersFishFieldValid && setStep((s) => s + 1);
                                         break;
 
                                     case 'Agreement':

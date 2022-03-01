@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { enableBodyScroll } from 'body-scroll-lock';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
