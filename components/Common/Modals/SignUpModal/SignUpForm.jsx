@@ -25,7 +25,7 @@ const SignUpForm = () => {
             <FormInput label="Password" name="password" type="password" placeholder="Enter your password" />
             <FormCheckbox
                 label={
-                    <>I agree to <span className="ml-1 font-trade-gothic-bold border-b border-primary">Fish My Spot</span>  policy and
+                    <>I agree to <span className="ml-1 font-trade-gothic-bold border-b border-primary mr-1">Fish My Spot</span>{" "}  policy and
                         <Link href="/"><a className="ml-1 font-trade-gothic-bold border-b border-primary">Terms of use</a></Link></>
                 }
                 name="isAgree" />
