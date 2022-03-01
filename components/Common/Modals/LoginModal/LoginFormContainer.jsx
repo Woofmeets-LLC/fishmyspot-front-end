@@ -122,7 +122,7 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
                     </button>
                 </div>
                 <div className="mt-5 text-center">
-                    Don't have an account?
+                    {"Don't have an account?"}
                     <button
                         onClick={() => dispatch(setShowSignUpModal())}
                         className="inline-block text-primary font-trade-gothic-bold ml-2">Sign Up</button>

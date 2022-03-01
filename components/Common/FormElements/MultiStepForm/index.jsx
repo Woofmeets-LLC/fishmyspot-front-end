@@ -35,8 +35,8 @@ const MultiStepForm = ({
                         enableReinitialize={true}
                         onSubmit={async (values, helpers) => {
                             console.log(values);
-                            if (isLastStep) {
-                                setIsSuccess(true);
+                            if (step === (timelineArray.length - 1)) {
+                                // setIsSuccess(true);
                                 await props.onSubmit(values, helpers);
                             } else {
                                 // If we want to write custom logic for the next step then we have to write it here
