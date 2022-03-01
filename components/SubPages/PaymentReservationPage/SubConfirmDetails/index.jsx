@@ -12,7 +12,7 @@ const SubConfimDetails = () => {
       <NumberOfAnglersSelect />
       <div className='text-lg text-primary mt-5 h-14'>
         <input type="checkbox" {...aggrementCheckedField} />
-        <span>I have read and agree with FishMySpot's<span className='text-highlight-3'>{" "}Rules and Regulations, Cancellation and Weather Policy.</span></span>
+        <span>{"I have read and agree with FishMySpot's"}<span className='text-highlight-3'>{" "}Rules and Regulations, Cancellation and Weather Policy.</span></span>
         {
           aggrementCheckedMeta.touched && aggrementCheckedMeta.error &&
           <div className="text-red-500">
