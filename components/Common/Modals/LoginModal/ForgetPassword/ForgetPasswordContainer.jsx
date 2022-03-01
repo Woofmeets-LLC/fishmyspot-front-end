@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import * as yup from 'yup';

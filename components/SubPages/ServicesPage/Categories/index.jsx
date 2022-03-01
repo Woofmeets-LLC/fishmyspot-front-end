@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import PriceSlider from '../PriceSlider';
-import Location from '../Location';
-import TypeFish from '../TypeFish';
-import UserRating from '../UserRating';
-import Experience from '../Experience';
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
+import React, { useEffect, useState } from 'react';
+import Experience from '../Experience';
+import Location from '../Location';
+import PriceSlider from '../PriceSlider';
+import TypeFish from '../TypeFish';
+import UserRating from '../UserRating';
 import styles from './Categories.module.css';
 
 const Categories = () => {
