@@ -10,6 +10,9 @@ export const store = configureStore({
       auth: authSliceReducer,
       listSpotContents: listSpotContentsSliceReducer,
     },
+    middleware: (getDefaultMiddleware)=>getDefaultMiddleware({
+        serializableCheck: false,
+    }),
   });
   
 
