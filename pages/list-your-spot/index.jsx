@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
@@ -26,10 +27,14 @@ import { setShowSignUpModal } from '../../store/slices/modalsSlice';
 const ListYourPond = () => {
     // Redux
     const dispatch = useDispatch();
-    const { isLoggedIn } = useSelector(state => state.auth);
+    const auth = useSelector(state => state.auth);
+    const { isLoggedIn, user } = auth;
     const fishes = useSelector(state => state.listSpotContents.fishes);
     const fishesObject = fishes?.map(fish => fish.name + "_" + fish.id)
         ?.reduce((prevObj, key) => ({ ...prevObj, [key]: false }), {});
+
+    // routes 
+    const router = useRouter();
 
     // Updating fishes image to redux
     useEffect(() => {
@@ -50,9 +55,9 @@ const ListYourPond = () => {
         "catch-requirements": "",
         // Pond Owner Details
         // => First address 
-        firstName1: '',
-        lastName1: '',
-        email1: '',
+        firstName1: user?.profile?.firstName,
+        lastName1: user?.profile?.lastName,
+        email1: user?.email,
         zipCode1: '',
         address1: "",
         city1: "",
@@ -66,9 +71,9 @@ const ListYourPond = () => {
             _sdkType: 'LatLng',
         },
         // => Second address 
-        firstName2: '',
-        lastName2: '',
-        email2: '',
+        firstName2: user?.profile?.firstName,
+        lastName2: user?.profile?.lastName,
+        email2: user?.email,
         zipCode2: '',
         address2: "",
         city2: "",
@@ -191,8 +196,16 @@ const ListYourPond = () => {
             names: ""
         },
         addOns: {
-            "Pond Trawler/Metal Boat ($20)": false,
-            "Campsite ( $20 )": false,
+            "pond-trawler-or-metal-boat": {
+                checked: false,
+                title: "Pond Trawler/Metal Boat ($20)",
+                price: 20
+            },
+            "campsite": {
+                checked: false,
+                title: "Campsite ($20)",
+                price: 20
+            },
         },
         otherAddOns: {
             isSelected: false,
@@ -286,6 +299,7 @@ const ListYourPond = () => {
     const handleSubmit = async (values, helpers) => {
         // Data organizing without images
         const newData = listingDataOrganizing(values);
+        const url = URL.createObjectURL(values["additional-images-file"][0]);
 
         // Formatting Images array and uploading
         const allImages = [
@@ -301,6 +315,7 @@ const ListYourPond = () => {
         getSdk().ownListings.create(newData, { expand: true, include: ['images'] })
             .then(listingRes => {
                 console.log(listingRes);
+                router.push(`/list-your-spot/success`);
             })
             .catch(err => {
                 console.log(err);
