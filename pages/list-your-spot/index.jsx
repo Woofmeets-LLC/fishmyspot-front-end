@@ -22,7 +22,6 @@ import { listingImagesUpload } from '../../services/listing-spot-data-organiging
 import { getRequest } from '../../services/requests';
 import { getSdk } from '../../sharetribe/sharetribeSDK';
 import { setFishes } from '../../store/slices/listSpotContentsSlice';
-import { setShowSignUpModal } from '../../store/slices/modalsSlice';
 
 const ListYourPond = () => {
     // Redux
@@ -290,8 +289,7 @@ const ListYourPond = () => {
         {}, {},
         {
             back: <BackBtn text="Go back" />, next: <NextBtn
-                text="List My Spot"
-                onClick={() => !isLoggedIn && dispatch(setShowSignUpModal())} />
+                text="List My Spot" />
         }, {}, {}, {}, {}, {}, {},
         { next: <NextBtn text="List My Spot" /> },
     ]
