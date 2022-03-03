@@ -1,34 +1,40 @@
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
+import StepperContainer from './Stepper/StepperContainer';
 
-const FormikStepper = ({ children, ...props }) => {
+const FormikStepper = ({ children, stepperArray, ...props }) => {
   const childrenArray = React.Children.toArray(children);
   const [step, setStep] = useState(0);
   const currentChild = childrenArray[step];
-  console.log(currentChild)
+  console.log(step, childrenArray.length)
 
   const isLastStep = () => {
-    return step === childrenArray.length - 1;
+    return step === childrenArray.length - 2;
   }
 
   return (
-    <Formik
-      {...props}
-      validationSchema={currentChild.props.validation}
-      onSubmit={async (values, helpers) => {
-        if (isLastStep()) {
-          console.log(values);
-          await props.onSubmit(values, helpers);
-        }
-        else {
-          setStep(s => s + 1);
-        }
-      }}
-    >
-      <Form autoComplete='off'>
-        {currentChild}
-      </Form>
-    </Formik>
+    <div>
+      <StepperContainer step={step} stepperArray={stepperArray} />
+      <Formik
+        {...props}
+        validationSchema={currentChild.props.validation}
+        onSubmit={async (values, helpers) => {
+          if (isLastStep()) {
+            console.log('last step', values);
+            // it will be used inside the then block of the api
+            setStep(s => s + 1);
+            // await props.onSubmit(values, helpers);
+          }
+          else {
+            setStep(s => s + 1);
+          }
+        }}
+      >
+        <Form autoComplete='off'>
+          {currentChild}
+        </Form>
+      </Formik>
+    </div>
   )
 }
 

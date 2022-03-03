@@ -1,38 +1,42 @@
 import { useField } from 'formik';
 import React from 'react';
-import NumberOfAnglersSelect from './NumberOfAnglersSelect';
+import SubDetails from '../SubDetails/SubDetails';
+import ConfirmDetailSection from '../ConfirmDetailSection/ConfirmDetailSection';
 
 const SubConfimDetails = () => {
-  const [aggrementCheckedField, aggrementCheckedMeta, aggrementCheckedHelpers] = useField('agreementChecked');
+
   const [addGiftCardField, addGiftCardMeta, addGiftCardHelpers] = useField('addGiftCard');
 
   return (
-    <div className='w-[965px] mx-auto'>
-      <h1 className='text-4xl text-primary font-food-truck uppercase mb-3'>CONFIRM DETAILS</h1>
-      <NumberOfAnglersSelect />
-      <div className='text-lg text-primary mt-5 h-14'>
-        <input type="checkbox" {...aggrementCheckedField} />
-        <span>{"I have read and agree with FishMySpot's"}<span className='text-highlight-3'>{" "}Rules and Regulations, Cancellation and Weather Policy.</span></span>
-        {
-          aggrementCheckedMeta.touched && aggrementCheckedMeta.error &&
-          <div className="text-red-500">
-            {aggrementCheckedMeta.error}
-          </div>
-        }
-      </div>
-      <div>
-        <div>
-          <input type="text" placeholder="Add Gift Card" {...addGiftCardField} />
-          <button>Apply</button>
-          {
-            addGiftCardMeta.touched && addGiftCardMeta.error &&
-            <div className="text-red-500">
-              {addGiftCardMeta.error}
+    <div>
+      <ConfirmDetailSection />
+      <SubDetails title={"Details"} />
+      <div className='grid grid-cols-12 gap-3 mt-7'>
+        <div className='col-span-8'>
+          <div className='border rounded grid grid-cols-12'>
+            <div className="col-span-8">
+              <input
+                type="text"
+                placeholder="Add Gift Card"
+                {...addGiftCardField}
+                className="py-2 px-3 sm:py-3 2xl:py-5 w-full h-full focus:outline-none" />
             </div>
-          }
+            <div className="col-span-4">
+              <button type='submit' className='bg-secondary text-sm md:text-base 2xl:text-xl font-trade-gothic-bold text-white py-2 px-3 sm:py-3 2xl:py-5 w-full rounded'>Apply</button>
+            </div>
+          </div>
+
         </div>
-        <button type='submit'>Reserve</button>
+        <span className="col-span-4">
+          <button type='submit' className='bg-secondary text-sm md:text-base 2xl:text-xl font-trade-gothic-bold text-white py-2 px-3 sm:py-3 2xl:py-5 w-full rounded'>Reserve</button>
+        </span>
       </div>
+      {
+        addGiftCardMeta.touched && addGiftCardMeta.error &&
+        <div className="text-red-500">
+          {addGiftCardMeta.error}
+        </div>
+      }
     </div>
   );
 };
