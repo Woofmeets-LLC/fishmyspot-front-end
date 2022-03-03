@@ -8,8 +8,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { getSdk } from '../../../../sharetribe/sharetribeSDK';
-import { login } from '../../../../store/slices/authSlice';
-import { setShowSignUpModal } from '../../../../store/slices/modalsSlice';
+import { setCloseLoginModal, setCloseSignUpModal, setShowSignUpModal } from '../../../../store/slices/modalsSlice';
 import LoginForm from './LoginForm';
 
 const LoginFormContainer = ({ setShowForgetPassword }) => {
@@ -44,13 +43,11 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
                     ?.login({ username: loginInfo.email, password: loginInfo.password })
                     ?.then(loginData => {
                         setIsLoading(false);
+                        dispatch(setCloseLoginModal());
+                        dispatch(setCloseSignUpModal());
 
                         if (typeof (window) !== "undefined") {
-                            if (router?.route == "/list-your-spot") {
-                                dispatch(login())
-                            } else {
-                                window.location.reload();
-                            }
+                            window.location.reload();
                         }
                     })
                     ?.catch(err => {

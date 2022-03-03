@@ -1,8 +1,10 @@
+import { useField } from 'formik';
 import Link from 'next/link';
 import React from 'react';
-import { FormCheckbox, FormInput, FormOption, FormSelect } from '../..';
+import { FormInput, FormOption, FormSelect } from '../..';
 
 const SignUpForm = () => {
+    const [field, meta, helpers] = useField("isAgree");
     return (
         <>
             <FormInput label="Email" name="email" placeholder="Enter your email" />
@@ -23,12 +25,21 @@ const SignUpForm = () => {
                 </FormSelect>
             </div>
             <FormInput label="Password" name="password" type="password" placeholder="Enter your password" />
-            <FormCheckbox
-                label={
-                    <>I agree to <span className="ml-1 font-trade-gothic-bold border-b border-primary mr-1">Fish My Spot</span>{" "}  policy and
-                        <Link href="/"><a className="ml-1 font-trade-gothic-bold border-b border-primary">Terms of use</a></Link></>
-                }
-                name="isAgree" />
+            <div className="mb-4">
+                <label
+                    onChange={() => helpers.setValue(!field.value)}
+                    className=" text-[16px] font-trade-gothic-bold text-primary mb-2 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        className="w-4 h-4 mr-2 accent-secondary"
+                        {...field} />
+                    I agree to <span className="ml-1 font-trade-gothic-bold border-b border-primary mr-1">Fish My Spot</span>{" "}  policy and
+                    <Link href="/"><a className="ml-1 font-trade-gothic-bold border-b border-primary">Terms of use</a></Link>
+                </label>
+                {meta.touched && meta.error ? (
+                    <div className="mt-2 text-red-500 text-sm">{meta.error}</div>
+                ) : null}
+            </div>
         </>
     );
 };

@@ -34,7 +34,7 @@ const SubPondListing = () => {
                 name="stocked-pond"
                 radioBtns={[{ title: "Yes", value: "yes" }, { title: "No", value: "no" }]} />
             <FormRadioButtons
-                containerClasses={"grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4"}
+                containerClasses={"grid grid-cols-2 md:grid-cols-3"}
                 label="Catch Requirements"
                 name="catch-requirements"
                 radioBtns={[{ title: "Catch & Keep", value: "catch-n-keep" }, { title: "Catch & Release", value: "catch-n-release" }]} />

@@ -6,7 +6,7 @@ const SubHeroSection = () => {
     return (
         <section className='container'>
             <div className='mt-6 lg:mt-8 xl:mt-12'>
-                <div className="relative">
+                <div className="relative flex items-center">
                     <div className='w-full rounded-xl overflow-hidden'>
                         <img
                             src={"/images/fatherSonFishing.jpg"}
