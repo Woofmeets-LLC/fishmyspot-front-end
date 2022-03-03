@@ -28,11 +28,10 @@ const PaymentReservation = () => {
   const validation = {
     confirmDetails: yup.object({
       numberOfAnglers: yup.string().required("You have to select one of those"),
-      agreementChecked: yup.boolean().required("You have to checked"),
-      addGiftCard: yup.string().required("Gift Card is required")
+      agreementChecked: yup.boolean().oneOf([true], 'Field must be checked'),
     }),
     paymentMethod: yup.object({
-      eligiblePay: yup.string().required("You have to select one of these"),
+      eligiblePay: yup.string().required("You have to select one of those"),
     }),
     billingInfo: yup.object({
       cardNumber: yup.string().required("Card Number is required"),
