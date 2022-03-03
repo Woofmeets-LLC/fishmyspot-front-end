@@ -34,22 +34,34 @@ const hoverVariants = {
 const Location = ({ selectedCities, setSelectedCities }) => {
   const [isDropDown, setIsDropDown] = useState(false);
   const options = [
-    'Florida',
-    'California',
-    'Georgia',
-    'Alabama',
-    'District of Columbia'
+    {
+      name: 'Florida',
+      value: '27.6648:81.5158'
+    },
+    {
+      name: 'California',
+      value: '36.7783:119.4179'
+    },
+    {
+      name: 'Georgia',
+      value: '32.1656:82.9001'
+    },
+    {
+      name: 'Alabama',
+      value: '32.3182:86.9023'
+    },
+    {
+      name: 'District of Columbia',
+      value: '38.9072:77.0369'
+    },
   ];
 
-  const cityAddOrRemove = (cityName) => {
-    const findCity = selectedCities?.length > 0 ? selectedCities?.find((city) => city === cityName) : undefined;
-
-    if (findCity !== undefined) {
-      const filterCity = selectedCities?.filter(city => city !== cityName);
+  const cityAddOrRemove = (value) => {
+    if (selectedCities === value) {
       setSelectedCities((prevState) => {
         return {
           ...prevState,
-          location: filterCity
+          location: ''
         }
       });
     }
@@ -57,7 +69,7 @@ const Location = ({ selectedCities, setSelectedCities }) => {
       setSelectedCities((prevState) => {
         return {
           ...prevState,
-          location: [...prevState.location, cityName]
+          location: value
         }
       });
     }
@@ -94,20 +106,20 @@ const Location = ({ selectedCities, setSelectedCities }) => {
                       className={styles['dropdown-item']}
                     >
                       <input
-                        type={"checkbox"}
-                        name={option}
-                        id={option}
-                        value={option}
-                        checked={selectedCities?.includes(option) ? true : false}
-                        onChange={() => cityAddOrRemove(option)}
+                        type={"radio"}
+                        name={"location"}
+                        id={option.value}
+                        value={option.value}
+                        checked={selectedCities === option.value ? true : false}
+                        onChange={() => cityAddOrRemove(option.value)}
                         className="accent-secondary w-4 h-4 md:w-5 md:h-5"
                       />
                       <motion.label
-                        htmlFor={option}
+                        htmlFor={option.value}
                         variants={hoverVariants}
                         whileHover="hover"
                       >
-                        {option}
+                        {option.name}
                       </motion.label>
 
                     </div>

@@ -13,7 +13,7 @@ const Categories = () => {
     const router = useRouter();
     const [firstTime, setFirstTime] = useState(true)
 
-    const [query, setQuery] = useState({ location: [], typeFish: [], rating: [], experience: [], price: [0, 1000] });
+    const [query, setQuery] = useState({ location: '', typeFish: [], rating: [], experience: [], price: [0, 1000] });
 
     useEffect(() => {
         if (!firstTime) router.push('/services?' + queryString.stringify(query, { arrayFormat: 'comma', skipNull: true }));
@@ -24,7 +24,12 @@ const Categories = () => {
         if (typeof window !== 'undefined' && window.location.search) {
             const parsed = queryString.parse(window.location.search, { arrayFomate: 'comma' })
             for (const p in parsed) {
-                parsed[p] = parsed[p].split(',')
+                if (p === 'location') {
+                    parsed[p] = parsed[p];
+                }
+                else {
+                    parsed[p] = parsed[p].split(',');
+                }
             }
             const parsedQuery = { ...query, ...parsed }
             setQuery((prevState) => {
@@ -41,7 +46,7 @@ const Categories = () => {
 
 
     const handlePriceClear = () => {
-        setQuery({ ...query, price: [0, 1000] })
+        setQuery({ ...query, price: [0, 1000] });
     }
 
 

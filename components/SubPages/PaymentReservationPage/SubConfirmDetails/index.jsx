@@ -5,7 +5,7 @@ import ConfirmDetailSection from '../ConfirmDetailSection/ConfirmDetailSection';
 
 const SubConfimDetails = () => {
 
-  const [addGiftCardField, addGiftCardMeta, addGiftCardHelpers] = useField('addGiftCard');
+  const [field, meta, helpers] = useField('addGiftCard');
 
   return (
     <div>
@@ -18,7 +18,7 @@ const SubConfimDetails = () => {
               <input
                 type="text"
                 placeholder="Add Gift Card"
-                {...addGiftCardField}
+                {...field}
                 className="py-2 px-3 sm:py-3 2xl:py-5 w-full h-full focus:outline-none" />
             </div>
             <div className="col-span-4">
@@ -31,12 +31,6 @@ const SubConfimDetails = () => {
           <button type='submit' className='bg-secondary text-sm md:text-base 2xl:text-xl font-trade-gothic-bold text-white py-2 px-3 sm:py-3 2xl:py-5 w-full rounded'>Reserve</button>
         </span>
       </div>
-      {
-        addGiftCardMeta.touched && addGiftCardMeta.error &&
-        <div className="text-red-500">
-          {addGiftCardMeta.error}
-        </div>
-      }
     </div>
   );
 };
