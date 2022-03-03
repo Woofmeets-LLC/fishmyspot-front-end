@@ -299,8 +299,6 @@ const ListYourPond = () => {
     const handleSubmit = async (values, helpers) => {
         // Data organizing without images
         const newData = listingDataOrganizing(values);
-        const url = URL.createObjectURL(values["additional-images-file"][0]);
-
         // Formatting Images array and uploading
         const allImages = [
             ...values["ATP-images-file"],
