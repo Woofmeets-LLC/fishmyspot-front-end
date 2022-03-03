@@ -2,6 +2,8 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { FaUserCircle } from 'react-icons/fa';
+import { GoThreeBars } from 'react-icons/go';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginModal, SignUpModal } from '../../../components/Common';
 import { logoutAction } from '../../../store/slices/authSlice';
@@ -50,9 +52,14 @@ const Header = () => {
                         {
                             user?.profile?.publicData?.account_type === "angler"
                                 ? null
-                                : <Link href="/list-your-spot" >
-                                    <a className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</a>
-                                </Link>
+                                : (isLoggedIn
+                                    ? <Link href="/list-your-spot" >
+                                        <a className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</a>
+                                    </Link>
+                                    : <button
+                                        onClick={() => !isLoggedIn && dispatch(setShowLoginModal())}
+                                        type="button"
+                                        className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</button>)
                         }
 
                         {
@@ -68,6 +75,14 @@ const Header = () => {
                                         onClick={() => !isLoggedIn && dispatch(setShowLoginModal())}
                                         className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">Log-in</button>
                                 </>
+                        }
+                        {
+                            isLoggedIn
+                                ? <div className="flex px-4 py-2 space-x-3 border shadow rounded-full">
+                                    <GoThreeBars className="text-xl text-primary" />
+                                    <FaUserCircle className="text-xl text-primary" />
+                                </div>
+                                : null
                         }
                     </div>
                     <div className="block md:hidden ml-auto">

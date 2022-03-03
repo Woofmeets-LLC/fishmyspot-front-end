@@ -8,16 +8,17 @@ const slots = {
 
 const availabilityPlanEntriesForOneDay = (availableTime) => {
     // Creating entries for availabilityPlan
+    const mapEntries = (key,hourKeyArray) => hourKeyArray.map(hourKey => ({
+        dayOfWeek: key?.substring(0, 3),
+        ...slots[hourKey]
+    }))
     return Object.keys(availableTime)
         ?.filter(key => availableTime[key]?.isSelected)
         ?.map(key => {
             const tempEntries = Object.keys(availableTime[key].hours)
                 ?.filter(hourKey => availableTime[key].hours[hourKey] === true)
                 ?.map(hourKey => hourKey === "all-hours" ? Object.keys(slots) : [hourKey])
-                ?.map(hourKeyArray => hourKeyArray.map(hourKey => ({
-                    dayOfWeek: key?.substring(0, 3),
-                    ...slots[hourKey]
-                })));
+                ?.map((hourKeyArray)=>mapEntries(key,hourKeyArray));
             return tempEntries
         })
         ?.reduce((prevArray, currentArray) => [...prevArray, ...currentArray], [])

@@ -9,9 +9,9 @@ const AddOns = () => {
     return (
         <>
             <h2 className="text-primary font-trade-gothic-bold text-xl mb-4">Check all that you would like to ADD-ON to your listing. (This is an additional fee that anglers will be charged):</h2>
-            <FormCheckbox name="addOns[Pond Trawler/Metal Boat ($20)]" label="Pond Trawler/Metal Boat ($20)" />
-            <FormCheckbox name="addOns[Campsite ( $20 )]" label="Campsite ( $20 )" />
-            <label
+            <FormCheckbox name="addOns[pond-trawler-or-metal-boat].checked" label="Pond Trawler/Metal Boat ($20)" />
+            <FormCheckbox name="addOns[campsite].checked" label="Campsite ( $20 )" />
+            {/* <label
                 onChange={() => selectOtherAddOnsHelpers.setValue(!selectOtherAddOnsField.value)}
                 className="inline-flex items-center text-[16px] font-trade-gothic-bold text-primary cursor-pointer">
                 <input
@@ -31,7 +31,7 @@ const AddOns = () => {
                 className="border-b-2 border-primary appearance-none outline-none placeholder:font-trade-gothic mb-2" />
             <div className="px-6 mb-7">
                 <p className="text-sm text-gray-500">Use comma for separating multiple <b>other amenities</b>!</p>
-            </div>
+            </div> */}
         </>
     );
 };
