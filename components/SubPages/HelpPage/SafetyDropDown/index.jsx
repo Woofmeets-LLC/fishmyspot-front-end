@@ -31,7 +31,7 @@ const hoverVariants = {
   }
 }
 
-const SafetyDropDown = () => {
+const SafetyDropDown = ({ setIsShowContent }) => {
   const [isDropDown, setIsDropDown] = useState(false);
   const options = [
     'Safety concerns',
@@ -67,8 +67,9 @@ const SafetyDropDown = () => {
                 options?.map((option, i) => {
                   return (
                     <div
-                      key={i}
+                      key={"safety" + (i + 1)}
                       className={styles['dropdown-item']}
+                      onClick={() => setIsShowContent("safety" + (i + 1))}
                     >
                       <motion.span
                         htmlFor={option}
