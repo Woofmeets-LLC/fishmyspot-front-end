@@ -1,10 +1,10 @@
 import React from 'react';
 import AboutFishMySpot from '../AboutFishMySpot';
 
-const SubSideBar = () => {
+const SubSideBar = ({ setIsShowContent }) => {
   return (
     <div className=''>
-      <AboutFishMySpot />
+      <AboutFishMySpot setIsShowContent={setIsShowContent} />
     </div>
   );
 };

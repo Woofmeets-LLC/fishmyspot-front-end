@@ -31,7 +31,7 @@ const hoverVariants = {
   }
 }
 
-const TermsAndPolicyDropDown = () => {
+const TermsAndPolicyDropDown = ({ setIsShowContent }) => {
   const [isDropDown, setIsDropDown] = useState(false);
   const options = [
     'Privacy Policy',
@@ -68,8 +68,9 @@ const TermsAndPolicyDropDown = () => {
                 options?.map((option, i) => {
                   return (
                     <div
-                      key={i}
+                      key={"termsAndPolicy" + (i + 1)}
                       className={styles['dropdown-item']}
+                      onClick={() => setIsShowContent("termsAndPolicy" + (i + 1))}
                     >
                       <motion.span
                         htmlFor={option}
