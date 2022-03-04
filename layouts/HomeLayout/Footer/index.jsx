@@ -56,7 +56,7 @@ const Footer = () => {
                             <a className="block font-trade-gothic mb-2">Trust & Safety</a>
                         </Link>
                     </div>
-                    <div className="">
+                    <div className=" col-span-2 md:col-span-1">
                         <h2 className="text-xl uppercase font-trade-gothic-bold mb-2">Follow us</h2>
                         <div className="space-x-4 mt-7 2xl:mt-10">
                             <a

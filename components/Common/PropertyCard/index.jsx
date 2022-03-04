@@ -1,14 +1,26 @@
 import { FaMapMarkerAlt, FaStar, FaRegHeart } from "react-icons/fa";
 import styles from './PropertyCard.module.css';
+import { motion } from "framer-motion";
 
 
-const PropertyCard = () => {
+const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
+
     return (
-        <div className={styles['card-container']}>
+        <motion.div
+            initial={{
+                scale: 0,
+            }}
+            animate={{
+                scale: 1,
+            }}
+            transition={{
+                delay: delay
+            }}
+            className={styles['card-container']}>
             <div className="relative">
                 <div className="w-full h-[190px] sm:h-auto">
                     <img
-                        src="/images/pond2.jpg"
+                        src={image}
                         alt="Pond"
                         className="w-full h-full object-cover rounded-xl"
                     />
@@ -29,7 +41,7 @@ const PropertyCard = () => {
                         <span className="font-trade-gothic text-highlight-1">location</span>
                     </div>
                     <div className="mt-1 md:my-2 xl:w-[230px] 2xl:max-w-[240px] sm:h-14">
-                        <h4 className={styles['card-heading']}>OH-STARK COUNTY-NAVARRE</h4>
+                        <h4 className={styles['card-heading']}>{title}</h4>
                     </div>
                     <div className="flex justify-between">
                         <div className={styles.ratings}>
@@ -40,13 +52,13 @@ const PropertyCard = () => {
                             <FaStar />
                         </div>
                         <div>
-                            <span className={styles.price}>$160.00</span>
+                            <span className={styles.price}>{price}</span>
                             <span className={styles['per-hour']}>per hour</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

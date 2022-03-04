@@ -35,7 +35,7 @@ const hoverVariants = {
   }
 }
 
-const AboutFishMySpot = () => {
+const AboutFishMySpot = ({ setIsShowContent }) => {
   const [isDropDown, setIsDropDown] = useState(false);
 
   return (
@@ -63,8 +63,8 @@ const AboutFishMySpot = () => {
               className={styles['']}>
               {
                 <>
-                  <SafetyDropDown />
-                  <TermsAndPolicyDropDown />
+                  <SafetyDropDown setIsShowContent={setIsShowContent} />
+                  <TermsAndPolicyDropDown setIsShowContent={setIsShowContent} />
                   <HelpCenterDropDown />
                 </>
               }

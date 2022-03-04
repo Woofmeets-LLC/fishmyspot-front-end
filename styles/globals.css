@@ -131,6 +131,11 @@ Chrome
     @apply text-2xl sm:text-3xl md:text-4xl 2xl:text-6xl text-secondary;
 }
 
+/* payment card icons */
+.card-icons svg {
+    @apply text-3xl text-highlight-3;
+}
+
 
 /* accordion */
 .accordion {

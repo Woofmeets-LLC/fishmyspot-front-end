@@ -18,7 +18,7 @@ const Review = () => {
           </div>
         </div>
         <div className='mt-3 3xl:mt-5 3xl:pl-5'>
-          <p className={styles['review-description']}> "Your company is truly upstanding and is behind its product 100%. It's the perfect solution for our business. It has really helped our business."</p>
+          <p className={styles['review-description']}> {`"Your company is truly upstanding and is behind its product 100%. It's the perfect solution for our business. It has really helped our business."`}</p>
         </div>
       </div>
     </div>

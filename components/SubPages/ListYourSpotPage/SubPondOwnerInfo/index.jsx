@@ -1,24 +1,24 @@
 import { useField } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import Autocomplete from "react-google-autocomplete";
 import { FormInput, FormRadioButtons } from '../../../Common';
 
 
 const SubPondOwnerInfo = () => {
+    const [address1Error, setAddress1Error] = useState({ isError: false, message: "" })
+    const [address2Error, setAddress2Error] = useState({ isError: false, message: "" })
+
     const [fullDayRateField] = useField({ name: "fullDayRate" })
 
     const [firstName1Field] = useField({ name: "firstName1" })
     const [lastName1Field] = useField({ name: "lastName1" })
     const [zipCode1Field, zipCode1Meta, zipCode1Helpers] = useField({ name: "zipCode1" })
     const [address1Field, address1Meta, address1Helpers] = useField({ name: "address1" })
+    const [latLng1Field, latLng1Meta, latLng1Helpers] = useField({ name: "latLng1" })
     const [city1Field, city1Meta, city1Helpers] = useField({ name: "city1" })
     const [state1Field, state1Meta, state1Helpers] = useField({ name: "state1" })
-    const [latLng1Field, latLng1Meta, latLng1Helpers] = useField({ name: "latLng1" })
 
     const [secondAddressField] = useField({ name: "secondAddress" })
-    const [firstName2Field] = useField({ name: "firstName2" })
-    const [lastName2Field] = useField({ name: "lastName2" })
-    const [email2Field] = useField({ name: "email2" })
     const [zipCode2Field, zipCode2Meta, zipCode2Helpers] = useField({ name: "zipCode2" })
     const [address2Field, address2Meta, address2Helpers] = useField({ name: "address2" })
     const [city2Field, city2Meta, city2Helpers] = useField({ name: "city2" })
@@ -27,41 +27,60 @@ const SubPondOwnerInfo = () => {
     const [phone2Field] = useField({ name: "phone2" })
 
     const getAddress = (place, addressName) => {
+        setAddress1Error({ isError: false, message: "" });
+        setAddress2Error({ isError: false, message: "" });
+
         if (addressName === "address1") {
             address1Helpers.setValue(place.formatted_address);
+            city1Helpers.setValue("");
+            state1Helpers.setValue("");
+            zipCode1Helpers.setValue("");
+
+            let errorCount = 3;
             place.address_components.forEach(component => {
                 if (component.types[0] === 'administrative_area_level_2') {
-                    // address.city = component.short_name
                     city1Helpers.setValue(component?.short_name)
+                    errorCount--;
                 }
                 if (component.types[0] == 'postal_code') {
-                    // address.zip = component.short_name
                     zipCode1Helpers.setValue(component?.short_name);
+                    errorCount--;
                 }
                 if (component.types[0] == 'administrative_area_level_1') {
-                    // address.state = component.short_name
                     state1Helpers.setValue(component?.short_name)
+                    errorCount--;
                 }
-                // Setting the lat and lng values
                 latLng1Helpers.setValue({
                     _sdkType: 'LatLng',
                     lat: place.geometry.location.lat(),
                     lng: place.geometry.location.lng(),
                 })
-                // address.lat = place.geometry.location.lat();
-                // address.lng = place.geometry.location.lng();
             })
+            if (errorCount) {
+                setAddress1Error({ isError: true, message: "Address is not valid. Select valid address!" })
+            } else {
+                setAddress1Error({ isError: false, message: "" })
+            }
+
         } else if (addressName === "address2") {
             address2Helpers.setValue(place.formatted_address);
+            city2Helpers.setValue("");
+            state2Helpers.setValue("");
+            zipCode2Helpers.setValue("");
+
+            let errorCount = 3;
             place.address_components.forEach(component => {
                 if (component.types[0] === 'administrative_area_level_2') {
                     city2Helpers.setValue(component?.short_name)
+                    errorCount--;
                 }
                 if (component.types[0] == 'postal_code') {
                     zipCode2Helpers.setValue(component?.short_name);
+                    errorCount--;
                 }
                 if (component.types[0] == 'administrative_area_level_1') {
                     state2Helpers.setValue(component?.short_name)
+                    errorCount--;
                 }
                 // Setting the lat and lng values
                 latLng2Helpers.setValue({
@@ -70,6 +89,11 @@ const SubPondOwnerInfo = () => {
                     lng: place.geometry.location.lng(),
                 })
             })
+            if (errorCount) {
+                setAddress2Error({ isError: true, message: "Address is not valid. Select valid address!" })
+            } else {
+                setAddress2Error({ isError: false, message: "" })
+            }
         }
     }
 
@@ -77,9 +101,7 @@ const SubPondOwnerInfo = () => {
         if (secondAddressField?.value === "no") {
             return false;
         } else {
-            if (firstName2Field?.value &&
-                lastName2Field?.value &&
-                email2Field?.value &&
+            if (
                 zipCode2Field?.value &&
                 address2Field?.value &&
                 city2Field?.value &&
@@ -104,8 +126,8 @@ const SubPondOwnerInfo = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-5 xl:gap-6">
-                <FormInput name="firstName1" label="First Name" placeholder="Enter your first name" />
-                <FormInput name="lastName1" label="Last Name" placeholder="Enter your last name" />
+                <FormInput name="firstName1" label="First Name" placeholder="Enter your first name" disabled />
+                <FormInput name="lastName1" label="Last Name" placeholder="Enter your last name" disabled />
             </div>
             {/* <FormInput name="address1" label="Address" placeholder="Enter Your Address" /> */}
             <div className="mb-4">
@@ -127,13 +149,19 @@ const SubPondOwnerInfo = () => {
                     defaultValue={address1Field?.value}
 
                 />
+                {address1Meta.touched && (address1Meta.error) ? (
+                    <div className="mt-2 text-red-500 text-sm">{address1Meta.error}</div>
+                ) : null}
+                {address1Error.isError ? (
+                    <div className="mt-2 text-red-500 text-sm">{address1Error.message}</div>
+                ) : null}
             </div>
             <div className="grid grid-cols-3 gap-4 xl:gap-6">
-                <FormInput name="city1" label="City" placeholder="Please enter city" />
-                <FormInput name="state1" label="State" placeholder="Please enter state" />
-                <FormInput name="zipCode1" label="zip" placeholder="Please enter zipCode" />
+                <FormInput name="city1" label="City" placeholder="Please enter city" disabled />
+                <FormInput name="state1" label="State" placeholder="Please enter state" disabled />
+                <FormInput name="zipCode1" label="zip" placeholder="Please enter zipCode" disabled />
             </div>
-            <FormInput name="email1" label="Email" placeholder="Please enter email" />
+            <FormInput name="email1" label="Email" placeholder="Please enter email" disabled />
             <FormInput name="phone1" label="Phone" placeholder="Please enter phone" />
             <FormRadioButtons
                 name="secondAddress"
@@ -145,8 +173,8 @@ const SubPondOwnerInfo = () => {
                 secondAddressField?.value === "yes" && (
                     <div className="mt-6">
                         <div className="grid grid-cols-2 gap-5 xl:gap-6">
-                            <FormInput name="firstName2" label="First Name" placeholder="Enter your first name" />
-                            <FormInput name="lastName2" label="Last Name" placeholder="Enter your last name" />
+                            <FormInput name="firstName2" label="First Name" placeholder="Enter your first name" disabled />
+                            <FormInput name="lastName2" label="Last Name" placeholder="Enter your last name" disabled />
                         </div>
                         {/* <FormInput name="address2" label="Address" placeholder="Enter Your Address" /> */}
                         <div className="mb-4">
@@ -168,13 +196,19 @@ const SubPondOwnerInfo = () => {
                                 defaultValue={address2Field?.value}
 
                             />
+                            {address2Meta.touched && address2Meta.error ? (
+                                <div className="mt-2 text-red-500 text-sm">{address2Meta.error}</div>
+                            ) : null}
+                            {address2Error.isError ? (
+                                <div className="mt-2 text-red-500 text-sm">{address2Error.message}</div>
+                            ) : null}
                         </div>
                         <div className="grid grid-cols-3 gap-4 xl:gap-6">
-                            <FormInput name="city2" label="City" placeholder="Please enter city" />
-                            <FormInput name="state2" label="State" placeholder="Please enter state" />
-                            <FormInput name="zipCode2" label="zip" placeholder="Please enter zipCode" />
+                            <FormInput name="city2" label="City" placeholder="Please enter city" disabled />
+                            <FormInput name="state2" label="State" placeholder="Please enter state" disabled />
+                            <FormInput name="zipCode2" label="zip" placeholder="Please enter zipCode" disabled />
                         </div>
-                        <FormInput name="email2" label="Email" placeholder="Please enter email" />
+                        <FormInput name="email2" label="Email" placeholder="Please enter email" disabled />
                         <FormInput name="phone2" label="Phone" placeholder="Please enter phone" />
                     </div>
                 )
