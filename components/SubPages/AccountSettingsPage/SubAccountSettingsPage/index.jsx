@@ -6,13 +6,17 @@ import styles from './SubAccountSecttings.module.css';
 import { IoIosSettings } from "react-icons/io";
 import { FaHeart } from "react-icons/fa";
 import { MdMessage, MdHelp, MdNotifications } from "react-icons/md";
+import { PageHeader } from '../../../Common';
 
 const SubAccountSettingsPage = () => {
   return (
     <div className={styles['sub-account-settings-container']}>
-      <div className={styles['sub-account-settings']}>
-        <h1 className={styles['sub-account-settings-title']}>Account</h1>
-        <p className={styles['sub-account-settings-user-info']}>Larissa Smith, larissa@gmail.com</p>
+      <div className='mb-4 sm:mb-6 md:mb-8 lg:mb-10'>
+        <PageHeader
+          title={"Account"}
+          userName={"Larissa Smith"}
+          userEmail={"larissa@gmail.com"}
+        />
       </div>
       <div className={styles['sub-account-settings-items']}>
         <SettingCard

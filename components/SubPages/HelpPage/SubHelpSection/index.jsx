@@ -8,6 +8,7 @@ import { AiOutlineBars } from "react-icons/ai";
 
 //import styles 👇
 import 'react-modern-drawer/dist/index.css'
+import { PageHeader } from '../../../Common';
 
 const SubHelpSection = () => {
   const [isShowContent, setIsShowContent] = useState('');
@@ -20,8 +21,11 @@ const SubHelpSection = () => {
   return (
     <div className={styles['sub-help-section-container']}>
       <div className={styles['sub-help-section-heading-wrapper']}>
-        <h1 className={styles['sub-help-section-heading']}>Help</h1>
-        <p className={styles['sub-help-settings-user-info']}>Larissa Smith, larissa@gmail.com</p>
+        <PageHeader
+          title={"Help"}
+          userName={"Larissa Smith"}
+          userEmail={"larissa@gmail.com"}
+        />
       </div>
       <div className='md:grid md:grid-cols-12 md:gap-14 xl:gap-24'>
         <div className='sm:block md:hidden'>

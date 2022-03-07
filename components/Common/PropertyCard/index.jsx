@@ -18,7 +18,7 @@ const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
             }}
             className={styles['card-container']}>
             <div className="relative">
-                <div className="w-full h-[190px] sm:h-auto">
+                <div className="w-full h-[190px] sm:h-[160px] lg:h-[180px] 2xl:h-[237px]">
                     <img
                         src={image}
                         alt="Pond"
