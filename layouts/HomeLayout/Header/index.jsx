@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LoginModal, SignUpModal } from '../../../components/Common';
 import { logoutAction } from '../../../store/slices/authSlice';
 import { setShowLoginModal, setShowSignUpModal } from '../../../store/slices/modalsSlice';
+import Autocomplete from "react-google-autocomplete";
+import {useRouter} from "next/router";
+import {set} from '../../../store/slices/autocompletetionSlice'
 
 const backdropVariants = {
     hidden: {
@@ -25,6 +28,11 @@ const backdropVariants = {
 }
 
 const Header = () => {
+    const router = useRouter();
+    const getAddress = (place) => {
+        dispatch(set({isFirst: router.pathname !== "/services", latLng: `${place.geometry.location.lat()}:${place.geometry.location.lng()}` }))
+        router.push(`/services?location=${place.geometry.location.lat()}%3A${place.geometry.location.lng()}&price=0,1000`)
+    }
     // States
     const [isActive, setIsActive] = useState(false);
     const [isMenuActive, setIsMenuActive] = useState(false);
@@ -55,10 +63,19 @@ const Header = () => {
                             <span className="flex justify-center items-center h-full w-8 2xl:w-10">
                                 <AiOutlineSearch className="text-primary xl:text-xl 2xl:text-2xl" />
                             </span>
-                            <input
+                            <Autocomplete
+                                placeholder={'Search...'}
                                 className="block w-full appearance-none p-1 bg-transparent border-none text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                type="text"
-                                placeholder="Search..." />
+                                apiKey={process.env.GOOGLE_MAP_API_KEY}
+                                onPlaceSelected={(place) => {
+                                    getAddress(place)
+                                }}
+                                options={{
+                                    types: 'ALL'
+                                }}
+
+
+                            />
                         </div>
                     </div>
                     {/* Before login right side items */}
