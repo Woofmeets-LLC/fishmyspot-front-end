@@ -57,7 +57,9 @@ const Services = () => {
 
 
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setData([])
+            })
     }
 
     React.useEffect(() => {
