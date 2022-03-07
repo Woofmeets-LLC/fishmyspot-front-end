@@ -1,10 +1,14 @@
 import React from 'react';
+import EditPondContainer from '../../../components/SubPages/EditPondPage/EditPondContainer';
+import HomeLayout from '../../../layouts/HomeLayout';
 
 const AvailableTimeEdit = () => {
     return (
-        <div>
-
-        </div>
+        <HomeLayout>
+            <EditPondContainer>
+                Avail Time
+            </EditPondContainer>
+        </HomeLayout>
     );
 };
 

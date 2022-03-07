@@ -1,0 +1,23 @@
+import { useField } from 'formik';
+import React from 'react';
+import { FormInput } from '../../../Common';
+
+const SubPriceEdit = () => {
+    const [fullDayRateField] = useField('fullDayRate')
+    const [zipCode1Field] = useField('zipCode1')
+    return (
+        <>
+            <div className="grid grid-cols-2 gap-5 xl:gap-6">
+                <FormInput name="halfDayRate" label="Half Day Rate" type="number" />
+                <FormInput name="fullDayRate" label="Full Day Rate" type="number" />
+            </div>
+            <div className="text-center text-primary mt-5">
+                <h2 className="text-2xl font-trade-gothic-bold mb-5">Habibullah, you could make</h2>
+                <h1 className="text-5xl font-trade-gothic-bold mb-8">$ {+fullDayRateField?.value * 7}</h1>
+                <p className="text-sm mb-10">by sharing your pond for 1 week in {zipCode1Field?.value}.</p>
+            </div>
+        </>
+    );
+};
+
+export default SubPriceEdit;
