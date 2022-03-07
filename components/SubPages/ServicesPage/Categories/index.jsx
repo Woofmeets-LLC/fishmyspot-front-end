@@ -9,7 +9,9 @@ import TypeFish from '../TypeFish';
 import UserRating from '../UserRating';
 import styles from './Categories.module.css';
 
-const Categories = () => {
+
+
+const Categories = ({getQuery}) => {
     const router = useRouter();
     const [firstTime, setFirstTime] = useState(true)
 
@@ -17,6 +19,7 @@ const Categories = () => {
 
     useEffect(() => {
         if (!firstTime) router.push('/services?' + queryString.stringify(query, { arrayFormat: 'comma', skipNull: true }));
+        getQuery(query)
 
     }, [query]);
 

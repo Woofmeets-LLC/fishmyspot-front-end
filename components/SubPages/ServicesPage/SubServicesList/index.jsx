@@ -1,77 +1,43 @@
 import React from 'react';
-import { PropertyCard } from '../../../Common';
+import {PropertyCard} from '../../../Common';
 import styles from './SubServices.module.css';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-const SubServices = () => {
+const SubServices = ({items, fetchData, hasMore, images}) => {
     return (
-        <div className={styles['services-container']}>
-            <PropertyCard
-                delay={(Math.floor(Math.random() * 10)) / 10}
-                id={1}
-                image={"/images/pond2.jpg"}
-                title={"OH-STARK COUNTY-NAVARRE"}
-                price={"$160.00"}
-                ratings={3}
-            />
-            <PropertyCard
-                delay={(Math.floor(Math.random() * 10)) / 10}
-                id={2}
-                image={"/images/pond2.jpg"}
-                title={"OH-STARK COUNTY-NAVARRE"}
-                price={"$160.00"}
-                ratings={3}
-            />
-            <PropertyCard
-                delay={(Math.floor(Math.random() * 10)) / 10}
-                id={3}
-                image={"/images/pond2.jpg"}
-                title={"OH-STARK COUNTY-NAVARRE"}
-                price={"$160.00"}
-                ratings={3}
-            />
-            <PropertyCard
-                delay={(Math.floor(Math.random() * 10)) / 10}
-                id={4}
-                image={"/images/pond2.jpg"}
-                title={"OH-STARK COUNTY-NAVARRE"}
-                price={"$160.00"}
-                ratings={3}
-            />
-            <PropertyCard
-                delay={(Math.floor(Math.random() * 10)) / 10}
-                id={5}
-                image={"/images/pond2.jpg"}
-                title={"OH-STARK COUNTY-NAVARRE"}
-                price={"$160.00"}
-                ratings={3}
-            />
-            <PropertyCard
-                delay={(Math.floor(Math.random() * 10)) / 10}
-                id={6}
-                image={"/images/pond2.jpg"}
-                title={"OH-STARK COUNTY-NAVARRE"}
-                price={"$160.00"}
-                ratings={3}
-            />
-            <PropertyCard
-                delay={(Math.floor(Math.random() * 10)) / 10}
-                id={7}
-                image={"/images/pond2.jpg"}
-                title={"OH-STARK COUNTY-NAVARRE"}
-                price={"$160.00"}
-                ratings={3}
-            />
-            <PropertyCard
-                delay={(Math.floor(Math.random() * 10)) / 10}
-                id={8}
-                image={"/images/pond2.jpg"}
-                title={"OH-STARK COUNTY-NAVARRE"}
-                price={"$160.00"}
-                ratings={3}
-            />
 
-        </div>
-    );
+        <InfiniteScroll
+            className={`${styles['services-container']} no-scrollbar`}
+            dataLength={items.length} //This is important field to render the next data
+            next={fetchData}
+            hasMore={hasMore}
+            loader={<p style={{textAlign: 'center', display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center'}}>
+                <b>Loading...</b>
+            </p>}
+            endMessage={<p style={{textAlign: 'center', display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center'}}>
+                <b>Nothing Left Here!</b>
+            </p>}
+        >
+            {
+                items.map((item) => {
+                    return (
+                        <PropertyCard
+                            key={item.id.uuid}
+                            delay={(Math.floor(Math.random() * 10)) / 10}
+                            id={item.id.uuid}
+                            image={images[item.relationships.images.data[0].id.uuid].variants.default.url}
+                            title={item.attributes.title.substring(0, 30) + (item.attributes.title.length > 30 ? '...' : '')}
+                            price={`$ ${parseFloat(item.attributes.publicData.halfDay).toFixed(2)}`}
+                            ratings={3}
+
+                        />
+                    )
+                })
+            }
+
+        </InfiniteScroll>
+
+    )
 };
 
 export default SubServices;
