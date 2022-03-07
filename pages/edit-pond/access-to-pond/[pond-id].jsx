@@ -1,10 +1,14 @@
 import React from 'react';
+import EditPondContainer from '../../../components/SubPages/EditPondPage/EditPondContainer';
+import HomeLayout from '../../../layouts/HomeLayout';
 
 const AccessToPondEdit = () => {
     return (
-        <div>
-
-        </div>
+        <HomeLayout>
+            <EditPondContainer>
+                Access to pond
+            </EditPondContainer>
+        </HomeLayout>
     );
 };
 

@@ -6,11 +6,16 @@ import { FormCheckbox } from '../../../Common';
 const AddOns = () => {
     const [selectOtherAddOnsField, { }, selectOtherAddOnsHelpers] = useField("otherAddOns[isSelected]");
     const [namesOtherAddOnsField] = useField("otherAddOns[names]");
+    const [addOnsField] = useField("addOns");
     return (
         <>
             <h2 className="text-primary font-trade-gothic-bold text-xl mb-4">Check all that you would like to ADD-ON to your listing. (This is an additional fee that anglers will be charged):</h2>
-            <FormCheckbox name="addOns[pond-trawler-or-metal-boat].checked" label="Pond Trawler/Metal Boat ($20)" />
-            <FormCheckbox name="addOns[campsite].checked" label="Campsite ( $20 )" />
+            <FormCheckbox
+                name="addOns[pond-trawler-or-metal-boat].checked"
+                label={`${addOnsField?.value?.["pond-trawler-or-metal-boat"]?.title} ($${addOnsField?.value?.["pond-trawler-or-metal-boat"]?.price})`} />
+            <FormCheckbox
+                name="addOns[campsite].checked"
+                label={`${addOnsField?.value?.["campsite"]?.title} ($${addOnsField?.value?.["campsite"]?.price})`} />
             {/* <label
                 onChange={() => selectOtherAddOnsHelpers.setValue(!selectOtherAddOnsField.value)}
                 className="inline-flex items-center text-[16px] font-trade-gothic-bold text-primary cursor-pointer">

@@ -32,6 +32,24 @@ const ListYourPond = () => {
     const fishesObject = fishes?.map(fish => fish.name + "_" + fish.id)
         ?.reduce((prevObj, key) => ({ ...prevObj, [key]: false }), {});
 
+    // available time data 
+    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    const availableTime = days.reduce((prevObj, key) => {
+        return {
+            ...prevObj,
+            [key]: {
+                isSelected: false,
+                hours: {
+                    "6am-11am": false,
+                    "11am-4pm": false,
+                    "4pm-9pm": false,
+                    "9pm-6am": false,
+                    "all-hours": false,
+                }
+            }
+        }
+    }, {});
+
     // routes 
     const router = useRouter();
 
@@ -87,88 +105,7 @@ const ListYourPond = () => {
         secondAddress: "no",
 
         // Available Time
-        availableTime: {
-            sunday: {
-                isSelected: false,
-                hours: {
-                    "6am-11am": false,
-                    "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
-                    "all-hours": false,
-                }
-            },
-            monday: {
-                isSelected: false,
-                hours: {
-                    "6am-11am": false,
-                    "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
-                    "all-hours": false,
-                }
-            },
-            tuesday: {
-                isSelected: false,
-                hours: {
-                    "6am-11am": false,
-                    "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
-                    "all-hours": false,
-                }
-            },
-            wednesday: {
-                isSelected: false,
-                hours: {
-                    "6am-11am": false,
-                    "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
-                    "all-hours": false,
-                }
-            },
-            thursday: {
-                isSelected: false,
-                hours: {
-                    "6am-11am": false,
-                    "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
-                    "all-hours": false,
-                }
-            },
-            friday: {
-                isSelected: false,
-                hours: {
-                    "6am-11am": false,
-                    "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
-                    "all-hours": false,
-                }
-            },
-            saturday: {
-                isSelected: false,
-                hours: {
-                    "6am-11am": false,
-                    "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
-                    "all-hours": false,
-                }
-            },
-            everyday: {
-                isSelected: false,
-                hours: {
-                    "6am-11am": false,
-                    "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
-                    "all-hours": false,
-                }
-            }
-        },
+        availableTime,
         // Description
         description: "",
         fishes: fishesObject,
@@ -197,12 +134,12 @@ const ListYourPond = () => {
         addOns: {
             "pond-trawler-or-metal-boat": {
                 checked: false,
-                title: "Pond Trawler/Metal Boat ($20)",
+                title: "Pond Trawler/Metal Boat",
                 price: 20
             },
             "campsite": {
                 checked: false,
-                title: "Campsite ($20)",
+                title: "Campsite",
                 price: 20
             },
         },
