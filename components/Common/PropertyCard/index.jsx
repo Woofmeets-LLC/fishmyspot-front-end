@@ -53,7 +53,7 @@ const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
                         </div>
                         <div>
                             <span className={styles.price}>{price}</span>
-                            <span className={styles['per-hour']}>per hour</span>
+                            <span className={styles['per-hour']}>half day</span>
                         </div>
                     </div>
                 </div>

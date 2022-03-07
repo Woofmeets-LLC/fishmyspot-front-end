@@ -35,16 +35,8 @@ const Experience = ({ experience, setExperience }) => {
 
   const [isDropDown, setIsDropDown] = useState(false);
   const options = [
-    'Beginning Fishing Lesson',
-    'Beginning Fishing Instruction For Family',
-    'Boat',
-    'Boat Rental',
-    'Family Fun Day',
-    '1+ Extra Angler',
-    '2+ Extra Angler',
-    'Canoe/ Kayak',
-    'Night Fishing',
-    'Camping'
+    'Pond Trawler/Metal Boat',
+    'Campsite',
   ];
 
   const experienceAddOrRemove = (exp) => {

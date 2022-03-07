@@ -1,7 +1,7 @@
 import { useField } from 'formik';
 import React from 'react';
 
-const FormInput = ({ label, ...props }) => {
+const FormInput = ({ label, className, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <div className="mb-4">
@@ -13,7 +13,8 @@ const FormInput = ({ label, ...props }) => {
             </label>
             <input
                 type={props.type ? props.type : 'text'}
-                className={`${props?.disabled ? "bg-gray-50" : "bg-white"} block w-full px-3 py-[5px] font-trade-gothic text-base text-primary bg-clip-padding bg-no-repeat  border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none`}
+                id={props.name}
+                className={`${props?.disabled ? "bg-gray-50" : "bg-white"} ${className && className} block w-full px-3 py-[5px] font-trade-gothic text-base text-primary bg-clip-padding bg-no-repeat  border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none`}
                 {...field}
                 {...props}
             />
