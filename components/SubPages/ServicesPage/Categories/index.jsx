@@ -8,13 +8,10 @@ import PriceSlider from '../PriceSlider';
 import TypeFish from '../TypeFish';
 import UserRating from '../UserRating';
 import styles from './Categories.module.css';
-import { getSdk } from '../../../../sharetribe/sharetribeSDK';
-import * as sharetribeSdk from 'sharetribe-flex-sdk'
-import {boundsCalculator} from "../../../../types";
-const {types} = sharetribeSdk
 
 
-const Categories = () => {
+
+const Categories = ({getQuery}) => {
     const router = useRouter();
     const [firstTime, setFirstTime] = useState(true)
 
@@ -22,19 +19,7 @@ const Categories = () => {
 
     useEffect(() => {
         if (!firstTime) router.push('/services?' + queryString.stringify(query, { arrayFormat: 'comma', skipNull: true }));
-
-        const q = {
-            pub_halfDay:`${query.price[0]},${query.price[1]}`
-        }
-
-        if(query.location){
-            const [lat, lng] = query.location.split(":");
-            q.origin = new types.LatLng(parseFloat(lat), parseFloat(lng))
-            q.bounds = boundsCalculator(1000, parseFloat(lat), parseFloat(lng))
-        }
-        getSdk().listings.query(q)
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+        getQuery(query)
 
     }, [query]);
 
