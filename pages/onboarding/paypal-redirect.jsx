@@ -13,7 +13,6 @@ const GenerateRedirectUI = ({ data }) => {
     productIntentId,
   } = data;
 
-  console.log(data);
 
   return (
     <div className="rounded-t-xl overflow-hidden bg-gradient-to-r from-emerald-50 to-teal-100 p-10">

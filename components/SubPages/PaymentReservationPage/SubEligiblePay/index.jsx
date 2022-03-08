@@ -1,12 +1,11 @@
 import { useField } from 'formik';
 import React from 'react';
-import { FaCcVisa, FaPaypal, FaStripe } from "react-icons/fa";
 import { AiFillBank } from "react-icons/ai";
+import { FaCcVisa, FaPaypal, FaStripe } from "react-icons/fa";
 import { IoLogoVenmo } from "react-icons/io5";
 
 const SubEligiblePay = () => {
   const [field, meta, helpers] = useField('eligiblePay');
-  console.log(field, meta);
 
   const radioBtns = [
     {

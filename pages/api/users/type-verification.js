@@ -33,7 +33,7 @@ const handler = async (req, res) => {
                 }
                 
             }catch(error){
-                console.log(error)
+                console.log({"Hello-error":error})
                 res.status(404).send({
                     message: "User not found!",
                     code: 404
