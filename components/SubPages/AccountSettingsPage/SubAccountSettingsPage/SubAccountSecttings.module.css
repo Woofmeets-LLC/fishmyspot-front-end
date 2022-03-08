@@ -2,18 +2,6 @@
   @apply pt-6 sm:pt-8 md:pt-10 xl:pt-16 2xl:pt-[76px] pb-10 sm:pb-14 md:pb-20 lg:pb-24 2xl:pb-[180px];
 }
 
-.sub-account-settings {
-  @apply text-primary space-y-2 md:space-y-3 lg:space-y-5 mb-5 md:mb-6 lg:mb-10;
-}
-
-.sub-account-settings-title {
-  @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl font-food-truck;
-}
-
-.sub-account-settings-user-info {
-  @apply text-base md:text-lg lg:text-xl 2xl:text-2xl font-trade-gothic;
-}
-
 .sub-account-settings-items {
   @apply grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 xl:gap-x-7 xl:gap-y-9;
 }
