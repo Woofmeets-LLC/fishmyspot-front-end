@@ -1,4 +1,5 @@
 import Modal from './CustomModal/Modal';
+import DayHoursPicker from './FormElements/DayHoursPicker';
 import FormCheckbox from './FormElements/FormCheckbox';
 import FormInput from './FormElements/FormInput';
 import FormRadioButtons from './FormElements/FormRadioButtons/FormRadioButtons';
@@ -27,6 +28,7 @@ export {
     FormOption,
     FormCheckbox,
     FormTextarea,
+    DayHoursPicker,
     MultiStepForm,
     BackBtn,
     NextBtn,

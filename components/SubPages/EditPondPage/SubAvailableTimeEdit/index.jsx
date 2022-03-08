@@ -2,11 +2,11 @@ import { useField } from 'formik';
 import React from 'react';
 import { DayHoursPicker } from '../../../Common';
 
-const SubAvailableTime = () => {
+const SubAvailableTimeEdit = () => {
     const [field, meta] = useField({ name: "availableTime" });
     const isSelectedAny = Object.keys(field?.value)?.map(key => (field?.value[key]?.isSelected))?.includes(true);
     return (
-        <div>
+        <>
             <h2 className="block text-2xl text-primary font-trade-gothic-bold capitalize mb-4">Check all days/times that your pond is available to fish:</h2>
             <DayHoursPicker label="Sunday" name="availableTime[sunday]" />
             <DayHoursPicker label="Monday" name="availableTime[monday]" />
@@ -19,8 +19,13 @@ const SubAvailableTime = () => {
             {!isSelectedAny ? (
                 <div className="mt-2 text-red-500 text-sm">{"You must select at least one day"}</div>
             ) : null}
-        </div>
+            <div className="my-2 text-right">
+                <button
+                    type="submit"
+                    className="bg-secondary text-white font-trade-gothic-bold rounded py-2 px-8 ml-auto">Update</button>
+            </div>
+        </>
     );
 };
 
-export default SubAvailableTime;
+export default SubAvailableTimeEdit;

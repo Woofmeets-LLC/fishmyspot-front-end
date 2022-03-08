@@ -8,12 +8,10 @@ import UploadPhoto from './UploadPhoto';
 const AccessPondImages = () => {
     const [fileField, fileMeta, fileHelpers] = useField({ name: "ATP-images-file" });
     const [base64Field, base64Meta, base64Helpers] = useField({ name: "ATP-images-base64" });
-    const [atpImagesField, atpImagesMeta] = useField({ name: "ATP-images-file" });
 
     const handleFileUpload = (e) => {
         onSelectFile(e).then((file) => {
             const fileData = file;
-            console.log({ fileValue: fileField.value, base64Value: base64Field.value });
             fileHelpers?.setValue([...fileField.value, fileData?.file]);
             base64Helpers?.setValue([...base64Field.value, fileData?.base64]);
         });
@@ -52,8 +50,8 @@ const AccessPondImages = () => {
             </div>
             <div className="text-gray-500 text-sm">Tip: Choose the top 2-4 photos of your home from different angles in good light that really show the Spot.</div>
             {
-                atpImagesMeta?.touched && atpImagesMeta?.error ? (
-                    <div className="mt-2 text-red-500 text-sm">{atpImagesMeta?.error}</div>
+                fileMeta?.touched && fileMeta?.error ? (
+                    <div className="mt-2 text-red-500 text-sm">{fileMeta?.error}</div>
                 ) : null
             }
         </div>
