@@ -34,7 +34,6 @@ const MultiStepForm = ({
                         validationSchema={currentChild.props.validationSchema}
                         enableReinitialize={true}
                         onSubmit={async (values, helpers) => {
-                            console.log(values);
                             if (step === (timelineArray.length - 1)) {
                                 // setIsSuccess(true);
                                 await props.onSubmit(values, helpers);

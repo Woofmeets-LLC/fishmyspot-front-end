@@ -33,7 +33,7 @@ const ListYourPond = () => {
         ?.reduce((prevObj, key) => ({ ...prevObj, [key]: false }), {});
 
     // available time data 
-    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "everyday"];
     const availableTime = days.reduce((prevObj, key) => {
         return {
             ...prevObj,
@@ -60,7 +60,7 @@ const ListYourPond = () => {
                 dispatch(setFishes(res.data));
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
             })
     }, [])
 
@@ -247,11 +247,11 @@ const ListYourPond = () => {
         // Creating listing
         getSdk().ownListings.create(newData, { expand: true, include: ['images'] })
             .then(listingRes => {
-                console.log(listingRes);
+                // console.log(listingRes);
                 router.push(`/list-your-spot/success`);
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
             })
     }
 

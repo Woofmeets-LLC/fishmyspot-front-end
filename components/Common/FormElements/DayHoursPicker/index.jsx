@@ -41,8 +41,16 @@ const DayHoursPicker = ({
     const isAnyHourSelected = field?.value?.isSelected ? (Object.values(field?.value?.hours)?.includes(true)) : true;
 
     const handleDayClick = () => {
-        helpers.setValue({ ...field.value, isSelected: !field.value.isSelected });
+        helpers.setValue({ ...field.value, isSelected: !field?.value?.isSelected });
     };
+
+    const handleSelectHoursClick = () => {
+        if (everydayField?.value?.isSelected) {
+            setIsDropDown(prevIsDropDown => name == "availableTime[everyday]" ? !prevIsDropDown : false)
+        } else {
+            setIsDropDown(prevIsDropDown => field.value.isSelected ? !prevIsDropDown : false);
+        }
+    }
 
     const handleHoursChange = (option) => {
         helpers.setValue({
@@ -67,16 +75,15 @@ const DayHoursPicker = ({
                         className={`${everydayField?.value?.isSelected ? (name != "availableTime[everyday]" ? "accent-yellow-200" : "accent-secondary") : "accent-secondary"} w-4 h-4 mr-2 cursor-pointer`} />{label}
                 </label>
                 <div className="relative block w-[165px]">
-                    {/* <div onClick={() => console.log("Hello")} className="top-0 left-0 fixed w-screen h-screen bg-gray-500 opacity-25 z-10"></div> */}
                     <div
-                        onClick={() => setIsDropDown(prevIsDropDown => everydayField?.value?.isSelected ? (name == "availableTime[everyday]" ? !prevIsDropDown : false) : !prevIsDropDown)}
+                        onClick={handleSelectHoursClick}
                         className="relative block w-[165px] px-3 py-[5px] font-trade-gothic text-base text-primary bg-white bg-clip-padding bg-no-repeat font-medium border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none cursor-pointer">
                         <div className="flex justify-between items-center">
                             <span className="">Select Hour</span>
                             {
                                 (everydayField?.value?.isSelected
                                     ? (name == "availableTime[everyday]" ? isDropDown : false)
-                                    : isDropDown)
+                                    : field?.value?.isSelected ? isDropDown : false)
                                     ? <IoIosArrowUp />
                                     : <IoIosArrowDown />
                             }
@@ -86,7 +93,7 @@ const DayHoursPicker = ({
                         {
                             (everydayField?.value?.isSelected
                                 ? (name == "availableTime[everyday]" ? isDropDown : false)
-                                : isDropDown) &&
+                                : field?.value?.isSelected ? isDropDown : false) &&
                             (
                                 <motion.div
                                     variants={variants}

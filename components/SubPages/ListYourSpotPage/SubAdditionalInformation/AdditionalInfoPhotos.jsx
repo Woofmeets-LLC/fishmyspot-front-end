@@ -11,7 +11,6 @@ const AdditionalInfoPhotos = () => {
     const handleFileUpload = (e) => {
         onSelectFile(e).then((file) => {
             const fileData = file;
-            console.log({ fileValue: fileField.value, base64Value: base64Field.value });
             fileHelpers?.setValue([...fileField.value, fileData?.file]);
             base64Helpers?.setValue([...base64Field.value, fileData?.base64]);
         });

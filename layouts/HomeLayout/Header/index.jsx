@@ -1,16 +1,16 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from "next/router";
 import React, { useState } from 'react';
+import Autocomplete from "react-google-autocomplete";
 import { Toaster } from 'react-hot-toast';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaUserCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginModal, SignUpModal } from '../../../components/Common';
 import { logoutAction } from '../../../store/slices/authSlice';
+import { set } from '../../../store/slices/autocompletetionSlice';
 import { setShowLoginModal, setShowSignUpModal } from '../../../store/slices/modalsSlice';
-import Autocomplete from "react-google-autocomplete";
-import {useRouter} from "next/router";
-import {set} from '../../../store/slices/autocompletetionSlice'
 
 const backdropVariants = {
     hidden: {
@@ -30,7 +30,7 @@ const backdropVariants = {
 const Header = () => {
     const router = useRouter();
     const getAddress = (place) => {
-        dispatch(set({isFirst: router.pathname !== "/services", latLng: `${place.geometry.location.lat()}:${place.geometry.location.lng()}` }))
+        dispatch(set({ isFirst: router.pathname !== "/services", latLng: `${place.geometry.location.lat()}:${place.geometry.location.lng()}` }))
         router.push(`/services?location=${place.geometry.location.lat()}%3A${place.geometry.location.lng()}&price=0,1000`)
     }
     // States
@@ -137,7 +137,7 @@ const Header = () => {
                                         className=" block  py-1 px-2 text-primary text-2xl lg:text-3xl">
                                         <div className=" cursor-pointer flex flex-col items-end relative">
                                             <span className={`bg-primary rounded-sm transform transition duration-500 h-[3px] ${isMenuActive
-                                                ? "mb-2 rotate-[48deg] w-5 translate-y-[12px]"
+                                                ? "mb-2 rotate-[48deg] w-5 translate-y-[11px]"
                                                 : "mb-1 rotate-0 w-5 translate-y-0"}`}></span>
                                             <span className={` bg-primary rounded-sm w-5 transform transition duration-500 h-[3px] ${isMenuActive
                                                 ? "mb-2 opacity-0"

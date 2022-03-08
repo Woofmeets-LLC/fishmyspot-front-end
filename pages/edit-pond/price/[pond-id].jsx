@@ -18,9 +18,8 @@ const PriceEdit = () => {
                     }}
                     validationSchema={
                         yup.object({
-                            acre: yup.string().required('Required'),
-                            'stocked-pond': yup.string().required('Required'),
-                            "catch-requirements": yup.string().required('Required'),
+                            halfDayRate: yup.number().required('Required'),
+                            fullDayRate: yup.number().required('Required'),
                         })
                     }
                     onSubmit={(values, helpers) => {
