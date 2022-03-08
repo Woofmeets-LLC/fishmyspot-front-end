@@ -1,9 +1,5 @@
 module.exports = {
   reactStrictMode: true,
-  webpack: (config) => {
-    config.experiments = { topLevelAwait: true };
-    return config;
-  },
   env: {
     FLEX_INTEGRATION_API_SECRET_KEY: "d4764c7d6a72eef41e759843c6ee9ea447e14ed6",
     FLEX_INTEGRATION_API_CLINT_ID: "ba629dad-8426-4e13-925b-ec9aa0251248",

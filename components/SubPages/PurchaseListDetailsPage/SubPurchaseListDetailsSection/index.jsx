@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListItem, StatusButton } from '../../../Common';
+import { ListItem } from '../../../Common';
 
 const SubPurchaseListDetailsSection = () => {
   return (
@@ -78,9 +78,9 @@ const SubPurchaseListDetailsSection = () => {
         </div>
       </div>
       <div className='mt-8 lg:mt-14'>
-        <StatusButton
-          title={"Purchased"}
-        />
+        <button className={`text-[#fcfcfc] font-trade-gothic py-2 px-6 md:py-3 md:px-8 lg:px-10 2xl:py-4 2xl:px-14 bg-[#65947e] rounded`}>
+          Purchased
+        </button>
       </div>
     </div>
   );
