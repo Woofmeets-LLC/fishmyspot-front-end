@@ -30,11 +30,31 @@ const AmenitiesEdit = () => {
         getPondData()
     }, [query]);
 
-    // console.log(pondData?.publicData?.addOns?.reduce());
+    // AddOns Data making
+    const tempAddOns = pondData?.publicData?.addOns;
+    const initialAddOns = {
+        "pond-trawler-or-metal-boat": {
+            checked: false,
+            title: "Pond Trawler/Metal Boat",
+            price: 20
+        },
+        "campsite": {
+            checked: false,
+            title: "Campsite",
+            price: 20
+        },
+    }
+    const addOns = Object.keys(initialAddOns)?.reduce((prevObj, key) => {
+        const checked = tempAddOns?.map(addOn => addOn.title)?.includes(initialAddOns[key].title);
+        return {
+            ...prevObj,
+            [key]: { ...initialAddOns[key], checked }
+        }
+    }, {});
+
     return (
         <HomeLayout>
             <EditPondContainer>
-
                 <Formik
                     enableReinitialize
                     initialValues={{
@@ -52,18 +72,7 @@ const AmenitiesEdit = () => {
                             isSelected: pondData?.publicData?.allAmenities?.others?.length ? true : false,
                             names: pondData?.publicData?.allAmenities?.others?.join(",") || ""
                         },
-                        addOns: {
-                            "pond-trawler-or-metal-boat": {
-                                checked: false,
-                                title: "Pond Trawler/Metal Boat",
-                                price: 20
-                            },
-                            "campsite": {
-                                checked: false,
-                                title: "Campsite",
-                                price: 20
-                            },
-                        },
+                        addOns,
                         otherAddOns: {
                             isSelected: false,
                             services: [],

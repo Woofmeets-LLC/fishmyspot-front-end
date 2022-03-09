@@ -9,12 +9,15 @@ const AddOnsEdit = () => {
     return (
         <>
             <h2 className="text-primary font-trade-gothic-bold text-xl mb-4">Check all that you would like to ADD-ON to your listing. (This is an additional fee that anglers will be charged):</h2>
-            <FormCheckbox
-                name="addOns[pond-trawler-or-metal-boat].checked"
-                label={`${addOnsField?.value?.["pond-trawler-or-metal-boat"]?.title} ($${addOnsField?.value?.["pond-trawler-or-metal-boat"]?.price})`} />
-            <FormCheckbox
-                name="addOns[campsite].checked"
-                label={`${addOnsField?.value?.["campsite"]?.title} ($${addOnsField?.value?.["campsite"]?.price})`} />
+            {
+                addOnsField.value &&
+                Object.keys(addOnsField?.value)?.map((key, index) => (
+                    <FormCheckbox
+                        key={index}
+                        name={`addOns[${key}].checked`}
+                        label={`${addOnsField?.value?.[key]?.title} ($${addOnsField?.value?.[key]?.price})`} />
+                ))
+            }
             {/* <FormCheckbox
                 name="otherAddOns.isSelected"
                 label={`Other`} /> */}

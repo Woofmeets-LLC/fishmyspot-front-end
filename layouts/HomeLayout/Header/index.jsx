@@ -8,6 +8,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { FaUserCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginModal, SignUpModal } from '../../../components/Common';
+import { getSdk } from '../../../sharetribe/sharetribeSDK';
 import { logoutAction } from '../../../store/slices/authSlice';
 import { set } from '../../../store/slices/autocompletetionSlice';
 import { setShowLoginModal, setShowSignUpModal } from '../../../store/slices/modalsSlice';
@@ -40,6 +41,40 @@ const Header = () => {
 
     // Dispatch
     const dispatch = useDispatch();
+
+    // For stripe connection 
+    const createStripeAccount = () => {
+        getSdk().stripeAccount.create({
+            country: "US",
+            requestedCapabilities: ["transfers", "card_payments"]
+        }, {
+            expand: true
+        })
+            .then(res => {
+                createAccountLink();
+            })
+            .catch(err => {
+                console.dir(err)
+            })
+    }
+
+    const createAccountLink = () => {
+        getSdk().stripeAccountLinks.create({
+            failureURL: "http://localhost:3000/",
+            successURL: "http://localhost:3000/test",
+            type: "account_onboarding",
+            collect: "currently_due",
+        })
+            .then(res => {
+                console.log(res)
+                if (typeof (window) !== "undefined") {
+                    window.location = res.data?.data?.attributes?.url;
+                }
+            })
+            .catch(err => {
+                console.dir(err)
+            })
+    }
 
     return (
         <>
@@ -125,13 +160,16 @@ const Header = () => {
                             className={`flex items-center w-auto h-[70px] 2xl:h-[85px] 3xl:h-[102px] ml-auto space-y-0 space-x-10 bg-white transition transform px-2 py-2 rounded border-0`}>
                             {
                                 user?.profile?.publicData?.account_type !== "angler" &&
-                                <Link href="/list-your-spot" >
-                                    <a className={`hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]`}>List your spot +</a>
-                                </Link>
-                                // <button
-                                //     onClick={() => !isLoggedIn && dispatch(setShowLoginModal())}
-                                //     type="button"
-                                //     className="hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</button>
+                                    user?.stripeConnected
+                                    ? <Link href="/list-your-spot" >
+                                        <a className={`hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]`}>List your spot +</a>
+                                    </Link>
+                                    : <button
+                                        onClick={createStripeAccount}
+                                        type="button"
+                                        className="hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</button>
+
+
                             }
                             <div className="flex items-center px-3 border shadow rounded-full ml-auto">
                                 <div className="block">
