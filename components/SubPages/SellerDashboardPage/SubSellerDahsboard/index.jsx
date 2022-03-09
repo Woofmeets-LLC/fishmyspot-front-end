@@ -1,10 +1,9 @@
 import React from 'react';
-import SettingCard from '../../AccountSettingsPage/SettingCard';
-import styles from './SubSellerDashboard.module.css';
-
 import { IoIosSettings } from "react-icons/io";
 import { MdMessage, MdNotifications } from "react-icons/md";
 import { PageHeader } from '../../../Common';
+import SettingCard from '../../AccountSettingsPage/SettingCard';
+import styles from './SubSellerDashboard.module.css';
 
 const SubSellerDashboard = () => {
   return (
@@ -21,9 +20,10 @@ const SubSellerDashboard = () => {
           Icon={IoIosSettings}
         />
         <SettingCard
-          title={"Edit Spot list"}
+          title={"Spot list"}
           description={"Provide personal details and how we can reach you."}
           Icon={IoIosSettings}
+          href="/edit-spot-list"
         />
         <SettingCard
           title={"Notification"}

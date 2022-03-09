@@ -1,23 +1,29 @@
-import React, { useEffect } from "react";
-import { ResetPasswordModal } from "../components/Common";
+import React from "react";
 import HomeLayout from "../layouts/HomeLayout";
-import { estimatedEarnings } from "../services";
+import { getSdk } from '../sharetribe/sharetribeSDK';
+import { UUID } from "../types";
 
 const Test = () => {
-  const tests = [];
-  useEffect(() => {
-    console.table(estimatedEarnings(1));
-    console.table(estimatedEarnings(1.5));
-    console.table(estimatedEarnings(2.4));
-    console.table(estimatedEarnings(6.1));
-    console.table(estimatedEarnings(7.9));
-    console.table(estimatedEarnings(8));
-    console.table(estimatedEarnings(15));
-  }, []);
+  const updateListing = () => {
+    getSdk().ownListings.update({
+      id: new UUID("62270d28-49c0-4677-aa2f-a984aa4f9967"),
+      title: "Test 111 N HILL ST, LOS ANGELES",
 
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
   return (
     <HomeLayout>
-      <ResetPasswordModal />
+      <div className="my-5 text-center">
+        <button
+          onClick={updateListing}
+          className="bg-secondary text-white px-4 py-2 rounded">Update listing</button>
+      </div>
       corrupti quod omnis aliquam earum quaerat perferendis quia. Quos quaerat
       incidunt officiis ullam? Sit magni minima rerum fugiat eum natus? Rem
       tempora sunt, culpa eveniet nisi tenetur ratione laboriosam aspernatur
