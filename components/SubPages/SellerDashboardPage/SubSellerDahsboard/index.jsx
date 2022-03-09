@@ -1,17 +1,18 @@
 import React from 'react';
 import { IoIosSettings } from "react-icons/io";
 import { MdMessage, MdNotifications } from "react-icons/md";
+import { PageHeader } from '../../../Common';
 import SettingCard from '../../AccountSettingsPage/SettingCard';
 import styles from './SubSellerDashboard.module.css';
-
 
 const SubSellerDashboard = () => {
   return (
     <div className={styles['sub-seller-dashboard-container']}>
-      <div className={styles['sub-seller-info']}>
-        <h1 className={styles['sub-seller-dashboard-title']}>Account</h1>
-        <p className={styles['sub-user-info']}>Larissa Smith, larissa@gmail.com</p>
-      </div>
+      <PageHeader
+        title={"Account"}
+        userName={"Larissa Smith"}
+        userEmail={"larissa@gmail.com"}
+      />
       <div className={styles['sub-settings-items']}>
         <SettingCard
           title={"Account Settings"}
