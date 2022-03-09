@@ -1,45 +1,47 @@
-import React, { useEffect } from "react";
-import { ResetPasswordModal } from "../components/Common";
+import React from "react";
 import HomeLayout from "../layouts/HomeLayout";
-import { estimatedEarnings } from "../services";
+import {getSdk} from "../sharetribe/sharetribeSDK";
+
 
 const Test = () => {
-  const tests = [];
-  useEffect(() => {
-    console.table(estimatedEarnings(1));
-    console.table(estimatedEarnings(1.5));
-    console.table(estimatedEarnings(2.4));
-    console.table(estimatedEarnings(6.1));
-    console.table(estimatedEarnings(7.9));
-    console.table(estimatedEarnings(8));
-    console.table(estimatedEarnings(15));
-  }, []);
+    const createStripeAccount = () => {
+        getSdk().stripeAccount.create({
+            country: "US",
+            requestedCapabilities: ["transfers", "card_payments"]
+        }, {
+            expand: true
+        })
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.dir(err)
+            })
+    }
 
-  return (
-    <HomeLayout>
-      <ResetPasswordModal />
-      corrupti quod omnis aliquam earum quaerat perferendis quia. Quos quaerat
-      incidunt officiis ullam? Sit magni minima rerum fugiat eum natus? Rem
-      tempora sunt, culpa eveniet nisi tenetur ratione laboriosam aspernatur
-      praesentium nesciunt perspiciatis quaerat odit optio adipisci recusandae
-      voluptatibus deleniti. Voluptatum, dolorem corrupti. Vitae nisi eaque ad
-      eos magnam fugiat tenetur asperiores libero consectetur veniam ut dicta
-      quis et, inventore porro temporibus officiis ex at totam nesciunt. Error
-      facere quam molestias eius. Necessitatibus iste eaque velit quisquam, vero
-      eligendi ratione omnis amet nesciunt, ab totam ullam saepe voluptatibus
-      aperiam illo, at eos quos autem nam fugit assumenda doloribus consequuntur
-      modi. Hic veniam neque error. Aspernatur delectus magni, cum ipsam dolores
-      ducimus harum sunt quia ab molestias unde saepe ratione consequuntur
-      consectetur, quod perferendis accusamus laudantium a reprehenderit? Sequi
-      earum reprehenderit cupiditate iste praesentium, neque quasi tempore
-      facere vitae sed fugiat velit voluptate rerum ipsam vero voluptatem modi
-      nulla repellendus sapiente ducimus nihil! Illo recusandae officia esse
-      repellat explicabo in sapiente dolore, optio facilis omnis ipsam doloribus
-      a fugit rem dolorum harum eligendi voluptates officiis dignissimos aliquid
-      facere. Molestiae, cum harum eius officiis numquam ad impedit voluptate
-      voluptatum iste at!
-    </HomeLayout>
-  );
+    const createAccountLink = () => {
+
+        getSdk().stripeAccountLinks.create({
+            failureURL: "http://localhost:3000/",
+            successURL: "http://localhost:3000/test",
+            type: "account_onboarding",
+            collect: "currently_due",
+        })
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.dir(err)
+            })
+    }
+
+    return (
+        <HomeLayout>
+
+            <button onClick={createStripeAccount}>check</button>
+            <button onClick={createAccountLink}>account link</button>
+        </HomeLayout>
+    );
 };
 
 export default Test;
