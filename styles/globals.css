@@ -165,3 +165,17 @@ Chrome
     @apply xl:pl-8 xl:pr-32 xl:py-9 bg-[#fcfcfc] !important;
     box-shadow: 0 1px 9px 0 rgba(123, 174, 212, 0.12);
 }
+
+
+/* services list page modal */
+.view-image-modal .slick-prev:before,
+.view-image-modal .slick-next:before {
+    @apply text-secondary text-xl lg:text-3xl 2xl:text-4xl z-50 !important;
+}
+
+.view-image-modal .slick-prev {
+    @apply left-0 lg:left-3 z-10 top-44 !important;
+}
+.view-image-modal .slick-next {
+    @apply right-0 lg:right-6 z-10 top-44 !important;
+}
