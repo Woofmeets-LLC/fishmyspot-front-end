@@ -1,9 +1,10 @@
-import React from 'react';
-import { FaMapMarkerAlt, FaStar, FaRegHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Link from 'next/link';
+import React from 'react';
+import { FaMapMarkerAlt, FaStar } from "react-icons/fa";
 import styles from './EditPropertyCard.module.css';
 
-const EditPropertyCard = ({ image, title, price, delay }) => {
+const EditPropertyCard = ({ id, image, title, price, delay }) => {
   return (
     <motion.div
       initial={{
@@ -43,15 +44,17 @@ const EditPropertyCard = ({ image, title, price, delay }) => {
                 <FaStar />
                 <FaStar />
               </div>
-              <button
-                className='bg-secondary py-1 px-3 text-white text-xs font-trade-gothic-bold rounded'
-              >
-                Edit
-              </button>
+              <Link href={`/edit-pond/pond-listing/${id}`}>
+                <a
+                  className='bg-secondary py-1 px-3 text-white text-xs font-trade-gothic-bold rounded'
+                >
+                  Edit
+                </a>
+              </Link>
             </div>
             <div>
               <span className={styles.price}>{price}</span>
-              <span className={styles['per-hour']}>per hour</span>
+              <span className={styles['per-hour']}>half day</span>
             </div>
           </div>
         </div>
