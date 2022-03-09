@@ -1,14 +1,60 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Form, Formik } from 'formik';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import EditPondContainer from '../../../components/SubPages/EditPondPage/EditPondContainer';
 import SubAmenitiesEdit from '../../../components/SubPages/EditPondPage/SubAmenitiesEdit';
 import HomeLayout from '../../../layouts/HomeLayout';
+import { getSdk } from '../../../sharetribe/sharetribeSDK';
 
 const AmenitiesEdit = () => {
+    const [pondData, setPondData] = useState({});
+    const [loading, setLoading] = useState(false);
+
+    const { query } = useRouter();
+    const getPondData = () => {
+        setLoading(true)
+        getSdk().ownListings.show({ id: query['pond-id'] })
+            .then(res => {
+                setLoading(false)
+                // res.data contains the response data
+                setPondData(res?.data?.data?.attributes);
+            })
+            .catch(err => {
+                setLoading(false)
+                console.log(err);
+            });
+    }
+
+    useEffect(() => {
+        getPondData()
+    }, [query]);
+
+    // AddOns Data making
+    const tempAddOns = pondData?.publicData?.addOns;
+    const initialAddOns = {
+        "pond-trawler-or-metal-boat": {
+            checked: false,
+            title: "Pond Trawler/Metal Boat",
+            price: 20
+        },
+        "campsite": {
+            checked: false,
+            title: "Campsite",
+            price: 20
+        },
+    }
+    const addOns = Object.keys(initialAddOns)?.reduce((prevObj, key) => {
+        const checked = tempAddOns?.map(addOn => addOn.title)?.includes(initialAddOns[key].title);
+        return {
+            ...prevObj,
+            [key]: { ...initialAddOns[key], checked }
+        }
+    }, {});
+
     return (
         <HomeLayout>
             <EditPondContainer>
-
                 <Formik
                     enableReinitialize
                     initialValues={{
@@ -20,23 +66,13 @@ const AmenitiesEdit = () => {
                             "Pet Friendly": false,
                             "Picnic Tables": false,
                             "Dock": false,
+                            ...pondData?.publicData?.allAmenities?.amenities
                         },
                         otherAmenities: {
-                            isSelected: false,
-                            names: ""
+                            isSelected: pondData?.publicData?.allAmenities?.others?.length ? true : false,
+                            names: pondData?.publicData?.allAmenities?.others?.join(",") || ""
                         },
-                        addOns: {
-                            "pond-trawler-or-metal-boat": {
-                                checked: false,
-                                title: "Pond Trawler/Metal Boat",
-                                price: 20
-                            },
-                            "campsite": {
-                                checked: false,
-                                title: "Campsite",
-                                price: 20
-                            },
-                        },
+                        addOns,
                         otherAddOns: {
                             isSelected: false,
                             services: [],
@@ -46,7 +82,11 @@ const AmenitiesEdit = () => {
                         console.log(values);
                     }}>
                     <Form>
-                        <SubAmenitiesEdit />
+                        {
+                            loading
+                                ? <div>Loading...</div>
+                                : <SubAmenitiesEdit />
+                        }
                     </Form>
                 </Formik>
             </EditPondContainer>

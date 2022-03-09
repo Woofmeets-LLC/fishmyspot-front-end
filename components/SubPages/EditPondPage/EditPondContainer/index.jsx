@@ -13,6 +13,9 @@ const EditPondContainer = ({ children }) => {
                             <Link href={`/edit-pond/pond-listing/${query["pond-id"]}`}>
                                 <a className={`block text-lg font-trade-gothic-bold ${pathname.search("pond-listing") != -1 && "text-secondary"}`}>Pond Listing</a>
                             </Link>
+                            <Link href={`/edit-pond/description/${query["pond-id"]}`}>
+                                <a className={`block text-lg font-trade-gothic-bold ${pathname.search("description") != -1 && "text-secondary"}`}>Description</a>
+                            </Link>
                             <Link href={`/edit-pond/price/${query["pond-id"]}`}>
                                 <a className={`block text-lg font-trade-gothic-bold ${pathname.search("price") != -1 && "text-secondary"}`}>Price</a>
                             </Link>
@@ -21,9 +24,6 @@ const EditPondContainer = ({ children }) => {
                             </Link>
                             <Link href={`/edit-pond/access-to-pond/${query["pond-id"]}`}>
                                 <a className={`block text-lg font-trade-gothic-bold ${pathname.search("access-to-pond") != -1 && "text-secondary"}`}>Access to Pond</a>
-                            </Link>
-                            <Link href={`/edit-pond/description/${query["pond-id"]}`}>
-                                <a className={`block text-lg font-trade-gothic-bold ${pathname.search("description") != -1 && "text-secondary"}`}>Description</a>
                             </Link>
                             <Link href={`/edit-pond/amenities/${query["pond-id"]}`}>
                                 <a className={`block text-lg font-trade-gothic-bold ${pathname.search("amenities") != -1 && "text-secondary"}`}>Amenities</a>
