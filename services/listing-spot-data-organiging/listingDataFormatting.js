@@ -78,7 +78,7 @@ export const listingDataOrganizing = (values) => {
             },
             promoteBy: values?.promoteBy,
             "access-to-pond-description": values?.["ATP-description"],
-            "additional-information-description": values['"additional-information-description'],
+            "additional-information-description": values['additional-information-description'],
             "terms": values?.terms,
             "license": values?.license,
         }

@@ -1,27 +1,38 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Form, Formik } from 'formik';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import EditPondContainer from '../../../components/SubPages/EditPondPage/EditPondContainer';
 import SubAvailableTimeEdit from '../../../components/SubPages/EditPondPage/SubAvailableTimeEdit';
 import HomeLayout from '../../../layouts/HomeLayout';
+import { getEditAvailableTimeData } from '../../../services/listing-spot-data-organiging/availableTimeFormatting';
+import { getSdk } from '../../../sharetribe/sharetribeSDK';
 
 const AvailableTimeEdit = () => {
-    // available time data 
-    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "everyday"];
-    const availableTime = days.reduce((prevObj, key) => {
-        return {
-            ...prevObj,
-            [key]: {
-                isSelected: false,
-                hours: {
-                    "6am-11am": false,
-                    "11am-4pm": false,
-                    "4pm-9pm": false,
-                    "9pm-6am": false,
-                    "all-hours": false,
-                }
-            }
-        }
-    }, {});
+    const [pondData, setPondData] = useState({});
+    const [loading, setLoading] = useState(false);
+
+    const { query } = useRouter();
+    const getPondData = () => {
+        setLoading(true)
+        getSdk().ownListings.show({ id: query['pond-id'] })
+            .then(res => {
+                setLoading(false)
+                // res.data contains the response data
+                setPondData(res?.data?.data?.attributes);
+            })
+            .catch(err => {
+                setLoading(false)
+                console.log(err);
+            });
+    }
+
+    useEffect(() => {
+        getPondData()
+    }, [query])
+
+    const availableTime = getEditAvailableTimeData(pondData);
+
 
     return (
         <HomeLayout>
@@ -44,7 +55,11 @@ const AvailableTimeEdit = () => {
 
                     }}>
                     <Form>
-                        <SubAvailableTimeEdit />
+                        {
+                            loading
+                                ? <div>Loading...</div>
+                                : <SubAvailableTimeEdit />
+                        }
                     </Form>
                 </Formik>
             </EditPondContainer>

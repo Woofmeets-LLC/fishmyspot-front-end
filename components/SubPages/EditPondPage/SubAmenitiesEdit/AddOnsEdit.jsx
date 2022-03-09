@@ -15,9 +15,9 @@ const AddOnsEdit = () => {
             <FormCheckbox
                 name="addOns[campsite].checked"
                 label={`${addOnsField?.value?.["campsite"]?.title} ($${addOnsField?.value?.["campsite"]?.price})`} />
-            <FormCheckbox
+            {/* <FormCheckbox
                 name="otherAddOns.isSelected"
-                label={`Other`} />
+                label={`Other`} /> */}
             {/* {
                 selectOtherAddOnsField.value &&
                 <div className="">

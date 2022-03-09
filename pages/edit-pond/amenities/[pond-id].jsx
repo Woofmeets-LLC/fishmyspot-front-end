@@ -1,10 +1,36 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Form, Formik } from 'formik';
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import EditPondContainer from '../../../components/SubPages/EditPondPage/EditPondContainer';
 import SubAmenitiesEdit from '../../../components/SubPages/EditPondPage/SubAmenitiesEdit';
 import HomeLayout from '../../../layouts/HomeLayout';
+import { getSdk } from '../../../sharetribe/sharetribeSDK';
 
 const AmenitiesEdit = () => {
+    const [pondData, setPondData] = useState({});
+    const [loading, setLoading] = useState(false);
+
+    const { query } = useRouter();
+    const getPondData = () => {
+        setLoading(true)
+        getSdk().ownListings.show({ id: query['pond-id'] })
+            .then(res => {
+                setLoading(false)
+                // res.data contains the response data
+                setPondData(res?.data?.data?.attributes);
+            })
+            .catch(err => {
+                setLoading(false)
+                console.log(err);
+            });
+    }
+
+    useEffect(() => {
+        getPondData()
+    }, [query]);
+
+    // console.log(pondData?.publicData?.addOns?.reduce());
     return (
         <HomeLayout>
             <EditPondContainer>
@@ -20,10 +46,11 @@ const AmenitiesEdit = () => {
                             "Pet Friendly": false,
                             "Picnic Tables": false,
                             "Dock": false,
+                            ...pondData?.publicData?.allAmenities?.amenities
                         },
                         otherAmenities: {
-                            isSelected: false,
-                            names: ""
+                            isSelected: pondData?.publicData?.allAmenities?.others?.length ? true : false,
+                            names: pondData?.publicData?.allAmenities?.others?.join(",") || ""
                         },
                         addOns: {
                             "pond-trawler-or-metal-boat": {
@@ -46,7 +73,11 @@ const AmenitiesEdit = () => {
                         console.log(values);
                     }}>
                     <Form>
-                        <SubAmenitiesEdit />
+                        {
+                            loading
+                                ? <div>Loading...</div>
+                                : <SubAmenitiesEdit />
+                        }
                     </Form>
                 </Formik>
             </EditPondContainer>

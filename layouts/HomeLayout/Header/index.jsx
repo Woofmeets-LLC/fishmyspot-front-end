@@ -125,10 +125,13 @@ const Header = () => {
                             className={`flex items-center w-auto h-[70px] 2xl:h-[85px] 3xl:h-[102px] ml-auto space-y-0 space-x-10 bg-white transition transform px-2 py-2 rounded border-0`}>
                             {
                                 user?.profile?.publicData?.account_type !== "angler" &&
-                                <button
-                                    onClick={() => !isLoggedIn && dispatch(setShowLoginModal())}
-                                    type="button"
-                                    className="hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</button>
+                                <Link href="/list-your-spot" >
+                                    <a className={`hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]`}>List your spot +</a>
+                                </Link>
+                                // <button
+                                //     onClick={() => !isLoggedIn && dispatch(setShowLoginModal())}
+                                //     type="button"
+                                //     className="hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</button>
                             }
                             <div className="flex items-center px-3 border shadow rounded-full ml-auto">
                                 <div className="block">
