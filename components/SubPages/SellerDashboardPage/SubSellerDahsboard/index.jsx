@@ -23,7 +23,7 @@ const SubSellerDashboard = () => {
           title={"Spot list"}
           description={"Provide personal details and how we can reach you."}
           Icon={IoIosSettings}
-          href="/edit-spot-list"
+          href="/own-spot-list"
         />
         <SettingCard
           title={"Notification"}
