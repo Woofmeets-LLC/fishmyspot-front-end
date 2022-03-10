@@ -23,7 +23,7 @@ const AmenitiesOptionsEdit = () => {
                     className="w-4 h-4 mr-2 accent-secondary"
                     {...{
                         ...selectOtherAmenitiesField,
-                        checked: selectOtherAmenitiesField.value.isSelected
+                        checked: selectOtherAmenitiesField.value
                     }} />
                 Other (Include any other amenities you have):
             </label>

@@ -19,11 +19,6 @@ const SubPriceEdit = () => {
                 <h1 className="text-5xl font-trade-gothic-bold mb-8">$ {+fullDayRateField?.value * 7}</h1>
                 <p className="text-sm mb-10">by sharing your pond for 1 week in {zipCode1Field?.value}.</p>
             </div>
-            <div className="my-2 text-center">
-                <button
-                    type="submit"
-                    className="bg-secondary text-white font-trade-gothic-bold rounded py-2 px-8 ml-auto">Update</button>
-            </div>
         </>
     );
 };
