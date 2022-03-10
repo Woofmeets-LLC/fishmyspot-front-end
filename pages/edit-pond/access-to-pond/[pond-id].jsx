@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import EditPondContainer from '../../../components/SubPages/EditPondPage/EditPondContainer';
 import SubAccessToPondEdit from '../../../components/SubPages/EditPondPage/SubAccessToPondEdit';
 import HomeLayout from '../../../layouts/HomeLayout';
+import { listingImagesUpload } from '../../../services/listing-spot-data-organiging/listingImageUpload';
 import { getSdk } from '../../../sharetribe/sharetribeSDK';
 
 const AccessToPondEdit = () => {
@@ -57,11 +58,21 @@ const AccessToPondEdit = () => {
                     validationSchema={
                         yup.object({
                             "ATP-description": yup.string().required("Description is required"),
-                            "ATP-images-file": yup.array().min(2, 'You must upload at least 2 photos!'),
+                            "ATP-images-base64": yup.array().min(2, 'You must upload at least 2 photos!'),
                         })
                     }
-                    onSubmit={(values, helpers) => {
-                        console.log(values);
+                    onSubmit={async (values, helpers) => {
+                        const existingImages = pondData?.relationships?.images?.data
+                            ?.filter(image => values?.["ATP-images-base64"]?.includes(image?.attributes?.variants?.default?.url))
+                            ?.map(image => image.id)
+
+                        const uploadedImages = await listingImagesUpload(values?.["ATP-images-file"]);
+                        const newImagesIds = uploadedImages;
+                        const requestData = {
+                            images: [...existingImages],
+                        }
+                        console.log({ requestData, newImagesIds, files: values?.["ATP-images-file"] });
+
                     }}>
                     <Form>
                         {

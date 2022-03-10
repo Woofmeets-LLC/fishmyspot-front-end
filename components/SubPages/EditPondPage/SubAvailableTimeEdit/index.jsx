@@ -19,11 +19,6 @@ const SubAvailableTimeEdit = () => {
             {!isSelectedAny ? (
                 <div className="mt-2 text-red-500 text-sm">{"You must select at least one day"}</div>
             ) : null}
-            <div className="my-2 text-right">
-                <button
-                    type="submit"
-                    className="bg-secondary text-white font-trade-gothic-bold rounded py-2 px-8 ml-auto">Update</button>
-            </div>
         </>
     );
 };

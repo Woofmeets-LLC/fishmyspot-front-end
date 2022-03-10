@@ -4,42 +4,24 @@ import { getSdk } from "../sharetribe/sharetribeSDK";
 
 
 const Test = () => {
-  const createStripeAccount = () => {
-    getSdk().stripeAccount.create({
-      country: "US",
-      requestedCapabilities: ["transfers", "card_payments"]
-    }, {
-      expand: true
-    })
+  const showListingData = () => {
+    const listingId = "62287fa7-5f0b-4322-8025-7a24207a9e5a";
+    getSdk().ownListings.show({ id: listingId })
       .then(res => {
-        console.log(res)
+        // res.data contains the response data
+        console.log(res);
       })
       .catch(err => {
-        console.dir(err)
-      })
+        console.log(err);
+      });
   }
-
-  const createAccountLink = () => {
-
-    getSdk().stripeAccountLinks.create({
-      failureURL: "http://localhost:3000/",
-      successURL: "http://localhost:3000/test",
-      type: "account_onboarding",
-      collect: "currently_due",
-    })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.dir(err)
-      })
-  }
-
   return (
     <HomeLayout>
-
-      <button onClick={createStripeAccount}>check</button>
-      <button onClick={createAccountLink}>account link</button>
+      <div className="my-8 text-center">
+        <button
+          onClick={showListingData}
+          className="bg-secondary text-white px-4 py-1 rounded">Show listing data</button>
+      </div>
     </HomeLayout>
   );
 };
