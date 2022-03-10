@@ -43,7 +43,7 @@ const SubEditSpotListSection = () => {
             delay={(Math.floor(Math.random() * 10)) / 10}
             id={listing?.id?.uuid}
             image={listing?.relationships?.images?.data?.[0]?.attributes?.variants?.default?.url}
-            title={listing?.attributes?.title}
+            title={listing?.attributes?.title?.substring(0, 30) + (listing?.attributes?.title?.length > 30 ? '...' : '')}
             price={`$${listing?.attributes?.publicData?.halfDay}`}
             ratings={3}
           />

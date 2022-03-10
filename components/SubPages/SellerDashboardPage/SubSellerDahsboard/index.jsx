@@ -30,6 +30,7 @@ const SubSellerDashboard = () => {
           title={"Notification"}
           description={"Provide personal details and how we can reach you."}
           Icon={MdNotifications}
+          href={"/notifications"}
         />
         <SettingCard
           title={"Book list"}
@@ -45,6 +46,7 @@ const SubSellerDashboard = () => {
           title={"Cacellation"}
           description={"Provide personal details and how we can reach you."}
           Icon={IoIosSettings}
+          href={"/cancellation"}
         />
       </div>
     </div>
