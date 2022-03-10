@@ -174,8 +174,21 @@ Chrome
 }
 
 .view-image-modal .slick-prev {
-    @apply left-0 lg:left-3 z-10 top-44 !important;
+    @apply left-0 lg:left-3 z-10 !important;
 }
 .view-image-modal .slick-next {
-    @apply right-0 lg:right-6 z-10 top-44 !important;
+    @apply right-0 lg:right-6 z-10 !important;
+}
+
+@media screen and (max-width: 768px) {
+    .view-image-modal .slick-prev,
+    .view-image-modal .slick-next {
+        top: 25% !important;
+    }
+}
+@media screen and (min-width: 769px) {
+    .view-image-modal .slick-prev,
+    .view-image-modal .slick-next {
+        top: 20% !important;
+    }
 }

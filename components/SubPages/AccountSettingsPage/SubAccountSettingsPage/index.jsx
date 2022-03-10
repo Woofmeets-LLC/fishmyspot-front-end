@@ -23,21 +23,25 @@ const SubAccountSettingsPage = () => {
           title={"Account Settings"}
           description={"Provide personal details and how we can reach you."}
           Icon={IoIosSettings}
+          href={"/user-account"}
         />
         <SettingCard
           title={"Cancellation"}
           description={"Provide personal details and how we can reach you."}
           Icon={IoIosSettings}
+          href={"/cancellation"}
         />
         <SettingCard
           title={"Favourites"}
           description={"Provide personal details and how we can reach you."}
           Icon={FaHeart}
+          href={"/favorite-pond-list"}
         />
         <SettingCard
           title={"Purchase list"}
           description={"Provide personal details and how we can reach you."}
           Icon={IoIosSettings}
+          href={"/purchase-list"}
         />
         <SettingCard
           title={"Message"}
@@ -48,21 +52,25 @@ const SubAccountSettingsPage = () => {
           title={"Helps"}
           description={"Provide personal details and how we can reach you."}
           Icon={MdHelp}
+          href={"/help"}
         />
         <SettingCard
           title={"Notification"}
           description={"Provide personal details and how we can reach you."}
           Icon={MdNotifications}
+          href={"/notification"}
         />
         <SettingCard
           title={"Review"}
           description={"Provide personal details and how we can reach you."}
           Icon={IoIosSettings}
+          href={"#"}
         />
         <SettingCard
           title={"FAQ"}
           description={"Provide personal details and how we can reach you."}
           Icon={IoIosSettings}
+          href={"/faq"}
         />
       </div>
     </div>

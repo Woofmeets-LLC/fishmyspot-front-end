@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { ListItem, PageHeader, StatusButton } from '../../components/Common';
-import CancelationPopUp from '../../components/SubPages/CancelationWaitingPage/CancelationPopUp';
+import CancellationPopUp from '../../components/SubPages/CancelationWaitingPage/CancellationPopUp';
 import HomeLayout from '../../layouts/HomeLayout';
 
-const CancelationWaiting = () => {
+const CancellationWaiting = () => {
   const [modalOpen, setModalOpen] = useState(false);
   return (
     <HomeLayout>
-      <CancelationPopUp
+      <CancellationPopUp
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
       />
@@ -116,4 +116,4 @@ const CancelationWaiting = () => {
   );
 };
 
-export default CancelationWaiting;
+export default CancellationWaiting;

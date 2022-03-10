@@ -2,7 +2,7 @@ import React from 'react';
 import { PageHeader, PurchaseOrCancelationCard } from '../../components/Common';
 import HomeLayout from '../../layouts/HomeLayout';
 
-const Cancelation = () => {
+const Cancellation = () => {
   return (
     <HomeLayout>
       <div className='bg-[#fcfcfc]'>
@@ -23,4 +23,4 @@ const Cancelation = () => {
   );
 };
 
-export default Cancelation;
+export default Cancellation;

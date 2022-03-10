@@ -3,7 +3,7 @@ import { enableBodyScroll } from 'body-scroll-lock';
 import { FaTimes } from 'react-icons/fa';
 import { Modal } from '../../../Common';
 
-const CancelationPopUp = ({ modalOpen, setModalOpen }) => {
+const CancellationPopUp = ({ modalOpen, setModalOpen }) => {
 
   const handleClose = () => {
     setModalOpen(false);
@@ -43,4 +43,4 @@ const CancelationPopUp = ({ modalOpen, setModalOpen }) => {
   );
 };
 
-export default CancelationPopUp;
+export default CancellationPopUp;

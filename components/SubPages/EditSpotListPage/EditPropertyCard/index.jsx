@@ -18,7 +18,7 @@ const EditPropertyCard = ({ id, image, title, price, delay }) => {
       }}
       className={styles['card-container']}>
       <div className="relative">
-        <div className="w-full h-[190px] sm:h-auto">
+        <div className="w-full h-[190px] sm:h-[160px] lg:h-[180px] 2xl:h-[237px]">
           <img
             src={image}
             alt="Pond"
@@ -46,7 +46,7 @@ const EditPropertyCard = ({ id, image, title, price, delay }) => {
               </div>
               <Link href={`/edit-pond/pond-listing/${id}`}>
                 <a
-                  className='bg-secondary py-1 px-3 text-white text-xs font-trade-gothic-bold rounded'
+                  className='bg-secondary py-1 px-3 text-white text-sm font-trade-gothic-bold rounded'
                 >
                   Edit
                 </a>
