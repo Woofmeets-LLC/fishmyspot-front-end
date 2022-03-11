@@ -126,6 +126,10 @@ Chrome
     @apply px-5 lg:px-3;
 }
 
+.pond-details-slider .slick-slide {
+    height: 100% !important;
+}
+
 /* settings icons */
 .icons svg {
     @apply text-2xl sm:text-3xl md:text-4xl 2xl:text-6xl text-secondary;
@@ -135,7 +139,6 @@ Chrome
 .card-icons svg {
     @apply text-3xl text-highlight-3;
 }
-
 
 /* accordion */
 .accordion {
@@ -157,7 +160,8 @@ Chrome
     transform: rotate(47deg) !important;
 }
 
-.accordion__button[aria-expanded='true']::before, .accordion__button[aria-selected='true']::before {
+.accordion__button[aria-expanded="true"]::before,
+.accordion__button[aria-selected="true"]::before {
     transform: rotate(224deg) !important;
 }
 
@@ -165,7 +169,6 @@ Chrome
     @apply xl:pl-8 xl:pr-32 xl:py-9 bg-[#fcfcfc] !important;
     box-shadow: 0 1px 9px 0 rgba(123, 174, 212, 0.12);
 }
-
 
 /* services list page modal */
 .view-image-modal .slick-prev:before,

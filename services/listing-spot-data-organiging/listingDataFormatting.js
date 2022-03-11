@@ -4,18 +4,6 @@ export const listingDataOrganizing = (values) => {
     // Availability Plan Data
     const availabilityPlan = availabilityPlanFormatting(values.availableTime);
 
-    // Address Data
-    const address2 = values?.secondAddress == 'yes'
-        ? {
-            address: values?.address2,
-            city: values?.city2,
-            state: values?.state2,
-            zipCode: values?.zipCode2,
-            phone: values?.phone2,
-            email: values?.email2
-        }
-        : {}
-
     // Fishes Data
     const tempFishes = Object.keys(values?.fishes)?.filter(fish => values?.fishes[fish])?.map(fish => fish.split("_")[0]);
     const fishes = values?.["others-fish"]?.isSelected ? [...tempFishes, "Other"] : tempFishes;
@@ -44,23 +32,22 @@ export const listingDataOrganizing = (values) => {
     }))
 
     const data = {
-        title: values?.address1,
+        title: values?.address,
         description: values?.description,
-        geolocation: values?.latLng1,
+        geolocation: values?.latLng,
         publicData: {
             availabilityPlan,
             fishes,
             allFishes,
             amenities,
             allAmenities,
-            address2,
             addOns,
             experiences,
-            zipCode: values?.zipCode1,
-            address: values?.address1,
-            "city": values?.city1,
-            "state": values?.state1,
-            "phone": values?.phone1,
+            zipCode: values?.zipCode,
+            address: values?.address,
+            "city": values?.city,
+            "state": values?.state,
+            "phone": values?.phone,
             acre: +values?.acre,
             "stocked-pond": values["stocked-pond"],
             "catch-requirements": values["catch-requirements"],

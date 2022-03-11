@@ -1,6 +1,7 @@
-import { FaMapMarkerAlt, FaStar, FaRegHeart } from "react-icons/fa";
-import styles from './PropertyCard.module.css';
 import { motion } from "framer-motion";
+import Link from 'next/link';
+import { FaMapMarkerAlt, FaRegHeart, FaStar } from "react-icons/fa";
+import styles from './PropertyCard.module.css';
 
 
 const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
@@ -18,13 +19,17 @@ const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
             }}
             className={styles['card-container']}>
             <div className="relative">
-                <div className="w-full h-[190px] sm:h-[160px] lg:h-[180px] 2xl:h-[237px]">
-                    <img
-                        src={image}
-                        alt="Pond"
-                        className="w-full h-full object-cover rounded-xl"
-                    />
-                </div>
+                <Link href={`/pond-details/${id}`}>
+                    <a>
+                        <div className="w-full h-[190px] sm:h-[160px] lg:h-[180px] 2xl:h-[237px]">
+                            <img
+                                src={image}
+                                alt="Pond"
+                                className="w-full h-full object-cover rounded-xl"
+                            />
+                        </div>
+                    </a>
+                </Link>
                 <span className={styles.feature}>
                     Feature Spot
                 </span>
@@ -41,7 +46,11 @@ const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
                         <span className="font-trade-gothic text-highlight-1">location</span>
                     </div>
                     <div className="mt-1 md:my-2 xl:w-[230px] 2xl:max-w-[240px] sm:h-14">
-                        <h4 className={styles['card-heading']}>{title}</h4>
+                        <Link href={`/pond-details/${id}`}>
+                            <a>
+                                <h4 className={styles['card-heading']}>{title}</h4>
+                            </a>
+                        </Link>
                     </div>
                     <div className="flex justify-between">
                         <div className={styles.ratings}>
