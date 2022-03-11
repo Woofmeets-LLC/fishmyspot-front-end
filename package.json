@@ -29,6 +29,7 @@
     "react-modern-drawer": "^1.0.1",
     "react-redux": "^7.2.6",
     "react-slick": "^0.28.1",
+    "react-spinners": "^0.11.0",
     "sharetribe-flex-integration-sdk": "^1.7.0",
     "sharetribe-flex-sdk": "^1.15.0",
     "slick-carousel": "^1.8.1",

@@ -2,12 +2,12 @@ import React from 'react';
 import { FaStar } from "react-icons/fa";
 import Features from '../Features';
 
-const SubServicesDetailsSection = () => {
+const SubServicesDetailsSection = ({ pondData }) => {
   return (
     <div className="order-2 lg:order-1 mt-8 lg:mt-0 lg:w-[600px] 3xl:w-[700px]">
       <div>
         <h1 className='text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-[40px] 3xl:text-5xl text-primary font-food-truck uppercase mb-4 2xl:mb-6'>
-          OH- STARK COUNTY ROYALATION NAVARRE
+          {pondData?.attributes?.title}
         </h1>
         <div className='flex items-center space-x-10 xl:text-lg text-highlight-1 mb-4 2xl:mb-6'>
           <div className='flex text-highlight-3 space-x-[6px]'>
@@ -26,7 +26,9 @@ const SubServicesDetailsSection = () => {
         </div>
         <div className='mb-6 md:mb-8 2xl:mb-11'>
           <h3 className='text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-food-truck uppercase text-primary mb-3'>Description</h3>
-          <p className='text-sm md:text-base font-trade-gothic text-highlight-1'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi venenatis tortor eget ex rey vbuhnrgvdbhngghhjjghgh jj pulvinarjjjj, rutrum lobortis ipsum laoreet. Morbi scelerisqua int viverra, ne suscipit hhhhhhmassa bibendum. Vestibulum viverra arcu ac mss cursus hendrerit. Fusce ligula augue, tempor nec feugiat congue, accumsan non leo.</p>
+          <p className='text-sm md:text-base font-trade-gothic text-highlight-1'>
+            {pondData?.attributes?.description}
+          </p>
         </div>
         <div>
           <div className='flex space-x-12 sm:space-x-12 mb-4 md:mb-6 xl:mb-8 2xl:mb-11'>

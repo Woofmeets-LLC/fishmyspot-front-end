@@ -35,34 +35,14 @@ const MultiStepForm = ({
                         enableReinitialize={true}
                         onSubmit={async (values, helpers) => {
                             if (step === (timelineArray.length - 1)) {
-                                // setIsSuccess(true);
-                                await props.onSubmit(values, helpers);
+                                if (values.terms && values.license) {
+                                    await props.onSubmit(values, helpers);
+                                }
                             } else {
                                 // If we want to write custom logic for the next step then we have to write it here
                                 switch (timelineArray[step]) {
                                     case 'Price':
                                         isLoggedIn && setStep((s) => s + 1);
-                                        break;
-
-                                    case 'Pond Owner Information':
-                                        if (values?.secondAddress == 'no') {
-                                            setStep((s) => s + 1);
-                                        } else {
-                                            if (values.firstName2 &&
-                                                values.lastName2 &&
-                                                values.email2 &&
-                                                values.zipCode2 &&
-                                                values.address2 &&
-                                                values.city2 &&
-                                                values.state2 &&
-                                                values.phone2) {
-                                                setStep((s) => s + 1);
-                                            } else {
-                                                helpers?.setErrors({
-                                                    firstName2: 'Please fill all the fields',
-                                                })
-                                            }
-                                        }
                                         break;
 
                                     case 'Available time':
