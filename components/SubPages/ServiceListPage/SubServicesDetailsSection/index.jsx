@@ -3,6 +3,35 @@ import { FaStar } from "react-icons/fa";
 import Features from '../Features';
 
 const SubServicesDetailsSection = ({ pondData }) => {
+
+  const formattingString = (string) => {
+    const formattedString = string?.replace(/-n-/g, ' & ').toLowerCase();
+    return formattedString;
+  }
+
+  const amenitiesArray = (pondData) => {
+    const hasOtherAmenities = pondData?.attributes?.publicData?.amenities?.includes("Other");
+    const amenitiesArr = pondData?.attributes?.publicData?.amenities?.filter(amenity => amenity !== "Other");
+    const otherAmenitiesArr = pondData?.attributes?.publicData?.allAmenities?.others;
+
+    if (hasOtherAmenities) {
+      return [...amenitiesArr, ...otherAmenitiesArr]
+    } else {
+      return amenitiesArr
+    }
+  }
+
+  const fishesArray = (pondData) => {
+    const hasOtherFishes = pondData?.attributes?.publicData?.fishes?.includes("Other");
+    const fishesArr = pondData?.attributes?.publicData?.fishes?.filter(fish => fish !== "Other");
+    const otherFishesArr = pondData?.attributes?.publicData?.allFishes?.othersFish;
+
+    if (hasOtherFishes) {
+      return [...fishesArr, ...otherFishesArr]
+    } else {
+      return fishesArr
+    }
+  }
   return (
     <div className="order-2 lg:order-1 mt-8 lg:mt-0 lg:w-[600px] 3xl:w-[700px]">
       <div>
@@ -44,7 +73,7 @@ const SubServicesDetailsSection = ({ pondData }) => {
                 <Features
                   title={"POND ACREAGE"}
                   items={[
-                    "100 acr",
+                    `${pondData?.attributes?.publicData?.acre} acr`,
                   ]}
                 />
               </div>
@@ -61,7 +90,7 @@ const SubServicesDetailsSection = ({ pondData }) => {
                 <Features
                   title={"CATCH REQUIREMENTS"}
                   items={[
-                    "Catch & Keep",
+                    `${formattingString(pondData?.attributes?.publicData?.["catch-requirements"])}`,
                   ]}
                 />
               </div>
@@ -79,12 +108,7 @@ const SubServicesDetailsSection = ({ pondData }) => {
               <div>
                 <Features
                   title={"AMENITIES"}
-                  items={[
-                    "Canoe/ Kayak",
-                    "Canoe/ Kayak",
-                    "Canoe/ Kayak",
-                    "Canoe/ Kayak",
-                  ]}
+                  items={amenitiesArray(pondData)}
                 />
               </div>
             </div>
@@ -99,12 +123,7 @@ const SubServicesDetailsSection = ({ pondData }) => {
               <div>
                 <Features
                   title={"Fish"}
-                  items={[
-                    "Hilsha",
-                    "Crab",
-                    "Carp",
-                    "Trout",
-                  ]}
+                  items={fishesArray(pondData)}
                 />
               </div>
             </div>
@@ -120,12 +139,7 @@ const SubServicesDetailsSection = ({ pondData }) => {
             <div>
               <Features
                 title={"Experinces"}
-                items={[
-                  "Beginning Fishing Instruction For Family / $25",
-                  "2+Extra Angler",
-                  "2+Extra Angler / $25",
-                  "Family Fun Day / $25",
-                ]}
+                items={pondData?.attributes?.publicData?.experiences}
               />
             </div>
           </div>

@@ -1,8 +1,9 @@
-import {configureStore} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import authSliceReducer from "./slices/authSlice";
+import autocompletetionSlice from "./slices/autocompletetionSlice";
+import bookingDataSliceReducer from "./slices/bookingDataSlice";
 import listSpotContentsSliceReducer from "./slices/listSpotContentsSlice";
 import modalsSliceReducer from "./slices/modalsSlice";
-import autocompletetionSlice from "./slices/autocompletetionSlice";
 
 
 export const store = configureStore({
@@ -10,7 +11,8 @@ export const store = configureStore({
         modals: modalsSliceReducer,
         auth: authSliceReducer,
         listSpotContents: listSpotContentsSliceReducer,
-        place: autocompletetionSlice
+        place: autocompletetionSlice,
+        bookingData: bookingDataSliceReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
