@@ -126,10 +126,6 @@ Chrome
     @apply px-5 lg:px-3;
 }
 
-.pond-details-slider .slick-slide {
-    height: 100% !important;
-}
-
 /* settings icons */
 .icons svg {
     @apply text-2xl sm:text-3xl md:text-4xl 2xl:text-6xl text-secondary;
@@ -186,37 +182,37 @@ Chrome
 @media screen and (max-width: 768px) {
     .view-image-modal .slick-prev,
     .view-image-modal .slick-next {
-        top: 25% !important;
+        top: 50% !important;
     }
 }
 @media screen and (min-width: 769px) {
     .view-image-modal .slick-prev,
     .view-image-modal .slick-next {
-        top: 20% !important;
+        top: 50% !important;
     }
 }
 
 /* ::-webkit-scrollbar {
     width: 10px;
   } */
-  
-  /* Track */
-  /* html {
+
+/* Track */
+/* html {
     background: #f1f1f1;
     scrollbar-width: normal;
   } */
-  
-  /* Handle */
+
+/* Handle */
 .message__scrollbar::-webkit-scrollbar-thumb {
     background: rgb(192, 192, 192);
     border-radius: 15px !important;
 }
-  
-  /* Handle on hover */
+
+/* Handle on hover */
 /* .message__scrollbar::-webkit-scrollbar-thumb:hover {
     background: #555;
 } */
-  
+
 .message__scrollbar::-webkit-scrollbar {
     width: 2px;
 }

@@ -28,6 +28,33 @@ const preDefinedHours = {
     '24:00': '12am',
 }
 
+const preDefinedLongHours = {
+    '01:00': '01:00 AM',
+    '02:00': '02:00 AM',
+    '03:00': '03:00 AM',
+    '04:00': '04:00 AM',
+    '05:00': '05:00 AM',
+    '06:00': '06:00 AM',
+    '07:00': '07:00 AM',
+    '08:00': '08:00 AM',
+    '09:00': '09:00 AM',
+    '10:00': '10:00 AM',
+    '11:00': '11:00 AM',
+    '12:00': '12:00 PM',
+    '13:00': '01:00 PM',
+    '14:00': '02:00 PM',
+    '15:00': '03:00 PM',
+    '16:00': '04:00 PM',
+    '17:00': '05:00 PM',
+    '18:00': '06:00 PM',
+    '19:00': '07:00 PM',
+    '20:00': '08:00 PM',
+    '21:00': '09:00 PM',
+    '22:00': '10:00 PM',
+    '23:00': '11:00 PM',
+    '24:00': '12:00 AM',
+}
+
 // Slots
 const slots = {
     "6am-11am": { startTime: '06:00', endTime: '11:00' },
@@ -150,10 +177,21 @@ const getEditAvailableTimeData = (pondData) => {
 
 }
 
+const availableTimeSlots = (availableTimesArray, dayName, setTimeSlot)=>{
+    const formattedArray = availableTimesArray
+    ?.filter(availableTime=> availableTime.dayOfWeek.search(dayName) > -1)
+    ?.map(entry=>`${preDefinedLongHours[entry?.startTime]} - ${preDefinedLongHours[entry?.endTime]}`);
+
+    
+    return setTimeSlot(formattedArray);
+}
+
 export {
     availabilityPlanEntriesForOneDay,
     availableTimeFormatting,
     availabilityPlanFormatting,
-    getEditAvailableTimeData
+    getEditAvailableTimeData,
+    availableTimeSlots,
+    preDefinedLongHours
 };
 
