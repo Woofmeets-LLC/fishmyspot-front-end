@@ -23,10 +23,10 @@ const FormikStepper = ({ children, stepperArray, ...props }) => {
             console.log('last step', values);
             // it will be used inside the then block of the api
             setStep(s => s + 1);
-            // await props.onSubmit(values, helpers);
           }
           else {
-            setStep(s => s + 1);
+            // setStep(s => s + 1);
+            await props.onSubmit(values, helpers);
           }
         }}
       >

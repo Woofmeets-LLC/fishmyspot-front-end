@@ -1,4 +1,5 @@
 import { Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
@@ -10,6 +11,7 @@ import SelectDateTime from './SelectDateTime';
 
 const SubReservationSection = ({ pondData }) => {
   const dispatch = useDispatch();
+  const { push } = useRouter();
   return (
     <div className="order-1 lg:order-2 w-full md:w-2/3 mx-auto lg:w-[420px] 2xl:w-[510px] 2xl:h-[928px] shadow-lg rounded-lg bg-white">
       <div className='px-4 py-6 sm:px-7 sm:pt-8 sm:pb-10'>
@@ -17,6 +19,7 @@ const SubReservationSection = ({ pondData }) => {
         <Formik
           enableReinitialize={true}
           initialValues={{
+            'pond-id': pondData?.id?.uuid,
             dayType: 'halfDay',
             dayRates: {
               fullDay: pondData?.attributes?.publicData?.fullDay,
@@ -35,6 +38,9 @@ const SubReservationSection = ({ pondData }) => {
           onSubmit={(values, { setSubmitting }) => {
             console.log(values);
             dispatch(setBookingData(values));
+            setTimeout(() => {
+              push('/payment-reservation')
+            }, 1000)
           }}
         >
           <Form>

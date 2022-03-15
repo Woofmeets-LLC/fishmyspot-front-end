@@ -48,6 +48,7 @@ const ListYourPond = () => {
                     "11am-4pm": false,
                     "4pm-9pm": false,
                     "9pm-6am": false,
+                    "6am-9pm": false,
                     "all-hours": false,
                 }
             }

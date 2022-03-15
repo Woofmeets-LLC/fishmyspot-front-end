@@ -35,6 +35,54 @@ export const listingDataOrganizing = (values) => {
         title: values?.address,
         description: values?.description,
         geolocation: values?.latLng,
+        availabilityPlan: {
+            type: 'availability-plan/time',
+            entries: [
+                {
+                    dayOfWeek: 'mon',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                },
+                {
+                    dayOfWeek: 'tue',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                },
+                {
+                    dayOfWeek: 'wed',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                },
+                {
+                    dayOfWeek: 'thu',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                },
+                {
+                    dayOfWeek: 'fri',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                },
+                {
+                    dayOfWeek: 'sat',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                },
+                {
+                    dayOfWeek: 'sun',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                }
+            ],
+            timezone: "America/New_York",
+        },
         publicData: {
             availabilityPlan,
             fishes,
@@ -70,6 +118,6 @@ export const listingDataOrganizing = (values) => {
             "license": values?.license,
         }
     }
-
+console.log(data);
     return data
 }
