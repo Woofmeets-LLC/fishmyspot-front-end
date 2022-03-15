@@ -12,7 +12,7 @@ const TimeSelect = ({ label, isActive, setIsActive, selectedItem, setSelectedIte
       >
         {label}
       </label>
-      <div className={`w-full relative text-base cursor-pointer border ${items.length ? "border-gray-300" : "border-red-500"} rounded-md transition ease-in-out select-none`}>
+      <div className={`w-full relative text-base cursor-pointer border ${items?.length ? "border-gray-300" : "border-red-500"} rounded-md transition ease-in-out select-none`}>
         <div
           onClick={() => setIsActive(prevState => !prevState)}
           className="py-3 px-3 md:px-5 shadow-md font-trade-gothic text-highlight-1">
@@ -27,9 +27,9 @@ const TimeSelect = ({ label, isActive, setIsActive, selectedItem, setSelectedIte
                 (
                   <span className='flex items-center space-x-4'>
                     <span className='text-xl 2xl:text-[28px]'>
-                      <FaRegClock className={!items.length && "text-red-500"} />
+                      <FaRegClock className={!items?.length ? "text-red-500" : ""} />
                     </span>
-                    <span className={!items.length && "text-red-500"}>
+                    <span className={!items?.length ? "text-red-500" : ""}>
                       {selectedItem}
                     </span>
                   </span>
@@ -38,8 +38,8 @@ const TimeSelect = ({ label, isActive, setIsActive, selectedItem, setSelectedIte
             <span className='text-lg'>
               {
                 !isActive ?
-                  <IoMdArrowDropdown className={!items.length && "text-red-500"} /> :
-                  <IoMdArrowDropup className={!items.length && "text-red-500"} />
+                  <IoMdArrowDropdown className={!items?.length ? "text-red-500" : ""} /> :
+                  <IoMdArrowDropup className={!items?.length ? "text-red-500" : ""} />
               }
             </span>
           </div>

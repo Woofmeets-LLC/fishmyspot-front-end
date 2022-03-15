@@ -1,7 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import SubDetailsItem from './SubDetailsItem';
 
 const SubDetails = ({ title }) => {
+  const bookingData = useSelector(state => state.bookingData);
+  console.log({ bookingData })
   return (
     <>
       <div className='flex items-center justify-between pb-1 border-b border-b-highlight-1'>

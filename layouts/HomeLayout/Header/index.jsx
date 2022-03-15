@@ -61,7 +61,7 @@ const Header = () => {
     const createAccountLink = () => {
         getSdk().stripeAccountLinks.create({
             failureURL: "http://localhost:3000/",
-            successURL: "http://localhost:3000/test",
+            successURL: "http://localhost:3000/list-your-spot",
             type: "account_onboarding",
             collect: "currently_due",
         })
@@ -206,9 +206,14 @@ const Header = () => {
                                 className={`absolute block top-[74px] right-[20px] w-[150px] md:w-auto md:ml-auto space-y-2 bg-white px-4 h-auto py-2 rounded border`}>
                                 {
                                     user?.profile?.publicData?.account_type !== "angler" &&
-                                    <Link href="/list-your-spot" >
-                                        <a className={`block md:hidden text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]`}>List your spot +</a>
-                                    </Link>
+                                        user?.stripeConnected
+                                        ? <Link href="/list-your-spot" >
+                                            <a className={`block md:hidden text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]`}>List your spot +</a>
+                                        </Link>
+                                        : <button
+                                            onClick={createStripeAccount}
+                                            type="button"
+                                            className="block md:hidden text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">List your spot +</button>
                                 }
                                 <Link href="/messages" >
                                     <a className={`block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]`}>Message</a>

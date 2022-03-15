@@ -1,12 +1,10 @@
 import { useField } from 'formik';
 import React from 'react';
-import SubDetails from '../SubDetails/SubDetails';
 import ConfirmDetailSection from '../ConfirmDetailSection/ConfirmDetailSection';
+import SubDetails from '../SubDetails/SubDetails';
 
-const SubConfimDetails = () => {
-
+const SubConfirmDetails = () => {
   const [field, meta, helpers] = useField('addGiftCard');
-
   return (
     <div>
       <ConfirmDetailSection />
@@ -35,4 +33,4 @@ const SubConfimDetails = () => {
   );
 };
 
-export default SubConfimDetails;
+export default SubConfirmDetails;

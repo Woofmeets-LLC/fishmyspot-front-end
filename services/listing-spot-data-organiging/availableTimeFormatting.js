@@ -61,6 +61,7 @@ const slots = {
     "11am-4pm": { startTime: '11:00', endTime: '16:00' },
     "4pm-9pm": { startTime: '16:00', endTime: '21:00' },
     "9pm-6am": { startTime: '21:00', endTime: '06:00' },
+    "6am-9pm": { startTime: '06:00', endTime: '21:00' },
 };
 
 const availabilityPlanEntriesForOneDay = (availableTime) => {
@@ -132,7 +133,8 @@ const preFormatAvailableTime = (pondData, everydayData) => {
                     "11am-4pm": false,
                     "4pm-9pm": false,
                     "9pm-6am": false,
-                    "all-hours": Object.keys(selectedHours).length == 4 ? true : false,
+                    "6am-9pm": false,
+                    "all-hours": Object.keys(selectedHours).length == 5 ? true : false,
                     ...selectedHours,
                 }
             }
@@ -144,6 +146,7 @@ const preFormatAvailableTime = (pondData, everydayData) => {
                     "11am-4pm": false,
                     "4pm-9pm": false,
                     "9pm-6am": false,
+                    "6am-9pm": false,
                     "all-hours": false,
                 }
             }

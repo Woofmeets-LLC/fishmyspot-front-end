@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const bookingDataSlice = createSlice({
     name: "bookingData",
     initialState: {
+        'pond-id': '',
         date: '',
         dayRates: {},
         dayType: "",
@@ -12,7 +13,13 @@ const bookingDataSlice = createSlice({
     },
     reducers: {
         setBookingData: (state, action) => {
-            state = action.payload;
+            state['pond-id'] = action.payload['pond-id'];
+            state.date = action.payload.date;
+            state.dayRates = action.payload.dayRates;
+            state.dayType = action.payload.dayType;
+            state.experience = action.payload.experience;
+            state.time = action.payload.time;
+            state.total = action.payload.total;
             console.log(action);
         },
     },

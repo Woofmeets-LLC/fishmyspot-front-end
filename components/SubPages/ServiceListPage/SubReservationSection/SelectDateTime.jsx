@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useField } from 'formik';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { MdCalendarToday } from "react-icons/md";
@@ -14,6 +14,9 @@ const SelectDateTime = ({ pondData }) => {
 
     const [dateField, dateMeta, dateHelpers] = useField('date');
     const [timeField, timeMeta, timeHelpers] = useField('time');
+    const [dayTypeField] = useField('dayType');
+
+    const entries = pondData?.attributes?.publicData?.availabilityPlan?.entries;
 
     const weekDay = [
         "sun",
@@ -23,23 +26,47 @@ const SelectDateTime = ({ pondData }) => {
         "thu",
         "fri",
         "sat",
-    ]
+    ];
+
+    const slots = {
+        halfDay: [
+            `06:00 AM - 11:00 AM`,
+            `11:00 AM - 04:00 PM`,
+            `04:00 PM - 09:00 PM`,
+        ],
+        fullDay: [
+            `09:00 PM - 06:00 AM`,
+            `06:00 AM - 09:00 PM`,
+        ]
+    };
+
+    const getNewTimeSlotsForReservation = (entries, dayName) => {
+        timeHelpers.setValue("");
+
+        const newTimeSlot = entries?.filter(availableTime => (availableTime.dayOfWeek.search(dayName) > -1))
+            ?.map(entry => `${preDefinedLongHours[entry?.startTime]} - ${preDefinedLongHours[entry?.endTime]}`)
+            ?.filter(time => slots[dayTypeField.value]?.includes(time));
+
+
+        setSelectedTimeItem(newTimeSlot?.length ? "Select one" : "No time available this day");
+        setTimeSlot(prevTimeSlot => newTimeSlot);
+    }
+
+    useEffect(() => {
+        // Time Slot making
+        const dayName = weekDay[dateField.value.getDay()];
+        getNewTimeSlotsForReservation(entries, dayName);
+    }, [dayTypeField.value, pondData]);
+
+
 
     const handleDateChange = (date) => {
         // Setting the date value
         dateHelpers.setValue(date);
-        timeHelpers.setValue("");
 
         // Time Slot making
-        const entries = pondData?.attributes?.publicData?.availabilityPlan?.entries;
         const dayName = weekDay[date.getDay()];
-        setTimeSlot(prevTimeSlot => {
-            const newTimeSlot = entries?.filter(availableTime => availableTime.dayOfWeek.search(dayName) > -1)
-                ?.map(entry => `${preDefinedLongHours[entry?.startTime]} - ${preDefinedLongHours[entry?.endTime]}`);
-
-            setSelectedTimeItem(newTimeSlot?.length ? "Select one" : "No time available");
-            return newTimeSlot
-        });
+        getNewTimeSlotsForReservation(entries, dayName);
     }
 
     const handleTimeChange = (time) => {
