@@ -4,7 +4,9 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { MdCalendarToday } from "react-icons/md";
+import { bookingTimeFormatter } from '../../../../services/date/date-overflow-handler';
 import { preDefinedLongHours } from '../../../../services/listing-spot-data-organiging/availableTimeFormatting';
+import { getSdk } from '../../../../sharetribe/sharetribeSDK';
 import TimeSelect from './TimeSelect';
 
 const SelectDateTime = ({ pondData }) => {
@@ -70,8 +72,29 @@ const SelectDateTime = ({ pondData }) => {
     }
 
     const handleTimeChange = (time) => {
+        const slots = {
+            "06:00 AM - 11:00 AM": { startTime: '06:00', endTime: '11:00' },
+            "11:00 AM - 04:00 PM": { startTime: '11:00', endTime: '16:00' },
+            "04:00 PM - 09:00 PM": { startTime: '16:00', endTime: '21:00' },
+            "09:00 PM - 06:00 AM": { startTime: '21:00', endTime: '06:00' },
+            "06:00 AM - 09:00 PM": { startTime: '06:00', endTime: '21:00' },
+        };
+        console.log("time is", bookingTimeFormatter(dateField.value, slots[time]));
+        const timeObject = bookingTimeFormatter(dateField.value, slots[time]);
+        getSdk().timeslots.query({
+            listingId: pondData?.id?.uuid,
+            start: new Date(timeObject.bookingStart).toISOString(),
+            end: new Date(timeObject.bookingEnd).toISOString()
+        })
+            .then(res => {
+                console.log("checking availabilities", res);
+                // res.data comains the response data
+            })
+            .catch(err => {
+                console.dir(err);
+            });
+
         timeHelpers.setValue(time);
-        console.log("time is", time)
     }
     return (
         <>

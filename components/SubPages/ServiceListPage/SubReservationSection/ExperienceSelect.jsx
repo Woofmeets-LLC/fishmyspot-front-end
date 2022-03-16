@@ -21,7 +21,7 @@ const ExperienceSelect = ({ pondData }) => {
                 htmlFor=""
                 className='block lg:text-lg 2xl:text-xl font-trade-gothic-bold text-primary mb-2 lg:mb-3 xl:mb-4'
             >Experiences</label>
-            <div className={`w-full relative text-base cursor-pointer border ${items.length ? "border-gray-300" : "border-red-500"} rounded-md transition ease-in-out select-none`}>
+            <div className={`w-full relative text-base cursor-pointer border border-gray-300 rounded-md transition ease-in-out select-none`}>
                 <div
                     onClick={() => setIsActive(prevState => !prevState)}
                     className="py-3 px-3 md:px-5 shadow-md font-trade-gothic text-highlight-1">
@@ -32,8 +32,8 @@ const ExperienceSelect = ({ pondData }) => {
                         <span className='text-lg'>
                             {
                                 !isActive ?
-                                    <IoMdArrowDropdown className={!items.length && "text-red-500"} /> :
-                                    <IoMdArrowDropup className={!items.length && "text-red-500"} />
+                                    <IoMdArrowDropdown /> :
+                                    <IoMdArrowDropup />
                             }
                         </span>
                     </div>

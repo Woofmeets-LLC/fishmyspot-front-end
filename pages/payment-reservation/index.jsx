@@ -79,7 +79,7 @@ const PaymentReservation = () => {
 
   const handleSubmit = (values) => {
     getSdk().transactions.initiate({
-      processAlias: "flex-default-process/instant-booking",
+      processAlias: "flex-default-process/hourly-instant-booking-with-stripe",
       transition: "transition/enquire",
       params: {
         listingId: bookingData['pond-id'],
@@ -98,7 +98,7 @@ const PaymentReservation = () => {
 
 
   }
-  console.log(data?.data);
+  console.log("transaction status", data);
   return (
     <HomeLayout>
       <div className="container">
