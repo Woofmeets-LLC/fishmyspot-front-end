@@ -1,0 +1,27 @@
+.review-area {
+  @apply bg-white shadow-xl rounded-2xl pointer-events-none mx-3;
+}
+
+.review-area-wrapper {
+  @apply px-4 py-3 lg:px-6 lg:py-4 3xl:px-12 3xl:py-9;
+}
+
+.review-area-info {
+  @apply flex space-x-4 lg:space-x-5 items-center;
+}
+
+.review-image-area {
+  @apply w-14 h-14 md:w-16 md:h-16 2xl:w-20 2xl:h-20;
+}
+
+.review-title {
+  @apply text-lg lg:text-xl xl:text-2xl 3xl:text-4xl font-food-truck text-[#222a41];
+}
+
+.designation {
+  @apply text-sm md:text-base xl:text-lg 2xl:text-xl font-trade-gothic-bold text-highlight-1;
+}
+
+.review-description {
+  @apply text-sm md:text-base 2xl:text-xl font-trade-gothic text-highlight-1;
+}

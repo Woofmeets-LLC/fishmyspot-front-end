@@ -1,18 +1,35 @@
-import { FaMapMarkerAlt, FaStar, FaRegHeart } from "react-icons/fa";
+import { motion } from "framer-motion";
+import Link from 'next/link';
+import { FaMapMarkerAlt, FaRegHeart, FaStar } from "react-icons/fa";
 import styles from './PropertyCard.module.css';
 
 
-const PropertyCard = () => {
+const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
+
     return (
-        <div className={styles['card-container']}>
+        <motion.div
+            initial={{
+                scale: 0,
+            }}
+            animate={{
+                scale: 1,
+            }}
+            transition={{
+                delay: delay
+            }}
+            className={styles['card-container']}>
             <div className="relative">
-                <div className="w-full">
-                    <img
-                        src="/images/pond2.jpg"
-                        alt="Pond"
-                        className="w-full rounded-xl"
-                    />
-                </div>
+                <Link href={`/pond-details/${id}`}>
+                    <a>
+                        <div className="w-full h-[190px] sm:h-[160px] lg:h-[180px] 2xl:h-[237px]">
+                            <img
+                                src={image}
+                                alt="Pond"
+                                className="w-full h-full object-cover rounded-xl"
+                            />
+                        </div>
+                    </a>
+                </Link>
                 <span className={styles.feature}>
                     Feature Spot
                 </span>
@@ -28,8 +45,12 @@ const PropertyCard = () => {
                         </span>
                         <span className="font-trade-gothic text-highlight-1">location</span>
                     </div>
-                    <div className="my-2 h-14">
-                        <h4 className={styles['card-heading']}>OH-STARK COUNTY-NAVARRRE</h4>
+                    <div className="mt-1 md:my-2 xl:w-[230px] 2xl:max-w-[240px] sm:h-14">
+                        <Link href={`/pond-details/${id}`}>
+                            <a>
+                                <h4 className={styles['card-heading']}>{title}</h4>
+                            </a>
+                        </Link>
                     </div>
                     <div className="flex justify-between">
                         <div className={styles.ratings}>
@@ -40,13 +61,13 @@ const PropertyCard = () => {
                             <FaStar />
                         </div>
                         <div>
-                            <span className={styles.price}>$160.00</span>
-                            <span className={styles['per-hour']}>per hour</span>
+                            <span className={styles.price}>{price}</span>
+                            <span className={styles['per-hour']}>half day</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

@@ -1,94 +1,132 @@
-import { motion } from 'framer-motion';
-import React, { useState } from 'react';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import {AnimatePresence, motion} from 'framer-motion';
+import React, {useState} from 'react';
+import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io';
+import styles from '../Categories/Categories.module.css';
 
 const variants = {
-  hidden: {
-    opacity: 0,
-    y: -15,
-  },
-  visible: {
-    y: 5,
-    opacity: 1,
-    transition: {
-      delay: 0.2,
-      duration: 1,
-      type: 'spring',
-      stiffness: 120
+    hidden: {
+        opacity: 0,
+        y: -15,
+    },
+    visible: {
+        y: 5,
+        opacity: 1,
+        transition: {
+            delay: 0.2,
+            duration: 1,
+            type: 'spring',
+            stiffness: 120
+        }
     }
-  }
 };
 
 const hoverVariants = {
-  hover: {
-    scale: 1.1,
-    originX: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 200,
+    hover: {
+        scale: 1.03,
+        originX: 0,
+        transition: {
+            type: 'spring',
+            stiffness: 200,
+        }
     }
-  }
 };
 
 
-const TypeFish = () => {
+const TypeFish = ({typeFish, setTypeFish}) => {
 
-  const [isDropDown, setIsDropDown] = useState(false);
-  const options = [
-    'Fish Name',
-    'Fish Name',
-    'Fish Name'
-  ];
+    const [isDropDown, setIsDropDown] = useState(false);
+    const options = [
+        "Blackcrappie",
+        "Bluegill",
+        "Carp",
+        "Channelcatfish",
+        "Largemouthbass",
+        "Muskie",
+        "Northernpike",
+        "Sunfish",
+        "Smallmouthbass",
+        "Walleye",
+        "Whitecrappie",
+        "YellowPerch",
+        "Other"
+    ];
 
-  return (
-    <div>
-      <div
-        className='flex items-center border border-[#a8a8a8] rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary'
-        onClick={() => setIsDropDown(!isDropDown)}
-      >
-        Type fish
-        {
-          isDropDown ?
-            <IoIosArrowUp className='ml-2' /> :
-            <IoIosArrowDown className='ml-2' />
+    const typeFishAddOrRemove = (fishName) => {
+        const findFish = typeFish?.length > 0 ? typeFish?.find(fish => fish === fishName) : undefined;
+
+        if (findFish !== undefined) {
+            const filterTypeFish = typeFish?.filter(fish => fish !== fishName);
+            setTypeFish((prevState) => {
+                return {
+                    ...prevState,
+                    typeFish: filterTypeFish
+                }
+            });
+        } else {
+            setTypeFish((prevState) => {
+                return {
+                    ...prevState,
+                    typeFish: [...prevState.typeFish, fishName]
+                }
+            });
         }
-      </div>
-      {
-        isDropDown &&
-        (<motion.div
-          variants={variants}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          className='absolute bg-white pt-5 pl-4 pr-6 z-50 rounded-lg'>
-          {
-            options?.map((option, i) => (
-              <div
-                key={i}
-                className='flex items-center space-x-3 mb-4 text-base font-trade-gothic-bold'
-              >
-                <input
-                  type={"checkbox"}
-                  name={option}
-                  id={option}
-                  value={option}
-                  className="accent-secondary w-5 h-5"
-                />
-                <motion.label
-                  htmlFor={option}
-                  variants={hoverVariants}
-                  whileHover="hover"
-                >
-                  {option}
-                </motion.label>
+    }
 
-              </div>
-            ))
-          }
-        </motion.div>)
-      }
-    </div>
-  );
+    return (
+        <div>
+            <div
+                className={styles['list-item']}
+                onClick={() => setIsDropDown(!isDropDown)}
+            >
+                Type fish
+                {
+                    isDropDown ?
+                        <IoIosArrowUp/> :
+                        <IoIosArrowDown/>
+                }
+            </div>
+            <AnimatePresence>
+                {
+                    isDropDown &&
+                    (
+                        <motion.div
+                            variants={variants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="hidden"
+                            className={styles['dropdown']}>
+                            {
+                                options?.map((option, i) => (
+                                    <div
+                                        key={i}
+                                        className={styles['dropdown-item']}
+                                    >
+                                        <input
+                                            type={"checkbox"}
+                                            name={option}
+                                            id={option}
+                                            value={option}
+                                            checked={typeFish?.includes(option) ? true : false}
+                                            onChange={() => typeFishAddOrRemove(option)}
+                                            className="accent-secondary w-4 h-4 md:w-5 md:h-5"
+                                        />
+                                        <motion.label
+                                            htmlFor={option}
+                                            variants={hoverVariants}
+                                            whileHover="hover"
+                                        >
+                                            {option}
+                                        </motion.label>
+
+                                    </div>
+                                ))
+                            }
+                        </motion.div>
+                    )
+                }
+            </AnimatePresence>
+        </div>
+    );
 };
 
 export default TypeFish;
