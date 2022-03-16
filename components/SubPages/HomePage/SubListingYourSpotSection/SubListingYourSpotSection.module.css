@@ -1,0 +1,16 @@
+.sub-listing-container {
+  @apply py-6 sm:py-8 md:py-10 lg:py-16 xl:py-20 2xl:py-32;
+}
+
+.title {
+  @apply relative uppercase text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-food-truck text-primary max-w-[300px] md:max-w-[250px] lg:max-w-[300px] xl:max-w-[400px] 2xl:max-w-[522px] mt-4 md:mt-0;
+}
+
+.sub-listing-content {
+  @apply mt-8 mb-4 lg:max-w-[400px] 2xl:max-w-[470px] text-sm sm:text-base 2xl:text-xl text-highlight-1 font-trade-gothic;
+  line-height: 1.5;
+}
+
+.sub-listing-button {
+  @apply bg-secondary text-white text-xs sm:text-sm lg:text-base xl:text-xl py-2 px-3 sm:py-2 sm:px-4 lg:py-3 lg:px-6 rounded font-trade-gothic-bold;
+}

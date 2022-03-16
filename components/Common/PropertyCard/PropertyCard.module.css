@@ -1,13 +1,13 @@
 .card-container {
-  @apply bg-white rounded-xl overflow-hidden shadow;
+  @apply bg-white rounded-xl overflow-hidden shadow-lg;
 }
 
 .feature {
-  @apply absolute bg-secondary text-xs font-trade-gothic-bold text-primary py-1 px-2 sm:p-2 md:py-2 md:px-3 top-3 left-3 lg:top-5 lg:left-4 rounded;
+  @apply absolute bg-secondary text-xs font-trade-gothic-bold text-primary py-1 px-2 sm:px-2 sm:py-1 md:py-2 md:px-3 top-3 left-3 lg:top-5 lg:left-4 rounded;
 }
 
 .wishlist {
-  @apply bg-secondary inline-block text-lg text-white rounded-md p-2;
+  @apply bg-secondary inline-block text-base md:text-lg text-white rounded-md p-2;
 }
 
 .location {
