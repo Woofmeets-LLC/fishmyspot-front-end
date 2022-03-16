@@ -1,12 +1,33 @@
-import React from 'react';
-import HomeLayout from '../layouts/HomeLayout';
+import React from "react";
+import HomeLayout from "../layouts/HomeLayout";
+import { getSdk } from "../sharetribe/sharetribeSDK";
+import {} from "../services/date/date-overflow-handler";
 
 const Test = () => {
-    return (
-        <HomeLayout>
-            corrupti quod omnis aliquam earum quaerat perferendis quia. Quos quaerat incidunt officiis ullam? Sit magni minima rerum fugiat eum natus? Rem tempora sunt, culpa eveniet nisi tenetur ratione laboriosam aspernatur praesentium nesciunt perspiciatis quaerat odit optio adipisci recusandae voluptatibus deleniti. Voluptatum, dolorem corrupti. Vitae nisi eaque ad eos magnam fugiat tenetur asperiores libero consectetur veniam ut dicta quis et, inventore porro temporibus officiis ex at totam nesciunt. Error facere quam molestias eius. Necessitatibus iste eaque velit quisquam, vero eligendi ratione omnis amet nesciunt, ab totam ullam saepe voluptatibus aperiam illo, at eos quos autem nam fugit assumenda doloribus consequuntur modi. Hic veniam neque error. Aspernatur delectus magni, cum ipsam dolores ducimus harum sunt quia ab molestias unde saepe ratione consequuntur consectetur, quod perferendis accusamus laudantium a reprehenderit? Sequi earum reprehenderit cupiditate iste praesentium, neque quasi tempore facere vitae sed fugiat velit voluptate rerum ipsam vero voluptatem modi nulla repellendus sapiente ducimus nihil! Illo recusandae officia esse repellat explicabo in sapiente dolore, optio facilis omnis ipsam doloribus a fugit rem dolorum harum eligendi voluptates officiis dignissimos aliquid facere. Molestiae, cum harum eius officiis numquam ad impedit voluptate voluptatum iste at!
-        </HomeLayout>
-    );
+  const showListingData = () => {
+    const listingId = "62287fa7-5f0b-4322-8025-7a24207a9e5a";
+    getSdk()
+      .ownListings.show({ id: listingId })
+      .then((res) => {
+        // res.data contains the response data
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  return (
+    <HomeLayout>
+      <div className="my-8 text-center">
+        <button
+          onClick={showListingData}
+          className="bg-secondary text-white px-4 py-1 rounded"
+        >
+          Show listing data
+        </button>
+      </div>
+    </HomeLayout>
+  );
 };
 
 export default Test;

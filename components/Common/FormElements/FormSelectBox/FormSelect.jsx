@@ -4,8 +4,8 @@ import React from 'react';
 const FormSelect = ({ label, children, name, ...props }) => {
     const [field, meta] = useField({ name });
     return (
-        <div>
-            <label htmlFor={name} className="block text-[16px] text-primary font-trade-gothic-bold capitalize mb-2">{label}</label>
+        <div className="mb-4">
+            <label htmlFor={name} className="block text-xl text-primary font-trade-gothic-bold mb-2">{label}</label>
             <select
                 {...field} {...props}
                 onChange={(e) => {

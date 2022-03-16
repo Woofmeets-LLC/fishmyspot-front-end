@@ -1,30 +1,50 @@
+import { AnimatePresence } from 'framer-motion';
 import React, { useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import Slider from '../Slider';
+import styles from '../Categories/Categories.module.css';
 
-const PriceSlider = () => {
-  const [isPrice, setIsPrice] = useState(false);
+const PriceSlider = ({ priceRange, setPriceRange, handlePriceClear }) => {
+  const [isDropDown, setIsDropDown] = useState(false);
+
+  const onSliderChange = (priceValue) => {
+    setPriceRange((prevState) => {
+      return {
+        ...prevState,
+        price: priceValue
+      }
+    });
+  };
 
   return (
-    <div className='relative mt-0'>
+    <div>
       <div
-        className='flex items-center border border-[#a8a8a8] rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary'
-        onClick={() => setIsPrice(!isPrice)}
+        className={styles['list-item']}
+        onClick={() => setIsDropDown(!isDropDown)}
       >
         Price range
         {
-          isPrice ?
-            <IoIosArrowUp className='ml-2' /> :
-            <IoIosArrowDown className='ml-2' />
+          isDropDown ?
+            <IoIosArrowUp /> :
+            <IoIosArrowDown />
         }
       </div>
-      {
-        isPrice && (
-          <div className='absolute w-full'>
-            <Slider />
-          </div>
-        )
-      }
+      <AnimatePresence>
+        {
+          isDropDown && (
+            <Slider
+              min={0}
+              max={1000}
+              setValue={setPriceRange}
+              value={priceRange}
+              onSliderChange={onSliderChange}
+              handlePriceClear={handlePriceClear}
+            />
+            // <div className='absolute w-full'>
+            // </div>
+          )
+        }
+      </AnimatePresence>
     </div>
   );
 };

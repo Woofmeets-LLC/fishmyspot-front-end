@@ -1,8 +1,10 @@
+import { useField } from 'formik';
 import Link from 'next/link';
 import React from 'react';
-import { FormCheckbox, FormInput, FormOption, FormSelect } from '../..';
+import { FormInput, FormOption, FormSelect } from '../..';
 
 const SignUpForm = () => {
+    const [field, meta, helpers] = useField("isAgree");
     return (
         <>
             <FormInput label="Email" name="email" placeholder="Enter your email" />
@@ -18,20 +20,26 @@ const SignUpForm = () => {
                 </FormSelect>
                 <FormSelect label="Account Type" name="type" >
                     <FormOption title="Select a type" value="" />
-                    <FormOption title="Pond Owner" value="OWNER" />
-                    <FormOption title="Angler" value="ANGLER" />
+                    <FormOption title="Pond Owner" value="owner" />
+                    <FormOption title="Angler" value="angler" />
                 </FormSelect>
             </div>
             <FormInput label="Password" name="password" type="password" placeholder="Enter your password" />
-            <FormCheckbox
-                label={
-                    <>I agree to <span className="ml-1 font-trade-gothic-bold border-b border-primary">Door tap</span>  policy and
-                        <Link href="/"><a className="ml-1 font-trade-gothic-bold border-b border-primary">Terms of use</a></Link></>
-                }
-                name="isAgree" />
-            <button
-                type="submit"
-                className="block w-full bg-highlight-3 text-white text-center font-trade-gothic-bold py-2 mt-5">Sign Up</button>
+            <div className="mb-4">
+                <label
+                    onChange={() => helpers.setValue(!field.value)}
+                    className=" text-[16px] font-trade-gothic-bold text-primary mb-2 cursor-pointer">
+                    <input
+                        type="checkbox"
+                        className="w-4 h-4 mr-2 accent-secondary"
+                        {...field} />
+                    I agree to <span className="ml-1 font-trade-gothic-bold border-b border-primary mr-1">Fish My Spot</span>{" "}  policy and
+                    <Link href="/"><a className="ml-1 font-trade-gothic-bold border-b border-primary">Terms of use</a></Link>
+                </label>
+                {meta.touched && meta.error ? (
+                    <div className="mt-2 text-red-500 text-sm">{meta.error}</div>
+                ) : null}
+            </div>
         </>
     );
 };
