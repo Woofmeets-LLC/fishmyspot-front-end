@@ -68,12 +68,8 @@ const availabilityPlanEntriesForOneDay = (availableTime) => {
     // Creating entries for availabilityPlan
     const mapEntries = (key, hourKeyArray) => hourKeyArray.map(hourKey => ({
         dayOfWeek: key?.substring(0, 3),
-<<<<<<< HEAD
         ...slots[hourKey],
         seats: 1,
-=======
-        ...slots[hourKey]
->>>>>>> 34faf2f326a4a9ba4c84a8522ac5ccdd389dab11
     }))
     return Object.keys(availableTime)
         ?.filter(key => availableTime[key]?.isSelected)
