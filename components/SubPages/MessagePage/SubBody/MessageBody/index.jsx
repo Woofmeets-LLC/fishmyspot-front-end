@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Message from '../Message/Message';
 
-const MessageBody = ({ messages }) => {
+const MessageBody = ({ messages, currentUserId }) => {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -11,15 +11,18 @@ const MessageBody = ({ messages }) => {
   return (
     <div className="overflow-y-auto h-[62vh] pb-2 pr-3 pt-2 message__scrollbar">
       {
-        messages.map((message, index) => {
+
+        messages?.map((message, index) => {
           return (
             <Message
-              key={index}
-              message={message}
-              sentfrom={index % 2 === 0 ? true : false}
+              key={message?.id?.uuid}
+              message={message?.attributes?.content}
+              createdAt={message?.attributes?.createdAt?.toLocaleTimeString()}
+              sentfrom={message?.relationships?.sender?.data?.id?.uuid === currentUserId}
             />
           )
         })
+
       }
       <div ref={messagesEndRef} />
     </div>
