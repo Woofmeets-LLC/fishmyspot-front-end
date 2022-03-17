@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
     useElements, useStripe
 } from '@stripe/react-stripe-js';
