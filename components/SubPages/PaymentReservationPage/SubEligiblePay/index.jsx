@@ -1,40 +1,37 @@
 import { useField } from 'formik';
 import React from 'react';
-import { AiFillBank } from "react-icons/ai";
-import { FaCcVisa, FaPaypal, FaStripe } from "react-icons/fa";
-import { IoLogoVenmo } from "react-icons/io5";
+import { FaStripe } from "react-icons/fa";
 
 const SubEligiblePay = () => {
   const [field, meta, helpers] = useField('eligiblePay');
 
   const radioBtns = [
-    {
-      label: "Market Place",
-      value: "market-place",
-      Icon: FaCcVisa,
-    },
-    {
-      label: "Bank Transfer",
-      value: "bank-transfer",
-      Icon: AiFillBank,
-    },
-    {
-      label: "Venmo",
-      value: "venmo",
-      Icon: IoLogoVenmo,
-    },
-    {
-      label: "PayPal",
-      value: "payPal",
-      Icon: FaPaypal,
-    },
+    // {
+    //   label: "Market Place",
+    //   value: "market-place",
+    //   Icon: FaCcVisa,
+    // },
+    // {
+    //   label: "Bank Transfer",
+    //   value: "bank-transfer",
+    //   Icon: AiFillBank,
+    // },
+    // {
+    //   label: "Venmo",
+    //   value: "venmo",
+    //   Icon: IoLogoVenmo,
+    // },
+    // {
+    //   label: "PayPal",
+    //   value: "payPal",
+    //   Icon: FaPaypal,
+    // },
     {
       label: "Stripe",
       value: "stripe",
       Icon: FaStripe,
     },
-  ]
-
+  ];
   return (
     <div>
       <div>

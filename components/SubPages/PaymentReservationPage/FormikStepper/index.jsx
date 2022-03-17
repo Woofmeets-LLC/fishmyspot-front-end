@@ -1,5 +1,7 @@
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
+import ConfirmDetailSection from '../ConfirmDetailSection/ConfirmDetailSection';
+import SubDetails from '../SubDetails/SubDetails';
 import StepperContainer from './Stepper/StepperContainer';
 
 const FormikStepper = ({ children, stepperArray, ...props }) => {
@@ -17,6 +19,7 @@ const FormikStepper = ({ children, stepperArray, ...props }) => {
       <StepperContainer step={step} stepperArray={stepperArray} />
       <Formik
         {...props}
+        enableReinitialize={true}
         validationSchema={currentChild.props.validation}
         onSubmit={async (values, helpers) => {
           if (isLastStep()) {
@@ -25,13 +28,24 @@ const FormikStepper = ({ children, stepperArray, ...props }) => {
             setStep(s => s + 1);
           }
           else {
-            // setStep(s => s + 1);
+            setStep(s => s + 1);
             await props.onSubmit(values, helpers);
           }
         }}
       >
         <Form autoComplete='off'>
-          {currentChild}
+
+          <div className={step < 2 ? 'md:grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 xl:gap-12' : ''}>
+            {currentChild}
+
+            {
+              step < 2 &&
+              <div className="">
+                <ConfirmDetailSection />
+                <SubDetails title={"Details"} step={step} />
+              </div>
+            }
+          </div>
         </Form>
       </Formik>
     </div>

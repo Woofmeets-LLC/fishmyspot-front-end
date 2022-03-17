@@ -6,11 +6,19 @@ const Calculation = () => {
     const [dayTypeField] = useField('dayType');
     const [dayRatesField] = useField('dayRates');
     const [experienceField] = useField('experience');
+    const [serviceFeeField] = useField('serviceFee');
     const [totalField, totalMeta, totalHelpers] = useField('total');
 
     const dayRate = parseFloat(+dayRatesField.value?.[dayTypeField.value]).toFixed(2);
-    const experienceCost = parseFloat(+experienceField?.value?.split("/ $")[1] || 0).toFixed(2);
-    const serviceFee = parseFloat(3.50).toFixed(2);
+
+    const experienceCost = Object.keys(experienceField.value || {})
+        ?.reduce((prevCost, currExpKey) => {
+            return +experienceField.value?.[currExpKey]?.checked
+                ? +prevCost + +experienceField.value?.[currExpKey]?.price
+                : +prevCost;
+        }, 0);
+
+    const serviceFee = parseFloat(+serviceFeeField.value).toFixed(2);
     const total = parseFloat(+dayRate + +experienceCost + +serviceFee).toFixed(2);
 
     useEffect(() => {
@@ -25,11 +33,18 @@ const Calculation = () => {
                 <p>${dayRate}</p>
             </div>
             {
-                experienceField?.value &&
-                <div className='flex justify-between mb-2 lg:mb-3 2xl:mb-4 space-x-4'>
-                    <p>{experienceField.value}</p>
-                    <p>${experienceCost}</p>
-                </div>
+                Object?.keys(experienceField.value || {}).length
+                    ? Object.keys(experienceField.value)
+                        ?.filter(key => experienceField.value[key].checked)
+                        ?.map((key, i) => (
+                            <div
+                                key={i}
+                                className='flex justify-between mb-2 lg:mb-3 2xl:mb-4 space-x-4'>
+                                <p>{key}</p>
+                                <p>${parseFloat(+experienceField.value[key].price).toFixed(2)}</p>
+                            </div>
+                        ))
+                    : null
             }
             <div className='flex justify-between pb-2 md:pb-3 lg:pb-4 xl:pb-5 border-b border-highlight-1'>
                 <p>Service fees</p>

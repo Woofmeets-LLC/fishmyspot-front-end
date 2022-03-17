@@ -2,32 +2,21 @@
 
 import { getTrustedSdk } from "../../../sharetribe/sharetribeSDK";
 export default async function handler(req, res) {
-    const { id , bookingStart,  bookingEnd} = req.body
+    const { id, bookingStart, bookingEnd, lineItems } = req.body
     console.log({
         bookingStart: bookingStart,
         bookingEnd: bookingEnd,
     });
     try {
+        // https://www.sharetribe.com/docs/references/transaction-process-actions/#:~:text=Configuration%20options%3A%20%2D-,Pricing,-%3Aaction/privileged%2Dset
         const sdk = await getTrustedSdk(req)
         const dd = await sdk.transactions.transition({
             id: id,
             transition: "transition/request-payment-after-enquiry",
             params: {
-                bookingStart: new Date("2022-03-17T06:00:00.000-04:00").toISOString(),
-                bookingEnd: new Date("2022-03-17T21:00:00.000-04:00").toISOString(),
-                // bookingStart: new Date("2022-03-16T011:00:00.000-04:00").toISOString(),
-                // bookingEnd: new Date("2022-03-16T16:00:00.000-04:00").toISOString(),
-                lineItems: [
-                    {
-                        code: 'line-item/tea',
-                        unitPrice: {
-                            amount: 10,
-                            currency: 'USD',
-                            _sdkType: 'Money'
-                        },
-                        quantity: 10
-                    }
-                ]
+                bookingStart: new Date(bookingStart).toISOString(),
+                bookingEnd: new Date(bookingEnd).toISOString(),
+                lineItems
             }
         }, {
             expand: true
@@ -35,7 +24,7 @@ export default async function handler(req, res) {
         res.send(dd.data)
     } catch (e) {
         console.log(e?.data || e)
-        res.send(e.data)
+        res.status(400).send(e.data);
     }
 }
 export const config = {
