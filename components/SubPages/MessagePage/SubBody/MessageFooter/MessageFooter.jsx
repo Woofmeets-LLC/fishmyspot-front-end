@@ -1,27 +1,36 @@
 import React, { useState } from 'react';
 import { TiCameraOutline } from "react-icons/ti";
 import { IoSendSharp } from "react-icons/io5";
+import { getSdk } from '../../../../../sharetribe/sharetribeSDK';
 
-const MessageFooter = ({ messages, setMessages }) => {
+const MessageFooter = ({ messages, setMessages, activeTransactionId, currentUserId }) => {
   const [inputValue, setInputValue] = useState('');
   const [image, setImage] = useState(null);
 
   const handleSubmit = e => {
     e.preventDefault();
     if (inputValue.length > 0) {
-      const messageObj = {
-        inputValue,
-        time: new Date().toLocaleTimeString(),
-        sentFrom: true,
-      }
-      setMessages([...messages, messageObj]);
-      setInputValue('');
+      // const messageObj = {
+      //   content: inputValue,
+      //   createdAt: new Date().toLocaleTimeString(),
+      // }
+      // setMessages([...messages, messageObj]);
+
+      getSdk().messages.send({
+        transactionId: activeTransactionId,
+        content: inputValue
+      }, {
+        expand: true
+      }).then(res => {
+        // res.data contains the response data
+        const messageData = { ...res.data.data, relationships: { sender: { data: { id: { _sdkType: 'UUID', uuid: currentUserId } } } } };
+        setMessages([...messages, messageData]);
+
+
+        setInputValue('');
+      });
     }
-    // if (image !== null) {
-    //   const formData = new FormData();
-    //   formData.append('image', image);
-    //   console.log(formData);
-    // }
+
   }
   return (
     <div className="w-full pt-[6px]">
@@ -36,9 +45,9 @@ const MessageFooter = ({ messages, setMessages }) => {
             className="flex-1 bg-white xl:text-lg 2xl:text-xl text-highlight-1 focus:outline-none"
           />
           <div className="flex items-center space-x-4 xl:space-x-6 mr-3 text-2xl text-highlight-1">
-            <TiCameraOutline
+            {/* <TiCameraOutline
               className='cursor-pointer'
-            />
+            /> */}
             {/* <input
               type="file"
               accept='image/*'
