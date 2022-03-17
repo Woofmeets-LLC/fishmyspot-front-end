@@ -1,15 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { FaMapMarkerAlt, FaRegHeart, FaStar, FaHeart } from 'react-icons/fa';
-import styles from './PropertyCard.module.css';
-import { useCurrentUser } from '../../../hooks/users/index';
+import { useEffect, useState } from 'react';
+import { FaHeart, FaMapMarkerAlt, FaRegHeart, FaStar } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import {
-  updateFavoriteList,
-  updateUser,
-} from '../../../store/slices/authSlice';
+import { useCurrentUser } from '../../../hooks/users/index';
 import { getSdk } from '../../../sharetribe/sharetribeSDK';
-import { useState, useEffect } from 'react';
+import {
+  updateUser
+} from '../../../store/slices/authSlice';
+import styles from './PropertyCard.module.css';
 
 const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
   const user = useCurrentUser();
@@ -46,7 +46,7 @@ const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
             dispatch(updateUser());
             setIsFavorite(!isFavorite);
           })
-          .catch(() => {});
+          .catch(() => { });
       }
     }
   };
@@ -67,7 +67,7 @@ const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
             dispatch(updateUser());
             setIsFavorite(!isFavorite);
           })
-          .catch(() => {});
+          .catch(() => { });
       }
     }
   };

@@ -1,14 +1,12 @@
 import { useField } from 'formik';
 import React from 'react';
 import ConfirmDetailSection from '../ConfirmDetailSection/ConfirmDetailSection';
-import SubDetails from '../SubDetails/SubDetails';
 
 const SubConfirmDetails = () => {
   const [field, meta, helpers] = useField('addGiftCard');
   return (
     <div>
       <ConfirmDetailSection />
-      <SubDetails title={"Details"} />
       <div className='grid grid-cols-12 gap-3 mt-7'>
         <div className='col-span-8'>
           <div className='border rounded grid grid-cols-12'>

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export const useCurrentUser = () => {
   const [activeUser, setActiveUser] = useState(null);

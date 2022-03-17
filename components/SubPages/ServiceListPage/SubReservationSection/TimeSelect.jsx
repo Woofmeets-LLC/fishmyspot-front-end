@@ -2,7 +2,7 @@ import React from 'react';
 import { FaRegClock } from "react-icons/fa";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 
-const TimeSelect = ({ label, isActive, setIsActive, selectedItem, setSelectedItem, items, helper }) => {
+const TimeSelect = ({ label, isActive, setIsActive, selectedItem, setSelectedItem, items, helper, loading }) => {
 
   return (
     <div className='mb-4 xl:mb-5'>
@@ -17,24 +17,15 @@ const TimeSelect = ({ label, isActive, setIsActive, selectedItem, setSelectedIte
           onClick={() => setIsActive(prevState => !prevState)}
           className="py-3 px-3 md:px-5 shadow-md font-trade-gothic text-highlight-1">
           <div className='flex justify-between items-center'>
-            {
-              label === 'Experiences' ?
-                (
-                  <span>
-                    {selectedItem}
-                  </span>
-                ) :
-                (
-                  <span className='flex items-center space-x-4'>
-                    <span className='text-xl 2xl:text-[28px]'>
-                      <FaRegClock className={!items?.length ? "text-red-500" : ""} />
-                    </span>
-                    <span className={!items?.length ? "text-red-500" : ""}>
-                      {selectedItem}
-                    </span>
-                  </span>
-                )
-            }
+
+            <span className='flex items-center space-x-4'>
+              <span className='text-xl 2xl:text-[28px]'>
+                <FaRegClock className={!items?.length ? "text-red-500" : ""} />
+              </span>
+              <span className={!items?.length ? "text-red-500" : ""}>
+                {loading ? "Loading..." : selectedItem}
+              </span>
+            </span>
             <span className='text-lg'>
               {
                 !isActive ?

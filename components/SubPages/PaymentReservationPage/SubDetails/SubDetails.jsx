@@ -1,10 +1,12 @@
+import { format } from 'date-fns';
+import { useField } from 'formik';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import SubDetailsItem from './SubDetailsItem';
 
-const SubDetails = ({ title }) => {
+const SubDetails = ({ title, step }) => {
   const bookingData = useSelector(state => state.bookingData);
-  console.log({ bookingData })
+  const [field, meta, helpers] = useField('agreementChecked');
   return (
     <>
       <div className='flex items-center justify-between pb-1 border-b border-b-highlight-1'>
@@ -12,37 +14,45 @@ const SubDetails = ({ title }) => {
         <span className='text-sm inline-block mt-2 sm:text-base lg:text-lg text-highlight-1 font-trade-gothic underline'>Edit</span>
       </div>
       <div className="pt-3 lg:pt-5 2xl:pt-7">
-        <SubDetailsItem item={"Date"} value={"February 11, 2022"} />
-        <SubDetailsItem item={"Time"} value={"All Day"} />
+        <SubDetailsItem item={"Date"} value={format(bookingData?.date, "dd MMMM, yyyy")} />
+        <SubDetailsItem item={"Time"} value={bookingData?.time} />
         <SubDetailsItem
           item={"Fishing spot"}
-          value={"OH- Stark County- Royalation"}
+          value={bookingData?.pondData?.attributes?.title}
         />
         <SubDetailsItem
-          item={"Location"}
-          value={"Royalation, OH"}
+          item={bookingData.dayType == "halfDay" ? "Half Day Cost" : "Full Day Cost"}
+          value={`$${parseFloat(+bookingData?.dayRates?.[bookingData?.dayType]).toFixed(2)}`}
         />
-        <SubDetailsItem
-          item={"Full Day Cost"}
-          value={"$125.00"}
-        />
-        <SubDetailsItem
-          item={"Experiences"}
-          value={"$20.00"}
-        />
+        {
+          Object.keys(bookingData?.experience || {})
+            ?.filter(key => bookingData?.experience?.[key]?.checked)
+            ?.map(key => (
+              <SubDetailsItem
+                key={key}
+                item={key}
+                value={`$${parseFloat(+bookingData?.experience?.[key].price).toFixed(2)}`}
+              />
+            ))
+        }
         <div className="pb-1 2xl:pb-3 border-b border-b-highlight-1">
           <SubDetailsItem
             item={"Service fees"}
-            value={"$3.50"}
+            value={`$${parseFloat(+bookingData?.serviceFee).toFixed(2)}`}
           />
         </div>
         <div className="mt-2 md:mt-3 2xl:mt-5">
           <SubDetailsItem
             item={"Total"}
-            value={"$175.00"}
+            value={`$${parseFloat(+bookingData?.total).toFixed(2)}`}
           />
         </div>
       </div>
+
+      {
+        step == 1 &&
+        <button type='submit' className={`${field.value ? "bg-secondary" : "bg-gray-300"} text-sm md:text-base 2xl:text-xl font-trade-gothic-bold text-white py-2 px-3 sm:py-3 2xl:py-5 mt-4 w-full rounded`}>Confirm Booking</button>
+      }
     </>
   );
 };

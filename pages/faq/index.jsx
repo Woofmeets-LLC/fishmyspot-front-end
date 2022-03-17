@@ -1,6 +1,6 @@
-import React from "react";
-import SubFaqSection from "../../components/SubPages/FaqPage/SubFaqSection";
-import HomeLayout from "../../layouts/HomeLayout";
+import React from 'react';
+import SubFaqSection from '../../components/SubPages/FaqPage/SubFaqSection';
+import HomeLayout from '../../layouts/HomeLayout';
 
 const Faq = () => {
   return (
