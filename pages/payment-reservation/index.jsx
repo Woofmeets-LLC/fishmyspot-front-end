@@ -5,12 +5,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
-import * as yup from 'yup';
-import FormikStepper from '../../components/SubPages/PaymentReservationPage/FormikStepper';
-import FormikStep from '../../components/SubPages/PaymentReservationPage/FormikStepper/FormikStep';
-import PaymentSuccess from '../../components/SubPages/PaymentReservationPage/PaymentSuccess';
-import SubCheckout from '../../components/SubPages/PaymentReservationPage/SubCheckout';
-import SubPaymentMethod from '../../components/SubPages/PaymentReservationPage/SubPaymentMethod';
+import SubPaymentStepper from '../../components/SubPages/PaymentReservationPage/SubPaymentStepper/SubPaymentStepper';
 import HomeLayout from '../../layouts/HomeLayout';
 import { bookingTimeFormatter } from '../../services/date/date-overflow-handler';
 import { getSdk } from '../../sharetribe/sharetribeSDK';
@@ -26,30 +21,7 @@ const PaymentReservation = () => {
   const bookingData = useSelector(state => state.bookingData);
   const router = useRouter();
 
-  const validation = {
-    confirmDetails: yup.object({
-      agreementChecked: yup.boolean().oneOf([true], 'Field must be checked'),
-    }),
-    paymentMethod: yup.object({
-      eligiblePay: yup.string().required("You have to select one of those"),
-    }),
-    billingInfo: yup.object({
-      cardNumber: yup.string().required("Card Number is required"),
-      email: yup.string().required("Email is required"),
-      companyName: yup.string().required("Company Name is required"),
-      vatNumber: yup.string().required("Vat Number is required"),
-      billingAddress: yup.string().required("Billing Address is required"),
-      zipCode: yup.string().required("Zip Code is required"),
-      city: yup.string().required("City is required"),
-      country: yup.string().required("Country is required")
-    })
-  };
 
-  const stepperArray = [
-    "Confirm details",
-    "Checkout",
-    "Confirmation",
-  ];
 
   const proceedTransaction = (id) => {
     setLoading(true);
@@ -153,6 +125,7 @@ const PaymentReservation = () => {
             <h1 className='text-xl sm:text-2xl md:text-3xl xl:text-4xl font-food-truck uppercase text-primary'>PRICE CALCULATOR</h1>
             <p className='text-base xl:text-lg font-trade-gothic text-highlight-1 mt-2 md:mt-3 xl:mt-5'>All printing includes full-color on both sides.</p>
           </div>
+
           {
             loading
               ? (
@@ -166,36 +139,7 @@ const PaymentReservation = () => {
                   ? (
                     <div className="text-red-500 font-trade-gothic text-lg my-5">{error.message}</div>
                   )
-                  : (
-                    <FormikStepper
-                      initialValues={{
-                        tran: transactionInfo?.tran || "",
-                        sk: transactionInfo?.sk || "",
-                        agreementChecked: false,
-                        eligiblePay: '',
-                        cardNumber: '',
-                        email: '',
-                        name: '',
-                        vatNumber: '',
-                        billingAddress: '',
-                        zipCode: '',
-                        city: '',
-                        state: '',
-                      }}
-                      stepperArray={stepperArray}
-                      onSubmit={() => console.log()}
-                    >
-                      <FormikStep validation={validation.paymentMethod}>
-                        <SubPaymentMethod />
-                      </FormikStep>
-                      <FormikStep validation={validation.billingInfo}>
-                        <SubCheckout />
-                      </FormikStep>
-                      <FormikStep>
-                        <PaymentSuccess />
-                      </FormikStep>
-                    </FormikStepper>
-                  )
+                  : (<SubPaymentStepper transactionInfo={transactionInfo} />)
               )
           }
         </div>

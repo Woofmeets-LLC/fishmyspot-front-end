@@ -221,6 +221,3 @@ Chrome
 #card-element {
     @apply border px-1 py-2 mb-3 rounded;
 }
-#payment-form button[type="submit"] {
-    @apply bg-secondary text-white px-4 py-2 rounded;
-}
