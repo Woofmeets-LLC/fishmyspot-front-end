@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import SubCheckout from '..';
-import SubDetails from '../../SubDetails/SubDetails';
-import SubPaymentMethod from '../../SubPaymentMethod';
+import PaymentSuccess from '../PaymentSuccess';
+import SubCheckout from '../SubCheckout';
+import SubDetails from '../SubDetails/SubDetails';
+import SubPaymentMethod from '../SubPaymentMethod';
 import StepperContainer from './StepperContainer';
 
 const SubPaymentStepper = ({ transactionInfo }) => {
@@ -20,7 +21,7 @@ const SubPaymentStepper = ({ transactionInfo }) => {
             case 1:
                 return <SubCheckout setStep={setStep} transactionInfo={transactionInfo} />;
             case 2:
-                return <div className="">Step 3</div>;
+                return <PaymentSuccess />;
             default:
                 return null;
         }
@@ -28,14 +29,21 @@ const SubPaymentStepper = ({ transactionInfo }) => {
     return (
         <>
             <StepperContainer step={step} stepperArray={stepperArray} />
-            <div className={step < 2 ? 'md:grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 xl:gap-12' : ''}>
+            <div className={step < 2 ? 'flex flex-wrap md:grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 xl:gap-12' : ''}>
                 {/* Showing data based on state  */}
-                {getStepItems()}
+                <div className="w-full">
+                    {getStepItems()}
+                </div>
 
                 {/* By default the section will show to every step  */}
-                <div className="">
-                    <SubDetails title={"Details"} step={step} />
-                </div>
+                {
+                    step < 2 &&
+                    <div className="w-full">
+                        <SubDetails
+                            title={"Details"}
+                            step={step} />
+                    </div>
+                }
             </div>
         </>
     );

@@ -4,7 +4,8 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import SubPaymentStepper from '../../components/SubPages/PaymentReservationPage/SubCheckout/SubPaymentStepper/SubPaymentStepper';
+import { ClipLoader } from 'react-spinners';
+import SubPaymentStepper from '../../components/SubPages/PaymentReservationPage/SubPaymentStepper/SubPaymentStepper';
 import HomeLayout from '../../layouts/HomeLayout';
 import { bookingTimeFormatter } from '../../services/date/date-overflow-handler';
 import { getSdk } from '../../sharetribe/sharetribeSDK';
@@ -124,8 +125,8 @@ const PaymentReservation = () => {
             <h1 className='text-xl sm:text-2xl md:text-3xl xl:text-4xl font-food-truck uppercase text-primary'>PRICE CALCULATOR</h1>
             <p className='text-base xl:text-lg font-trade-gothic text-highlight-1 mt-2 md:mt-3 xl:mt-5'>All printing includes full-color on both sides.</p>
           </div>
-          <SubPaymentStepper transactionInfo={transactionInfo} />
-          {/* {
+
+          {
             loading
               ? (
                 <div className="flex justify-center items-center flex-wrap my-10">
@@ -138,38 +139,9 @@ const PaymentReservation = () => {
                   ? (
                     <div className="text-red-500 font-trade-gothic text-lg my-5">{error.message}</div>
                   )
-                  : (
-                    <FormikStepper
-                      initialValues={{
-                        tran: transactionInfo?.tran || "",
-                        sk: transactionInfo?.sk || "",
-                        agreementChecked: false,
-                        eligiblePay: '',
-                        cardNumber: '',
-                        email: '',
-                        name: '',
-                        vatNumber: '',
-                        billingAddress: '',
-                        zipCode: '',
-                        city: '',
-                        state: '',
-                      }}
-                      stepperArray={stepperArray}
-                      onSubmit={() => console.log()}
-                    >
-                      <FormikStep validation={validation.paymentMethod}>
-                        <SubPaymentMethod />
-                      </FormikStep>
-                      <FormikStep validation={validation.billingInfo}>
-                        <SubCheckout />
-                      </FormikStep>
-                      <FormikStep>
-                        <PaymentSuccess />
-                      </FormikStep>
-                    </FormikStepper>
-                  )
+                  : (<SubPaymentStepper transactionInfo={transactionInfo} />)
               )
-          } */}
+          }
         </div>
       </div>
     </HomeLayout>

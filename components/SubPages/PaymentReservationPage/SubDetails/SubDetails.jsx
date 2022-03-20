@@ -16,6 +16,8 @@ const SubDetails = ({ title, step }) => {
           <input
             type="checkbox"
             className='cursor-pointer'
+            id="agree-with-terms"
+            data-is-agree={isAgree}
             checked={isAgree}
             onChange={() => setIsAgree(prevIsAgree => !prevIsAgree)}
           />
@@ -67,11 +69,6 @@ const SubDetails = ({ title, step }) => {
           />
         </div>
       </div>
-
-      {
-        step == 1 &&
-        <button type='submit' className={`${isAgree ? "bg-secondary" : "bg-gray-300"} text-sm md:text-base 2xl:text-xl font-trade-gothic-bold text-white py-2 px-3 sm:py-3 2xl:py-5 mt-4 w-full rounded`}>Confirm Booking</button>
-      }
     </>
   );
 };
