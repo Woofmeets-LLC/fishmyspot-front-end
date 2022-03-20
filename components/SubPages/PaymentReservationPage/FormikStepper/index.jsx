@@ -1,8 +1,8 @@
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import ConfirmDetailSection from '../ConfirmDetailSection/ConfirmDetailSection';
+import StepperContainer from '../SubCheckout/SubPaymentStepper/StepperContainer';
 import SubDetails from '../SubDetails/SubDetails';
-import StepperContainer from './Stepper/StepperContainer';
 
 const FormikStepper = ({ children, stepperArray, ...props }) => {
   const childrenArray = React.Children.toArray(children);

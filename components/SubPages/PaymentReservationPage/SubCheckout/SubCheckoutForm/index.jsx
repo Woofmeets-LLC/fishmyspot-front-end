@@ -3,9 +3,10 @@ import {
     useElements, useStripe
 } from '@stripe/react-stripe-js';
 import { useEffect } from "react";
-import { getSdk } from '../../../../sharetribe/sharetribeSDK';
+import { getSdk } from '../../../../../sharetribe/sharetribeSDK';
 
-const SubCheckoutForm = ({ id, secret }) => {
+const SubCheckoutForm = ({ setStep, id, secret, billing_details }) => {
+
     const stripe = useStripe();
     const elements = useElements();
     let cardElement;
@@ -16,6 +17,8 @@ const SubCheckoutForm = ({ id, secret }) => {
 
         cardElement?.mount('#card-element')
     }, []);
+
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -32,7 +35,7 @@ const SubCheckoutForm = ({ id, secret }) => {
             payment_method: {
                 card: cardElement,
                 billing_details: {
-                    name: 'Imran Hossain',
+                    ...billing_details
                 }
             }
         });
@@ -56,9 +59,11 @@ const SubCheckoutForm = ({ id, secret }) => {
 
     return (
         <form id="payment-form" onSubmit={handleSubmit}>
+            <p className='text-lg font-trade-gothic-bold text-primary mb-2 lg:mb-5'>Credit Card Info</p>
             <div id="card-element"></div>
 
-            <button type={'submit'}>Submit</button>
+
+            <button type={'submit'}>Confirm Booking</button>
         </form>
     )
 };
