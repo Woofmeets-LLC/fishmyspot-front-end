@@ -1,8 +1,8 @@
 import React from 'react';
-import ListItem from './ListItem';
-import StatusButton from './StatusButton';
+import ListItem from '../ListItem';
+import StatusButton from '../StatusButton';
 
-const PurchaseOrCancelationCard = ({ status }) => {
+const PurchaseOrCancellationCard = ({ status }) => {
   return (
     <div className='md:w-[650px] 2xl:w-[690px] bg-white shadow-md p-4 md:py-6 md:px-7 2xl:py-8 2xl:px-9 rounded-lg'>
       <div className='md:flex md:justify-between'>
@@ -52,4 +52,4 @@ const PurchaseOrCancelationCard = ({ status }) => {
   );
 };
 
-export default PurchaseOrCancelationCard;
+export default PurchaseOrCancellationCard;
