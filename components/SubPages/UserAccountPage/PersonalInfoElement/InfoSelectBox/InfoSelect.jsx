@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InfoSelect = ({ label, children, name, ...props }) => {
+const InfoSelect = ({ label, children, name, setValue, ...props }) => {
   return (
     <div>
       <label
@@ -10,6 +10,7 @@ const InfoSelect = ({ label, children, name, ...props }) => {
         {label}
       </label>
       <select
+        onChange={e => setValue(e.target.value)}
         {...props}
         className="block w-full px-2 py-[10px] 2xl:px-3 2xl:py-[15px] font-trade-gothic text-sm lg:text-base 2xl:text-lg text-primary bg-white bg-clip-padding bg-no-repeat font-medium border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none cursor-pointer"
       >
