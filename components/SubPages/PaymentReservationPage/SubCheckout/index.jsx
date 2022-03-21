@@ -1,18 +1,15 @@
 import React from 'react';
-import ConfirmDetailSection from '../ConfirmDetailSection/ConfirmDetailSection';
-import SubBillingInfo from '../SubBillingInfo';
-import SubDetails from '../SubDetails/SubDetails';
+import CustomCheckoutForm from './SubCheckoutForm/CustomCheckoutForm';
 
-const SubCheckout = () => {
+const SubCheckout = ({ setStep, transactionInfo }) => {
   return (
-    <div className='md:grid md:grid-cols-2 md:gap-14'>
-      <SubBillingInfo />
-      <div>
-        <ConfirmDetailSection />
-        <SubDetails title={"CHECKOUT DETAILS"} />
-        <div className='mt-7'>
-          <button type='submit' className='bg-secondary text-sm md:text-base 2xl:text-xl font-trade-gothic-bold text-white py-2 px-3 sm:py-3 2xl:py-5 w-full rounded'>Confirm Booking</button>
-        </div>
+    <div className='mb-6 md:mb-0'>
+      <h1 className='text-xl sm:text-2xl md:text-3xl xl:text-4xl font-food-truck text-primary uppercase mb-4 lg:mb-8'>Billing Info</h1>
+      <div className='mb-6 lg:mb-10'>
+        <CustomCheckoutForm
+          setStep={setStep}
+          tran={transactionInfo?.tran}
+          sk={transactionInfo?.sk} />
       </div>
     </div>
   );

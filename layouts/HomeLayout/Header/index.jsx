@@ -76,6 +76,8 @@ const Header = () => {
             })
     }
 
+    console.log("kk", user?.profile?.publicData?.account_type);
+
     return (
         <>
             <SignUpModal />
@@ -159,15 +161,16 @@ const Header = () => {
                             style={{ transition: "all 0.2s ease!important" }}
                             className={`flex items-center w-auto h-[70px] 2xl:h-[85px] 3xl:h-[102px] ml-auto space-y-0 space-x-10 bg-white transition transform px-2 py-2 rounded border-0`}>
                             {
-                                user?.profile?.publicData?.account_type !== "angler" &&
+                                user?.profile?.publicData?.account_type == "owner" && (
                                     user?.stripeConnected
-                                    ? <Link href="/list-your-spot" >
-                                        <a className={`hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]`}>List your spot +</a>
-                                    </Link>
-                                    : <button
-                                        onClick={createStripeAccount}
-                                        type="button"
-                                        className="hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</button>
+                                        ? <Link href="/list-your-spot" >
+                                            <a className={`hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]`}>List your spot +</a>
+                                        </Link>
+                                        : <button
+                                            onClick={createStripeAccount}
+                                            type="button"
+                                            className="hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</button>
+                                )
 
 
                             }
@@ -222,16 +225,13 @@ const Header = () => {
                                     <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Notification </a>
                                 </Link>
                                 {
-                                    user?.profile?.publicData?.account_type === "angler"
-                                        ? <Link href="/favorite-pond-list" >
-                                            <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Favorite pond </a>
-                                        </Link>
-                                        : <Link href="/seller-dashboard" >
-                                            <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Dashboard </a>
-                                        </Link>
+                                    user?.profile?.publicData?.account_type === "angler" &&
+                                    <Link href="/favorite-pond-list" >
+                                        <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Favorite pond </a>
+                                    </Link>
                                 }
-                                <Link href="/settings" >
-                                    <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Settings </a>
+                                <Link href={user?.profile?.publicData?.account_type === "angler" ? "/settings" : "/seller-dashboard"} >
+                                    <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Dashboard </a>
                                 </Link>
                                 <Link href="/cancellation" >
                                     <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Cancellation  </a>

@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import SubSidebar from '../SubSidebar';
-import SubBody from '../SubBody';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
 import { getSdk } from '../../../../sharetribe/sharetribeSDK';
+import SubBody from '../SubBody';
+import SubSidebar from '../SubSidebar';
 
 
 const SubMessageSection = () => {
