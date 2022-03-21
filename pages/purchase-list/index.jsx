@@ -1,8 +1,45 @@
-import React from 'react';
-import { PageHeader, PurchaseOrCancelationCard } from '../../components/Common';
+import React, { useEffect, useState } from 'react';
+import { PageHeader, PurchaseCard } from '../../components/Common';
 import HomeLayout from '../../layouts/HomeLayout';
+import { getSdk } from '../../sharetribe/sharetribeSDK';
 
 const PurchaseList = () => {
+  const [purchaseList, setPurchaseList] = useState([]);
+
+  useEffect(() => {
+    getSdk().transactions.query({
+      only: "order",
+      lastTransitions: ["transition/confirm-payment"],
+      include: ['booking', 'listing', 'provider']
+    })
+      .then(res => {
+        // res.data contains the response data
+        console.log(res);
+        const transactions = res.data?.data;
+        const bookings = res.data?.included?.filter(item => item.type === 'booking');
+        const listings = res.data?.included?.filter(item => item.type === 'listing');
+        const providers = res.data?.included?.filter(item => item.type === 'user');
+
+        const formattedData = transactions?.map(transaction => {
+          return {
+            ...transaction,
+            relationships: {
+              ...transaction?.relationships,
+              booking: bookings?.find(booking => booking?.id?.uuid === transaction?.relationships?.booking?.data?.id?.uuid),
+              listing: listings?.find(listing => listing?.id?.uuid === transaction?.relationships?.listing?.data?.id?.uuid),
+              provider: providers?.find(provider => provider?.id?.uuid === transaction?.relationships?.provider?.data?.id?.uuid)
+            }
+          }
+        });
+
+        setPurchaseList(formattedData);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+  console.log(purchaseList);
   return (
     <HomeLayout>
       <div className='bg-[#fcfcfc]'>
@@ -14,9 +51,12 @@ const PurchaseList = () => {
               userEmail={"larissa@gmail.com"}
             />
           </div>
-          <PurchaseOrCancelationCard status={"Purchased"} />
-          <PurchaseOrCancelationCard status={"Purchased"} />
-          <PurchaseOrCancelationCard status={"Purchased"} />
+          {
+            purchaseList?.map((purchase) => (
+              <PurchaseCard key={purchase?.id?.uuid} status={"Purchased"} />
+            ))
+          }
+          <PurchaseCard status={"Purchased"} />
         </div>
       </div>
     </HomeLayout>
