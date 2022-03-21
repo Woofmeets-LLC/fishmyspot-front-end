@@ -53,10 +53,12 @@ const PurchaseList = () => {
           </div>
           {
             purchaseList?.map((purchase) => (
-              <PurchaseCard key={purchase?.id?.uuid} status={"Purchased"} />
+              <PurchaseCard
+                key={purchase?.id?.uuid}
+                purchaseData={purchase}
+                status={"Purchased"} />
             ))
           }
-          <PurchaseCard status={"Purchased"} />
         </div>
       </div>
     </HomeLayout>
