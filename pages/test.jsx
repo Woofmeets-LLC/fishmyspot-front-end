@@ -1,4 +1,5 @@
 import React from "react";
+import { useCurrentUser } from "../hooks/users";
 import HomeLayout from "../layouts/HomeLayout";
 import { } from "../services/date/date-overflow-handler";
 import { getSdk } from "../sharetribe/sharetribeSDK";
@@ -17,16 +18,27 @@ const Test = () => {
         console.log(err);
       });
   };
+  const user = useCurrentUser();
+  const showReviews = () => {
+    getSdk().reviews.query({
+      subjectId: user.id,
+      state: ['pending']
+    }).then(res => {
+      // res.data contains the response data
+      console.log(res);
+    });
+
+  }
 
 
   return (
     <HomeLayout>
       <div className="my-8 text-center">
         <button
-          onClick={showListingData}
+          onClick={showReviews}
           className="bg-secondary text-white px-4 py-1 rounded"
         >
-          Show listing data
+          Show reviews
         </button>
       </div>
     </HomeLayout>
