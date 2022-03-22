@@ -73,7 +73,10 @@ const authSlice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       if (action.payload.data) {
         state.isLoggedIn = true;
-        state.user = action.payload.data.data.attributes;
+        state.user = {
+          id:action.payload.data.data.id.uuid,
+          ...action.payload.data.data.attributes
+        };
         state.isLoading = false;
       } else {
         state.isLoggedIn = false;
