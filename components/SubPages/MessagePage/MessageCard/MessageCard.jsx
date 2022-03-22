@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MessageCard = ({ id, isActive, setIsActive }) => {
+const MessageCard = ({ id, isActive, setIsActive, listingTitle, lastMessage, lastMessageDate }) => {
   return (
     <div
       className={`${isActive === id ? "md:bg-highlight-2 text-white" : "hover:bg-gray-200 text-highlight-1"} rounded-xl mb-4 cursor-pointer`}
@@ -16,11 +16,11 @@ const MessageCard = ({ id, isActive, setIsActive }) => {
             />
           </div>
           <div className='hidden lg:block text-sm lg:text-base 2xl:text-lg 3xl:text-xl flex-1 lg:pl-4 lg:pr-4 3xl:pl-7 3xl:pr-11'>
-            <p>Monalisa</p>
-            <p>{`That's exactly how I felt 😉`}</p>
+            <p>{listingTitle?.slice(0, 20) ?? '' + '...'}</p>
+            <p>{lastMessage?.slice(0, 20) + '...'}</p>
           </div>
           <div className="hidden lg:block md:text-sm xl:text-base 2xl:text-lg">
-            <p>08:01</p>
+            <p>{lastMessageDate.toLocaleTimeString()}</p>
             <div className="w-7 h-7 flex justify-center items-center text-xs font-trade-gothic-bold text-white bg-highlight-2 rounded-full">
               2
             </div>

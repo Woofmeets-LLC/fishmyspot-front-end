@@ -4,13 +4,17 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { MdCalendarToday } from "react-icons/md";
+import { bookingTimeFormatter } from '../../../../services/date/date-overflow-handler';
 import { preDefinedLongHours } from '../../../../services/listing-spot-data-organiging/availableTimeFormatting';
+import { getSdk } from '../../../../sharetribe/sharetribeSDK';
 import TimeSelect from './TimeSelect';
 
 const SelectDateTime = ({ pondData }) => {
     const [isTimeActive, setIsTimeActive] = useState(false);
     const [selectedTimeItem, setSelectedTimeItem] = useState("Select One");
     const [timeSlot, setTimeSlot] = useState([]);
+    const [timeSlotError, setTimeSlotError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const [dateField, dateMeta, dateHelpers] = useField('date');
     const [timeField, timeMeta, timeHelpers] = useField('time');
@@ -70,8 +74,36 @@ const SelectDateTime = ({ pondData }) => {
     }
 
     const handleTimeChange = (time) => {
-        timeHelpers.setValue(time);
-        console.log("time is", time)
+        setTimeSlotError(false);
+        setLoading(true);
+        const slots = {
+            "06:00 AM - 11:00 AM": { startTime: '06:00', endTime: '11:00' },
+            "11:00 AM - 04:00 PM": { startTime: '11:00', endTime: '16:00' },
+            "04:00 PM - 09:00 PM": { startTime: '16:00', endTime: '21:00' },
+            "09:00 PM - 06:00 AM": { startTime: '21:00', endTime: '06:00' },
+            "06:00 AM - 09:00 PM": { startTime: '06:00', endTime: '21:00' },
+        };
+
+        const timeObject = bookingTimeFormatter(dateField.value, slots[time]);
+
+        getSdk().timeslots.query({
+            listingId: pondData?.id?.uuid,
+            start: new Date(timeObject.bookingStart).toISOString(),
+            end: new Date(timeObject.bookingEnd).toISOString()
+        })
+            .then(res => {
+                setLoading(false);
+                setTimeSlotError(res.data.data.length === 0);
+                res.data.data.length !== 0 && timeHelpers.setValue(time);
+                console.log("checking availabilities", res);
+                // res.data comains the response data
+            })
+            .catch(err => {
+                setLoading(false);
+                setTimeSlotError(true);
+                console.dir(err);
+            });
+
     }
     return (
         <>
@@ -106,12 +138,19 @@ const SelectDateTime = ({ pondData }) => {
                 setSelectedItem={setSelectedTimeItem}
                 selectedItem={selectedTimeItem}
                 items={timeSlot}
+                loading={loading}
                 helper={handleTimeChange}
             />
-
-            {timeMeta.error ? (
-                <div className="mb-3 text-red-500 text-sm">{timeMeta.error}</div>
-            ) : null}
+            <div className="my-2 text-red-500 text-sm">
+                {
+                    timeSlotError &&
+                    <>This time slot is not available!</>
+                }
+                {timeSlotError && timeMeta.error && " & "}
+                {timeMeta.error ? (
+                    <>{timeMeta.error}</>
+                ) : null}
+            </div>
         </>
     );
 };

@@ -216,3 +216,8 @@ Chrome
 .message__scrollbar::-webkit-scrollbar {
     width: 2px;
 }
+
+/* Stripe Card Styling  */
+#card-element {
+    @apply border px-1 py-2 mb-3 rounded;
+}

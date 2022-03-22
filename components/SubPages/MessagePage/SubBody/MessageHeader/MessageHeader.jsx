@@ -20,10 +20,10 @@ const MessageHeader = ({ name, isOnline }) => {
           }
         </p>
       </div>
-      <div className="flex justify-between text-xl xl:text-2xl 3xl:text-3xl space-x-4 xl:space-x-7 xl:mr-7">
+      {/* <div className="flex justify-between text-xl xl:text-2xl 3xl:text-3xl space-x-4 xl:space-x-7 xl:mr-7">
         <BsTelephone className='cursor-pointer' />
         <BsThreeDotsVertical className='cursor-pointer' />
-      </div>
+      </div> */}
     </div>
   );
 };
