@@ -2,6 +2,7 @@
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import * as yup from 'yup';
+import { getSdk } from '../../../../../sharetribe/sharetribeSDK';
 import ForgetPasswordForm from './ForgetPasswordForm';
 
 const ForgetPasswordContainer = () => {
@@ -19,6 +20,13 @@ const ForgetPasswordContainer = () => {
     const handleSubmit = (values) => {
         setIsSuccess(true);
         console.log(values);
+        getSdk().passwordReset.request({
+            email: values.email
+        }, {})
+            .then(res => {
+                // res.data
+            })
+            .catch(err => console.log(err?.message))
     }
     return (
         <div className="sidebar min-h-[310px] max-h-[73vh] pr-2">

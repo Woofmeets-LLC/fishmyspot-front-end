@@ -1,5 +1,3 @@
-import React from 'react';
-
 const MessageCard = ({ id, isActive, setIsActive, listingTitle, lastMessage, lastMessageDate }) => {
   return (
     <div
