@@ -1,78 +1,108 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react';
-import { getSdk } from '../../../../sharetribe/sharetribeSDK';
-import SubBody from '../SubBody';
-import SubSidebar from '../SubSidebar';
-
+import { useEffect, useState } from "react";
+import { unstable_batchedUpdates } from "react-dom/cjs/react-dom.development";
+import { getSdk } from "../../../../sharetribe/sharetribeSDK";
+import SubBody from "../SubBody";
+import SubSidebar from "../SubSidebar";
 
 const SubMessageSection = () => {
   const [transactionIds, setTransactionIds] = useState([]);
   const [includedListingData, setIncludedListingData] = useState({});
   const [includedMessageData, setIncludedMessageData] = useState({});
   const [transactionIdToListingId, setTransactionIdToListingId] = useState({});
-  const [currentUserId, setCurrentUserId] = useState('');
+  const [currentUserId, setCurrentUserId] = useState("");
   const [isActive, setIsActive] = useState(0);
-
 
   useEffect(() => {
     let tempTransactionIds = [];
     let tempTransactionIdToListingId = {};
     let listingData = {};
-    getSdk().transactions.query({
-      only: "order",
-      lastTransitions: ["transition/complete"],
-      include: ['listing'],
-      // "limit.messages": 1,
-      "fields.listing": ["title"],
-    }).then(res => {
-      // console.log(res.data);
-      res?.data?.data?.forEach(item => {
-        tempTransactionIds.push(item.id.uuid);
-        tempTransactionIdToListingId = { ...tempTransactionIdToListingId, [item.id.uuid]: item.relationships.listing.data.id.uuid };
+    getSdk()
+      .transactions.query({
+        only: "order",
+        lastTransitions: ["transition/complete"],
+        include: ["listing"],
+        // "limit.messages": 1,
+        "fields.listing": ["title"],
       })
-      setTransactionIds(tempTransactionIds);
-      setTransactionIdToListingId(tempTransactionIdToListingId);
+      .then((res) => {
+        res?.data?.data?.forEach((item) => {
+          tempTransactionIds.push(item.id.uuid);
+          tempTransactionIdToListingId = {
+            ...tempTransactionIdToListingId,
+            [item.id.uuid]: item.relationships.listing.data.id.uuid,
+          };
+        });
 
-      res?.data?.included.forEach(data => {
-        if (data.type === 'listing') {
-          listingData = { ...listingData, [data.id.uuid]: data.attributes.title || "" };
-        }
+        res?.data?.included.forEach((data) => {
+          if (data.type === "listing") {
+            listingData = {
+              ...listingData,
+              [data.id.uuid]: data.attributes.title || "",
+            };
+          }
+        });
+
+        unstable_batchedUpdates(() => {
+          setTransactionIds(() => tempTransactionIds);
+          setTransactionIdToListingId(() => tempTransactionIdToListingId);
+          setIncludedListingData(() => listingData);
+        });
       });
-      setIncludedListingData(listingData);
-
-
-
-    });
-
   }, []);
 
   useEffect(() => {
-    let tempMessageData = {};
+    const fetchMessage = async (id) => {
+      try {
+        const data = await getSdk().messages.query({
+          transactionId: id,
+          include: ["sender"],
+        });
+        return {
+          TransactionId: id,
+          ...data,
+        };
+      } catch (error) {
+        console.log({
+          [`messageFetchingError ${id}`]: error,
+        });
+        return;
+      }
+    };
 
-    transactionIds.forEach(id => {
+    const fetchMessages = async () => {
+      if (transactionIds?.length === 0) return;
 
-      getSdk().messages.query({
-        transactionId: id,
-        include: ['sender']
-      }).then(res => {
-        // tempMessageData = { ...tempMessageData, [id]: res.data }
-        setIncludedMessageData({ ...includedMessageData, [id]: res.data });
-        // console.log({ [id]: res.data });
-      });
+      const promiseList = await Promise.allSettled([
+        ...transactionIds.map((id) => fetchMessage(id)),
+      ]);
 
-    });
+      const messageResponseList = promiseList
+        .filter((data) => data.status == "fulfilled")
+        .map((data) => data.value);
 
+      const result = messageResponseList.reduce((prevValue, currentValue) => {
+        return {
+          ...prevValue,
+          [currentValue.TransactionId]: currentValue.data,
+        };
+      }, {});
 
+      setIncludedMessageData(() => ({ ...result }));
+    };
+
+    fetchMessages();
   }, [transactionIds]);
 
-
   useEffect(() => {
-    getSdk().currentUser.show({
-      fields: ['id']
-    }).then(res => {
-      // res.data contains the response data
-      setCurrentUserId(res.data.data.id.uuid);
-    });
+    getSdk()
+      .currentUser.show({
+        fields: ["id"],
+      })
+      .then((res) => {
+        // res.data contains the response data
+        setCurrentUserId(res.data.data.id.uuid);
+      });
   }, []);
 
   return (
@@ -88,11 +118,11 @@ const SubMessageSection = () => {
         />
       </div>
       <div className="col-span-10 lg:col-span-8">
-        {/* <SubBody
+        <SubBody
           activeTransactionId={isActive}
           includedMessageData={includedMessageData[isActive]}
           currentUserId={currentUserId}
-        /> */}
+        />
       </div>
     </div>
   );
