@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { unstable_batchedUpdates } from 'react-dom/cjs/react-dom.development';
+import { useCurrentUser } from '../../../../hooks/users/currentUserHooks';
 import { getSdk } from '../../../../sharetribe/sharetribeSDK';
 import SubBody from '../SubBody';
 import SubSidebar from '../SubSidebar';
@@ -12,6 +13,7 @@ const SubMessageSection = () => {
   const [transactionIdToListingId, setTransactionIdToListingId] = useState({});
   const [currentUserId, setCurrentUserId] = useState('');
   const [isActive, setIsActive] = useState(0);
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     let tempTransactionIds = [];
@@ -19,7 +21,10 @@ const SubMessageSection = () => {
     let listingData = {};
     getSdk()
       .transactions.query({
-        only: 'order',
+        only:
+          currentUser?.profile?.publicData?.account_type === 'owner'
+            ? 'sale'
+            : 'order',
         lastTransitions: ['transition/complete'],
         include: ['listing'],
         // "limit.messages": 1,
@@ -34,7 +39,7 @@ const SubMessageSection = () => {
           };
         });
 
-        res?.data?.included.forEach((data) => {
+        res?.data?.included?.forEach((data) => {
           if (data.type === 'listing') {
             listingData = {
               ...listingData,
@@ -49,7 +54,7 @@ const SubMessageSection = () => {
           setIncludedListingData(() => listingData);
         });
       });
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     const fetchMessage = async (id) => {

@@ -3,6 +3,7 @@ import MessageBody from './MessageBody';
 import MessageFooter from './MessageFooter/MessageFooter';
 import MessageHeader from './MessageHeader/MessageHeader';
 import { getSdk } from '../../../../sharetribe/sharetribeSDK';
+import { useCurrentUser } from '../../../../hooks/users/currentUserHooks';
 
 const SubBody = ({
   isActive: activeTransactionId,
@@ -11,6 +12,7 @@ const SubBody = ({
   currentUserId,
 }) => {
   const [messages, setMessages] = useState([]);
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     if (activeTransactionId !== 0) {
@@ -42,7 +44,7 @@ const SubBody = ({
 
   return (
     <div className="w-full h-full flex flex-col pl-2 sm:pl-4 md:pl-0 pr-4 lg:pr-16">
-      <MessageHeader name={'Monalisa'} isOnline={true} />
+      <MessageHeader name={currentUser?.profile?.displayName} isOnline={true} />
       <MessageBody messages={messages} currentUserId={currentUserId} />
       <hr />
       <MessageFooter
