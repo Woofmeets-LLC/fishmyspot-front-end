@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
-import { unstable_batchedUpdates } from "react-dom/cjs/react-dom.development";
-import { getSdk } from "../../../../sharetribe/sharetribeSDK";
-import SubBody from "../SubBody";
-import SubSidebar from "../SubSidebar";
+import { useEffect, useState } from 'react';
+import { unstable_batchedUpdates } from 'react-dom/cjs/react-dom.development';
+import { getSdk } from '../../../../sharetribe/sharetribeSDK';
+import SubBody from '../SubBody';
+import SubSidebar from '../SubSidebar';
 
 const SubMessageSection = () => {
   const [transactionIds, setTransactionIds] = useState([]);
   const [includedListingData, setIncludedListingData] = useState({});
   const [includedMessageData, setIncludedMessageData] = useState({});
   const [transactionIdToListingId, setTransactionIdToListingId] = useState({});
-  const [currentUserId, setCurrentUserId] = useState("");
+  const [currentUserId, setCurrentUserId] = useState('');
   const [isActive, setIsActive] = useState(0);
 
   useEffect(() => {
@@ -19,11 +19,11 @@ const SubMessageSection = () => {
     let listingData = {};
     getSdk()
       .transactions.query({
-        only: "order",
-        lastTransitions: ["transition/complete"],
-        include: ["listing"],
+        only: 'order',
+        lastTransitions: ['transition/complete'],
+        include: ['listing'],
         // "limit.messages": 1,
-        "fields.listing": ["title"],
+        'fields.listing': ['title'],
       })
       .then((res) => {
         res?.data?.data?.forEach((item) => {
@@ -35,10 +35,10 @@ const SubMessageSection = () => {
         });
 
         res?.data?.included.forEach((data) => {
-          if (data.type === "listing") {
+          if (data.type === 'listing') {
             listingData = {
               ...listingData,
-              [data.id.uuid]: data.attributes.title || "",
+              [data.id.uuid]: data.attributes.title || '',
             };
           }
         });
@@ -56,7 +56,7 @@ const SubMessageSection = () => {
       try {
         const data = await getSdk().messages.query({
           transactionId: id,
-          include: ["sender"],
+          include: ['sender'],
         });
         return {
           TransactionId: id,
@@ -78,7 +78,7 @@ const SubMessageSection = () => {
       ]);
 
       const messageResponseList = promiseList
-        .filter((data) => data.status == "fulfilled")
+        .filter((data) => data.status == 'fulfilled')
         .map((data) => data.value);
 
       const result = messageResponseList.reduce((prevValue, currentValue) => {
@@ -97,7 +97,7 @@ const SubMessageSection = () => {
   useEffect(() => {
     getSdk()
       .currentUser.show({
-        fields: ["id"],
+        fields: ['id'],
       })
       .then((res) => {
         // res.data contains the response data
@@ -119,8 +119,9 @@ const SubMessageSection = () => {
       </div>
       <div className="col-span-10 lg:col-span-8">
         <SubBody
-          activeTransactionId={isActive}
-          includedMessageData={includedMessageData[isActive]}
+          isActive={isActive}
+          includedMessageData={includedMessageData}
+          setIncludedMessageData={setIncludedMessageData}
           currentUserId={currentUserId}
         />
       </div>
