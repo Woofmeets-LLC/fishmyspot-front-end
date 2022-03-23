@@ -118,7 +118,13 @@ const PaymentReservation = () => {
   }, [])
 
   return (
-    <HomeLayout>
+    <HomeLayout
+      isPrivate
+      guards={{
+        account_type: 'angler',
+        fallbackUrl: "/"
+      }}
+    >
       <div className="container">
         <div className='lg:w-[800px] xl:w-[965px] mx-auto pt-6 xl:pt-10 pb-16 xl:pb-32'>
           <div className='mb-11'>

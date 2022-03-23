@@ -64,7 +64,7 @@ const Services = () => {
 
   React.useEffect(() => {
     getData(1, true)
-
+    console.log(query)
   }, [query])
 
 

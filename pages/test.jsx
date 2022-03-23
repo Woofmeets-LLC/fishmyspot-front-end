@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useCurrentUser } from "../hooks/users";
 import HomeLayout from "../layouts/HomeLayout";
@@ -20,19 +21,31 @@ const Test = () => {
   };
   const user = useCurrentUser();
   const showReviews = () => {
-    getSdk().reviews.query({
-      subjectId: user.id,
-      state: ['pending']
-    }).then(res => {
-      // res.data contains the response data
-      console.log(res);
-    });
-
+    // getSdk().reviews.show({
+    //   id: "623994ea-9e55-4526-b711-814990e1cf0c"
+    // })
+    //   .then(res => {
+    //     // res.data contains the response data
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.dir(err);
+    //   });
+    axios.post('/api/hello', {
+      userId: "62305252-d42f-47dd-af63-03a080124326",
+      lastTransitions: ["transition/review-1-by-customer"],
+    })
+      .then(listingRes => {
+        console.log(listingRes);
+      })
+      .catch(listingErr => {
+        console.dir(listingErr);
+      })
   }
 
 
   return (
-    <HomeLayout>
+    <HomeLayout isPrivate>
       <div className="my-8 text-center">
         <button
           onClick={showReviews}
