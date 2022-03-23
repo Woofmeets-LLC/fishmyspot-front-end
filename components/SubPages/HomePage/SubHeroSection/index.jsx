@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
+import Link from 'next/link';
 import React from 'react';
 import styles from './SubHeroSection.module.css';
 
@@ -16,11 +17,11 @@ const SubHeroSection = () => {
                     </div>
                     <div className={styles['hero-content']}>
                         <h1 className={styles['hero-title']}>Get Hooked On Unforgettable fishing!</h1>
-                        <button
-                            className={styles['hero-button']}
-                        >
-                            List your spot
-                        </button>
+                        <Link href="/services">
+                            <a className={styles['hero-button']}>
+                                Spot List
+                            </a>
+                        </Link>
                     </div>
                 </div>
             </div>

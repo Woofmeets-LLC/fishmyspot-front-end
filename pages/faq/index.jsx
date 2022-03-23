@@ -4,7 +4,7 @@ import HomeLayout from '../../layouts/HomeLayout';
 
 const Faq = () => {
   return (
-    <HomeLayout>
+    <HomeLayout >
       <section className="bg-[#fbfbfb]">
         <div className="container">
           <SubFaqSection />

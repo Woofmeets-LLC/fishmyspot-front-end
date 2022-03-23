@@ -76,7 +76,12 @@ const AvailableTimeEdit = () => {
     }
 
     return (
-        <HomeLayout>
+        <HomeLayout
+            isPrivate
+            guards={{
+                account_type: "owner",
+                fallbackUrl: "/",
+            }}>
             <EditPondContainer>
                 <Formik
                     enableReinitialize

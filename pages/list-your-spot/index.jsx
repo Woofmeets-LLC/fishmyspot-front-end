@@ -249,7 +249,12 @@ const ListYourPond = () => {
     }
 
     return (
-        <HomeLayout>
+        <HomeLayout
+            isPrivate
+            guards={{
+                account_type: "owner",
+                fallbackUrl: "/",
+            }}>
             <TopImageCard />
             <MultiStepForm
                 initialValues={initialValues}

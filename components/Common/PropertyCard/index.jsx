@@ -17,7 +17,7 @@ const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   useEffect(() => {
     if (user) {
-      const prevFabList = user.profile.publicData?.favouriteList?.length
+      const prevFabList = user?.profile?.publicData?.favouriteList?.length
         ? user.profile.publicData?.favouriteList
         : [];
       for (let i = 0; i < prevFabList.length; i++) {
