@@ -9,11 +9,15 @@ const SubMessageSection = () => {
   const [transactionIds, setTransactionIds] = useState([]);
   const [includedListingData, setIncludedListingData] = useState({});
   const [includedMessageData, setIncludedMessageData] = useState({});
+  const [transactionIdToListingId, setTransactionIdToListingId] = useState({});
   const [currentUserId, setCurrentUserId] = useState('');
   const [isActive, setIsActive] = useState(0);
 
 
   useEffect(() => {
+    let tempTransactionIds = [];
+    let tempTransactionIdToListingId = {};
+    let listingData = {};
     getSdk().transactions.query({
       only: "order",
       lastTransitions: ["transition/complete"],
@@ -21,28 +25,46 @@ const SubMessageSection = () => {
       // "limit.messages": 1,
       "fields.listing": ["title"],
     }).then(res => {
-      const transactionId = res?.data?.data?.[0]?.id?.uuid;
-      if (!transactionId) return;
+      // console.log(res.data);
+      res?.data?.data?.forEach(item => {
+        tempTransactionIds.push(item.id.uuid);
+        tempTransactionIdToListingId = { ...tempTransactionIdToListingId, [item.id.uuid]: item.relationships.listing.data.id.uuid };
+      })
+      setTransactionIds(tempTransactionIds);
+      setTransactionIdToListingId(tempTransactionIdToListingId);
 
-      setTransactionIds([...transactionIds, transactionId]);
-      setIncludedListingData({ ...includedListingData, [transactionId]: res?.data?.included?.shift() });
-      // setIncludedMessageData({ ...includedMessageData, [transactionId]: res.data.included });
-      // setIsActive(transactionIds[0]);
+      res?.data?.included.forEach(data => {
+        if (data.type === 'listing') {
+          listingData = { ...listingData, [data.id.uuid]: data.attributes.title || "" };
+        }
+      });
+      setIncludedListingData(listingData);
 
-      res.data.data.forEach(item => {
-        getSdk().messages.query({
-          transactionId: item.id.uuid,
-          include: ['sender']
-        }).then(res => {
-          // res.data contains the response data
-          // res.data.data.forEach(item => setIncludedMessageData(prevState => [...prevState, item]))
-          // console.log({ transactionId: item.id.uuid, message: res.data })
-          setIncludedMessageData({ ...includedMessageData, [item.id.uuid]: res.data });
-        });
+
+
+    });
+
+  }, []);
+
+  useEffect(() => {
+    let tempMessageData = {};
+
+    transactionIds.forEach(id => {
+
+      getSdk().messages.query({
+        transactionId: id,
+        include: ['sender']
+      }).then(res => {
+        // tempMessageData = { ...tempMessageData, [id]: res.data }
+        setIncludedMessageData({ ...includedMessageData, [id]: res.data });
+        // console.log({ [id]: res.data });
       });
 
     });
-  }, []);
+
+
+  }, [transactionIds]);
+
 
   useEffect(() => {
     getSdk().currentUser.show({
@@ -62,14 +84,15 @@ const SubMessageSection = () => {
           transactionIds={transactionIds}
           includedListingData={includedListingData}
           includedMessageData={includedMessageData}
+          transactionIdToListingId={transactionIdToListingId}
         />
       </div>
       <div className="col-span-10 lg:col-span-8">
-        <SubBody
+        {/* <SubBody
           activeTransactionId={isActive}
           includedMessageData={includedMessageData[isActive]}
           currentUserId={currentUserId}
-        />
+        /> */}
       </div>
     </div>
   );
