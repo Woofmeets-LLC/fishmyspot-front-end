@@ -16,7 +16,11 @@ const Reviewed = () => {
         setLoading(true);
         getSdk().transactions.query({
             only: "order",
-            lastTransitions: ["transition/review-1-by-customer"],
+            lastTransitions: [
+                "transition/review-1-by-customer",
+                "transition/review-2-by-provider",
+                "transition/expire-provider-review-period"
+            ],
             include: ['booking', 'listing', 'provider', 'reviews']
         })
             .then(res => {
@@ -27,6 +31,7 @@ const Reviewed = () => {
                 const bookings = res.data?.included?.filter(item => item.type === 'booking');
                 const listings = res.data?.included?.filter(item => item.type === 'listing');
                 const providers = res.data?.included?.filter(item => item.type === 'user');
+                const reviews = res.data?.included?.filter(item => item.type === 'review');
 
                 const formattedData = transactions?.map(transaction => {
                     return {
@@ -35,7 +40,8 @@ const Reviewed = () => {
                             ...transaction?.relationships,
                             booking: bookings?.find(booking => booking?.id?.uuid === transaction?.relationships?.booking?.data?.id?.uuid),
                             listing: listings?.find(listing => listing?.id?.uuid === transaction?.relationships?.listing?.data?.id?.uuid),
-                            provider: providers?.find(provider => provider?.id?.uuid === transaction?.relationships?.provider?.data?.id?.uuid)
+                            provider: providers?.find(provider => provider?.id?.uuid === transaction?.relationships?.provider?.data?.id?.uuid),
+                            reviews: reviews?.filter(review => transaction?.relationships?.reviews?.data?.map(rev => rev?.id?.uuid).includes(review?.id?.uuid))
                         }
                     }
                 });
@@ -47,8 +53,15 @@ const Reviewed = () => {
                 console.log(err);
             });
     }, []);
+
+    console.log("pl", purchaseList);
     return (
-        <HomeLayout>
+        <HomeLayout
+            isPrivate
+            guards={{
+                account_type: "angler",
+                fallbackUrl: "/",
+            }}>
             <div className='bg-[#fcfcfc]'>
                 <div className='container flex flex-col gap-4 lg:gap-5 pb-10 md:pb-12 lg:pb-16 2xl:pb-20'>
                     <div className='pt-6 sm:pt-8 md:pt-10 2xl:pt-12 mb-3 md:mb-4 2xl:mb-5'>

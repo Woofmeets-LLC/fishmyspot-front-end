@@ -4,7 +4,12 @@ import HomeLayout from '../../layouts/HomeLayout';
 
 const SellerDashboard = () => {
   return (
-    <HomeLayout>
+    <HomeLayout
+      isPrivate
+      guards={{
+        account_type: "owner",
+        fallbackUrl: "/",
+      }}>
       <div className='container'>
         <SubSellerDashboard />
       </div>

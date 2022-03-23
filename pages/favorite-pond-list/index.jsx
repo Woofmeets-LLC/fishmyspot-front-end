@@ -4,7 +4,12 @@ import HomeLayout from '../../layouts/HomeLayout';
 
 const FavoritePondList = () => {
   return (
-    <HomeLayout>
+    <HomeLayout
+      isPrivate
+      guards={{
+        account_type: "angler",
+        fallbackUrl: "/",
+      }}>
       <section className="bg-[#fbfbfb]">
         <div className="container">
           <SubFavoritePondList />

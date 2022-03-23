@@ -61,7 +61,12 @@ const PondListingEdit = () => {
 
     }
     return (
-        <HomeLayout>
+        <HomeLayout
+            isPrivate
+            guards={{
+                account_type: "owner",
+                fallbackUrl: "/",
+            }}>
             <EditPondContainer>
                 <Formik
                     enableReinitialize={true}

@@ -4,7 +4,7 @@ import HomeLayout from '../../layouts/HomeLayout';
 
 const UserAccount = () => {
   return (
-    <HomeLayout>
+    <HomeLayout isPrivate>
       <div className="bg-[#fbfbfb]">
         <div className='container'>
           <SubUserAccountSection />
