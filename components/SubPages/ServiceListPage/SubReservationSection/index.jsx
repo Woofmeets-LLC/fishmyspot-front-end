@@ -49,7 +49,6 @@ const SubReservationSection = ({ pondData }) => {
             time: yup.string().required('Time is required!'),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
             dispatch(setBookingData(values));
             setTimeout(() => {
               push('/payment-reservation')

@@ -28,8 +28,8 @@ const SubServices = ({ items, fetchData, hasMore, images }) => {
               image={images?.[item?.relationships?.images?.data?.[0]?.id?.uuid]?.variants?.default?.url}
               title={item?.attributes?.title.substring(0, 30) + (item?.attributes?.title.length > 30 ? '...' : '')}
               price={`$ ${parseFloat(item?.attributes?.publicData?.halfDay).toFixed(2)}`}
-              ratings={3}
-
+              ratings={item?.attributes?.publicData?.absoluteRating || item?.attributes?.publicData?.rating}
+              reviewCount={item?.attributes?.publicData?.reviewCount || 0}
             />
           )
         })

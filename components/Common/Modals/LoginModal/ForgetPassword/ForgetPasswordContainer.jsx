@@ -19,14 +19,15 @@ const ForgetPasswordContainer = () => {
 
     const handleSubmit = (values) => {
         setIsSuccess(true);
-        console.log(values);
         getSdk().passwordReset.request({
             email: values.email
         }, {})
             .then(res => {
                 // res.data
             })
-            .catch(err => console.log(err?.message))
+            .catch(err => {
+
+            })
     }
     return (
         <div className="sidebar min-h-[310px] max-h-[73vh] pr-2">

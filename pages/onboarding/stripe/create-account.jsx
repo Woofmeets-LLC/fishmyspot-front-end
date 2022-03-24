@@ -13,13 +13,11 @@ const CreateStripeAccount = () => {
       if (!user) return;
       try {
         const data = await getSdk().stripeAccount.fetch();
-        console.log(data);
       } catch (error) {
-        console.log(error.status);
+
       }
     };
 
-    console.log(user);
     getStripeInfo();
   }, [user]);
 

@@ -68,9 +68,7 @@ const SubMessageSection = () => {
           ...data,
         };
       } catch (error) {
-        console.log({
-          [`messageFetchingError ${id}`]: error,
-        });
+
         return;
       }
     };

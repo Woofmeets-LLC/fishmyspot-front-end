@@ -13,10 +13,9 @@ const Test = () => {
       .ownListings.show({ id: listingId })
       .then((res) => {
         // res.data contains the response data
-        console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+
       });
   };
   const user = useCurrentUser();
@@ -36,7 +35,7 @@ const Test = () => {
       lastTransitions: ["transition/review-1-by-customer"],
     })
       .then(listingRes => {
-        console.log(listingRes);
+
       })
       .catch(listingErr => {
         console.dir(listingErr);

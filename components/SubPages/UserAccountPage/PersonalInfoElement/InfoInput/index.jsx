@@ -1,7 +1,6 @@
 import { useField } from 'formik';
 
 const InfoInput = ({ label, ...props }) => {
-  console.log(props)
   const [field, meta] = useField(props);
   return (
     <div>

@@ -222,7 +222,7 @@ const ListYourPond = () => {
         setLoading(true);
         // Data organizing without images
         const newData = listingDataOrganizing(values);
-        console.log("loading...", newData);
+
         // Formatting Images array and uploading
         const allImages = [
             ...values["ATP-images-file"],

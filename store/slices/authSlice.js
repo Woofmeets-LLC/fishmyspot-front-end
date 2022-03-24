@@ -37,10 +37,10 @@ const authSlice = createSlice({
       getSdk()
         ?.logout()
         ?.then((loginRes) => {
-          console.log('Logout successful.');
+          
         })
         ?.catch((err) => {
-          console.log('Logout failed.');
+          
         });
     },
     updateFavoriteList: (state, { payload }) => {
@@ -54,9 +54,7 @@ const authSlice = createSlice({
           },
         })
         .then((res) => {
-          console.log(
-            res?.data?.data?.attributes?.profile?.publicData?.favoriteList
-          );
+          
         });
     },
   },

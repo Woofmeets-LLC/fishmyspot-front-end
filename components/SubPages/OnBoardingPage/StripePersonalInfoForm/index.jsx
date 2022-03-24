@@ -6,14 +6,12 @@ import { FormInput, FormOption, FormSelect } from "../../../Common";
 
 const PersonalInfoContainer = () => {
   const onSumbit = async (values, helpers) => {
-    console.log("Submitted", {
-      values,
-    });
+
     const { token, error } = createStripeAccountToken(values);
     if (error) {
       console.log(error);
     } else {
-      console.log(token);
+      // console.log(token);
     }
   };
 

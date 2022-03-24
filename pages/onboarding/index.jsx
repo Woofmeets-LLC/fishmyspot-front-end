@@ -1,38 +1,38 @@
-import axios from "axios";
-import Link from "next/link";
-import { useState } from "react";
-import { FaExternalLinkAlt } from "react-icons/fa";
+// import axios from "axios";
+// import Link from "next/link";
+// import { useState } from "react";
+// import { FaExternalLinkAlt } from "react-icons/fa";
 
 const PaypalOnboardButton = () => {
-  const [redirectUrl, setRedirectUrl] = useState(undefined);
-  const [loading, setLoadingState] = useState(false);
+  // const [redirectUrl, setRedirectUrl] = useState(undefined);
+  // const [loading, setLoadingState] = useState(false);
 
-  const getPayPalOnboardingLink = async () => {
-    setLoadingState(true);
+  // const getPayPalOnboardingLink = async () => {
+  //   setLoadingState(true);
 
-    try {
-      const res = await axios.post(
-        "http://localhost:5000/paypal/generate-signup-link",
-        {
-          tracker_id: 1,
-        }
-      );
-      const data = res.data;
-      console.log(data);
-      const onboardUrl = data?.links?.[1]?.href;
-      if (!onboardUrl) {
-        throw Error("No redirect url found");
-      }
-      setRedirectUrl(() => onboardUrl);
-    } catch (error) {
-      console.log(error);
-    }
-    setLoadingState(false);
-  };
+  //   try {
+  //     const res = await axios.post(
+  //       "http://localhost:5000/paypal/generate-signup-link",
+  //       {
+  //         tracker_id: 1,
+  //       }
+  //     );
+  //     const data = res.data;
+  //     console.log(data);
+  //     const onboardUrl = data?.links?.[1]?.href;
+  //     if (!onboardUrl) {
+  //       throw Error("No redirect url found");
+  //     }
+  //     setRedirectUrl(() => onboardUrl);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   setLoadingState(false);
+  // };
 
   return (
     <>
-      {!redirectUrl && (
+      {/* {!redirectUrl && (
         <button
           onClick={getPayPalOnboardingLink}
           key={"paypal-onboard-button"}
@@ -72,7 +72,7 @@ const PaypalOnboardButton = () => {
             </a>
           </Link>
         </div>
-      )}
+      )} */}
     </>
   );
 };
@@ -80,13 +80,13 @@ const PaypalOnboardButton = () => {
 const OnBoardingPage = () => {
   return (
     <>
-      <div className="min-w-full min-h-screen flex flex-col gap-4 items-center justify-center">
+      {/* <div className="min-w-full min-h-screen flex flex-col gap-4 items-center justify-center">
         <h1 className="font-food-truck text-2xl">Seller Onboarding page</h1>
         <button className="bg-gradient-to-tr from-purple-500 to-purple-400 p-2 rounded-md text-white shadow-md w-max">
           Get Stripe Onboarding Url
         </button>
         <PaypalOnboardButton></PaypalOnboardButton>
-      </div>
+      </div> */}
     </>
   );
 };
