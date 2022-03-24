@@ -22,7 +22,6 @@ const ReadyToReview = () => {
             .then(res => {
                 setLoading(false);
                 // res.data contains the response data
-                console.log(res);
                 const transactions = res.data?.data;
                 const bookings = res.data?.included?.filter(item => item.type === 'booking');
                 const listings = res.data?.included?.filter(item => item.type === 'listing');
@@ -44,11 +43,9 @@ const ReadyToReview = () => {
             })
             .catch(err => {
                 setLoading(false);
-                console.log(err);
             });
     }, []);
 
-    console.log("pl", purchaseList);
     return (
         <HomeLayout
             isPrivate

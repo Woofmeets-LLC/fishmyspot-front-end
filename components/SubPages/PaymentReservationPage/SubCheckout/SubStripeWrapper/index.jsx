@@ -8,9 +8,8 @@ const SubStripeWrapper = ({ children }) => {
     useEffect(() => {
         const getLoad = async () => {
             try {
-                const load = await loadStripe('pk_test_51JDrfGL6dPTcqE42bUjVOMBz9IlrztzO3WQSLYuIsVaQik9uBgC5l3ubS3NngycpFfOZDAXHHBDzL9CghHFjkkzd00LKieQOlz');
+                const load = await loadStripe(process.env.NEXT_STRIPE_PUBLISHABLE_KEY);
                 setCustomLoadStripe(load);
-                console.log("load", load);
             } catch (err) {
                 setCustomLoadStripe(null);
                 console.dir("err", err);

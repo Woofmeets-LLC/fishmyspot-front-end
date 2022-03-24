@@ -95,7 +95,6 @@ const SelectDateTime = ({ pondData }) => {
                 setLoading(false);
                 setTimeSlotError(res.data.data.length === 0);
                 res.data.data.length !== 0 && timeHelpers.setValue(time);
-                console.log("checking availabilities", res);
                 // res.data comains the response data
             })
             .catch(err => {

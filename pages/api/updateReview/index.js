@@ -9,7 +9,8 @@ export default async function handler(req, res) {
             await integrationSdk.listings.update({
                 id: listingId,
                 publicData: {
-                    rating,
+                    rating:Math.floor(+rating),
+                    absoluteRating: rating,
                     reviewCount,
                 },
             }, {

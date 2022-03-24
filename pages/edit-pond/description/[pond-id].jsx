@@ -46,7 +46,6 @@ const DescriptionEdit = () => {
             })
             .catch(err => {
                 setLoading(false)
-                console.log(err);
             });
     }
 
@@ -100,13 +99,11 @@ const DescriptionEdit = () => {
                 duration: 3000,
                 loading: 'Pond data updating...',
                 success: (res) => {
-                    console.log({ "toast-res": res });
                     setTimeout(() => push("/own-spot-list"), 2000)
                     setIsSubmitting(false);
                     return `Your pond data updated successfully!`
                 },
                 error: (err) => {
-                    console.log(err);
                     setIsSubmitting(false);
                     return `Pond data updating failed. Please try again!`;
                 },

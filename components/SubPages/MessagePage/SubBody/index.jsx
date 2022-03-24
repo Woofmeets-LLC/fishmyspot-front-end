@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useCurrentUser } from '../../../../hooks/users/currentUserHooks';
+import { getSdk } from '../../../../sharetribe/sharetribeSDK';
 import MessageBody from './MessageBody';
 import MessageFooter from './MessageFooter/MessageFooter';
 import MessageHeader from './MessageHeader/MessageHeader';
-import { getSdk } from '../../../../sharetribe/sharetribeSDK';
-import { useCurrentUser } from '../../../../hooks/users/currentUserHooks';
 
 const SubBody = ({
   isActive: activeTransactionId,
@@ -32,7 +32,6 @@ const SubBody = ({
             res?.data?.data?.length !==
             includedMessageData[activeTransactionId]?.data.length
           ) {
-            console.log('new messages');
             setIncludedMessageData({
               ...includedMessageData,
               [activeTransactionId]: res?.data,

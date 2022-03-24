@@ -19,7 +19,7 @@
 }
 
 .ratings {
-  @apply flex space-x-1 xl:space-x-2 text-highlight-3 text-sm xl:text-base;
+  @apply flex items-center space-x-1 xl:space-x-2 text-highlight-3 text-sm xl:text-base;
 }
 
 .price {
