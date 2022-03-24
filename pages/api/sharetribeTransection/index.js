@@ -6,7 +6,7 @@ export default function handler(req, res) {
     lastTransitions: ["transition/request"]
   }).then((response) => {
     // res.data contains the response data
-    console.log(response);
+    
     res.status(200).json(response);
   }).catch(err => res.status(200).json(err))
 

@@ -66,7 +66,6 @@ const Header = () => {
             collect: "currently_due",
         })
             .then(res => {
-                console.log(res)
                 if (typeof (window) !== "undefined") {
                     window.location = res.data?.data?.attributes?.url;
                 }
@@ -75,8 +74,6 @@ const Header = () => {
                 console.dir(err)
             })
     }
-
-    console.log("kk", user?.profile?.publicData?.account_type);
 
     return (
         <>

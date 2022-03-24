@@ -44,7 +44,6 @@ const ResetPassword = () => {
     }, {})
       .then(res => {
         // res.data
-        console.log(res.data);
         toast.success('Password reset successfully');
         router.push('/');
       })

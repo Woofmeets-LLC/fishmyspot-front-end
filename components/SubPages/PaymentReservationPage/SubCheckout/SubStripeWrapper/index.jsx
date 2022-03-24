@@ -10,7 +10,6 @@ const SubStripeWrapper = ({ children }) => {
             try {
                 const load = await loadStripe(process.env.NEXT_STRIPE_PUBLISHABLE_KEY);
                 setCustomLoadStripe(load);
-                console.log("load", load);
             } catch (err) {
                 setCustomLoadStripe(null);
                 console.dir("err", err);

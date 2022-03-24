@@ -33,7 +33,6 @@ const PropertyCard = ({ delay, image, id, title, ratings, price, reviewCount = 0
 
   const addToFavorites = () => {
     if (user) {
-      console.log(user);
       if (user.profile.publicData.account_type == 'angler') {
         const prevFabList = user.profile.publicData?.favouriteList?.length
           ? user.profile.publicData?.favouriteList

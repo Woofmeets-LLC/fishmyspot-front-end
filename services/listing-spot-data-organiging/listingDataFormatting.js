@@ -121,6 +121,5 @@ export const listingDataOrganizing = (values) => {
             "license": values?.license,
         }
     }
-console.log(data);
     return data
 }

@@ -1,12 +1,11 @@
 import { Form, Formik } from 'formik';
-import { FormInput } from '../../../Common';
+import toast from 'react-hot-toast';
 import * as yup from 'yup';
 import { getSdk } from '../../../../sharetribe/sharetribeSDK';
-import toast from 'react-hot-toast';
+import { FormInput } from '../../../Common';
 
 const ChangePassword = () => {
   const handleSubmit = (values) => {
-    console.log(values);
     getSdk().currentUser.changePassword({
       currentPassword: values.currentPassword,
       newPassword: values.newPassword

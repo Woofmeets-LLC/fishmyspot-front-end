@@ -45,15 +45,11 @@ const PondDetails = () => {
         }
         setPondImages(formattedData?.relationships?.images?.data?.map(image => image?.attributes?.variants?.default?.url));
         setPondData(formattedData)
-        console.log(res);
       })
       .catch(err => {
         setLoading(false);
-        console.log(err);
       })
   }, [query])
-
-  console.log(pondData);
 
   return (
     <HomeLayout>

@@ -20,7 +20,6 @@ const SubCheckoutForm = ({ setStep, id, secret, billing_details }) => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log({ isAgreeFromDataSets: document.getElementById("agree-with-terms").dataset.isAgree });
         if (document.getElementById("agree-with-terms").dataset.isAgree != 'true') {
             toast.error("You have to be agree with terms and conditions!", { duration: 4000 });
             // will not read below code is the user is not agree with terms and condition
@@ -42,32 +41,35 @@ const SubCheckoutForm = ({ setStep, id, secret, billing_details }) => {
                 }
             }
         }
-        console.log({ requestData });
-        setLoading(true);
-        const result = await stripe.confirmCardPayment(secret, requestData);
 
-        if (result.error) {
+        setLoading(true);
+        try {
+            const result = await stripe.confirmCardPayment(secret, requestData);
+
+            if (result.error) {
+                setLoading(false);
+                // Show error to your customer (for example, payment details incomplete)
+                toast.error(result.error.message, { duration: 4000 });
+
+            } else {
+                getSdk().transactions.transition({
+                    id: id,
+                    transition: "transition/confirm-payment",
+                    params: {}
+                }, {
+                    expand: true
+                })
+                    .then(sdkResult => {
+                        setLoading(false);
+                        setStep(prevStep => prevStep + 1);
+                    })
+                    .catch(sdkError => {
+                        setLoading(false);
+                        console.dir(sdkError);
+                    })
+            }
+        } catch (error) {
             setLoading(false);
-            // Show error to your customer (for example, payment details incomplete)
-            toast.error(result.error.message, { duration: 4000 });
-            console.log(result.error.message);
-        } else {
-            getSdk().transactions.transition({
-                id: id,
-                transition: "transition/confirm-payment",
-                params: {}
-            }, {
-                expand: true
-            })
-                .then(sdkResult => {
-                    setLoading(false);
-                    setStep(prevStep => prevStep + 1);
-                    console.log(sdkResult)
-                })
-                .catch(sdkError => {
-                    setLoading(false);
-                    console.dir(sdkError);
-                })
         }
     };
 

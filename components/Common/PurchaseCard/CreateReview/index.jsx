@@ -15,7 +15,6 @@ const CreateReview = ({ purchaseData, setPurchaseList, listingId, transactionId 
 
 
     const handleClose = () => {
-        console.log("Closed");
         setShowReviewForm(false);
         enableBodyScroll(document?.body);
     };

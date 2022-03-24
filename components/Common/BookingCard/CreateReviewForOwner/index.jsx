@@ -14,7 +14,6 @@ const CreateReviewForOnwer = ({ purchaseData, setPurchaseList, listingId, transa
 
 
     const handleClose = () => {
-        console.log("Closed");
         setShowReviewForm(false);
         enableBodyScroll(document?.body);
     };
@@ -32,7 +31,6 @@ const CreateReviewForOnwer = ({ purchaseData, setPurchaseList, listingId, transa
             expand: true
         })
             .then(res => {
-                console.log(res);
                 toast.success("Review submitted successfully");
                 setLoading(false);
             })

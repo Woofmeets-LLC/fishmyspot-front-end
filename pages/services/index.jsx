@@ -59,7 +59,6 @@ const Services = () => {
 
       // q.bounds = boundsCalculator(1000, parseFloat(lat), parseFloat(lng))
     }
-    console.log({ q });
     getSdk().listings.query(q)
       .then(res => {
         if (res.data.meta.totalItems) {
@@ -86,7 +85,6 @@ const Services = () => {
 
   useEffect(() => {
     getData(1, true)
-    console.log(query)
   }, [query])
 
 
