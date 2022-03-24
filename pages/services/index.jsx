@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as sharetribeSdk from 'sharetribe-flex-sdk';
 import Categories from '../../components/SubPages/ServicesPage/Categories';
 import SubServices from '../../components/SubPages/ServicesPage/SubServicesList';
@@ -9,10 +9,10 @@ const { types } = sharetribeSdk
 
 const Services = () => {
   const [images, setImages] = useState({})
-  const [query, setQuery] = React.useState({ location: '', typeFish: [], rating: [], experience: [], price: [0, 1000] });
-  const [hasMore, setHasMore] = React.useState(true)
-  const [currentPage, setCurrentPage] = React.useState(1)
-  const [data, setData] = React.useState([])
+  const [query, setQuery] = useState({ location: '', typeFish: [], rating: [], experience: [], price: [0, 1000] });
+  const [hasMore, setHasMore] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [data, setData] = useState([])
 
   const getData = (page, newData) => {
     if (newData) {
@@ -38,6 +38,28 @@ const Services = () => {
       q.origin = new types.LatLng(parseFloat(lat), parseFloat(lng))
       // q.bounds = boundsCalculator(1000, parseFloat(lat), parseFloat(lng))
     }
+    if (query.rating.length) {
+      const ratingOptions = {
+        'One star': 1,
+        'Two star': 2,
+        'Three star': 3,
+        'Four star': 4,
+        'Five star': 5
+      };
+      const rating = query.rating.map(r => ratingOptions[r]);
+      let min, max;
+      if (rating.length > 1) {
+        min = Math.min(...rating);
+        max = Math.max(...rating);
+      } else {
+        min = Math.min(...rating);
+        max = min + 1;
+      }
+      q.pub_rating = `${min},${max}`;
+
+      // q.bounds = boundsCalculator(1000, parseFloat(lat), parseFloat(lng))
+    }
+    console.log({ q });
     getSdk().listings.query(q)
       .then(res => {
         if (res.data.meta.totalItems) {
@@ -62,11 +84,10 @@ const Services = () => {
       })
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     getData(1, true)
     console.log(query)
   }, [query])
-
 
 
 

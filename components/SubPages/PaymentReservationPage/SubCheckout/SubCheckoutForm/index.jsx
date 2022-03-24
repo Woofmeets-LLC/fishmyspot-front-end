@@ -49,6 +49,7 @@ const SubCheckoutForm = ({ setStep, id, secret, billing_details }) => {
         if (result.error) {
             setLoading(false);
             // Show error to your customer (for example, payment details incomplete)
+            toast.error(result.error.message, { duration: 4000 });
             console.log(result.error.message);
         } else {
             getSdk().transactions.transition({

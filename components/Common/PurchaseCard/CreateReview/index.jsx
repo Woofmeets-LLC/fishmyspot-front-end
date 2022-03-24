@@ -23,7 +23,8 @@ const CreateReview = ({ purchaseData, setPurchaseList, listingId, transactionId 
     const handleSubmit = (values) => {
         setLoading(true);
 
-        const prevRating = +purchaseData?.relationships?.listing?.attributes?.publicData?.rating || 0;
+        const prevRating = +purchaseData?.relationships?.listing?.attributes?.publicData?.absoluteRating ||
+            +purchaseData?.relationships?.listing?.attributes?.publicData?.rating || 0;
         const prevReviewCount = +purchaseData?.relationships?.listing?.attributes?.publicData?.reviewCount || 0;
         const newReviewCount = prevReviewCount + 1;
         const newRating = (prevRating * prevReviewCount + +values?.rating) / newReviewCount;
