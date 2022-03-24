@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import SubServices from '../../components/SubPages/ServicesPage/SubServicesList';
 import { useCurrentUser } from '../../hooks/users';
