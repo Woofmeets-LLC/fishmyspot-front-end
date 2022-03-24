@@ -10,7 +10,6 @@ import FormTextarea from './FormElements/FormTextarea';
 import MultiStepForm from './FormElements/MultiStepForm';
 import BackBtn from './FormElements/MultiStepForm/BackBtn';
 import NextBtn from './FormElements/MultiStepForm/NextBtn';
-import Guards from './Guards';
 import ListItem from './ListItem';
 import LoginModal from './Modals/LoginModal';
 import ResetPasswordModal from './Modals/ResetPasswordModal';
@@ -43,7 +42,6 @@ export {
     PurchaseOrCancellationCard,
     PageHeader,
     ListItem,
-    StatusButton,
-    Guards
+    StatusButton
 };
 
