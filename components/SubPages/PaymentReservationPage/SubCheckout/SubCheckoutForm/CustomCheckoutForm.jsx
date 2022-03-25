@@ -4,7 +4,7 @@ import SubCheckoutForm from '.';
 import SubStripeWrapper from '../SubStripeWrapper';
 import CheckoutInput from './CheckoutInput';
 
-const CustomCheckoutForm = ({ setStep, tran, sk }) => {
+const CustomCheckoutForm = ({ setStep, tran, sk, reset }) => {
     const [submittedBillingInfo, setSubmittedBillingInfo] = useState(false);
     const [addressError, setAddressError] = useState({ isError: false, message: "" });
     const [errors, setErrors] = useState({
@@ -87,6 +87,7 @@ const CustomCheckoutForm = ({ setStep, tran, sk }) => {
         "name": name,
         "phone": phone
     }
+
     return (
         <>
             {
@@ -201,7 +202,8 @@ const CustomCheckoutForm = ({ setStep, tran, sk }) => {
                         setStep={setStep}
                         id={tran}
                         secret={sk}
-                        billing_details={billing_details} />
+                        billing_details={billing_details}
+                        reset={reset} />
                 </SubStripeWrapper>
             }
         </>
