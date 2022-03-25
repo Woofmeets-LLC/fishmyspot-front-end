@@ -5,7 +5,7 @@ import SubDetails from '../SubDetails/SubDetails';
 import SubPaymentMethod from '../SubPaymentMethod';
 import StepperContainer from './StepperContainer';
 
-const SubPaymentStepper = ({ transactionInfo }) => {
+const SubPaymentStepper = ({ transactionInfo, reset }) => {
     const [step, setStep] = useState(0);
 
     const stepperArray = [
@@ -19,7 +19,7 @@ const SubPaymentStepper = ({ transactionInfo }) => {
             case 0:
                 return <SubPaymentMethod step={step} setStep={setStep} />;
             case 1:
-                return <SubCheckout setStep={setStep} transactionInfo={transactionInfo} />;
+                return <SubCheckout setStep={setStep} transactionInfo={transactionInfo} reset={reset} />;
             case 2:
                 return <PaymentSuccess />;
             default:

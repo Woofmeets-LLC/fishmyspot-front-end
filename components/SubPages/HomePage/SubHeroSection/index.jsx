@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
 import Link from 'next/link';
-import React from 'react';
 import styles from './SubHeroSection.module.css';
 
 const SubHeroSection = () => {

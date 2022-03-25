@@ -17,6 +17,7 @@ const PaymentReservation = () => {
     tran: "",
     sk: "",
   });
+  const [keyValue, setKeyValue] = useState(1);
 
   const bookingData = useSelector(state => state.bookingData);
   const router = useRouter();
@@ -117,6 +118,11 @@ const PaymentReservation = () => {
     handleInitiateTransaction()
   }, [])
 
+  const reset = () => {
+    setKeyValue(keyValue + 1);
+
+  }
+
   return (
     <HomeLayout
       isPrivate
@@ -145,7 +151,7 @@ const PaymentReservation = () => {
                   ? (
                     <div className="text-red-500 font-trade-gothic text-lg my-5">{error.message}</div>
                   )
-                  : (<SubPaymentStepper transactionInfo={transactionInfo} />)
+                  : (<SubPaymentStepper transactionInfo={transactionInfo} reset={reset} key={keyValue} />)
               )
           }
         </div>

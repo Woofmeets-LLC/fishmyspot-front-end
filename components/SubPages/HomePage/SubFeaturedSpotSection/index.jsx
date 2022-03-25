@@ -1,6 +1,5 @@
-import React from 'react';
-import FeaturedSpot from '../FeauturedSpot';
 import Slider from "react-slick";
+import FeaturedSpot from '../FeauturedSpot';
 
 
 const SubFeaturedSpotSection = () => {
