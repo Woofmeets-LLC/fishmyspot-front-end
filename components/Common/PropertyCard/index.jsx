@@ -2,7 +2,8 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { FaHeart, FaMapMarkerAlt, FaRegHeart, FaStar } from 'react-icons/fa';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { FaHeart, FaMapMarkerAlt, FaRegHeart } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useCurrentUser } from '../../../hooks/users/index';
 import { getSdk } from '../../../sharetribe/sharetribeSDK';
@@ -11,13 +12,14 @@ import {
 } from '../../../store/slices/authSlice';
 import styles from './PropertyCard.module.css';
 
-const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
+const PropertyCard = ({ delay, image, id, title, ratings, price, reviewCount = 0 }) => {
   const user = useCurrentUser();
   const dispatch = useDispatch();
   const [isFavorite, setIsFavorite] = useState(false);
+
   useEffect(() => {
     if (user) {
-      const prevFabList = user.profile.publicData?.favouriteList?.length
+      const prevFabList = user?.profile?.publicData?.favouriteList?.length
         ? user.profile.publicData?.favouriteList
         : [];
       for (let i = 0; i < prevFabList.length; i++) {
@@ -31,7 +33,6 @@ const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
 
   const addToFavorites = () => {
     if (user) {
-      console.log(user);
       if (user.profile.publicData.account_type == 'angler') {
         const prevFabList = user.profile.publicData?.favouriteList?.length
           ? user.profile.publicData?.favouriteList
@@ -135,11 +136,10 @@ const PropertyCard = ({ delay, image, id, title, ratings, price }) => {
           </div>
           <div className="flex justify-between">
             <div className={styles.ratings}>
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
+              {
+                [1, 2, 3, 4, 5].map((i) => (i <= Math.floor(+ratings || 5) ? <AiFillStar key={i} /> : <AiOutlineStar key={i} />))
+              }
+              {" "}({reviewCount})
             </div>
             <div>
               <span className={styles.price}>{price}</span>

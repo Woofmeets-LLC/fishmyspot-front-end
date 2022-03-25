@@ -172,10 +172,8 @@ const getEditAvailableTimeData = (pondData) => {
             ?.map(entry => `${preDefinedHours[entry?.startTime]}-${preDefinedHours[entry?.endTime]}`);
         const selectedHours = [...new Set(tempSelectedHours)];
 
-        console.log("Every day selected", {selectedHours});
         return preFormatAvailableTime(pondData, { isSelected: true, hours: selectedHours });
     } else {
-        console.log("not all day")
         return preFormatAvailableTime(pondData);
     }
 

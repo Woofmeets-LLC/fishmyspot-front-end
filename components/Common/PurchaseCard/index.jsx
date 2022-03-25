@@ -2,8 +2,9 @@ import { format } from 'date-fns';
 import React from 'react';
 import { StatusButton } from '..';
 import ListItem from '../ListItem';
+import CreateReview from './CreateReview';
 
-const PurchaseCard = ({ purchaseData, status }) => {
+const PurchaseCard = ({ setPurchaseList, purchaseData, status }) => {
     const convertAmountToFloat = (amount) => parseFloat((+amount / 100) || 0).toFixed(2);
     const titleFormatter = (title) => title?.replace("line-item/", "")?.replaceAll("-", " ")
 
@@ -22,12 +23,17 @@ const PurchaseCard = ({ purchaseData, status }) => {
 
     const experiences = purchaseData?.attributes?.lineItems
         ?.filter(item => !['line-item/half-day', 'line-item/full-day', 'line-item/service-charge'].includes(item.code)) || [];
+
+    const serviceCharge = purchaseData?.attributes?.lineItems
+        ?.find(item => ['line-item/service-charge'].includes(item.code))
+        ?.lineTotal?.amount || 0;
+
     const total = convertAmountToFloat(+purchaseData?.attributes?.payoutTotal?.amount);
 
     return (
         <div className='md:w-[650px] 2xl:w-[690px] bg-white shadow-md p-4 md:py-6 md:px-7 2xl:py-8 2xl:px-9 rounded-lg'>
-            <div className='md:flex md:justify-between gap-3'>
-                <div className='text-primary 2xl:text-lg space-y-3'>
+            <div className='grid grid-cols-12 gap-3'>
+                <div className='col-span-9 text-primary 2xl:text-lg space-y-3'>
                     <div className='bg-white shadow-md p-4 rounded-lg'>
                         <ListItem
                             title={"Pond Owner"}
@@ -73,6 +79,11 @@ const PurchaseCard = ({ purchaseData, status }) => {
                         }
 
                         <ListItem
+                            title={"Service Charge"}
+                            value={`$${convertAmountToFloat(+serviceCharge)}`}
+                        />
+
+                        <ListItem
                             title={"Total"}
                             value={`$${total}`}
                         />
@@ -82,8 +93,17 @@ const PurchaseCard = ({ purchaseData, status }) => {
                         value={"Visa Debit Card"}
                     /> */}
                     </div>
+
+                    {
+                        status == 'Ready for review' &&
+                        <CreateReview
+                            purchaseData={purchaseData}
+                            setPurchaseList={setPurchaseList}
+                            transactionId={purchaseData?.id?.uuid}
+                            listingId={purchaseData?.relationships?.listing?.id?.uuid} />
+                    }
                 </div>
-                <div className='mt-4 md:mt-0'>
+                <div className='col-span-3 mt-4 md:mt-0 order-first md:order-last'>
                     <StatusButton title={status} />
                 </div>
             </div>

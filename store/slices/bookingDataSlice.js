@@ -24,7 +24,6 @@ const bookingDataSlice = createSlice({
             state.time = action.payload.time;
             state.serviceFee = action.payload.serviceFee;
             state.total = action.payload.total;
-            console.log(action);
         },
     },
 });

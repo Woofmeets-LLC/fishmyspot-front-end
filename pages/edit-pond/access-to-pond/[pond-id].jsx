@@ -39,7 +39,6 @@ const AccessToPondEdit = () => {
       })
       .catch(err => {
         setLoading(false)
-        console.log(err);
       });
   }
 
@@ -75,13 +74,11 @@ const AccessToPondEdit = () => {
       duration: 3000,
       loading: 'Pond listing data updating...',
       success: (res) => {
-        console.log({ "toast-res": res });
         setTimeout(() => push("/own-spot-list"), 2000)
         setIsSubmitting(false);
         return `Your pond updated successfully!`
       },
       error: (err) => {
-        console.log(err);
         setIsSubmitting(false);
         return `Pond updating failed. Please try again!`;
       },
@@ -90,7 +87,12 @@ const AccessToPondEdit = () => {
   }
 
   return (
-    <HomeLayout>
+    <HomeLayout
+      isPrivate
+      guards={{
+        account_type: "owner",
+        fallbackUrl: "/",
+      }}>
       <EditPondContainer>
         <Formik
           enableReinitialize

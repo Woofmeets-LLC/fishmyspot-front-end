@@ -17,6 +17,7 @@ const PaymentReservation = () => {
     tran: "",
     sk: "",
   });
+  const [keyValue, setKeyValue] = useState(1);
 
   const bookingData = useSelector(state => state.bookingData);
   const router = useRouter();
@@ -117,8 +118,19 @@ const PaymentReservation = () => {
     handleInitiateTransaction()
   }, [])
 
+  const reset = () => {
+    setKeyValue(keyValue + 1);
+
+  }
+
   return (
-    <HomeLayout>
+    <HomeLayout
+      isPrivate
+      guards={{
+        account_type: 'angler',
+        fallbackUrl: "/"
+      }}
+    >
       <div className="container">
         <div className='lg:w-[800px] xl:w-[965px] mx-auto pt-6 xl:pt-10 pb-16 xl:pb-32'>
           <div className='mb-11'>
@@ -139,7 +151,7 @@ const PaymentReservation = () => {
                   ? (
                     <div className="text-red-500 font-trade-gothic text-lg my-5">{error.message}</div>
                   )
-                  : (<SubPaymentStepper transactionInfo={transactionInfo} />)
+                  : (<SubPaymentStepper transactionInfo={transactionInfo} reset={reset} key={keyValue} />)
               )
           }
         </div>

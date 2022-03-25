@@ -22,7 +22,6 @@ const ResetPasswordModal = () => {
 
     const handleSubmit = (values) => {
         setIsSuccess(true);
-        console.log(values);
     }
     const handleClose = () => {
         enableBodyScroll(document?.body);

@@ -222,7 +222,7 @@ const ListYourPond = () => {
         setLoading(true);
         // Data organizing without images
         const newData = listingDataOrganizing(values);
-        console.log("loading...", newData);
+
         // Formatting Images array and uploading
         const allImages = [
             ...values["ATP-images-file"],
@@ -249,7 +249,12 @@ const ListYourPond = () => {
     }
 
     return (
-        <HomeLayout>
+        <HomeLayout
+            isPrivate
+            guards={{
+                account_type: "owner",
+                fallbackUrl: "/",
+            }}>
             <TopImageCard />
             <MultiStepForm
                 initialValues={initialValues}

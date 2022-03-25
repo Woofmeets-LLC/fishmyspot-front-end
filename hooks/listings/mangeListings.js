@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { getSdk } from '../../sharetribe/sharetribeSDK';
 import useCurrentUser from '../users/currentUserHooks';
 
@@ -33,9 +32,7 @@ const useMangeListing = () => {
         }
       )
       .then((res) => {
-        console.log(
-          res?.data?.data?.attributes?.profile?.publicData?.favoriteList
-        );
+        
       });
     setFavoriteList(newFavoriteList);
   };

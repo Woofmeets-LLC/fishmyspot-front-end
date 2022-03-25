@@ -37,10 +37,10 @@ const authSlice = createSlice({
       getSdk()
         ?.logout()
         ?.then((loginRes) => {
-          console.log('Logout successful.');
+          
         })
         ?.catch((err) => {
-          console.log('Logout failed.');
+          
         });
     },
     updateFavoriteList: (state, { payload }) => {
@@ -54,9 +54,7 @@ const authSlice = createSlice({
           },
         })
         .then((res) => {
-          console.log(
-            res?.data?.data?.attributes?.profile?.publicData?.favoriteList
-          );
+          
         });
     },
   },
@@ -73,7 +71,10 @@ const authSlice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       if (action.payload.data) {
         state.isLoggedIn = true;
-        state.user = action.payload.data.data.attributes;
+        state.user = {
+          id:action.payload.data.data.id.uuid,
+          ...action.payload.data.data.attributes
+        };
         state.isLoading = false;
       } else {
         state.isLoggedIn = false;

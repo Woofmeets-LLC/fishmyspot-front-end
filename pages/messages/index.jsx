@@ -1,10 +1,9 @@
-import React from 'react';
 import SubMessageSection from '../../components/SubPages/MessagePage/SubMessageSection';
 import HomeLayout from '../../layouts/HomeLayout';
 
-const Message = () => {
+const Messages = () => {
   return (
-    <HomeLayout>
+    <HomeLayout isPrivate>
       <div className='lg:ml-4 mt-5 mx-auto bg-[#fcfcfc] overflow-hidden'>
         <SubMessageSection />
       </div>
@@ -12,4 +11,4 @@ const Message = () => {
   );
 };
 
-export default Message;
+export default Messages;

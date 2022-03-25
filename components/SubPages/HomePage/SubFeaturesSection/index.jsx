@@ -1,6 +1,5 @@
-import React from 'react';
-import { GiCirclingFish } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa";
+import { GiCirclingFish } from "react-icons/gi";
 import { MdHome } from "react-icons/md";
 import styles from './SubFeaturesSection.module.css';
 

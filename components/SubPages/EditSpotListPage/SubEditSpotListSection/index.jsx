@@ -29,11 +29,10 @@ const SubEditSpotListSection = () => {
         setOwnListings(formattedData);
       })
       .catch(err => {
-        console.log(err);
+
       });
   }, []);
 
-  console.log(ownListings);
   return (
     <div className='grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-5 2xl:gap-7 pt-8 pb-8 md:pt-12 md:pb-14'>
       {
