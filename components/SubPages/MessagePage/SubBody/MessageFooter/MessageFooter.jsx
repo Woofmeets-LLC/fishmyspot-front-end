@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { TiCameraOutline } from "react-icons/ti";
 import { IoSendSharp } from "react-icons/io5";
 import { getSdk } from '../../../../../sharetribe/sharetribeSDK';
 
@@ -18,10 +17,11 @@ const MessageFooter = ({ messages, setMessages, activeTransactionId, currentUser
 
       getSdk().messages.send({
         transactionId: activeTransactionId,
-        content: inputValue
+        content: inputValue,
       }, {
         expand: true
       }).then(res => {
+        console.log(res);
         // res.data contains the response data
         const messageData = { ...res.data.data, relationships: { sender: { data: { id: { _sdkType: 'UUID', uuid: currentUserId } } } } };
         setMessages([...messages, messageData]);
