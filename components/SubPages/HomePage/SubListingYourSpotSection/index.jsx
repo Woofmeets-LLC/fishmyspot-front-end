@@ -8,7 +8,7 @@ const SubListingYourSpotSection = () => {
         <div className='grid md:grid-cols-2'>
           <div className='mx-auto my-auto'>
             <img
-              src="/images/FatherSonFishing.jpg"
+              src="/images/fatherSonFishing.jpg"
               alt="Father Son Fishing"
               className='w-[240px] h-[240px] md:w-[300px] md:h-[300px] xl:w-[400px] xl:h-[400px] 2xl:w-[484px] 2xl:h-[484px] object-cover rounded-full'
             />
