@@ -15,10 +15,10 @@ const SubHeroSection = () => {
                         />
                     </div>
                     <div className={styles['hero-content']}>
-                        <h1 className={styles['hero-title']}>Get Hooked On Unforgettable fishing!</h1>
+                        <h1 className={styles['hero-title']}>UNFORGETTABLE FISHING LOCALLY</h1>
                         <Link href="/services">
                             <a className={styles['hero-button']}>
-                                Spot List
+                                Fish Now
                             </a>
                         </Link>
                     </div>

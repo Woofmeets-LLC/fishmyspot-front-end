@@ -58,7 +58,7 @@ const UserRating = ({ ratings, setRatings }) => {
       setRatings((prevState) => {
         return {
           ...prevState,
-          rating: [...prevState.rating, rating]
+          rating: [rating]
         }
       });
     }

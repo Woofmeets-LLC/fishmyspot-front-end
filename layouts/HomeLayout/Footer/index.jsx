@@ -8,8 +8,8 @@ const Footer = () => {
             <div className="container">
                 <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 md:gap-20 text-white py-10 xl:py-16 3xl:py-20">
                     <div className="md:-mt-6 col-span-2 md:col-span-1">
-                        <div className="w-[200px] mb-8">
-                            <img className="w-full" src="/images/logo.png" alt="" />
+                        <div className="w-[200px] h-[100px] flex items-center">
+                            <img className="w-1/2" src="/images/footer-logo.png" alt="" />
                         </div>
                         <div className="font-trade-gothic">
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
@@ -23,6 +23,9 @@ const Footer = () => {
                             </Link>
                             <Link href="/about">
                                 <a className="block font-trade-gothic mb-2">About</a>
+                            </Link>
+                            <Link href="/blogs">
+                                <a className="block font-trade-gothic mb-2">Blog</a>
                             </Link>
                             <Link href="/family">
                                 <a className="block font-trade-gothic mb-2">Family</a>
@@ -40,13 +43,13 @@ const Footer = () => {
                     </div>
                     <div className="">
                         <h2 className="text-xl uppercase font-trade-gothic-bold mb-2">Terms & Policies</h2>
-                        <Link href="/about">
+                        <Link href="/terms-of-use">
                             <a className="block font-trade-gothic mb-2">Terms of Use</a>
                         </Link>
-                        <Link href="/about">
+                        <Link href="/help">
                             <a className="block font-trade-gothic mb-2">Help Center</a>
                         </Link>
-                        <Link href="/family">
+                        <Link href="/privacy">
                             <a className="block font-trade-gothic mb-2">Privacy Policy</a>
                         </Link>
                         <Link href="/press">

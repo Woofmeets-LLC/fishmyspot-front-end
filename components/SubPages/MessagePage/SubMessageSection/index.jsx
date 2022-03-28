@@ -112,7 +112,10 @@ const SubMessageSection = () => {
 
   return (
     <div className="w-full grid grid-cols-12 md:gap-x-[30px]">
-      <div className="col-span-2 lg:col-span-4">
+      {
+        transactionIds.length ? (
+        <>
+        <div className="col-span-2 lg:col-span-4">
         <SubSidebar
           isActive={isActive}
           setIsActive={setIsActive}
@@ -123,13 +126,28 @@ const SubMessageSection = () => {
         />
       </div>
       <div className="col-span-10 lg:col-span-8">
-        <SubBody
+        {
+          isActive ? (
+            <SubBody
           isActive={isActive}
           includedMessageData={includedMessageData}
           setIncludedMessageData={setIncludedMessageData}
           currentUserId={currentUserId}
         />
+          ) : (
+            <div className="sm:text-xl md:text-2xl xl:text-3xl h-full flex justify-center items-center font-trade-gothic-bold text-primary">
+              <h1>Select Transaction</h1>
+            </div>
+          )
+        }
       </div>
+        </>
+      ) : (
+        <div className="col-span-full sm:text-xl md:text-2xl xl:text-3xl font-trade-gothic-bold flex justify-center items-center h-screen text-primary">
+          <h1>Make A Transaction First.</h1>
+        </div>
+      )
+    }
     </div>
   );
 };
