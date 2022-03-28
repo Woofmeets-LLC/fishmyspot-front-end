@@ -18,7 +18,7 @@ const SubHeroSection = () => {
                         <h1 className={styles['hero-title']}>Get Hooked On Unforgettable fishing!</h1>
                         <Link href="/services">
                             <a className={styles['hero-button']}>
-                                Spot List
+                                Fish Now
                             </a>
                         </Link>
                     </div>
