@@ -18,6 +18,10 @@
     src: url("/fonts/Trade-Gothic-LT-Bold.ttf");
 }
 
+.overflow-custom {
+    -webkit-overflow-scrolling: touch;
+}
+
 /* rc slider css [start] */
 .rc-slider-track.rc-slider-track-1 {
     @apply bg-primary;
@@ -63,6 +67,7 @@ Chrome
 /* Custom scroll bar Firefox */
 .sidebar {
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     scrollbar-color: #f7be32 #ddd !important;
     scrollbar-width: 3px !important;
 }

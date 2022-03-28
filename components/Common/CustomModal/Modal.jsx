@@ -76,8 +76,10 @@ const Modal = ({
                             variants={modalVariants}
                             transition={{ duration: 0.3 }}
                             id="modalContainer"
-                            style={{ borderRadius: rounded + "px" }}
-                            className={`relative z-[1501] w-auto min-w-[300px] max-w-[95vw] h-auto min-h-[150px] max-h-[95vh] overflow-x-hidden ${isOverflowY ? "overflow-y-auto" : " overflow-y-hidden"} ${isTransparentBG ? "bg-transparent" : "bg-white"}`}>
+                            style={{
+                                borderRadius: rounded + "px"
+                            }}
+                            className={`relative z-[1501] w-auto min-w-[300px] max-w-[95vw] h-auto min-h-[150px] max-h-[95vh] overflow-x-hidden ${isOverflowY ? "overflow-y-auto overflow-custom" : " overflow-y-hidden"} ${isTransparentBG ? "bg-transparent" : "bg-white"}`}>
                             {/* You have to control this modal width form the child elements */}
                             {children}
                         </motion.div>
