@@ -60,13 +60,13 @@ const SubServicesDetailsSection = ({ pondData }) => {
           </p>
         </div>
         <div>
-          <div className='flex space-x-12 sm:space-x-12 mb-4 md:mb-6 xl:mb-8 2xl:mb-11'>
+          <div className='grid grid-cols-2 mb-4 md:mb-6 xl:mb-8 2xl:mb-11'>
             <div className='flex'>
-              <div className='mt-4 2xl:mt-5'>
+              <div className='w-8 mt-4 2xl:mt-5'>
                 <img
                   src="/images/Pond-Acre-Icon.svg"
                   alt="Pond Acre Icon"
-                  className="w-10 h-2"
+                  className="w-7 -mt-1 h-2"
                 />
               </div>
               <div>
@@ -79,14 +79,14 @@ const SubServicesDetailsSection = ({ pondData }) => {
               </div>
             </div>
             <div className="flex">
-              <div>
+              <div className='w-8'>
                 <img
                   src="/images/Catch-Requirements-Icon.svg"
                   alt="Catch Requirements Icon"
-                  className="w-6 md:w-8 h-4 md:h-5 xl:h-6 mt-2"
+                  className="w-4 h-5 mt-2 mx-auto"
                 />
               </div>
-              <div>
+              <div className="ml-1">
                 <Features
                   title={"CATCH REQUIREMENTS"}
                   items={[
@@ -96,13 +96,13 @@ const SubServicesDetailsSection = ({ pondData }) => {
               </div>
             </div>
           </div>
-          <div className='flex space-x-10 sm:space-x-14 mb-4 md:mb-6 xl:mb-8 2xl:mb-11'>
+          <div className='grid grid-cols-2 mb-4 md:mb-6 xl:mb-8 2xl:mb-11'>
             <div className="flex space-x-1">
-              <div className='mt-3'>
+              <div className='w-8 mt-3'>
                 <img
                   src='/images/Amenities-Icon.svg'
                   alt='Amenities Icon'
-                  className='w-4 2xl:w-5 -mt-1'
+                  className='w-5 -mt-2 mx-auto'
                 />
               </div>
               <div>
@@ -113,11 +113,11 @@ const SubServicesDetailsSection = ({ pondData }) => {
               </div>
             </div>
             <div className="flex space-x-1">
-              <div className='mt-4'>
+              <div className='w-8 mt-4'>
                 <img
                   src="/images/Type-of-Fish-Icon.svg"
                   alt="Fish Icon"
-                  className='w-5 md:w-6 -mt-1'
+                  className='w-6 -mt-[6px] mx-auto'
                 />
               </div>
               <div>
@@ -128,19 +128,21 @@ const SubServicesDetailsSection = ({ pondData }) => {
               </div>
             </div>
           </div>
-          <div className="flex space-x-1">
-            <div className="mt-4">
-              <img
-                src="/images/Experiences-Icon.svg"
-                alt="Experiences Icon"
-                className='w-4 xl:w-5 -mt-2'
-              />
-            </div>
-            <div>
-              <Features
-                title={"Experinces"}
-                items={pondData?.attributes?.publicData?.experiences}
-              />
+          <div className='grid grid-cols-2 mb-4 md:mb-6 xl:mb-8 2xl:mb-11'>
+            <div className="flex space-x-1">
+              <div className="w-8 mt-4">
+                <img
+                  src="/images/Experiences-Icon.svg"
+                  alt="Experiences Icon"
+                  className='w-5 -mt-2 mx-auto'
+                />
+              </div>
+              <div>
+                <Features
+                  title={"Experiences"}
+                  items={pondData?.attributes?.publicData?.experiences}
+                />
+              </div>
             </div>
           </div>
         </div>

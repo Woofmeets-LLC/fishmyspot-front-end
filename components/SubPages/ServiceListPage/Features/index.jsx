@@ -7,8 +7,10 @@ const Features = ({ title, items = [] }) => {
       {
         items.map((item, i) => {
           return (
-            <div key={i} className='flex items-center space-x-4 mb-1 lg:mb-2 2xl:mb-3'>
-              <div className='w-2 h-2 bg-secondary rounded-full'></div>
+            <div key={i} className='flex space-x-4 mb-1 lg:mb-2 2xl:mb-3'>
+              <div className="w-2 h-6 flex items-center">
+               <div className='w-2 h-2 bg-secondary rounded-full'></div>
+              </div>
               <div className='text-base 2xl:text-lg text-highlight-1 font-trade-gothic capitalize'>{item}</div>
             </div>
           )
