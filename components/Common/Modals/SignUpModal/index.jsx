@@ -1,4 +1,4 @@
-import { enableBodyScroll } from 'body-scroll-lock';
+// import { enableBodyScroll } from 'body-scroll-lock';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -65,7 +65,7 @@ const SignUpModal = () => {
 
     const handleClose = () => {
         dispatch(setCloseSignUpModal());
-        enableBodyScroll(document?.body);
+        // enableBodyScroll(document?.body);
     }
 
     return (
