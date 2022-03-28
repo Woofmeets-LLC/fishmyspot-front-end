@@ -1,4 +1,4 @@
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+// import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 
@@ -34,10 +34,10 @@ const Modal = ({
         }
     };
     useEffect(() => {
-        if (typeof (disableBodyScroll) == 'function') {
-            // Disabled when modal is open
-            isOpen && disableBodyScroll(document.body)
-        };
+        // if (typeof (disableBodyScroll) == 'function') {
+        //     // Disabled when modal is open
+        //     isOpen && disableBodyScroll(document.body)
+        // };
     }, [isOpen])
     const closeModal = (target) => {
         if (typeof onClose === 'function') {
@@ -45,7 +45,7 @@ const Modal = ({
             if ('close' in target.dataset) {
                 onClose()
                 // Enabled when modal is closed
-                enableBodyScroll(document.body)
+                // enableBodyScroll(document.body)
             }
         }
     }
@@ -76,10 +76,8 @@ const Modal = ({
                             variants={modalVariants}
                             transition={{ duration: 0.3 }}
                             id="modalContainer"
-                            style={{
-                                borderRadius: rounded + "px"
-                            }}
-                            className={`relative overflow-custom z-[1501] w-auto min-w-[300px] max-w-[95vw] h-[500px] min-h-[150px] max-h-[95vh] overflow-x-hidden ${isOverflowY ? "overflow-y-scroll overflow-custom" : " overflow-y-scroll "} ${isTransparentBG ? "bg-transparent" : "bg-white"}`}>
+                            style={{ borderRadius: rounded + "px" }}
+                            className={`relative z-[1501] w-auto min-w-[300px] max-w-[95vw] h-auto min-h-[150px] max-h-[95vh] overflow-x-hidden ${isOverflowY ? "overflow-y-auto" : " overflow-y-hidden"} ${isTransparentBG ? "bg-transparent" : "bg-white"}`}>
                             {/* You have to control this modal width form the child elements */}
                             {children}
                         </motion.div>

@@ -73,17 +73,15 @@ const SignUpModal = () => {
             isOpen={showSignUpModal}
             isOverflowY={false}
             rounded={15}
-            onClose={handleClose}
-        >
+            onClose={handleClose}>
             <div className="text-right pt-3 pr-5 mb-3">
                 <button onClick={handleClose}>
                     <FaTimes />
                 </button>
             </div>
-
-            <div className="sm:w-[350px] smd:w-[420px] h-full md:w-[500px] 2xl:w-[593px] pl-8 xl:pl-10 2xl:pl-14 3xl:pl-20 pr-6 xl:pr-8 2xl:pr-12 3xl:pr-[72px] pt-4 pb-10 3xl:pt-6 3xl:pb-10">
-                <h2 className="font-food-truck text-3xl xl:text-4xl 2xl:text-[44px] 3xl:text-5xl text-primary text-center">CREATE AN ACCOUNT</h2>
-                <div className="pr-2">
+            <h2 className="font-food-truck text-3xl xl:text-4xl 2xl:text-[44px] 3xl:text-5xl text-primary text-center">CREATE AN ACCOUNT</h2>
+            <div className="sm:w-[350px] smd:w-[420px] md:w-[500px] 2xl:w-[593px] min-h-[300px] max-h-[90vh] pl-8 xl:pl-10 2xl:pl-14 3xl:pl-20 pr-6 xl:pr-8 2xl:pr-12 3xl:pr-[72px] pt-4 pb-10 3xl:pt-6 3xl:pb-10">
+                <div className="sidebar min-h-[200px] max-h-[57vh] pr-2">
 
                     {/* Formik form  */}
                     <Formik
