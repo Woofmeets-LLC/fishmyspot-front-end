@@ -1,9 +1,11 @@
 import React from 'react';
-import { FaStar } from "react-icons/fa";
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import Features from '../Features';
 
 const SubServicesDetailsSection = ({ pondData }) => {
 
+  const ratings = pondData?.attributes?.publicData?.absoluteRating || pondData?.attributes?.publicData?.rating
+  const reviewCount = pondData?.attributes?.publicData?.reviewCount || 0;
   const formattingString = (string) => {
     const formattedString = string?.replace(/-n-/g, ' & ').toLowerCase();
     return formattedString;
@@ -38,16 +40,18 @@ const SubServicesDetailsSection = ({ pondData }) => {
         <h1 className='text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-[40px] 3xl:text-5xl text-primary font-food-truck uppercase mb-4 2xl:mb-6'>
           {pondData?.attributes?.title}
         </h1>
-        <div className='flex items-center space-x-10 xl:text-lg text-highlight-1 mb-4 2xl:mb-6'>
-          <div className='flex text-highlight-3 space-x-[6px]'>
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
+        <div className='flex items-center space-x-3 xl:text-lg text-highlight-1 mb-4 2xl:mb-6'>
+          <div className='flex text-highlight-3 space-x-2'>
+            {
+              [1, 2, 3, 4, 5].map((i) => (
+                i <= Math.floor(+ratings || 5)
+                  ? <AiFillStar key={i} className="text-2xl" />
+                  : <AiOutlineStar key={i} className="text-2xl" />
+              ))
+            }
           </div>
           <div>
-            (11)
+            ({reviewCount})
           </div>
         </div>
         <div className='mb-4'>
@@ -60,7 +64,7 @@ const SubServicesDetailsSection = ({ pondData }) => {
           </p>
         </div>
         <div>
-          <div className='grid grid-cols-2 mb-4 md:mb-6 xl:mb-8 2xl:mb-11'>
+          <div className='grid sm:grid-cols-2 mb-4 md:mb-6 xl:mb-8 2xl:mb-11'>
             <div className='flex'>
               <div className='w-8 mt-4 2xl:mt-5'>
                 <img
@@ -69,7 +73,7 @@ const SubServicesDetailsSection = ({ pondData }) => {
                   className="w-7 -mt-1 h-2"
                 />
               </div>
-              <div>
+              <div className="ml-1 sm:ml-0">
                 <Features
                   title={"POND ACREAGE"}
                   items={[
@@ -96,7 +100,7 @@ const SubServicesDetailsSection = ({ pondData }) => {
               </div>
             </div>
           </div>
-          <div className='grid grid-cols-2 mb-4 md:mb-6 xl:mb-8 2xl:mb-11'>
+          <div className='grid sm:grid-cols-2 mb-4 md:mb-6 xl:mb-8 2xl:mb-11'>
             <div className="flex space-x-1">
               <div className='w-8 mt-3'>
                 <img
@@ -128,7 +132,7 @@ const SubServicesDetailsSection = ({ pondData }) => {
               </div>
             </div>
           </div>
-          <div className='grid grid-cols-2 mb-4 md:mb-6 xl:mb-8 2xl:mb-11'>
+          <div className='grid sm:grid-cols-2 mb-4 md:mb-6 xl:mb-8 2xl:mb-11'>
             <div className="flex space-x-1">
               <div className="w-8 mt-4">
                 <img

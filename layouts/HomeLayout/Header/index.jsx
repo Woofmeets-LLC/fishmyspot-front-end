@@ -233,9 +233,9 @@ const Header = () => {
                                 <Link href="/messages" >
                                     <a className={`block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]`}>Message</a>
                                 </Link>
-                                <Link href="/notifications" >
+                                {/* <Link href="/notifications" >
                                     <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Notification </a>
-                                </Link>
+                                </Link> */}
                                 {
                                     user?.profile?.publicData?.account_type === "angler" &&
                                     <Link href="/favorite-pond-list" >
@@ -245,9 +245,9 @@ const Header = () => {
                                 <Link href={user?.profile?.publicData?.account_type === "angler" ? "/settings" : "/seller-dashboard"} >
                                     <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Dashboard </a>
                                 </Link>
-                                <Link href="/cancellation" >
+                                {/* <Link href="/cancellation" >
                                     <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Cancellation  </a>
-                                </Link>
+                                </Link> */}
                                 {
                                     user?.profile?.publicData?.account_type === "angler" &&
                                     <Link href="/help" >
