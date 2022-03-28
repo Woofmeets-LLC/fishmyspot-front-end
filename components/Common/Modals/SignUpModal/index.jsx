@@ -80,8 +80,8 @@ const SignUpModal = () => {
                 </button>
             </div>
             <h2 className="font-food-truck text-3xl xl:text-4xl 2xl:text-[44px] 3xl:text-5xl text-primary text-center">CREATE AN ACCOUNT</h2>
-            <div className="sidebar sm:w-[350px] smd:w-[420px] md:w-[500px] 2xl:w-[593px] min-h-[300px] max-h-[90vh] pl-8 xl:pl-10 2xl:pl-14 3xl:pl-20 pr-6 xl:pr-8 2xl:pr-12 3xl:pr-[72px] pt-4 pb-10 3xl:pt-6 3xl:pb-10">
-                <div className="min-h-[200px] pr-2">
+            <div className="sm:w-[350px] smd:w-[420px] md:w-[500px] 2xl:w-[593px] min-h-[300px] max-h-[90vh] pl-8 xl:pl-10 2xl:pl-14 3xl:pl-20 pr-6 xl:pr-8 2xl:pr-12 3xl:pr-[72px] pt-4 pb-10 3xl:pt-6 3xl:pb-10">
+                <div className="sidebar min-h-[200px] max-h-[57vh] pr-2">
 
                     {/* Formik form  */}
                     <Formik
