@@ -79,7 +79,7 @@ const Modal = ({
                             style={{
                                 borderRadius: rounded + "px"
                             }}
-                            className={`relative overflow-custom no-scrollbar z-[1501] w-auto min-w-[300px] max-w-[95vw] h-auto min-h-[150px] max-h-[95vh] overflow-x-hidden ${isOverflowY ? "overflow-y-auto overflow-custom" : " overflow-y-scroll "} ${isTransparentBG ? "bg-transparent" : "bg-white"}`}>
+                            className={`relative overflow-custom z-[1501] w-auto min-w-[300px] max-w-[95vw] h-[500px] min-h-[150px] max-h-[95vh] overflow-x-hidden ${isOverflowY ? "overflow-y-scroll overflow-custom" : " overflow-y-scroll "} ${isTransparentBG ? "bg-transparent" : "bg-white"}`}>
                             {/* You have to control this modal width form the child elements */}
                             {children}
                         </motion.div>
