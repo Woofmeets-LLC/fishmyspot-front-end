@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import toast from 'react-hot-toast';
 import { getSdk } from '../../../../../sharetribe/sharetribeSDK';
 
-const SubCheckoutForm = ({ setStep, id, secret, billing_details }) => {
+const SubCheckoutForm = ({ setStep, id, secret, billing_details, reset }) => {
     const [loading, setLoading] = useState(false);
 
     const stripe = useStripe();
@@ -50,7 +50,7 @@ const SubCheckoutForm = ({ setStep, id, secret, billing_details }) => {
                 setLoading(false);
                 // Show error to your customer (for example, payment details incomplete)
                 toast.error(result.error.message, { duration: 4000 });
-
+                reset();
             } else {
                 getSdk().transactions.transition({
                     id: id,
@@ -70,6 +70,7 @@ const SubCheckoutForm = ({ setStep, id, secret, billing_details }) => {
             }
         } catch (error) {
             setLoading(false);
+            reset();
         }
     };
 

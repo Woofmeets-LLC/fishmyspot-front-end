@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
 import { login } from '../../store/slices/authSlice';
 import { setShowLoginModal } from '../../store/slices/modalsSlice';
-import Footer from './Footer';
+// import Footer from './Footer';
 import Header from './Header';
+
+const Footer = dynamic(() => import('./Footer'), { ssr: false });
 
 const HomeLayout = ({
     children,

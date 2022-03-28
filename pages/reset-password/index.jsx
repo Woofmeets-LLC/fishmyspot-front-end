@@ -44,10 +44,13 @@ const ResetPassword = () => {
     }, {})
       .then(res => {
         // res.data
-        toast.success('Password reset successfully');
+        toast.success('Password reset successfully', { duration: 4000 });
         router.push('/');
       })
-      .catch(err => toast.error("Opps, something went wrong"))
+      .catch(err => {
+        toast.error("Opps, something went wrong", { duration: 2000 });
+        router.push('/');
+      })
   }
 
   return (
