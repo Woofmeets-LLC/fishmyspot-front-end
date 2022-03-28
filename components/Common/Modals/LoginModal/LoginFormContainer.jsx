@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Form, Formik } from 'formik';
 import { useRouter } from "next/router";
 import React, { useState } from 'react';
@@ -13,7 +12,6 @@ import LoginForm from './LoginForm';
 
 const LoginFormContainer = ({ setShowForgetPassword }) => {
     // States
-    const [isAngler, setIsAngler] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
     const router = useRouter();
@@ -36,34 +34,27 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
         // Setting loader
         setIsLoading(true);
 
-        const loginInfo = { ...values, type: isAngler ? "angler" : "owner" };
-        axios.post('/api/users/type-verification', loginInfo)
-            .then(res => {
-                getSdk()
-                    ?.login({ username: loginInfo.email, password: loginInfo.password })
-                    ?.then(loginData => {
-                        setIsLoading(false);
-                        dispatch(setCloseLoginModal());
-                        dispatch(setCloseSignUpModal());
-
-                        if (typeof (window) !== "undefined") {
-                            window.location.reload();
-                        }
-                    })
-                    ?.catch(err => {
-                        setIsLoading(false);
-                        toast("Login failed", { type: "error" });
-                    });
-            })
-            .catch(err => {
+        const loginInfo = { ...values };
+        getSdk()
+            ?.login({ username: loginInfo.email, password: loginInfo.password })
+            ?.then(loginData => {
                 setIsLoading(false);
-                toast("User not found", { type: "error" });
+                dispatch(setCloseLoginModal());
+                dispatch(setCloseSignUpModal());
+
+                if (typeof (window) !== "undefined") {
+                    window.location.reload();
+                }
             })
+            ?.catch(err => {
+                setIsLoading(false);
+                toast("Login failed", { type: "error" });
+            });
     }
     return (
         <>
             <h2 className="font-food-truck text-3xl xl:text-4xl 2xl:text-[44px] 3xl:text-5xl text-primary text-center mb-3">LOG IN</h2>
-            <div className="flex justify-center items-center font-trade-gothic-bold mb-3">
+            {/* <div className="flex justify-center items-center font-trade-gothic-bold mb-3">
                 <button
                     onClick={() => setIsAngler(false)}
                     className={`w-1/2 pb-2 border-b-4 transition text-lg ${isAngler ? "border-gray-300" : "border-secondary"}`}>Pond Owner</button>
@@ -71,7 +62,7 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
                     onClick={() => setIsAngler(true)}
                     className={`w-1/2 pb-2 border-b-4 transition text-lg ${!isAngler ? "border-gray-300" : "border-secondary"}`}>Angler</button>
 
-            </div>
+            </div> */}
             <div className="no-scrollbar min-h-[200px] max-h-[56vh] pr-2">
 
 
@@ -101,7 +92,7 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
                             {
                                 isLoading
                                     ? "Loading..."
-                                    : `Log In as ${isAngler ? "Angler" : "Pond Owner"}`
+                                    : `Log In`
                             }
 
                         </button>

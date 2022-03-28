@@ -33,8 +33,8 @@ const SignUpForm = () => {
                         type="checkbox"
                         className="w-4 h-4 mr-2 accent-secondary"
                         {...field} />
-                    I agree to <span className="ml-1 font-trade-gothic-bold border-b border-primary mr-1">Fish My Spot</span>{" "}  policy and
-                    <Link href="/"><a className="ml-1 font-trade-gothic-bold border-b border-primary">Terms of use</a></Link>
+                    I agree to <span className="ml-1 font-trade-gothic-bold border-primary mr-1">Fish My Spot</span>{" "}  <Link href="/privacy"><a className="ml-1 font-trade-gothic-bold border-b border-primary">Privacy</a></Link> and
+                    <Link href="/terms-of-use"><a className="ml-1 font-trade-gothic-bold border-b border-primary">Terms of use</a></Link>
                 </label>
                 {meta.touched && meta.error ? (
                     <div className="mt-2 text-red-500 text-sm">{meta.error}</div>
