@@ -1,6 +1,4 @@
-import { FaHeart } from "react-icons/fa";
 import { GiCirclingFish } from "react-icons/gi";
-import { MdHome } from "react-icons/md";
 import styles from './SubFeaturesSection.module.css';
 
 const SubFeaturesSection = () => {
@@ -25,7 +23,10 @@ const SubFeaturesSection = () => {
           <div className='text-center'>
             <div className={styles['icon-container']}>
               <span className={styles['icons']}>
-                <FaHeart />
+                <img
+                  src="/images/001-camera.png"
+                  className="w-[30px] h-[30px]"
+                  alt="New Memories" />
               </span>
             </div>
             <div className='pt-6'>
@@ -36,7 +37,10 @@ const SubFeaturesSection = () => {
           <div className='text-center'>
             <div className={styles['icon-container']}>
               <span className={styles['icons']}>
-                <MdHome />
+                <img
+                  src="/images/002-boat.png"
+                  className="w-[30px] h-[30px]"
+                  alt="Personalized experience" />
               </span>
             </div>
             <div className='pt-6'>

@@ -44,7 +44,8 @@ const SubEditSpotListSection = () => {
             image={listing?.relationships?.images?.data?.[0]?.attributes?.variants?.default?.url}
             title={listing?.attributes?.title?.substring(0, 30) + (listing?.attributes?.title?.length > 30 ? '...' : '')}
             price={`$${listing?.attributes?.publicData?.halfDay}`}
-            ratings={3}
+            ratings={listing?.attributes?.publicData?.absoluteRating || listing?.attributes?.publicData?.rating}
+            reviewCount={listing?.attributes?.publicData?.reviewCount || 0}
           />
         ))
       }
