@@ -6,6 +6,7 @@ import UserAccountSectionTitle from '../UserAccountSectionTitle';
 
 const SubUserAccountSection = () => {
   const { user } = useSelector(state => state.auth);
+
   return (
     <div className='pb-12 sm:pb-16 md:pb-20 lg:pb-28 2xl:pb-32'>
       <div className="text-primary space-y-2 md:space-y-3 lg:space-y-5 mb-5 md:mb-6 lg:mb-10 pt-6 sm:pt-12 lg:pt-16 2xl:pt-20">

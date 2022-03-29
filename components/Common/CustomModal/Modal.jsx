@@ -1,4 +1,4 @@
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+// import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect } from 'react';
 
@@ -34,10 +34,10 @@ const Modal = ({
         }
     };
     useEffect(() => {
-        if (typeof (disableBodyScroll) == 'function') {
-            // Disabled when modal is open
-            isOpen && disableBodyScroll(document.body)
-        };
+        // if (typeof (disableBodyScroll) == 'function') {
+        //     // Disabled when modal is open
+        //     isOpen && disableBodyScroll(document.body)
+        // };
     }, [isOpen])
     const closeModal = (target) => {
         if (typeof onClose === 'function') {
@@ -45,7 +45,7 @@ const Modal = ({
             if ('close' in target.dataset) {
                 onClose()
                 // Enabled when modal is closed
-                enableBodyScroll(document.body)
+                // enableBodyScroll(document.body)
             }
         }
     }
