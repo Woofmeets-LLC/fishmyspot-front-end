@@ -18,6 +18,8 @@ import PageHeader from './PageHeader';
 import PropertyCard from "./PropertyCard";
 import PurchaseCard from './PurchaseCard';
 import PurchaseOrCancellationCard from './PurchaseOrCancelationCard';
+import PageTitle from './StaticPageElements/PageTitle';
+import SectionTitleDescription from './StaticPageElements/SectionTitleDescription';
 import StatusButton from './StatusButton';
 
 
@@ -42,6 +44,8 @@ export {
     PurchaseOrCancellationCard,
     PageHeader,
     ListItem,
-    StatusButton
+    StatusButton,
+    PageTitle,
+    SectionTitleDescription
 };
 

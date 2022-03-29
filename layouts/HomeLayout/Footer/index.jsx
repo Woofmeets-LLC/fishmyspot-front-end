@@ -39,7 +39,7 @@ const Footer = () => {
                             <img className="w-1/2" src="/images/footer-logo.png" alt="" />
                         </div>
                         <div className="font-trade-gothic">
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+                            Our mission at FishMySpot is to help families and avid anglers discover unique fishing experiences while connecting with nature, the community, and each other.
                         </div>
                     </div>
                     <div className="">
@@ -57,8 +57,8 @@ const Footer = () => {
                             <Link href="/family">
                                 <a className="block font-trade-gothic mb-2">Family</a>
                             </Link>
-                            <Link href="/press">
-                                <a className="block font-trade-gothic mb-2">Press</a>
+                            <Link href="/benefits">
+                                <a className="block font-trade-gothic mb-2">Benefits</a>
                             </Link>
                             <Link href="/contact">
                                 <a className="block font-trade-gothic mb-2">Contact</a>
@@ -79,10 +79,10 @@ const Footer = () => {
                         <Link href="/privacy">
                             <a className="block font-trade-gothic mb-2">Privacy Policy</a>
                         </Link>
-                        <Link href="/press">
+                        <Link href="/acceptable-use-policy">
                             <a className="block font-trade-gothic mb-2">Acceptable Use Policy</a>
                         </Link>
-                        <Link href="/contact">
+                        <Link href="/trust-and-safety">
                             <a className="block font-trade-gothic mb-2">Trust & Safety</a>
                         </Link>
                     </div>

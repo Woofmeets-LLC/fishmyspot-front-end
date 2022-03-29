@@ -48,7 +48,7 @@ const Test = () => {
       <div className="my-8 text-center">
         <button
           onClick={showReviews}
-          className="bg-secondary text-white px-4 py-1 rounded"
+          className="bg-yellow-500 px-10 py-2 rounded text-white text-lg md:text-2xl lg:text-4xl"
         >
           Show reviews
         </button>
