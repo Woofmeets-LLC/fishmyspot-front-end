@@ -1,5 +1,5 @@
 .card-container {
-  @apply bg-white rounded-xl overflow-hidden shadow-lg cursor-pointer;
+  @apply bg-white rounded-xl overflow-hidden shadow-lg;
 }
 
 .feature {
@@ -19,7 +19,7 @@
 }
 
 .ratings {
-  @apply flex space-x-1 xl:space-x-2 text-highlight-3 text-sm xl:text-base mb-[22px];
+  @apply flex items-center space-x-1 text-highlight-3 text-sm xl:text-base mt-1 mb-[22px];
 }
 
 .price {

@@ -1,5 +1,3 @@
-import React from 'react';
-
 const SubServicesListHeroSection = ({ setImageModal, pondImages }) => {
 
   return (
@@ -16,7 +14,7 @@ const SubServicesListHeroSection = ({ setImageModal, pondImages }) => {
       </div>
       <div className='w-20 sm:w-24 md:w-28 xl:w-32 2xl:w-[158px] h-20 sm:h-24 md:h-28 xl:h-32 2xl:h-[158px] -mt-14 sm:-mt-16 md:-mt-20 2xl:-mt-24 ml-5 md:ml-9'>
         <img
-          src="/images/client.jpg"
+          src="/images/user.png"
           alt="client"
           className='w-full h-full rounded-full object-cover'
         />
