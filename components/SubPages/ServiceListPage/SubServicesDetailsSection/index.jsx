@@ -69,7 +69,7 @@ const SubServicesDetailsSection = ({ pondData }) => {
                   className="w-7 -mt-1 h-2"
                 />
               </div>
-              <div>
+              <div className="ml-1">
                 <Features
                   title={"POND ACREAGE"}
                   items={[

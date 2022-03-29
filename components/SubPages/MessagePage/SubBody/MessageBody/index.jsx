@@ -17,7 +17,7 @@ const MessageBody = ({ messages, currentUserId }) => {
             <Message
               key={message?.id?.uuid}
               message={message?.attributes?.content}
-              createdAt={message?.attributes?.createdAt?.toLocaleTimeString()}
+              createdAt={message?.attributes?.createdAt}
               sentfrom={message?.relationships?.sender?.data?.id?.uuid === currentUserId}
             />
           )

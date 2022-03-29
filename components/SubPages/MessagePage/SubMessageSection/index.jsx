@@ -15,6 +15,8 @@ const SubMessageSection = () => {
   const [isActive, setIsActive] = useState(0);
   const currentUser = useCurrentUser();
 
+  // console.log(currentUser.profile.abbreviatedName);
+
   useEffect(() => {
     let tempTransactionIds = [];
     let tempTransactionIdToListingId = {};
@@ -76,7 +78,7 @@ const SubMessageSection = () => {
     };
 
     const fetchMessages = async () => {
-      if (transactionIds?.length === 0) return;
+      if (transactionIds?.length === 0 && !currentUser) return;
 
       const promiseList = await Promise.allSettled([
         ...transactionIds.map((id) => fetchMessage(id)),
@@ -129,11 +131,12 @@ const SubMessageSection = () => {
         {
           isActive ? (
             <SubBody
-          isActive={isActive}
-          includedMessageData={includedMessageData}
-          setIncludedMessageData={setIncludedMessageData}
-          currentUserId={currentUserId}
-        />
+              isActive={isActive}
+              includedMessageData={includedMessageData}
+              setIncludedMessageData={setIncludedMessageData}
+              currentUserId={currentUserId}
+              listingTitle={includedListingData[transactionIdToListingId[isActive]]}
+            />
           ) : (
             <div className="sm:text-xl md:text-2xl xl:text-3xl h-full flex justify-center items-center font-trade-gothic-bold text-primary">
               <h1>Select Transaction</h1>
