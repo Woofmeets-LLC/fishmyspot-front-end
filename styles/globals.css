@@ -162,7 +162,7 @@ Chrome
 }
 
 .accordion__panel {
-    @apply xl:pl-8 xl:pr-32 xl:py-9 bg-[#fcfcfc] !important;
+    @apply xl:px-8 xl:py-8 bg-[#fcfcfc] text-sm lg:text-base font-trade-gothic !important;
     box-shadow: 0 1px 9px 0 rgba(123, 174, 212, 0.12);
 }
 
@@ -220,4 +220,21 @@ Chrome
 /* Stripe Card Styling  */
 #card-element {
     @apply border px-1 py-2 mb-3 rounded;
+}
+
+
+/* faq page */
+.list-alpha {
+    list-style: lower-alpha;
+    list-style-position: inside;
+}
+
+.list-upper-alpha {
+    list-style: upper-alpha;
+    list-style-position: inside;
+}
+
+.list-roman {
+    list-style: lower-roman;
+    list-style-position: inside;
 }
