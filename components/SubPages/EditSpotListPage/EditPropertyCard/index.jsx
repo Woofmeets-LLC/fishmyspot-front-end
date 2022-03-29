@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import Link from 'next/link';
 import React from 'react';
-import { FaMapMarkerAlt, FaStar } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import styles from './EditPropertyCard.module.css';
 
-const EditPropertyCard = ({ id, image, title, price, delay }) => {
+const EditPropertyCard = ({ id, image, title, price, delay, ratings, reviewCount = 0 }) => {
   return (
     <motion.div
       initial={{
@@ -38,11 +39,10 @@ const EditPropertyCard = ({ id, image, title, price, delay }) => {
           <div className="flex justify-between">
             <div>
               <div className={styles.ratings}>
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
+                {
+                  [1, 2, 3, 4, 5].map((i) => (i <= Math.floor(+ratings || 5) ? <AiFillStar key={i} /> : <AiOutlineStar key={i} />))
+                }
+                {" "}({reviewCount})
               </div>
               <Link href={`/edit-pond/pond-listing/${id}`}>
                 <a

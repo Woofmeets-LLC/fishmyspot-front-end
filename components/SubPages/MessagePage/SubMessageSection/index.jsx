@@ -34,7 +34,6 @@ const SubMessageSection = () => {
         'fields.listing': ['title'],
       })
       .then((res) => {
-        console.log(res);
         res?.data?.data?.forEach((item) => {
           tempTransactionIds.push(item.id.uuid);
           tempTransactionIdToListingId = {
