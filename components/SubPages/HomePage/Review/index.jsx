@@ -1,24 +1,25 @@
 import React from 'react';
 import styles from './Review.module.css';
 
-const Review = () => {
+const Review = ({ name, review, location, image }) => {
   return (
     <div className={styles['review-area']}>
       <div className={styles['review-area-wrapper']}>
-        <div className={styles['review-area-info']}>
-          <div className={styles['review-image-area']}>
-            <img
-              src="/images/client.jpg "
-              alt="Client"
-              className='w-full h-full object-cover rounded-full' />
+        <div className="h-[213px] md:h-[194px] grid grid-cols-12 gap-4">
+          <div className="col-span-4 overflow-hidden">
+            <div className="h-full aspect-[20/25]">
+              <img
+                src={image}
+                className="w-full h-full object-cover" alt="" />
+            </div>
           </div>
-          <div>
-            <h2 className={styles['review-title']}>Howard Arlene</h2>
-            <span className={styles['designation']}>Finance Manager</span>
+          <div className="col-span-8">
+            <div className="py-3 pr-3">
+              <h2 className="text-[17px] font-trade-gothic-bold">{name} </h2>
+              <p className="text-sm font-trade-gothic">{review}</p>
+              <span className="inline-block text-xs  font-trade-gothic font-semibold">{location}</span>
+            </div>
           </div>
-        </div>
-        <div className='mt-3 3xl:mt-5 3xl:pl-5'>
-          <p className={styles['review-description']}> {`"Your company is truly upstanding and is behind its product 100%. It's the perfect solution for our business. It has really helped our business."`}</p>
         </div>
       </div>
     </div>
