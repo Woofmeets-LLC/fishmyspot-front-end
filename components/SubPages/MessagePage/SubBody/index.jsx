@@ -45,7 +45,7 @@ const SubBody = ({
   return (
     <div className="w-full h-full flex flex-col pl-2 sm:pl-4 md:pl-0 pr-4 lg:pr-16">
       <MessageHeader name={listingTitle} />
-      <MessageBody messages={messages} currentUserId={currentUserId} />
+      <MessageBody messages={messages} currentUserId={currentUserId}  activeTransactionId={activeTransactionId}/>
       <hr />
       <MessageFooter
         messages={messages}
