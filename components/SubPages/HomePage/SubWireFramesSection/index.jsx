@@ -7,7 +7,7 @@ const SubWireFramesSection = () => {
         <div className="grid grid-cols-12 md:gap-8">
           <div className={styles['wireframe-content-area']}>
             <div className={styles['wireframe-content-wrapper']}>
-              <h1 className={styles['wireframe-content-heading']}>Easy Way To Create High fidelity WireFrames</h1>
+              <h1 className={styles['wireframe-content-heading']}>Why Use FishMySpot?</h1>
               <p className={styles['wireframe-content']}>Why Fish From FishMySpot’s Marketplace?  Our offerings of private ponds and lakes are under fished, secluded, private, and make for a great experience for the family or avid fisherman/woman who enjoy the thrill of fishing at new water holes. Specifically, parents can teach their children to fish without the hassle of crowds and long drive to public lakes. Plus, children are more likely to catch fish frequently at under-fished ponds and lakes than going to a public lake. And if kids catch fish, they will beg to return.</p>
             </div>
           </div>

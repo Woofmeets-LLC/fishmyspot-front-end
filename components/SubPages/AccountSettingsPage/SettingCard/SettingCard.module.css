@@ -1,5 +1,5 @@
 .setting-card-container {
-  @apply bg-white shadow-xl rounded-xl cursor-pointer;
+  @apply bg-white shadow-xl rounded-xl cursor-pointer h-[132px] sm:h-[158px] md:h-[168px] lg:h-[180px] 2xl:h-[248px];
 }
 
 .setting-card-inner-container {

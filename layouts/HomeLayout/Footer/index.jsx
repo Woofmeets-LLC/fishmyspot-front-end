@@ -1,34 +1,7 @@
 import Link from 'next/link';
-import { useRef } from 'react';
-import { Formik, Form } from 'formik';
-import { FaFacebook, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
-import emailjs from '@emailjs/browser';
-import FormComponent from './FormComponent';
+import { FaFacebook, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
-
-    const handleSubmit = (values) => {
-        console.log(values);
-        const data = {
-            service_id: 'service_nkd5d7m',
-            template_id: 'template_y72zlzw',
-            user_id: 'JqysG9KwXEN15uPyB',
-            template_params: {
-                'from_name': values.name,
-                'to_name': 'FMS Admin',
-                reply_to: values.email,
-                message: values.message,
-            }
-        };
-        fetch('https://api.emailjs.com/api/v1.0/email/send', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then(res => console.log(res))
-    }
 
     return (
         <footer className="bg-primary">
@@ -109,30 +82,13 @@ const Footer = () => {
                                 href="http://" target="_blank" rel="noopener noreferrer">
                                 <FaTwitter className="text-3xl 3xl:text-4xl" />
                             </a>
+                            <a
+                                className="inline-block"
+                                href="http://" target="_blank" rel="noopener noreferrer">
+                                <FaYoutube className="text-3xl 3xl:text-4xl" />
+                            </a>
                         </div>
                     </div>
-                </div>
-
-                <div className="md:w-3/5 lg:w-1/2 mx-auto mb-4">
-                    <h1 className="text-2xl font-trade-gothic-bold text-white text-center mb-3">Contact Us</h1>
-                    <Formik
-                        initialValues={{
-                            name: '',
-                            email: '',
-                            message: '',
-                        }}
-                        onSubmit={handleSubmit}
-                    >
-                        <Form>
-                            <FormComponent />
-                            <div className="w-full">
-                                <button
-                                    type="submit"
-                                    className="inline-block w-full bg-secondary py-3 px-4 rounded text-white font-trade-gothic-bold"
-                                >Send</button>
-                            </div>
-                        </Form>
-                    </Formik>
                 </div>
 
                 <hr className="w-1/2 mx-auto" />

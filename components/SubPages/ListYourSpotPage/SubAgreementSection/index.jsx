@@ -1,5 +1,5 @@
 import { useField } from "formik";
-import React from "react";
+import Link from "next/link";
 import { FaCheck } from 'react-icons/fa';
 
 
@@ -20,7 +20,13 @@ const SubAgreementSection = () => {
                     className={`h-4 flex justify-center items-center transition-all duration-300 cursor-pointer w-4 border-2 border-yellow-500 overflow-hidden ${termsField.value === true ? 'bg-yellow-500' : 'bg-white'}`}>
                     <FaCheck className={'inline text-white text-xs'} />
                 </div>
-                <p className={`transition-all duration-300 font-trade gothic-bold ${termsField.value == true ? 'text-gray-900' : ''}`}>I have read and agree with the <span className={'text-blue-400 underline cursor-pointer ml-1'}>Terms and Conditions</span></p>
+                <p className={`transition-all duration-300 font-trade gothic-bold ${termsField.value == true ? 'text-gray-900' : ''}`}>I have read and agree with the
+                    <Link href={"/terms-of-use"}>
+                        <a>
+                            <span className={'text-blue-400 underline cursor-pointer ml-1'}>Terms and Conditions.</span>
+                        </a>
+                    </Link>
+                </p>
             </div>
 
             {!termsField.value ? (
@@ -33,7 +39,13 @@ const SubAgreementSection = () => {
                     className={`h-4 flex justify-center items-center transition-all duration-300 cursor-pointer w-4 border-2 border-yellow-500 overflow-hidden ${licenseField.value === true ? 'bg-yellow-500' : 'bg-white'}`}>
                     <FaCheck className={'inline text-white text-xs'} />
                 </div>
-                <p className={`transition-all duration-300 font-trade gothic-bold ${licenseField.value == true ? 'text-gray-900' : ''}`}>I have read and agree with the <span className={'text-blue-400 underline cursor-pointer ml-1'}>License and Agreement</span></p>
+                <p className={`transition-all duration-300 font-trade gothic-bold ${licenseField.value == true ? 'text-gray-900' : ''}`}>I have read and agree with the
+                    <Link href={"/license-and-agreement"}>
+                        <a>
+                            <span className={'text-blue-400 underline cursor-pointer ml-1'}>License and Agreement.</span>
+                        </a>
+                    </Link>
+                </p>
             </div>
 
             {!licenseField.value ? (

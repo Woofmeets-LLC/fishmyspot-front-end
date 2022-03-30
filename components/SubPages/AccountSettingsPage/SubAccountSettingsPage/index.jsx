@@ -34,26 +34,26 @@ const SubAccountSettingsPage = () => {
           href={"/cancellation"}
         /> */}
         <SettingCard
-          title={"Favourites"}
-          description={"Provide personal details and how we can reach you."}
+          title={"Favorites"}
+          description={"All your favorite ponds in one spot."}
           Icon={FaHeart}
           href={"/favorite-pond-list"}
         />
         <SettingCard
-          title={"Purchase list"}
-          description={"Provide personal details and how we can reach you."}
+          title={"Purchase List"}
+          description={"All your reservations are listed here."}
           Icon={IoIosSettings}
           href={"/purchase-list"}
         />
         <SettingCard
           title={"Message"}
-          description={"Provide personal details and how we can reach you."}
+          description={"Communicate with pond owners regarding upcoming reservations."}
           Icon={MdMessage}
           href={"/messages"}
         />
         <SettingCard
-          title={"Helps"}
-          description={"Provide personal details and how we can reach you."}
+          title={"Help(s)"}
+          description={"Click here to get additional support regarding your account."}
           Icon={MdHelp}
           href={"/help"}
         />
@@ -71,7 +71,7 @@ const SubAccountSettingsPage = () => {
         /> */}
         <SettingCard
           title={"FAQ"}
-          description={"Provide personal details and how we can reach you."}
+          description={"Gather more information before your fishing trip."}
           Icon={IoIosSettings}
           href={"/faq"}
         />
