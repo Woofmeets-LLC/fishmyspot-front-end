@@ -1,4 +1,3 @@
-import React from 'react';
 import { PageTitle, SectionTitleDescription } from '../../components/Common';
 import HomeLayout from '../../layouts/HomeLayout';
 
@@ -17,7 +16,7 @@ const About = () => {
                 <SectionTitleDescription
                     title="OUR STORY"
                     descriptions={[
-                        "Growing up, we had a love for fishing untapped water holes. As adults and parents, we have we have found it more difficult because asking permission from land owners became daunting and disappointing. Plus, fishing at public lakes with young children was inconvenient, not always accessible and left our young children frequently disappointed with their catch.",
+                        "Growing up, we had a love for fishing untapped water holes. As adults and parents, we have found it more difficult because asking permission from land owners became daunting and disappointing. Plus, fishing at public lakes with young children was inconvenient, not always accessible and left our young children frequently disappointed with their catch.",
                         "That’s why we started FishMySpot: To bring local, private fishing holes to passionate anglers who are always dreaming of the next big catch."
                     ]} />
 
