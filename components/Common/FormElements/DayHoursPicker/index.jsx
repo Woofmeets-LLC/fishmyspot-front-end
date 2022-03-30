@@ -42,7 +42,12 @@ const DayHoursPicker = ({
     const isAnyHourSelected = field?.value?.isSelected ? (Object.values(field?.value?.hours)?.includes(true)) : true;
 
     const handleDayClick = () => {
-        helpers.setValue({ ...field.value, isSelected: !field?.value?.isSelected });
+        helpers.setValue({
+            ...field.value,
+            isSelected: (name == 'availableTime[everyday]'
+                ? !everydayField.value.isSelected
+                : everydayField?.value?.isSelected ? false : !field.value.isSelected)
+        });
     };
 
     const handleSelectHoursClick = () => {
@@ -114,9 +119,7 @@ const DayHoursPicker = ({
                                 {...dataAttribute.dropdownElement}
                                 {...dataAttribute.dropdownWrapper}
 
-                                className={`${(everydayField?.value?.isSelected
-                                    ? (name == "availableTime[everyday]" ? isDropDown : false)
-                                    : field?.value?.isSelected ? isDropDown : false) ? "block" : "hidden"} absolute top-8 w-full p-2 z-[20] bg-white border rounded`}>
+                                className={`hidden absolute top-8 w-full p-2 z-[20] bg-white border rounded`}>
                                 {
                                     options?.map((option, i) => {
                                         return (
