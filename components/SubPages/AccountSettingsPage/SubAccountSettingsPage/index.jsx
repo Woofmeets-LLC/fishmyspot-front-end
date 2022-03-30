@@ -1,8 +1,9 @@
 import React from 'react';
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaClipboardList } from "react-icons/fa";
 // icons
 import { IoIosSettings } from "react-icons/io";
 import { MdHelp, MdMessage } from "react-icons/md";
+import { BiMessageRoundedError } from "react-icons/bi";
 import { useSelector } from 'react-redux';
 import { PageHeader } from '../../../Common';
 import SettingCard from '../SettingCard';
@@ -34,26 +35,26 @@ const SubAccountSettingsPage = () => {
           href={"/cancellation"}
         /> */}
         <SettingCard
-          title={"Favourites"}
-          description={"Provide personal details and how we can reach you."}
+          title={"Favorites"}
+          description={"All your favorite ponds in one spot."}
           Icon={FaHeart}
           href={"/favorite-pond-list"}
         />
         <SettingCard
-          title={"Purchase list"}
-          description={"Provide personal details and how we can reach you."}
-          Icon={IoIosSettings}
+          title={"Purchase List"}
+          description={"All your reservations are listed here."}
+          Icon={FaClipboardList}
           href={"/purchase-list"}
         />
         <SettingCard
           title={"Message"}
-          description={"Provide personal details and how we can reach you."}
+          description={"Communicate with pond owners regarding upcoming reservations."}
           Icon={MdMessage}
           href={"/messages"}
         />
         <SettingCard
-          title={"Helps"}
-          description={"Provide personal details and how we can reach you."}
+          title={"Help"}
+          description={"Click here to get additional support regarding your account."}
           Icon={MdHelp}
           href={"/help"}
         />
@@ -71,8 +72,8 @@ const SubAccountSettingsPage = () => {
         /> */}
         <SettingCard
           title={"FAQ"}
-          description={"Provide personal details and how we can reach you."}
-          Icon={IoIosSettings}
+          description={"Gather more information before your fishing trip."}
+          Icon={BiMessageRoundedError}
           href={"/faq"}
         />
       </div>

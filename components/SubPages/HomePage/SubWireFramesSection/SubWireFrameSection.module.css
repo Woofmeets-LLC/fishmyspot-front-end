@@ -3,7 +3,7 @@
 }
 
 .wireframe-content-area {
-  @apply col-span-12 md:col-span-5 order-2 md:order-1 pt-4 sm:pt-5 md:pb-6 lg:pb-14 xl:pt-9 xl:pb-32 2xl:pt-12 2xl:pb-44;
+  @apply col-span-12 md:col-span-5 order-2 md:order-1 pt-4 sm:pt-5 md:pb-6 lg:pb-14 xl:pt-9 xl:pb-32 2xl:pt-12 2xl:pb-36;
 }
 
 .wireframe-content-wrapper {
