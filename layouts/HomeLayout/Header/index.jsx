@@ -42,6 +42,24 @@ const Header = () => {
     // Dispatch
     const dispatch = useDispatch();
 
+    const createAccountLink = () => {
+        const originURL = window.location.origin;
+        getSdk().stripeAccountLinks.create({
+            failureURL: originURL,
+            successURL: originURL + "/list-your-spot",
+            type: "account_onboarding",
+            collect: "currently_due",
+        })
+            .then(res => {
+                if (typeof (window) !== "undefined") {
+                    window.location = res.data?.data?.attributes?.url;
+                }
+            })
+            .catch(err => {
+                console.dir(err)
+            })
+    }
+
     // For stripe connection 
     const createStripeAccount = () => {
         getSdk().stripeAccount.create({
@@ -51,24 +69,8 @@ const Header = () => {
             expand: true
         })
             .then(res => {
+                console.log("createStripeAccount", res);
                 createAccountLink();
-            })
-            .catch(err => {
-                console.dir(err)
-            })
-    }
-
-    const createAccountLink = () => {
-        getSdk().stripeAccountLinks.create({
-            failureURL: "http://localhost:3000/",
-            successURL: "http://localhost:3000/list-your-spot",
-            type: "account_onboarding",
-            collect: "currently_due",
-        })
-            .then(res => {
-                if (typeof (window) !== "undefined") {
-                    window.location = res.data?.data?.attributes?.url;
-                }
             })
             .catch(err => {
                 console.dir(err)
