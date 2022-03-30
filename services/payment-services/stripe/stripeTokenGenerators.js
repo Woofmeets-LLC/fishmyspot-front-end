@@ -1,5 +1,5 @@
-import { loadStripe } from "@stripe/stripe-js/pure";
 import { TokenResult } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js/pure";
 import { getStripeClientWithSecretKey } from "./loaders";
 
 /**
@@ -29,11 +29,8 @@ export const createStripeAccountToken = async (obj) => {
       tos_shown_and_accepted: true,
     });
 
-    console.log(accountToken);
     return accountToken;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 /**
@@ -60,7 +57,7 @@ export const createStripeBusinessToken = async (obj) => {
         account_number: obj?.["account_number"],
       },
     });
-    console.log(result);
+
     return result;
   } catch (error) {
     return error;

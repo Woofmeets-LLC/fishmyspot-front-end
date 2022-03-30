@@ -1,9 +1,11 @@
-import React from 'react';
-import { FaMapMarkerAlt, FaStar, FaRegHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Link from 'next/link';
+import React from 'react';
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import styles from './EditPropertyCard.module.css';
 
-const EditPropertyCard = ({ image, title, price, delay }) => {
+const EditPropertyCard = ({ id, image, title, price, delay, ratings, reviewCount = 0 }) => {
   return (
     <motion.div
       initial={{
@@ -17,7 +19,7 @@ const EditPropertyCard = ({ image, title, price, delay }) => {
       }}
       className={styles['card-container']}>
       <div className="relative">
-        <div className="w-full h-[190px] sm:h-auto">
+        <div className="w-full h-[190px] sm:h-[160px] lg:h-[180px] 2xl:h-[237px]">
           <img
             src={image}
             alt="Pond"
@@ -37,21 +39,22 @@ const EditPropertyCard = ({ image, title, price, delay }) => {
           <div className="flex justify-between">
             <div>
               <div className={styles.ratings}>
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
-                <FaStar />
+                {
+                  [1, 2, 3, 4, 5].map((i) => (i <= Math.floor(+ratings || 5) ? <AiFillStar key={i} /> : <AiOutlineStar key={i} />))
+                }
+                {" "}({reviewCount})
               </div>
-              <button
-                className='bg-secondary py-1 px-3 text-white text-xs font-trade-gothic-bold rounded'
-              >
-                Edit
-              </button>
+              <Link href={`/edit-pond/pond-listing/${id}`}>
+                <a
+                  className='bg-secondary py-1 px-3 text-white text-sm font-trade-gothic-bold rounded'
+                >
+                  Edit
+                </a>
+              </Link>
             </div>
             <div>
               <span className={styles.price}>{price}</span>
-              <span className={styles['per-hour']}>per hour</span>
+              <span className={styles['per-hour']}>half day</span>
             </div>
           </div>
         </div>

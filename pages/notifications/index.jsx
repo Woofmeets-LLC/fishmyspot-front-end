@@ -4,7 +4,7 @@ import HomeLayout from '../../layouts/HomeLayout';
 
 const Notifications = () => {
   return (
-    <HomeLayout>
+    <HomeLayout isPrivate>
       <section className="bg-[#fbfbfb]">
         <div className="container">
           <SubNotifications />

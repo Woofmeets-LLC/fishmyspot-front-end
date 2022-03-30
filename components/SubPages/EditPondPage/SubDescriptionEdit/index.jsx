@@ -41,11 +41,6 @@ const SubDescriptionEdit = ({ fishes, loading }) => {
             {
                 !isAnyOthersFishFieldValid && <div className="text-red-500 text-[15px]">Please input the others fish name!</div>
             }
-            <div className="my-2 text-right">
-                <button
-                    type="submit"
-                    className="bg-secondary text-white font-trade-gothic-bold rounded py-2 px-8 ml-auto">Update</button>
-            </div>
         </>
     );
 };

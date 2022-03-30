@@ -8,6 +8,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { FaUserCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginModal, SignUpModal } from '../../../components/Common';
+import { getSdk } from '../../../sharetribe/sharetribeSDK';
 import { logoutAction } from '../../../store/slices/authSlice';
 import { set } from '../../../store/slices/autocompletetionSlice';
 import { setShowLoginModal, setShowSignUpModal } from '../../../store/slices/modalsSlice';
@@ -41,6 +42,39 @@ const Header = () => {
     // Dispatch
     const dispatch = useDispatch();
 
+    // For stripe connection 
+    const createStripeAccount = () => {
+        getSdk().stripeAccount.create({
+            country: "US",
+            requestedCapabilities: ["transfers", "card_payments"]
+        }, {
+            expand: true
+        })
+            .then(res => {
+                createAccountLink();
+            })
+            .catch(err => {
+                console.dir(err)
+            })
+    }
+
+    const createAccountLink = () => {
+        getSdk().stripeAccountLinks.create({
+            failureURL: "http://localhost:3000/",
+            successURL: "http://localhost:3000/list-your-spot",
+            type: "account_onboarding",
+            collect: "currently_due",
+        })
+            .then(res => {
+                if (typeof (window) !== "undefined") {
+                    window.location = res.data?.data?.attributes?.url;
+                }
+            })
+            .catch(err => {
+                console.dir(err)
+            })
+    }
+
     return (
         <>
             <SignUpModal />
@@ -58,7 +92,7 @@ const Header = () => {
                             </div>
                         </a>
                     </Link>
-                    <div className="hidden md:flex items-center w-[300px] lg:w-[500px] 2xl:w-[620px] 3xl:w-[818px] h-full border-l px-8 lg:px-16">
+                    <div className="hidden md:flex items-center w-[300px] lg:w-[400px] xl:w-[550px] 2xl:w-[620px] 3xl:w-[750px] h-full border-l px-8 lg:px-16">
                         <div className="flex w-full h-8 xl:h-[35px] 2xl:h-[42px] 3xl:h-[47px] border rounded">
                             <span className="flex justify-center items-center h-full w-8 2xl:w-10">
                                 <AiOutlineSearch className="text-primary xl:text-xl 2xl:text-2xl" />
@@ -89,9 +123,12 @@ const Header = () => {
                                     onClick={() => !isLoggedIn && dispatch(setShowLoginModal())}
                                     type="button"
                                     className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</button>
+                                <Link href="/services">
+                                    <a className={`block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]`}>Fish Now</a>
+                                </Link>
                                 <button
                                     onClick={() => !isLoggedIn && dispatch(setShowSignUpModal())}
-                                    className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">Sign-up</button>
+                                    className="block md:hidden lg:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">Sign-up</button>
                                 <button
                                     onClick={() => !isLoggedIn && dispatch(setShowLoginModal())}
                                     className="block md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">Log-in</button>
@@ -124,11 +161,23 @@ const Header = () => {
                             style={{ transition: "all 0.2s ease!important" }}
                             className={`flex items-center w-auto h-[70px] 2xl:h-[85px] 3xl:h-[102px] ml-auto space-y-0 space-x-10 bg-white transition transform px-2 py-2 rounded border-0`}>
                             {
-                                user?.profile?.publicData?.account_type !== "angler" &&
-                                <button
-                                    onClick={() => !isLoggedIn && dispatch(setShowLoginModal())}
-                                    type="button"
-                                    className="hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</button>
+                                user?.profile?.publicData?.account_type == "owner" && (
+                                    user?.stripeConnected
+                                        ? <Link href="/list-your-spot" >
+                                            <a className={`hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]`}>List your spot +</a>
+                                        </Link>
+                                        : <button
+                                            onClick={createStripeAccount}
+                                            type="button"
+                                            className="hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]">List your spot +</button>
+                                )
+                            }
+                            {
+                                user?.profile?.publicData?.account_type == "angler" && (
+                                    <Link href="/services" >
+                                        <a className={`hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]`}>Fish Now</a>
+                                    </Link>
+                                )
                             }
                             <div className="flex items-center px-3 border shadow rounded-full ml-auto">
                                 <div className="block">
@@ -164,32 +213,41 @@ const Header = () => {
                                 variants={backdropVariants}
                                 className={`absolute block top-[74px] right-[20px] w-[150px] md:w-auto md:ml-auto space-y-2 bg-white px-4 h-auto py-2 rounded border`}>
                                 {
-                                    user?.profile?.publicData?.account_type !== "angler" &&
-                                    <Link href="/list-your-spot" >
-                                        <a className={`block md:hidden text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]`}>List your spot +</a>
+                                    user?.profile?.publicData?.account_type == "owner" && (
+                                        user?.stripeConnected
+                                            ? <Link href="/list-your-spot" >
+                                                <a className={`block md:hidden text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]`}>List your spot +</a>
+                                            </Link>
+                                            : <button
+                                                onClick={createStripeAccount}
+                                                type="button"
+                                                className="block md:hidden text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">List your spot +</button>
+                                    )
+                                }
+                                {
+                                    user?.profile?.publicData?.account_type == "angler" &&
+                                    <Link href="/services" >
+                                        <a className={`block md:hidden text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]`}>Fish Now</a>
                                     </Link>
                                 }
                                 <Link href="/messages" >
                                     <a className={`block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]`}>Message</a>
                                 </Link>
-                                <Link href="/notifications" >
+                                {/* <Link href="/notifications" >
                                     <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Notification </a>
-                                </Link>
+                                </Link> */}
                                 {
-                                    user?.profile?.publicData?.account_type === "angler"
-                                        ? <Link href="/favorite-pond-list" >
-                                            <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Favorite pond </a>
-                                        </Link>
-                                        : <Link href="/seller-dashboard" >
-                                            <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Dashboard </a>
-                                        </Link>
+                                    user?.profile?.publicData?.account_type === "angler" &&
+                                    <Link href="/favorite-pond-list" >
+                                        <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Favorite pond </a>
+                                    </Link>
                                 }
-                                <Link href="/settings" >
-                                    <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Settings </a>
+                                <Link href={user?.profile?.publicData?.account_type === "angler" ? "/settings" : "/seller-dashboard"} >
+                                    <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Dashboard </a>
                                 </Link>
-                                <Link href="/cancellation" >
+                                {/* <Link href="/cancellation" >
                                     <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Cancellation  </a>
-                                </Link>
+                                </Link> */}
                                 {
                                     user?.profile?.publicData?.account_type === "angler" &&
                                     <Link href="/help" >

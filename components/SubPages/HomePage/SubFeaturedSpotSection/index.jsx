@@ -1,6 +1,8 @@
-import React from 'react';
+// import Slider from "react-slick";
+import dynamic from 'next/dynamic';
 import FeaturedSpot from '../FeauturedSpot';
-import Slider from "react-slick";
+
+const Slider = dynamic(() => import('react-slick'), { ssr: true });
 
 
 const SubFeaturedSpotSection = () => {

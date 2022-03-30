@@ -1,9 +1,9 @@
 .review-area {
-  @apply bg-white shadow-xl rounded-2xl pointer-events-none mx-3;
+  @apply bg-white shadow-xl rounded-2xl pointer-events-none mx-3 overflow-hidden;
 }
 
 .review-area-wrapper {
-  @apply px-4 py-3 lg:px-6 lg:py-4 3xl:px-12 3xl:py-9;
+  @apply overflow-hidden;
 }
 
 .review-area-info {

@@ -136,7 +136,6 @@ Chrome
     @apply text-3xl text-highlight-3;
 }
 
-
 /* accordion */
 .accordion {
     @apply border-none !important;
@@ -157,11 +156,85 @@ Chrome
     transform: rotate(47deg) !important;
 }
 
-.accordion__button[aria-expanded='true']::before, .accordion__button[aria-selected='true']::before {
+.accordion__button[aria-expanded="true"]::before,
+.accordion__button[aria-selected="true"]::before {
     transform: rotate(224deg) !important;
 }
 
 .accordion__panel {
-    @apply xl:pl-8 xl:pr-32 xl:py-9 bg-[#fcfcfc] !important;
+    @apply xl:px-8 xl:py-8 bg-[#fcfcfc] text-sm lg:text-base font-trade-gothic !important;
     box-shadow: 0 1px 9px 0 rgba(123, 174, 212, 0.12);
+}
+
+/* services list page modal */
+.view-image-modal .slick-prev:before,
+.view-image-modal .slick-next:before {
+    @apply text-secondary text-xl lg:text-3xl 2xl:text-4xl z-50 !important;
+}
+
+.view-image-modal .slick-prev {
+    @apply left-0 lg:left-3 z-10 !important;
+}
+.view-image-modal .slick-next {
+    @apply right-0 lg:right-6 z-10 !important;
+}
+
+@media screen and (max-width: 768px) {
+    .view-image-modal .slick-prev,
+    .view-image-modal .slick-next {
+        top: 50% !important;
+    }
+}
+@media screen and (min-width: 769px) {
+    .view-image-modal .slick-prev,
+    .view-image-modal .slick-next {
+        top: 50% !important;
+    }
+}
+
+/* ::-webkit-scrollbar {
+    width: 10px;
+  } */
+
+/* Track */
+/* html {
+    background: #f1f1f1;
+    scrollbar-width: normal;
+  } */
+
+/* Handle */
+.message__scrollbar::-webkit-scrollbar-thumb {
+    background: rgb(192, 192, 192);
+    border-radius: 15px !important;
+}
+
+/* Handle on hover */
+/* .message__scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+} */
+
+.message__scrollbar::-webkit-scrollbar {
+    width: 2px;
+}
+
+/* Stripe Card Styling  */
+#card-element {
+    @apply border px-1 py-2 mb-3 rounded;
+}
+
+
+/* faq page */
+.list-alpha {
+    list-style: lower-alpha;
+    list-style-position: inside;
+}
+
+.list-upper-alpha {
+    list-style: upper-alpha;
+    list-style-position: inside;
+}
+
+.list-roman {
+    list-style: lower-roman;
+    list-style-position: inside;
 }

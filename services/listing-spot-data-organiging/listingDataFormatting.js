@@ -4,18 +4,6 @@ export const listingDataOrganizing = (values) => {
     // Availability Plan Data
     const availabilityPlan = availabilityPlanFormatting(values.availableTime);
 
-    // Address Data
-    const address2 = values?.secondAddress == 'yes'
-        ? {
-            address: values?.address2,
-            city: values?.city2,
-            state: values?.state2,
-            zipCode: values?.zipCode2,
-            phone: values?.phone2,
-            email: values?.email2
-        }
-        : {}
-
     // Fishes Data
     const tempFishes = Object.keys(values?.fishes)?.filter(fish => values?.fishes[fish])?.map(fish => fish.split("_")[0]);
     const fishes = values?.["others-fish"]?.isSelected ? [...tempFishes, "Other"] : tempFishes;
@@ -44,23 +32,73 @@ export const listingDataOrganizing = (values) => {
     }))
 
     const data = {
-        title: values?.address1,
+        title: values?.address,
         description: values?.description,
-        geolocation: values?.latLng1,
+        geolocation: values?.latLng,
+        availabilityPlan: {
+            type: 'availability-plan/time',
+            entries: [
+                {
+                    dayOfWeek: 'mon',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                },
+                {
+                    dayOfWeek: 'tue',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                },
+                {
+                    dayOfWeek: 'wed',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                },
+                {
+                    dayOfWeek: 'thu',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                },
+                {
+                    dayOfWeek: 'fri',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                },
+                {
+                    dayOfWeek: 'sat',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                },
+                {
+                    dayOfWeek: 'sun',
+                    seats: 1,
+                    startTime: '00:00',
+                    endTime: '00:00'
+                }
+            ],
+            timezone: "America/New_York",
+        },
         publicData: {
             availabilityPlan,
             fishes,
             allFishes,
             amenities,
             allAmenities,
-            address2,
             addOns,
             experiences,
-            zipCode: values?.zipCode1,
-            address: values?.address1,
-            "city": values?.city1,
-            "state": values?.state1,
-            "phone": values?.phone1,
+            zipCode: values?.zipCode,
+            address: values?.address,
+            "city": values?.city,
+            "state": values?.state,
+            "phone": values?.phone,
+            rating: 5,
+            absoluteRating: 5,
+            reviewCount: 0,
             acre: +values?.acre,
             "stocked-pond": values["stocked-pond"],
             "catch-requirements": values["catch-requirements"],
@@ -78,11 +116,10 @@ export const listingDataOrganizing = (values) => {
             },
             promoteBy: values?.promoteBy,
             "access-to-pond-description": values?.["ATP-description"],
-            "additional-information-description": values['"additional-information-description'],
+            "additional-information-description": values['additional-information-description'],
             "terms": values?.terms,
             "license": values?.license,
         }
     }
-
     return data
 }

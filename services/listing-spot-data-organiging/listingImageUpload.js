@@ -9,6 +9,7 @@ export const listingImagesUpload = async (images) => {
     try {
         const allImageUpload = await Promise.allSettled(allImages);
         const successfulUploadedImages = allImageUpload.filter(image => image.status === "fulfilled");
+        
         return {
             success: true,
             uuids: successfulUploadedImages.map(image => image.value.data.data.id),

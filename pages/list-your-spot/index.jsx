@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
+import { ClipLoader } from 'react-spinners';
 import * as yup from 'yup';
 import { BackBtn, MultiStepForm, NextBtn } from '../../components/Common';
 import FormStep from '../../components/Common/FormElements/MultiStepForm/FormStep';
@@ -24,6 +26,8 @@ import { getSdk } from '../../sharetribe/sharetribeSDK';
 import { setFishes } from '../../store/slices/listSpotContentsSlice';
 
 const ListYourPond = () => {
+    const [loading, setLoading] = useState(false);
+
     // Redux
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
@@ -44,6 +48,7 @@ const ListYourPond = () => {
                     "11am-4pm": false,
                     "4pm-9pm": false,
                     "9pm-6am": false,
+                    "6am-9pm": false,
                     "all-hours": false,
                 }
             }
@@ -71,39 +76,21 @@ const ListYourPond = () => {
         "stocked-pond": "",
         "catch-requirements": "",
         // Pond Owner Details
-        // => First address 
-        firstName1: user?.profile?.firstName,
-        lastName1: user?.profile?.lastName,
-        email1: user?.email,
-        zipCode1: '',
-        address1: "",
-        city1: "",
-        state1: "",
-        phone1: "",
+        firstName: user?.profile?.firstName,
+        lastName: user?.profile?.lastName,
+        email: user?.email,
+        zipCode: '',
+        address: "",
+        city: "",
+        state: "",
+        phone: "",
         halfDayRate: '',
         fullDayRate: '',
-        latLng1: {
+        latLng: {
             lat: '',
             lng: ' ',
             _sdkType: 'LatLng',
         },
-        // => Second address 
-        firstName2: user?.profile?.firstName,
-        lastName2: user?.profile?.lastName,
-        email2: user?.email,
-        zipCode2: '',
-        address2: "",
-        city2: "",
-        state2: "",
-        phone2: "",
-        latLng2: {
-            lat: '',
-            lng: ' ',
-            _sdkType: 'LatLng',
-        },
-
-        secondAddress: "no",
-
         // Available Time
         availableTime,
         // Description
@@ -183,23 +170,22 @@ const ListYourPond = () => {
             "catch-requirements": yup.string().required("You have to select one of those"),
         }),
         pondOwnerDetails: yup.object({
-            firstName1: yup.string().required("First name is required"),
-            lastName1: yup.string().required("Last name is required"),
-            email1: yup.string().email().required("Email is required"),
-            zipCode1: yup.string().required("Zip code is required"),
+            firstName: yup.string().required("First name is required"),
+            lastName: yup.string().required("Last name is required"),
+            email: yup.string().email().required("Email is required"),
+            zipCode: yup.string().required("Zip code is required"),
             halfDayRate: yup.string().required("Required!"),
             fullDayRate: yup.string().required("Required!"),
         }),
         pondOwnerInfo: yup.object({
-            firstName1: yup.string().required("First name is required"),
-            lastName1: yup.string().required("Last name is required"),
-            email1: yup.string().email().required("Email is required"),
-            zipCode1: yup.string().required("Zip code is required"),
-            address1: yup.string().required("Required!"),
-            city1: yup.string().required("Required!"),
-            state1: yup.string().required("Required!"),
-            phone1: yup.string().required("Required!"),
-            secondAddress: yup.string().required("Required!"),
+            firstName: yup.string().required("First name is required"),
+            lastName: yup.string().required("Last name is required"),
+            email: yup.string().email().required("Email is required"),
+            zipCode: yup.string().required("Zip code is required"),
+            address: yup.string().required("Required!"),
+            city: yup.string().required("Required!"),
+            state: yup.string().required("Required!"),
+            phone: yup.string().required("Required!"),
         }),
         description: yup.object({
             description: yup.string().required("Description is required"),
@@ -232,8 +218,11 @@ const ListYourPond = () => {
     ]
 
     const handleSubmit = async (values, helpers) => {
+        // set loading
+        setLoading(true);
         // Data organizing without images
         const newData = listingDataOrganizing(values);
+
         // Formatting Images array and uploading
         const allImages = [
             ...values["ATP-images-file"],
@@ -247,16 +236,25 @@ const ListYourPond = () => {
         // Creating listing
         getSdk().ownListings.create(newData, { expand: true, include: ['images'] })
             .then(listingRes => {
+                setLoading(false);
+                toast.success("Listing created successfully!");
                 // console.log(listingRes);
                 router.push(`/list-your-spot/success`);
             })
             .catch(err => {
+                setLoading(false);
+                toast.error("Failed listing creation!");
                 // console.log(err);
             })
     }
 
     return (
-        <HomeLayout>
+        <HomeLayout
+            isPrivate
+            guards={{
+                account_type: "owner",
+                fallbackUrl: "/",
+            }}>
             <TopImageCard />
             <MultiStepForm
                 initialValues={initialValues}
@@ -292,8 +290,15 @@ const ListYourPond = () => {
                 <FormStep >
                     <SubAdditionalInformation />
                 </FormStep>
-                <FormStep>
-                    <SubAgreementSection />
+                <FormStep >
+                    {
+                        loading
+                            ? <div className="flex justify-center items-center flex-wrap my-10">
+                                <ClipLoader size={50} color={'#1971ff'} />
+                                <h2 className="w-full text-center font-semibold mt-2">Creating your pond...</h2>
+                            </div>
+                            : <SubAgreementSection />
+                    }
                 </FormStep>
             </MultiStepForm>
         </HomeLayout>

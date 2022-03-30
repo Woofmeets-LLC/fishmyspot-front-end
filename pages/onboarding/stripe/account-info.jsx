@@ -4,6 +4,5 @@ import HomeLayout from "../../../layouts/HomeLayout";
 
 export default function AccountInfo() {
   const user = useCurrentUser();
-  console.log(user);
   return <HomeLayout>{user && <PersonalInfoContainer />}</HomeLayout>;
 }

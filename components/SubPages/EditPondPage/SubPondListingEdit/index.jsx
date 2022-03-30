@@ -27,11 +27,6 @@ const SubPondListingEdit = () => {
                 label="Catch Requirements"
                 name="catch-requirements"
                 radioBtns={[{ title: "Catch & Keep", value: "catch-n-keep" }, { title: "Catch & Release", value: "catch-n-release" }]} />
-            <div className="my-2 text-right">
-                <button
-                    type="submit"
-                    className="bg-secondary text-white font-trade-gothic-bold rounded py-2 px-8 ml-auto">Update</button>
-            </div>
         </>
     );
 };

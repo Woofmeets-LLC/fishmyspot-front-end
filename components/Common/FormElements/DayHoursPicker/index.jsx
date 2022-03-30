@@ -28,6 +28,7 @@ const DayHoursPicker = ({
         { title: "11AM - 4PM", value: "11am-4pm" },
         { title: "4PM - 9PM", value: "4pm-9pm" },
         { title: "9PM - 6AM", value: "9pm-6am" },
+        { title: "6AM - 9PM", value: "6am-9pm" },
         { title: "All Hours", value: "all-hours" },
     ]
 }) => {
