@@ -16,7 +16,9 @@ const fetcher = async (activeTransactionId) => {
 };
 
 const MessageBody = ({ currentUserId, activeTransactionId }) => {
-  const { data, error } = useSWR(`${activeTransactionId}`, fetcher);
+  const { data, error } = useSWR(`${activeTransactionId}`, fetcher, {
+    refreshInterval: 1000,
+  });
   const messagesEndRef = useRef(null);
 
   // useEffect(() => {
