@@ -2,6 +2,7 @@ import React from 'react';
 import { IoIosSettings } from "react-icons/io";
 import { MdMessage } from "react-icons/md";
 import { FaClipboardList } from "react-icons/fa";
+import { GiBoatFishing } from "react-icons/gi";
 import { useSelector } from 'react-redux';
 import { PageHeader } from '../../../Common';
 import SettingCard from '../../AccountSettingsPage/SettingCard';
@@ -26,7 +27,7 @@ const SubSellerDashboard = () => {
         <SettingCard
           title={"My Pond Listings"}
           description={"Edit private pond listing(s)."}
-          Icon={IoIosSettings}
+          Icon={GiBoatFishing}
           href="/own-spot-list"
         />
         {/* <SettingCard

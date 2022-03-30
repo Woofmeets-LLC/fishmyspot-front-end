@@ -1,8 +1,9 @@
 import React from 'react';
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaClipboardList } from "react-icons/fa";
 // icons
 import { IoIosSettings } from "react-icons/io";
 import { MdHelp, MdMessage } from "react-icons/md";
+import { BiMessageRoundedError } from "react-icons/bi";
 import { useSelector } from 'react-redux';
 import { PageHeader } from '../../../Common';
 import SettingCard from '../SettingCard';
@@ -42,7 +43,7 @@ const SubAccountSettingsPage = () => {
         <SettingCard
           title={"Purchase List"}
           description={"All your reservations are listed here."}
-          Icon={IoIosSettings}
+          Icon={FaClipboardList}
           href={"/purchase-list"}
         />
         <SettingCard
@@ -52,7 +53,7 @@ const SubAccountSettingsPage = () => {
           href={"/messages"}
         />
         <SettingCard
-          title={"Help(s)"}
+          title={"Help"}
           description={"Click here to get additional support regarding your account."}
           Icon={MdHelp}
           href={"/help"}
@@ -72,7 +73,7 @@ const SubAccountSettingsPage = () => {
         <SettingCard
           title={"FAQ"}
           description={"Gather more information before your fishing trip."}
-          Icon={IoIosSettings}
+          Icon={BiMessageRoundedError}
           href={"/faq"}
         />
       </div>

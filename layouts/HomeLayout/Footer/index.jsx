@@ -33,7 +33,7 @@ const Footer = () => {
                             <Link href="/benefits">
                                 <a className="block font-trade-gothic mb-2">Benefits</a>
                             </Link>
-                            <Link href="/contact">
+                            <Link href="/contact-us">
                                 <a className="block font-trade-gothic mb-2">Contact</a>
                             </Link>
                             <Link href="/faq">

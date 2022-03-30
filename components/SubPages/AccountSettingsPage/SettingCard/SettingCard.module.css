@@ -7,7 +7,7 @@
 }
 
 .setting-card-title {
-  @apply text-base md:text-xl lg:text-2xl 2xl:text-[28px] font-trade-gothic-bold mb-1 md:mb-2 2xl:mb-4;
+  @apply text-base md:text-xl lg:text-2xl 2xl:text-[28px] font-trade-gothic-bold mb-1 md:mb-2 2xl:mb-4 capitalize;
 }
 
 .setting-card-description {
