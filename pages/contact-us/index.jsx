@@ -1,6 +1,6 @@
 import { Formik, Form } from 'formik';
+import FormComponent from '../../components/SubPages/ContactUsPage/FormComponent';
 import HomeLayout from '../../layouts/HomeLayout';
-import FormComponent from './FormComponent';
 
 const ContactUs = () => {
   const handleSubmit = (values) => {
