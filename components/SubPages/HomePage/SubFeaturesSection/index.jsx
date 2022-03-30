@@ -6,7 +6,7 @@ const SubFeaturesSection = () => {
     <section className='container'>
       <div className={styles['features-container']}>
         <div className='text-center'>
-          <h1 className={styles['features-heading']}>Fish You Own Private Pond Or Lake And Get Hooked!</h1>
+          <h1 className={styles['features-heading']}>Fish Your Own Private Pond Or Lake And Get Hooked!</h1>
         </div>
         <div className={styles['features-item-container']}>
           <div className='text-center'>

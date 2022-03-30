@@ -7,7 +7,7 @@ const FormComponent = () => {
     <>
       <InputField label={"Name"} name={"name"} placeholder={"Enter your name"} />
       <InputField label={"Email"} name={"email"} placeholder={"Enter your email"} />
-      <TextInput label={"Message"} name={"message"} placeholder={"Enter your message"} />
+      <TextInput label={"Message"} name={"message"} placeholder={"Write your message"} />
 
     </>
   );
