@@ -1,6 +1,8 @@
 import React from 'react';
 import { IoIosSettings } from "react-icons/io";
 import { MdMessage } from "react-icons/md";
+import { FaClipboardList } from "react-icons/fa";
+import { GiBoatFishing } from "react-icons/gi";
 import { useSelector } from 'react-redux';
 import { PageHeader } from '../../../Common';
 import SettingCard from '../../AccountSettingsPage/SettingCard';
@@ -23,9 +25,9 @@ const SubSellerDashboard = () => {
           href="/user-account"
         />
         <SettingCard
-          title={"Own Spot list"}
-          description={"Provide personal details and how we can reach you."}
-          Icon={IoIosSettings}
+          title={"My Pond Listings"}
+          description={"Edit private pond listing(s)."}
+          Icon={GiBoatFishing}
           href="/own-spot-list"
         />
         {/* <SettingCard
@@ -35,14 +37,14 @@ const SubSellerDashboard = () => {
           href={"/notifications"}
         /> */}
         <SettingCard
-          title={"Book list"}
-          description={"Provide personal details and how we can reach you."}
-          Icon={IoIosSettings}
+          title={"Pond Reservations"}
+          description={"View all of your reservations."}
+          Icon={FaClipboardList}
           href={"/seller-dashboard/booked-list"}
         />
         <SettingCard
           title={"Message"}
-          description={"Provide personal details and how we can reach you."}
+          description={"Communicate with anglers regarding upcoming reservations."}
           Icon={MdMessage}
           href={"/messages"}
         />
