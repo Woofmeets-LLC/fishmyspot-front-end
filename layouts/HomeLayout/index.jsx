@@ -54,8 +54,42 @@ const HomeLayout = ({
         }
     }, [isLoading, isLoggedIn])
 
+    const closeDropdowns = (e) => {
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Everyday'];
+        days.forEach(day => {
+            if (`dropdown${day}` in e.target.dataset) {
+                const isChecked = document.querySelector(`[data-checkbox-${day.toLocaleLowerCase()}]`)?.dataset[`checkbox${day}`] == 'true';
+                if (isChecked) {
+                    document.querySelectorAll(`[data-dropdown-${day.toLocaleLowerCase()}]`)
+                        ?.forEach(el => {
+
+                            if (el.dataset[`dropdown${day}`] == 'false') {
+                                document.querySelector(`[data-dropdown-wrap-${day.toLocaleLowerCase()}]`).classList.add('block');
+                                document.querySelector(`[data-dropdown-wrap-${day.toLocaleLowerCase()}]`).classList.remove('hidden');
+                            }
+
+                            el.dataset[`dropdown${day}`] = el.dataset[`dropdown${day}`] == 'true' ? 'false' : 'true';
+                        });
+                }
+            } else if (day.toLocaleLowerCase() in e.target.dataset) {
+                // console.log('item');
+            } else {
+                document.querySelectorAll(`[data-dropdown-${day.toLocaleLowerCase()}]`)
+                    ?.forEach(el => {
+                        el.dataset[`dropdown${day}`] = 'false';
+                    });
+                document.querySelectorAll(`[data-dropdown-wrap-${day.toLocaleLowerCase()}]`)
+                    ?.forEach(el => {
+                        console.log("hidden " + day);
+                        el.classList.add('hidden');
+                        el.classList.remove('block');
+                    });
+            }
+        })
+    }
+
     return (
-        <>
+        <div onClick={closeDropdowns}>
             {
                 isLoading || guardChecking
                     ? (
@@ -77,7 +111,7 @@ const HomeLayout = ({
                     )
             }
 
-        </>
+        </div>
     );
 };
 

@@ -62,12 +62,23 @@ const DayHoursPicker = ({
             }
         });
     }
+
+    const dataAttribute = {
+        dropdownBox: { [`data-dropdown-${name.replace("availableTime[", "").replace("]", "")}`]: "false" },
+        dropdownWrapper: { [`data-dropdown-wrap-${name.replace("availableTime[", "").replace("]", "")}`]: "false" },
+        dropdownElement: { [`data-${name.replace("availableTime[", "").replace("]", "")}`]: "" },
+        checkbox: { [`data-checkbox-${name.replace("availableTime[", "").replace("]", "")}`]: everydayField?.value?.isSelected ? true : field?.value?.isSelected },
+    }
+
     return (
         <div className=" mb-4">
             <div className="flex justify-between items-center">
-                <label className="flex items-center cursor-pointer">
+                <label
+                    {...dataAttribute.checkbox}
+                    className="flex items-center cursor-pointer">
                     <input
                         type="checkbox"
+                        {...dataAttribute.checkbox}
                         {...{
                             ...field,
                             checked: everydayField?.value?.isSelected ? true : field?.value?.isSelected,
@@ -78,52 +89,60 @@ const DayHoursPicker = ({
                 <div className="relative block w-[165px]">
                     <div
                         onClick={handleSelectHoursClick}
+                        {...dataAttribute.dropdownBox}
                         className="relative block w-[165px] px-3 py-[5px] font-trade-gothic text-base text-primary bg-white bg-clip-padding bg-no-repeat font-medium border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:outline-none cursor-pointer">
-                        <div className="flex justify-between items-center">
-                            <span className="">Select Hour</span>
+                        <div
+                            {...dataAttribute.dropdownBox}
+                            className="flex justify-between items-center">
+                            <span {...dataAttribute.dropdownBox}>Select Hour</span>
                             {
                                 (everydayField?.value?.isSelected
                                     ? (name == "availableTime[everyday]" ? isDropDown : false)
                                     : field?.value?.isSelected ? isDropDown : false)
-                                    ? <IoIosArrowUp />
-                                    : <IoIosArrowDown />
+                                    ? <IoIosArrowUp {...dataAttribute.dropdownBox} />
+                                    : <IoIosArrowDown {...dataAttribute.dropdownBox} />
                             }
                         </div>
                     </div>
                     <AnimatePresence>
                         {
-                            (everydayField?.value?.isSelected
-                                ? (name == "availableTime[everyday]" ? isDropDown : false)
-                                : field?.value?.isSelected ? isDropDown : false) &&
-                            (
-                                <motion.div
-                                    variants={variants}
-                                    initial="hidden"
-                                    animate="visible"
-                                    exit="hidden"
-                                    className="absolute top-8 w-full p-2 z-[20] bg-white border rounded">
-                                    {
-                                        options?.map((option, i) => {
-                                            return (
-                                                <div key={i}>
-                                                    <motion.label className="flex items-center cursor-pointer">
-                                                        <input
-                                                            type={"checkbox"}
-                                                            name={option?.title}
-                                                            id={i}
-                                                            value={option?.value}
-                                                            checked={field?.value?.hours?.["all-hours"] ? true : field?.value?.hours?.[option?.value]}
-                                                            onChange={() => handleHoursChange(option)}
-                                                            className={`${field?.value?.hours?.["all-hours"] ? (option?.value != "all-hours" ? "accent-yellow-200" : "accent-secondary") : "accent-secondary"} w-4 h-4 mr-2 cursor-pointer`} />
-                                                        <span className="">{option?.title}</span>
-                                                    </motion.label>
+                            <motion.div
+                                variants={variants}
+                                initial="hidden"
+                                animate="visible"
+                                exit="hidden"
+                                {...dataAttribute.dropdownElement}
+                                {...dataAttribute.dropdownWrapper}
 
-                                                </div>
-                                            )
-                                        })
-                                    }
-                                </motion.div>
-                            )
+                                className={`${(everydayField?.value?.isSelected
+                                    ? (name == "availableTime[everyday]" ? isDropDown : false)
+                                    : field?.value?.isSelected ? isDropDown : false) ? "block" : "hidden"} absolute top-8 w-full p-2 z-[20] bg-white border rounded`}>
+                                {
+                                    options?.map((option, i) => {
+                                        return (
+                                            <div
+                                                key={i}
+                                                {...dataAttribute.dropdownElement}>
+                                                <motion.label
+                                                    {...dataAttribute.dropdownElement}
+                                                    className="flex items-center cursor-pointer">
+                                                    <input
+                                                        {...dataAttribute.dropdownElement}
+                                                        type={"checkbox"}
+                                                        name={option?.title}
+                                                        id={i}
+                                                        value={option?.value}
+                                                        checked={field?.value?.hours?.["all-hours"] ? true : field?.value?.hours?.[option?.value]}
+                                                        onChange={() => handleHoursChange(option)}
+                                                        className={`${field?.value?.hours?.["all-hours"] ? (option?.value != "all-hours" ? "accent-yellow-200" : "accent-secondary") : "accent-secondary"} w-4 h-4 mr-2 cursor-pointer`} />
+                                                    <span {...dataAttribute.dropdownElement}>{option?.title}</span>
+                                                </motion.label>
+
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </motion.div>
                         }
                     </AnimatePresence>
                 </div>
