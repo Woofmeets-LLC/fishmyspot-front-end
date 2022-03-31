@@ -25,7 +25,9 @@ const PondDetails = () => {
     setLoading(true);
     getSdk().listings.show({
       id: query['pond-id'],
-      include: ['images']
+      include: ['images', 'author']
+    }, {
+      expand: true,
     })
       .then(res => {
         setLoading(false);

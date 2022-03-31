@@ -33,7 +33,7 @@ const PurchaseCard = ({ setPurchaseList, purchaseData, status }) => {
     return (
         <div className='md:w-[650px] 2xl:w-[690px] bg-white shadow-md p-4 md:py-6 md:px-7 2xl:py-8 2xl:px-9 rounded-lg'>
             <div className='grid grid-cols-12 gap-3'>
-                <div className='col-span-9 text-primary 2xl:text-lg space-y-3'>
+                <div className='col-span-12 sm:col-span-9 text-primary 2xl:text-lg space-y-3'>
                     <div className='bg-white shadow-md p-4 rounded-lg'>
                         <ListItem
                             title={"Pond Owner"}
@@ -103,7 +103,7 @@ const PurchaseCard = ({ setPurchaseList, purchaseData, status }) => {
                             listingId={purchaseData?.relationships?.listing?.id?.uuid} />
                     }
                 </div>
-                <div className='col-span-3 mt-4 md:mt-0 order-first md:order-last'>
+                <div className='col-span-12 sm:col-span-3 mt-4 md:mt-0 order-first md:order-last'>
                     <StatusButton title={status} />
                 </div>
             </div>
