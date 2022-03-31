@@ -18,7 +18,7 @@ const Footer = () => {
                     <div className="col-span-2 sm:col-span-1">
                         <div className="w-28 lg:mx-auto">
                             <h2 className="text-xl uppercase font-trade-gothic-bold mb-2">About</h2>
-                            <Link href="/about">
+                            <Link href="/">
                                 <a className="block font-trade-gothic mb-2">Home</a>
                             </Link>
                             <Link href="/about">
