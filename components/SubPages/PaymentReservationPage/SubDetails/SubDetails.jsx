@@ -32,7 +32,6 @@ const SubDetails = ({ title, step }) => {
       </div>
       <div className='flex items-center justify-between pb-1 border-b border-b-highlight-1'>
         <h1 className='text-xl sm:text-2xl md:text-3xl xl:text-4xl text-primary font-food-truck uppercase'>{title}</h1>
-        <span className='text-sm inline-block mt-2 sm:text-base lg:text-lg text-highlight-1 font-trade-gothic underline'>Edit</span>
       </div>
       <div className="pt-3 lg:pt-5 2xl:pt-7">
         <SubDetailsItem item={"Date"} value={bookingData?.date ? format(bookingData?.date, "dd MMMM, yyyy") : "N/A"} />

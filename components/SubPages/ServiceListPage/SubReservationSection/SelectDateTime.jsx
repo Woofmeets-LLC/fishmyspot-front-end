@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { MdCalendarToday } from "react-icons/md";
+import { compareDates } from '../../../../services/date/compare-dates';
 import { bookingTimeFormatter } from '../../../../services/date/date-overflow-handler';
 import { preDefinedLongHours } from '../../../../services/listing-spot-data-organiging/availableTimeFormatting';
 import { getSdk } from '../../../../sharetribe/sharetribeSDK';
@@ -14,6 +15,7 @@ const SelectDateTime = ({ pondData }) => {
     const [selectedTimeItem, setSelectedTimeItem] = useState("Select One");
     const [timeSlot, setTimeSlot] = useState([]);
     const [timeSlotError, setTimeSlotError] = useState(false);
+    const [dateError, setDateError] = useState({ status: false, message: '' });
     const [loading, setLoading] = useState(false);
 
     const [dateField, dateMeta, dateHelpers] = useField('date');
@@ -58,37 +60,28 @@ const SelectDateTime = ({ pondData }) => {
 
     useEffect(() => {
         // Time Slot making
-        const dayName = weekDay[dateField?.value?.getDay()];
+        const dayName = dateField?.value && weekDay[dateField?.value?.getDay()];
         getNewTimeSlotsForReservation(entries, dayName);
     }, [dayTypeField.value, pondData]);
 
 
 
     const handleDateChange = (date) => {
-        const todayDate = new Date();
-        const newDate = new Date(date);
-        // if (
-        //     newDate.getFullYear() >= todayDate.getFullYear() &&
-        //     newDate.getMonth() >= todayDate.getMonth() &&
-        //     newDate.getDate() >= todayDate.getDate()
-        // ) {
-        //     // Setting the date value
-        //     dateHelpers.setValue(date);
-
-        //     // Time Slot making
-        //     const dayName = weekDay[date.getDay()];
-        //     getNewTimeSlotsForReservation(entries, dayName);
-        // } else {
-        //     // Setting the date value
-        //     dateHelpers.setValue('');
-        // }
+        setDateError({ status: false, message: '' });
         // Setting the date value
+        dateHelpers.setValue("2000-01-01");
         dateHelpers.setValue(date);
 
         // Time Slot making
         const dayName = weekDay[date.getDay()];
         getNewTimeSlotsForReservation(entries, dayName);
 
+        const datesCompare = compareDates(new Date(), date);
+        if (datesCompare.newTime >= datesCompare.todayTime) {
+            setDateError({ status: false, message: '' });
+        } else {
+            setDateError({ status: true, message: 'The selected date is in the past!' });
+        }
     }
 
     const handleTimeChange = (time) => {
@@ -122,6 +115,7 @@ const SelectDateTime = ({ pondData }) => {
             });
 
     }
+    console.log(dateField.value);
     return (
         <>
             <div className='mb-4 xl:mb-5'>
@@ -138,13 +132,15 @@ const SelectDateTime = ({ pondData }) => {
                     <DatePicker
                         selected={dateField.value}
                         onChange={handleDateChange}
-                        placeholderText={`${dateField.value || "Your selected date is in the past"}`}
+                        placeholderText={`${dateField.value}`}
                         className="w-full py-3 px-5 focus:outline-none text-base"
                     />
                 </div>
             </div>
-            {dateMeta.error ? (
-                <div className="mt-2 text-red-500 text-sm">{dateMeta.error}</div>
+            {dateMeta.error || dateError.status ? (
+                <div className="mt-2 mb-4 text-red-500 text-sm">
+                    {dateMeta.error} {dateMeta.error && dateError?.status && 'and'} {dateError?.status && dateError?.message}
+                </div>
             ) : null}
 
             {/* Time field */}

@@ -5,7 +5,7 @@ const Review = ({ name, review, location, image }) => {
   return (
     <div className={styles['review-area']}>
       <div className={styles['review-area-wrapper']}>
-        <div className="h-[213px] md:h-[194px] grid grid-cols-12 gap-4">
+        <div className="h-[213px] grid grid-cols-12 gap-4 smd:gap-0 md:gap-4">
           <div className="col-span-4 overflow-hidden">
             <div className="h-full aspect-[20/25]">
               <img

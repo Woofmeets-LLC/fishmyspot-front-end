@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import styles from './SubListingYourSpotSection.module.css';
 
@@ -17,7 +18,9 @@ const SubListingYourSpotSection = () => {
             <h1 className={styles['title']}>Find out how much you can make listing your spot</h1>
             <span className='w-[140px] h-[6px] bg-secondary block rounded-full mt-4'></span>
             <p className={styles['sub-listing-content']}>We provide private ponds/lakes for parents, grandparents, the frequent fisherman, and most importantly, to get kids outside and enjoy nature. Public lakes are over-fished, crowded and hard to access. By sharing your spot, you provide local access to your community to fish. Join our community of pond owner!</p>
-            <button className={styles['sub-listing-button']}>Get Started</button>
+            <Link href="/list-your-spot">
+              <a className={styles['sub-listing-button']}>Get Started</a>
+            </Link>
           </div>
         </div>
       </div>

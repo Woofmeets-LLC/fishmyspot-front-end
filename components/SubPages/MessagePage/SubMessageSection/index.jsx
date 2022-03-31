@@ -54,6 +54,7 @@ const SubMessageSection = () => {
         // });
 
         res?.data?.included?.forEach((data) => {
+          console.log(data);
           if (data.type === 'listing') {
             listingData = {
               ...listingData,
