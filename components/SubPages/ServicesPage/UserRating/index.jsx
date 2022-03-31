@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import styles from '../Categories/Categories.module.css';
@@ -35,6 +35,22 @@ const hoverVariants = {
 const UserRating = ({ ratings, setRatings }) => {
 
   const [isDropDown, setIsDropDown] = useState(false);
+  // create a React ref for the dropdown element
+  const dropdown = useRef(null);
+
+  useEffect(() => {
+    // only add the event listener when the dropdown is opened
+    if (!isDropDown) return;
+    function handleClick(event) {
+      if (dropdown.current && !dropdown.current.contains(event.target)) {
+        setIsDropDown(false);
+      }
+    }
+    window.addEventListener("click", handleClick);
+    // clean up
+    return () => window.removeEventListener("click", handleClick);
+  }, [isDropDown]);
+
   const options = [
     'One star',
     'Two star',
@@ -86,6 +102,7 @@ const UserRating = ({ ratings, setRatings }) => {
               initial="hidden"
               animate="visible"
               exit="hidden"
+              ref={dropdown}
               className={styles['dropdown']}>
               {
                 options?.map((option, i) => (
@@ -95,7 +112,7 @@ const UserRating = ({ ratings, setRatings }) => {
                   >
                     <div className='flex items-center space-x-2'>
                       <input
-                        type={"checkbox"}
+                        type={"radio"}
                         name={option}
                         id={option}
                         value={option}
