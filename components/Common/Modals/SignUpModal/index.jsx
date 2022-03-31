@@ -36,7 +36,7 @@ const SignUpModal = () => {
         password: yup.string().required("Required").min(8, "Too Short!"),
         gender: yup.string().required("Required"),
         type: yup.string().required("Required"),
-        isAgree: yup.boolean().oneOf([true], "You must agree!").required("Required"),
+        isAgree: yup.boolean().oneOf([true], "Please read and agree by clicking on box!").required("Required"),
     });
 
 

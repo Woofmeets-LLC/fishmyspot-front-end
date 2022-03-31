@@ -44,7 +44,7 @@ const SubFeaturedSpotSection = () => {
     <section className='container'>
       <div className='featured-spot-slider py-6 sm:py-8 md:py-10 lg:py-16 xl:py-20 2xl:py-32'>
         <div className=' text-primary text-center'>
-          <h1 className='text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-food-truck uppercase'>Some of our featured spot</h1>
+          <h1 className='text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-food-truck uppercase'>Some of our featured spots</h1>
           <span className='w-[140px] h-[6px] bg-secondary inline-block rounded-full mt-4'></span>
         </div>
         <Slider {...settings}>
