@@ -7,6 +7,7 @@ import SubBody from '../SubBody';
 import SubSidebar from '../SubSidebar';
 
 const SubMessageSection = () => {
+  const [loading, setLoading] = useState(false);
   const [transactionIds, setTransactionIds] = useState([]);
   const [includedListingData, setIncludedListingData] = useState({});
   const [includedMessageData, setIncludedMessageData] = useState({});
@@ -21,6 +22,8 @@ const SubMessageSection = () => {
     let tempTransactionIds = [];
     let tempTransactionIdToListingId = {};
     let listingData = {};
+
+    setLoading(true);
     getSdk()
       .transactions.query({
         only:
@@ -33,6 +36,8 @@ const SubMessageSection = () => {
         'fields.listing': ['title'],
       })
       .then((res) => {
+        setLoading(false);
+
         console.log("transactions", res.data.data);
         res?.data?.data?.forEach((item) => {
           tempTransactionIds.push(item.id.uuid);
@@ -56,6 +61,9 @@ const SubMessageSection = () => {
           setTransactionIdToListingId(() => tempTransactionIdToListingId);
           setIncludedListingData(() => listingData);
         });
+      })
+      .catch(error => {
+        setLoading(false);
       });
   }, [currentUser]);
 
@@ -112,41 +120,47 @@ const SubMessageSection = () => {
 
   return (
     <div className="w-full grid grid-cols-12 md:gap-x-[30px]">
-      {transactionIds.length ? (
-        <>
-          <div className="col-span-2 lg:col-span-4">
-            <SubSidebar
-              isActive={isActive}
-              setIsActive={setIsActive}
-              transactionIds={transactionIds}
-              includedListingData={includedListingData}
-              includedMessageData={includedMessageData}
-              transactionIdToListingId={transactionIdToListingId}
-            />
-          </div>
-          <div className="col-span-10 lg:col-span-8">
-            {isActive ? (
-              <SubBody
-                isActive={isActive}
-                includedMessageData={includedMessageData}
-                setIncludedMessageData={setIncludedMessageData}
-                currentUserId={currentUserId}
-                listingTitle={
-                  includedListingData[transactionIdToListingId[isActive]]
-                }
-              />
+      {
+        loading
+          ? <div className="text-center">Loading</div>
+          : (
+            transactionIds.length ? (
+              <>
+                <div className="col-span-2 lg:col-span-4">
+                  <SubSidebar
+                    isActive={isActive}
+                    setIsActive={setIsActive}
+                    transactionIds={transactionIds}
+                    includedListingData={includedListingData}
+                    includedMessageData={includedMessageData}
+                    transactionIdToListingId={transactionIdToListingId}
+                  />
+                </div>
+                <div className="col-span-10 lg:col-span-8">
+                  {isActive ? (
+                    <SubBody
+                      isActive={isActive}
+                      includedMessageData={includedMessageData}
+                      setIncludedMessageData={setIncludedMessageData}
+                      currentUserId={currentUserId}
+                      listingTitle={
+                        includedListingData[transactionIdToListingId[isActive]]
+                      }
+                    />
+                  ) : (
+                    <div className="sm:text-xl md:text-2xl xl:text-3xl h-full flex justify-center items-center font-trade-gothic-bold text-primary">
+                      <h1>Select Transaction</h1>
+                    </div>
+                  )}
+                </div>
+              </>
             ) : (
-              <div className="sm:text-xl md:text-2xl xl:text-3xl h-full flex justify-center items-center font-trade-gothic-bold text-primary">
-                <h1>Select Transaction</h1>
+              <div className="col-span-full sm:text-xl md:text-2xl xl:text-3xl font-trade-gothic-bold flex justify-center items-center h-screen text-primary">
+                <h1>Make A Transaction First.</h1>
               </div>
-            )}
-          </div>
-        </>
-      ) : (
-        <div className="col-span-full sm:text-xl md:text-2xl xl:text-3xl font-trade-gothic-bold flex justify-center items-center h-screen text-primary">
-          <h1>Make A Transaction First.</h1>
-        </div>
-      )}
+            )
+          )
+      }
     </div>
   );
 };
