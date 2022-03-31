@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import { unstable_batchedUpdates } from 'react-dom/cjs/react-dom.development';
 import { useCurrentUser } from '../../../../hooks/users/currentUserHooks';
 import { getSdk } from '../../../../sharetribe/sharetribeSDK';
 import SubBody from '../SubBody';
@@ -39,13 +38,20 @@ const SubMessageSection = () => {
         setLoading(false);
 
         console.log("transactions", res.data.data);
-        res?.data?.data?.forEach((item) => {
-          tempTransactionIds.push(item.id.uuid);
+        tempTransactionIds = res?.data?.data?.map(item => {
           tempTransactionIdToListingId = {
             ...tempTransactionIdToListingId,
             [item.id.uuid]: item.relationships.listing.data.id.uuid,
           };
+          return item.id.uuid
         });
+        // res?.data?.data?.forEach((item) => {
+        //   tempTransactionIds.push(item.id.uuid);
+        //   tempTransactionIdToListingId = {
+        //     ...tempTransactionIdToListingId,
+        //     [item.id.uuid]: item.relationships.listing.data.id.uuid,
+        //   };
+        // });
 
         res?.data?.included?.forEach((data) => {
           if (data.type === 'listing') {
@@ -56,11 +62,9 @@ const SubMessageSection = () => {
           }
         });
 
-        unstable_batchedUpdates(() => {
-          setTransactionIds(() => tempTransactionIds);
-          setTransactionIdToListingId(() => tempTransactionIdToListingId);
-          setIncludedListingData(() => listingData);
-        });
+        setTransactionIds(() => tempTransactionIds);
+        setTransactionIdToListingId(() => tempTransactionIdToListingId);
+        setIncludedListingData(() => listingData);
       })
       .catch(error => {
         setLoading(false);
