@@ -51,8 +51,9 @@ const Test = () => {
     getSdk().stripeAccount.fetch()
       .then(res => {
         const stripeData = res?.data?.data;
-        dispatch(setStripeAccount(stripeData));
-        // res.data
+        const isTransferActivated = stripeData?.attributes?.stripeAccountData?.capabilities?.card_payments == 'active' || stripeData?.attributes?.stripeAccountData?.capabilities?.transfers == 'active';
+
+        dispatch(setStripeAccount({ ...stripeData, isTransferActivated }));
       })
       .catch(error => {
         console.dir(error);
@@ -60,11 +61,6 @@ const Test = () => {
   }
 
   const check = () => {
-    const mcc = stripeAccount?.attributes?.stripeAccountData?.business_profile?.mcc;
-    const url = stripeAccount?.attributes?.stripeAccountData?.business_profile?.url;
-    const isTransferActivated = stripeAccount?.attributes?.stripeAccountData?.capabilities?.card_payments == 'active' ||
-      stripeAccount?.attributes?.stripeAccountData?.capabilities?.transfers == 'active';
-
     const originURL = window.location.origin;
     getSdk().stripeAccountLinks.create({
       failureURL: originURL,
