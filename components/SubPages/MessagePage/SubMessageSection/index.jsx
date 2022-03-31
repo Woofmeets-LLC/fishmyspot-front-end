@@ -118,6 +118,8 @@ const SubMessageSection = () => {
       });
   }, []);
 
+  console.log({ transactionIds })
+
   return (
     <div className="w-full grid grid-cols-12 md:gap-x-[30px]">
       {
