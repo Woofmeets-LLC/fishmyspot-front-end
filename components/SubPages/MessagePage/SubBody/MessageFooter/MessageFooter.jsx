@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { IoSendSharp } from "react-icons/io5";
+import { IoSendSharp } from 'react-icons/io5';
 import { getSdk } from '../../../../../sharetribe/sharetribeSDK';
 
-const MessageFooter = ({ messages, setMessages, activeTransactionId, currentUserId }) => {
+const MessageFooter = ({ activeTransactionId, currentUserId }) => {
   const [inputValue, setInputValue] = useState('');
   const [image, setImage] = useState(null);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (inputValue.length > 0) {
       // const messageObj = {
@@ -15,23 +15,33 @@ const MessageFooter = ({ messages, setMessages, activeTransactionId, currentUser
       // }
       // setMessages([...messages, messageObj]);
 
-      getSdk().messages.send({
-        transactionId: activeTransactionId,
-        content: inputValue,
-      }, {
-        expand: true
-      }).then(res => {
-        console.log(res);
-        // res.data contains the response data
-        const messageData = { ...res.data.data, relationships: { sender: { data: { id: { _sdkType: 'UUID', uuid: currentUserId } } } } };
-        setMessages([...messages, messageData]);
+      getSdk()
+        .messages.send(
+          {
+            transactionId: activeTransactionId,
+            content: inputValue,
+          },
+          {
+            expand: true,
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          // res.data contains the response data
+          const messageData = {
+            ...res.data.data,
+            relationships: {
+              sender: {
+                data: { id: { _sdkType: 'UUID', uuid: currentUserId } },
+              },
+            },
+          };
+          // setMessages([...messages, messageData]);
 
-
-        setInputValue('');
-      });
+          setInputValue('');
+        });
     }
-
-  }
+  };
   return (
     <div className="w-full pt-[6px]">
       <form onSubmit={handleSubmit}>
@@ -40,7 +50,7 @@ const MessageFooter = ({ messages, setMessages, activeTransactionId, currentUser
             type="text"
             name="message"
             value={inputValue}
-            onChange={e => setInputValue(e.target.value)}
+            onChange={(e) => setInputValue(e.target.value)}
             placeholder="Write Message…"
             className="flex-1 bg-white xl:text-lg 2xl:text-xl text-highlight-1 focus:outline-none"
           />
@@ -53,7 +63,10 @@ const MessageFooter = ({ messages, setMessages, activeTransactionId, currentUser
               accept='image/*'
               onChange={e => setImage(e.target.files[0])}
             /> */}
-            <button type="submit" className="text-2xl 2xl:text-3xl text-secondary">
+            <button
+              type="submit"
+              className="text-2xl 2xl:text-3xl text-secondary"
+            >
               <IoSendSharp />
             </button>
           </div>

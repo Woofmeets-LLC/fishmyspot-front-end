@@ -1,14 +1,14 @@
-import React, { useEffect, useRef } from "react";
-import Message from "../Message/Message";
-import useSWR from "swr";
+import React, { useEffect, useRef } from 'react';
+import Message from '../Message/Message';
+import useSWR from 'swr';
 
-import { getSdk } from "../../../../../sharetribe/sharetribeSDK";
+import { getSdk } from '../../../../../sharetribe/sharetribeSDK';
 
 const fetcher = async (activeTransactionId) => {
   return getSdk()
     .messages.query({
       transactionId: activeTransactionId,
-      include: ["sender"],
+      include: ['sender'],
     })
     .then((res) => {
       return res.data.data.reverse();
