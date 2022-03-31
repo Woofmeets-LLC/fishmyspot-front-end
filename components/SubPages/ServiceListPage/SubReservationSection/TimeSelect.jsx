@@ -2,7 +2,7 @@ import React from 'react';
 import { FaRegClock } from "react-icons/fa";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 
-const TimeSelect = ({ label, isActive, setIsActive, selectedItem, setSelectedItem, items, helper, loading }) => {
+const TimeSelect = ({ label, isActive, setIsActive, selectedItem, setSelectedItem, items, helper, loading, dropdown }) => {
 
   return (
     <div className='mb-4 xl:mb-5'>
@@ -37,7 +37,9 @@ const TimeSelect = ({ label, isActive, setIsActive, selectedItem, setSelectedIte
         </div>
         {
           isActive &&
-          <div className={`absolute z-50 top-14 bg-white rounded-md shadow-lg ${label === 'Experiences' ? 'font-trade-gothic-bold' : 'font-trade-gothic'} text-primary w-full`}>
+          <div
+            ref={dropdown}
+            className={`absolute z-50 top-14 bg-white rounded-md shadow-lg ${label === 'Experiences' ? 'font-trade-gothic-bold' : 'font-trade-gothic'} text-primary w-full`}>
             {
               items?.map((item, i) => {
                 return (

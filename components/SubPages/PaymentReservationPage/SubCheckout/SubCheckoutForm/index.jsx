@@ -21,8 +21,7 @@ const SubCheckoutForm = ({ setStep, id, secret, billing_details, reset }) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (document.getElementById("agree-with-terms").dataset.isAgree != 'true') {
-            toast.error("You have to be agree with terms and conditions!", { duration: 4000 });
-            // will not read below code is the user is not agree with terms and condition
+            toast.error("Please agree by clicking on the box!", { duration: 4000 });
             return;
         }
 

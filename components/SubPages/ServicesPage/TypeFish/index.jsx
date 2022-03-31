@@ -1,6 +1,6 @@
-import {AnimatePresence, motion} from 'framer-motion';
-import React, {useState} from 'react';
-import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io';
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import styles from '../Categories/Categories.module.css';
 
 const variants = {
@@ -32,9 +32,25 @@ const hoverVariants = {
 };
 
 
-const TypeFish = ({typeFish, setTypeFish}) => {
+const TypeFish = ({ typeFish, setTypeFish }) => {
 
     const [isDropDown, setIsDropDown] = useState(false);
+    // create a React ref for the dropdown element
+    const dropdown = useRef(null);
+
+    useEffect(() => {
+        // only add the event listener when the dropdown is opened
+        if (!isDropDown) return;
+        function handleClick(event) {
+            if (dropdown.current && !dropdown.current.contains(event.target)) {
+                setIsDropDown(false);
+            }
+        }
+        window.addEventListener("click", handleClick);
+        // clean up
+        return () => window.removeEventListener("click", handleClick);
+    }, [isDropDown]);
+
     const options = [
         "Blackcrappie",
         "Bluegill",
@@ -81,8 +97,8 @@ const TypeFish = ({typeFish, setTypeFish}) => {
                 Type fish
                 {
                     isDropDown ?
-                        <IoIosArrowUp/> :
-                        <IoIosArrowDown/>
+                        <IoIosArrowUp /> :
+                        <IoIosArrowDown />
                 }
             </div>
             <AnimatePresence>
@@ -94,6 +110,7 @@ const TypeFish = ({typeFish, setTypeFish}) => {
                             initial="hidden"
                             animate="visible"
                             exit="hidden"
+                            ref={dropdown}
                             className={styles['dropdown']}>
                             {
                                 options?.map((option, i) => (

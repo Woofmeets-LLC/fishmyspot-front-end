@@ -12,13 +12,13 @@ const SubServicesListHeroSection = ({ setImageModal, pondImages }) => {
           onClick={() => setImageModal(prevState => !prevState)}
           className='p-2 sm:py-2 sm:px-3 xl:py-3 xl:px-4 bg-secondary text-xs md:text-sm font-trade-gothic-bold text-primary rounded'>View photos ({pondImages.length})</button>
       </div>
-      <div className='w-20 sm:w-24 md:w-28 xl:w-32 2xl:w-[158px] h-20 sm:h-24 md:h-28 xl:h-32 2xl:h-[158px] -mt-14 sm:-mt-16 md:-mt-20 2xl:-mt-24 ml-5 md:ml-9'>
+      {/* <div className='w-20 sm:w-24 md:w-28 xl:w-32 2xl:w-[158px] h-20 sm:h-24 md:h-28 xl:h-32 2xl:h-[158px] -mt-14 sm:-mt-16 md:-mt-20 2xl:-mt-24 ml-5 md:ml-9'>
         <img
           src="/images/user.png"
           alt="client"
           className='w-full h-full rounded-full object-cover'
         />
-      </div>
+      </div> */}
     </div>
   );
 };

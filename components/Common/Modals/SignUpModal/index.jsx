@@ -36,7 +36,7 @@ const SignUpModal = () => {
         password: yup.string().required("Required").min(8, "Too Short!"),
         gender: yup.string().required("Required"),
         type: yup.string().required("Required"),
-        isAgree: yup.boolean().oneOf([true], "You must agree!").required("Required"),
+        isAgree: yup.boolean().oneOf([true], "Please read and agree by clicking on box!").required("Required"),
     });
 
 
@@ -108,7 +108,7 @@ const SignUpModal = () => {
                         </Form>
                     </Formik>
 
-                    <div className="grid grid-cols-2 gap-4 mt-5">
+                    {/* <div className="grid grid-cols-2 gap-4 mt-5">
                         <button
                             className="flex justify-center items-center gap-2 w-full border border-transparent bg-blue-600 text-white text-center font-bold py-[6px]">
                             <FaFacebookF /> Facebook
@@ -117,7 +117,7 @@ const SignUpModal = () => {
                             className="flex justify-center items-center gap-2 w-full shadow border border-gray-50 text-primary text-center font-bold py-[6px]">
                             <FcGoogle /> Google
                         </button>
-                    </div>
+                    </div> */}
                     <div className="mt-5 text-center">
                         Already have an account?
                         <button

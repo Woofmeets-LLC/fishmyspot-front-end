@@ -12,5 +12,5 @@
 }
 
 .sub-listing-button {
-  @apply bg-secondary text-white text-xs sm:text-sm lg:text-base xl:text-xl py-2 px-3 sm:py-2 sm:px-4 lg:py-3 lg:px-6 rounded font-trade-gothic-bold;
+  @apply inline-block bg-secondary text-white text-xs sm:text-sm lg:text-base xl:text-xl py-2 px-3 sm:py-2 sm:px-4 lg:py-3 lg:px-6 rounded font-trade-gothic-bold;
 }

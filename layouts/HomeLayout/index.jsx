@@ -4,8 +4,10 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
+import { getSdk } from '../../sharetribe/sharetribeSDK';
 import { login } from '../../store/slices/authSlice';
 import { setShowLoginModal } from '../../store/slices/modalsSlice';
+import { setStripeAccount } from '../../store/slices/stripeAccountSlice';
 // import Footer from './Footer';
 import Header from './Header';
 
@@ -26,7 +28,26 @@ const HomeLayout = ({
     const { push } = useRouter();
 
     useEffect(() => {
-        dispatch(login())
+        // It will update user data in redux in every reload if user is logged in
+        dispatch(login());
+
+        // It will update stripe data in redux in every reload if found
+        getSdk().stripeAccount.fetch()
+            .then(res => {
+                const stripeData = res?.data?.data;
+                const isTransferActivated = stripeData?.attributes?.stripeAccountData?.capabilities?.card_payments == 'active' || stripeData?.attributes?.stripeAccountData?.capabilities?.transfers == 'active';
+
+                dispatch(setStripeAccount({ ...stripeData, isTransferActivated, loaded: true }));
+            })
+            .catch(error => {
+                dispatch(setStripeAccount({
+                    attributes: null,
+                    id: null,
+                    type: null,
+                    isTransferActivated: null,
+                    loaded: true,
+                }));
+            });
     }, [])
 
     useEffect(() => {

@@ -28,6 +28,7 @@ const Slider = ({
   min,
   max,
   handlePriceClear,
+  dropdown
 }) => {
 
 
@@ -38,6 +39,7 @@ const Slider = ({
       initial="hidden"
       animate="visible"
       exit="hidden"
+      ref={dropdown}
       className={styles['slider-container']}>
 
       <div className='text-base font-trade-gothic-bold'>

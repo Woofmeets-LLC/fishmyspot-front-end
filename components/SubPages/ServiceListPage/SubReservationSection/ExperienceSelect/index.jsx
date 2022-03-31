@@ -1,5 +1,5 @@
 import { useField } from 'formik';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import ExperienceItem from './ExperienceItem';
 
@@ -7,6 +7,20 @@ const ExperienceSelect = ({ pondData }) => {
     const [field] = useField('experience');
 
     const [isActive, setIsActive] = useState(false);
+    const dropdown = useRef(null);
+
+    useEffect(() => {
+        // only add the event listener when the dropdown is opened
+        if (!isActive) return;
+        function handleClick(event) {
+            if (dropdown.current && !dropdown.current.contains(event.target)) {
+                setIsActive(false);
+            }
+        }
+        window.addEventListener("click", handleClick);
+        // clean up
+        return () => window.removeEventListener("click", handleClick);
+    }, [isActive]);
 
     return (
         <div className='mb-4 xl:mb-5'>
@@ -41,7 +55,9 @@ const ExperienceSelect = ({ pondData }) => {
                 </div>
                 {
                     isActive &&
-                    <div className={`absolute z-50 top-14 bg-white rounded-md shadow-lg font-trade-gothic-bold  text-primary w-full`}>
+                    <div
+                        ref={dropdown}
+                        className={`absolute z-50 top-14 bg-white rounded-md shadow-lg font-trade-gothic-bold  text-primary w-full`}>
                         {
                             Object.keys(field?.value)?.map((key, i) => (
                                 <ExperienceItem key={i} name={key} price={field.value[key].price} />

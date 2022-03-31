@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import { unstable_batchedUpdates } from 'react-dom/cjs/react-dom.development';
 import { useCurrentUser } from '../../../../hooks/users/currentUserHooks';
 import { getSdk } from '../../../../sharetribe/sharetribeSDK';
 import SubBody from '../SubBody';
 import SubSidebar from '../SubSidebar';
 
 const SubMessageSection = () => {
+  const [loading, setLoading] = useState(false);
   const [transactionIds, setTransactionIds] = useState([]);
   const [includedListingData, setIncludedListingData] = useState({});
   const [includedMessageData, setIncludedMessageData] = useState({});
@@ -21,6 +21,8 @@ const SubMessageSection = () => {
     let tempTransactionIds = [];
     let tempTransactionIdToListingId = {};
     let listingData = {};
+
+    setLoading(true);
     getSdk()
       .transactions.query({
         only:
@@ -28,21 +30,31 @@ const SubMessageSection = () => {
             ? 'sale'
             : 'order',
         lastTransitions: ['transition/confirm-payment'],
-
         include: ['listing'],
         // // "limit.messages": 1,
         'fields.listing': ['title'],
       })
       .then((res) => {
-        res?.data?.data?.forEach((item) => {
-          tempTransactionIds.push(item.id.uuid);
+        setLoading(false);
+
+        console.log("transactions", res.data.data);
+        tempTransactionIds = res?.data?.data?.map(item => {
           tempTransactionIdToListingId = {
             ...tempTransactionIdToListingId,
             [item.id.uuid]: item.relationships.listing.data.id.uuid,
           };
+          return item.id.uuid
         });
+        // res?.data?.data?.forEach((item) => {
+        //   tempTransactionIds.push(item.id.uuid);
+        //   tempTransactionIdToListingId = {
+        //     ...tempTransactionIdToListingId,
+        //     [item.id.uuid]: item.relationships.listing.data.id.uuid,
+        //   };
+        // });
 
         res?.data?.included?.forEach((data) => {
+          console.log(data);
           if (data.type === 'listing') {
             listingData = {
               ...listingData,
@@ -51,11 +63,12 @@ const SubMessageSection = () => {
           }
         });
 
-        unstable_batchedUpdates(() => {
-          setTransactionIds(() => tempTransactionIds);
-          setTransactionIdToListingId(() => tempTransactionIdToListingId);
-          setIncludedListingData(() => listingData);
-        });
+        setTransactionIds(() => tempTransactionIds);
+        setTransactionIdToListingId(() => tempTransactionIdToListingId);
+        setIncludedListingData(() => listingData);
+      })
+      .catch(error => {
+        setLoading(false);
       });
   }, [currentUser]);
 
@@ -71,7 +84,6 @@ const SubMessageSection = () => {
           ...data,
         };
       } catch (error) {
-
         return;
       }
     };
@@ -111,45 +123,51 @@ const SubMessageSection = () => {
       });
   }, []);
 
+  console.log({ includedListingData })
+
   return (
     <div className="w-full grid grid-cols-12 md:gap-x-[30px]">
       {
-        transactionIds.length ? (
-        <>
-        <div className="col-span-2 lg:col-span-4">
-        <SubSidebar
-          isActive={isActive}
-          setIsActive={setIsActive}
-          transactionIds={transactionIds}
-          includedListingData={includedListingData}
-          includedMessageData={includedMessageData}
-          transactionIdToListingId={transactionIdToListingId}
-        />
-      </div>
-      <div className="col-span-10 lg:col-span-8">
-        {
-          isActive ? (
-            <SubBody
-              isActive={isActive}
-              includedMessageData={includedMessageData}
-              setIncludedMessageData={setIncludedMessageData}
-              currentUserId={currentUserId}
-              listingTitle={includedListingData[transactionIdToListingId[isActive]]}
-            />
-          ) : (
-            <div className="sm:text-xl md:text-2xl xl:text-3xl h-full flex justify-center items-center font-trade-gothic-bold text-primary">
-              <h1>Select Transaction</h1>
-            </div>
+        loading
+          ? <div className="text-center">Loading</div>
+          : (
+            transactionIds.length ? (
+              <>
+                <div className="col-span-2 lg:col-span-4">
+                  <SubSidebar
+                    isActive={isActive}
+                    setIsActive={setIsActive}
+                    transactionIds={transactionIds}
+                    includedListingData={includedListingData}
+                    includedMessageData={includedMessageData}
+                    transactionIdToListingId={transactionIdToListingId}
+                  />
+                </div>
+                <div className="col-span-10 lg:col-span-8">
+                  {isActive ? (
+                    <SubBody
+                      isActive={isActive}
+                      includedMessageData={includedMessageData}
+                      setIncludedMessageData={setIncludedMessageData}
+                      currentUserId={currentUserId}
+                      listingTitle={
+                        includedListingData[transactionIdToListingId[isActive]]
+                      }
+                    />
+                  ) : (
+                    <div className="sm:text-xl md:text-2xl xl:text-3xl h-full flex justify-center items-center font-trade-gothic-bold text-primary">
+                      <h1>Select Transaction</h1>
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <div className="col-span-full sm:text-xl md:text-2xl xl:text-3xl font-trade-gothic-bold flex justify-center items-center h-screen text-primary">
+                <h1>Make A Transaction First.</h1>
+              </div>
+            )
           )
-        }
-      </div>
-        </>
-      ) : (
-        <div className="col-span-full sm:text-xl md:text-2xl xl:text-3xl font-trade-gothic-bold flex justify-center items-center h-screen text-primary">
-          <h1>Make A Transaction First.</h1>
-        </div>
-      )
-    }
+      }
     </div>
   );
 };
