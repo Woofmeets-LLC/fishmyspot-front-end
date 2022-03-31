@@ -15,7 +15,7 @@ const Footer = () => {
                             Our mission at FishMySpot is to help families and avid anglers discover unique fishing experiences while connecting with nature, the community, and each other.
                         </div>
                     </div>
-                    <div className="">
+                    <div className="col-span-2 sm:col-span-1">
                         <div className="w-28 lg:mx-auto">
                             <h2 className="text-xl uppercase font-trade-gothic-bold mb-2">About</h2>
                             <Link href="/about">
@@ -27,6 +27,9 @@ const Footer = () => {
                             <Link href="/blogs">
                                 <a className="block font-trade-gothic mb-2">Blog</a>
                             </Link>
+                            {/* <Link href="/family">
+                                <a className="block font-trade-gothic mb-2">Family</a>
+                            </Link> */}
                             <Link href="/benefits-guide">
                                 <a className="block font-trade-gothic mb-2">Benefits</a>
                             </Link>
@@ -38,7 +41,7 @@ const Footer = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="">
+                    <div className="col-span-2 sm:col-span-1">
                         <h2 className="text-xl uppercase font-trade-gothic-bold mb-2">Terms & Policies</h2>
                         <Link href="/terms-of-use">
                             <a className="block font-trade-gothic mb-2">Terms of Use</a>
@@ -56,27 +59,27 @@ const Footer = () => {
                             <a className="block font-trade-gothic mb-2">Trust & Safety</a>
                         </Link>
                     </div>
-                    <div className=" col-span-2 md:col-span-1">
-                        <h2 className="text-xl uppercase font-trade-gothic-bold mb-2">Follow us</h2>
+                    <div className="col-span-full sm:mx-auto md:col-span-1 md:mx-0 lg:col-span-full lg:mx-auto xl:col-span-1">
+                        <h2 className="text-xl uppercase font-trade-gothic-bold mb-2 sm:text-center md:text-left lg:text-center xl:text-left">Follow us</h2>
                         <div className="space-x-4 mt-7 2xl:mt-10">
                             <a
                                 className="inline-block"
-                                href="http://www.facebook.com/fishmyspotllc" target="_blank" rel="noopener noreferrer">
+                                href="https://www.facebook.com/fishmyspotllc" target="_blank" rel="noopener noreferrer">
                                 <FaFacebook className="text-3xl 3xl:text-4xl" />
                             </a>
                             <a
                                 className="inline-block"
-                                href="http://www.instagram.com/fishmyspot/" target="_blank" rel="noopener noreferrer">
+                                href="https://www.instagram.com/fishmyspot/" target="_blank" rel="noopener noreferrer">
                                 <FaInstagram className="text-3xl 3xl:text-4xl" />
                             </a>
                             <a
                                 className="inline-block"
-                                href="http://www.linkedin.com/company/fishmyspot" target="_blank" rel="noopener noreferrer">
+                                href="https://www.linkedin.com/company/fishmyspot" target="_blank" rel="noopener noreferrer">
                                 <FaLinkedinIn className="text-3xl 3xl:text-4xl" />
                             </a>
                             <a
                                 className="inline-block"
-                                href="http://twitter.com/FishMySpot" target="_blank" rel="noopener noreferrer">
+                                href="https://twitter.com/FishMySpot" target="_blank" rel="noopener noreferrer">
                                 <FaTwitter className="text-3xl 3xl:text-4xl" />
                             </a>
                             <a
@@ -88,7 +91,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <hr className="w-1/2 mx-auto" />
+                <hr className="md:w-1/2 mx-auto" />
                 <div className="text-white py-6 text-center">&copy; 2018 – 2021 by FishMySpot</div>
             </div>
         </footer>

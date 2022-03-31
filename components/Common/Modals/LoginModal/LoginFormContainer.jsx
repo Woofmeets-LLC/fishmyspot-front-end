@@ -99,7 +99,7 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
                     </Form>
                 </Formik>
 
-                <div className="grid grid-cols-2 gap-4 mt-5">
+                {/* <div className="grid grid-cols-2 gap-4 mt-5">
                     <button
                         className="flex justify-center items-center gap-2 w-full border border-transparent bg-blue-600 text-white text-center font-bold py-[6px]">
                         <FaFacebookF /> Facebook
@@ -108,7 +108,7 @@ const LoginFormContainer = ({ setShowForgetPassword }) => {
                         className="flex justify-center items-center gap-2 w-full shadow border border-gray-50 text-primary text-center font-bold py-[6px]">
                         <FcGoogle /> Google
                     </button>
-                </div>
+                </div> */}
                 <div className="mt-5 text-center">
                     {"Don't have an account?"}
                     <button
