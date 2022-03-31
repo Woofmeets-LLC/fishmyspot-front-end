@@ -6,8 +6,8 @@ const LicenseAgreement = () => {
   return (
     <HomeLayout>
       <div className="container py-10">
-        <div className="text-center pb-8">
-          <h1 className="text-3xl text-secondary font-food-truck">LICENSE AGREEMENT (OHIO)</h1>
+        <div className="text-center">
+          <h1 className="text-4xl lg:text-5xl text-center text-secondary font-food-truck uppercase mb-6">LICENSE AGREEMENT (OHIO)</h1>
         </div>
         <div className="font-trade-gothic text-primary mt-4">
           <p>

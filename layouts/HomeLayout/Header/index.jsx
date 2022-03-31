@@ -244,7 +244,7 @@ const Header = () => {
                                 {
                                     user?.profile?.publicData?.account_type === "angler" &&
                                     <Link href="/favorite-pond-list" >
-                                        <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Favorite pond </a>
+                                        <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Favorite Ponds </a>
                                     </Link>
                                 }
                                 <Link href={user?.profile?.publicData?.account_type === "angler" ? "/settings" : "/seller-dashboard"} >
