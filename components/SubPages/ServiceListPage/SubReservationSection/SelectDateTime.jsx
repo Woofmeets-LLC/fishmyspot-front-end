@@ -58,19 +58,37 @@ const SelectDateTime = ({ pondData }) => {
 
     useEffect(() => {
         // Time Slot making
-        const dayName = weekDay[dateField.value.getDay()];
+        const dayName = weekDay[dateField?.value?.getDay()];
         getNewTimeSlotsForReservation(entries, dayName);
     }, [dayTypeField.value, pondData]);
 
 
 
     const handleDateChange = (date) => {
+        const todayDate = new Date();
+        const newDate = new Date(date);
+        // if (
+        //     newDate.getFullYear() >= todayDate.getFullYear() &&
+        //     newDate.getMonth() >= todayDate.getMonth() &&
+        //     newDate.getDate() >= todayDate.getDate()
+        // ) {
+        //     // Setting the date value
+        //     dateHelpers.setValue(date);
+
+        //     // Time Slot making
+        //     const dayName = weekDay[date.getDay()];
+        //     getNewTimeSlotsForReservation(entries, dayName);
+        // } else {
+        //     // Setting the date value
+        //     dateHelpers.setValue('');
+        // }
         // Setting the date value
         dateHelpers.setValue(date);
 
         // Time Slot making
         const dayName = weekDay[date.getDay()];
         getNewTimeSlotsForReservation(entries, dayName);
+
     }
 
     const handleTimeChange = (time) => {
@@ -120,7 +138,7 @@ const SelectDateTime = ({ pondData }) => {
                     <DatePicker
                         selected={dateField.value}
                         onChange={handleDateChange}
-                        placeholderText={`${dateField.value}`}
+                        placeholderText={`${dateField.value || "Your selected date is in the past"}`}
                         className="w-full py-3 px-5 focus:outline-none text-base"
                     />
                 </div>
