@@ -59,7 +59,7 @@ const BookingReadyToReview = () => {
                 <div className='container flex flex-col gap-4 lg:gap-5 pb-10 md:pb-12 lg:pb-16 2xl:pb-20'>
                     <div className='pt-6 sm:pt-8 md:pt-10 2xl:pt-12 mb-3 md:mb-4 2xl:mb-5'>
                         <PageHeader
-                            title={"Booking List"}
+                            title={"Pond Reservations"}
                             userName={user?.profile?.displayName}
                             userEmail={user?.email}
                         />
@@ -68,7 +68,7 @@ const BookingReadyToReview = () => {
                     <div className="mb-4">
                         <div className="flex gap-4">
                             <Link href="/seller-dashboard/booked-list">
-                                <a className="inline-block text-lg font-trade-gothic-bold">Bookings</a>
+                                <a className="inline-block text-lg font-trade-gothic-bold">Reservations</a>
                             </Link>
                             <Link href="/seller-dashboard/booked-list/delivered">
                                 <a className="inline-block text-lg font-trade-gothic-bold">Delivered</a>

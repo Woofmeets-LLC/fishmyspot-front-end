@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useField } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { MdCalendarToday } from "react-icons/md";
@@ -21,6 +21,21 @@ const SelectDateTime = ({ pondData }) => {
     const [dayTypeField] = useField('dayType');
 
     const entries = pondData?.attributes?.publicData?.availabilityPlan?.entries;
+
+    const dropdown = useRef(null);
+
+    useEffect(() => {
+        // only add the event listener when the dropdown is opened
+        if (!isTimeActive) return;
+        function handleClick(event) {
+            if (dropdown.current && !dropdown.current.contains(event.target)) {
+                setIsTimeActive(false);
+            }
+        }
+        window.addEventListener("click", handleClick);
+        // clean up
+        return () => window.removeEventListener("click", handleClick);
+    }, [isTimeActive]);
 
     const weekDay = [
         "sun",
@@ -139,6 +154,7 @@ const SelectDateTime = ({ pondData }) => {
                 items={timeSlot}
                 loading={loading}
                 helper={handleTimeChange}
+                dropdown={dropdown}
             />
             <div className="my-2 text-red-500 text-sm">
                 {
