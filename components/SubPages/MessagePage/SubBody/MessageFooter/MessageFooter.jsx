@@ -43,7 +43,7 @@ const MessageFooter = ({ activeTransactionId, currentUserId }) => {
     }
   };
   return (
-    <div className="w-full pt-[6px]">
+    <div className="w-full pt-[6px] pb-5">
       <form onSubmit={handleSubmit}>
         <div className="flex items-center border p-3 2xl:p-4 bg-white rounded-full">
           <input

@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
-import Message from '../Message/Message';
+import React, { useRef } from 'react';
 import useSWR from 'swr';
-
 import { getSdk } from '../../../../../sharetribe/sharetribeSDK';
+import Message from '../Message/Message';
+
 
 const fetcher = async (activeTransactionId) => {
   return getSdk()
@@ -39,7 +39,7 @@ const MessageBody = ({ currentUserId, activeTransactionId }) => {
 
   return (
     <div className="overflow-y-auto h-[62vh] pb-2 pr-3 pt-2 message__scrollbar">
-      {data?.length &&
+      {data?.length > 0 &&
         data.map((message, index) => {
           return (
             <Message
