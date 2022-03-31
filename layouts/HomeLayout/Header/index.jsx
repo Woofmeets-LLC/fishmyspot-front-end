@@ -37,7 +37,10 @@ const Header = () => {
     // States
     const [isActive, setIsActive] = useState(false);
     const [isMenuActive, setIsMenuActive] = useState(false);
+
     const { isLoggedIn, user } = useSelector(state => state.auth);
+    const { isTransferActivated } = useSelector(state => state.stripeAccount);
+
 
     // Dispatch
     const dispatch = useDispatch();
@@ -164,7 +167,7 @@ const Header = () => {
                             className={`flex items-center w-auto h-[70px] 2xl:h-[85px] 3xl:h-[102px] ml-auto space-y-0 space-x-10 bg-white transition transform px-2 py-2 rounded border-0`}>
                             {
                                 user?.profile?.publicData?.account_type == "owner" && (
-                                    user?.stripeConnected
+                                    (user?.stripeConnected && isTransferActivated)
                                         ? <Link href="/list-your-spot" >
                                             <a className={`hidden md:inline-block text-primary font-trade-gothic-bold 2xl:text-[18px]`}>List your spot +</a>
                                         </Link>
@@ -216,7 +219,7 @@ const Header = () => {
                                 className={`absolute block top-[74px] right-[20px] w-[150px] md:w-auto md:ml-auto space-y-2 bg-white px-4 h-auto py-2 rounded border`}>
                                 {
                                     user?.profile?.publicData?.account_type == "owner" && (
-                                        user?.stripeConnected
+                                        (user?.stripeConnected && isTransferActivated)
                                             ? <Link href="/list-your-spot" >
                                                 <a className={`block md:hidden text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]`}>List your spot +</a>
                                             </Link>

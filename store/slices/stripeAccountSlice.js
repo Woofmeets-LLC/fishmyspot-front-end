@@ -8,6 +8,7 @@ const stripeAccountSlice = createSlice({
         id: null,
         type: null,
         isTransferActivated: null,
+        loaded: false,
     },
     reducers: {
       setStripeAccount: (state,{payload}) => {
@@ -15,6 +16,7 @@ const stripeAccountSlice = createSlice({
         state.id = payload.id;
         state.type = payload.type;
         state.isTransferActivated = payload.isTransferActivated;
+        state.loaded = payload.loaded;
       },
     },
   });

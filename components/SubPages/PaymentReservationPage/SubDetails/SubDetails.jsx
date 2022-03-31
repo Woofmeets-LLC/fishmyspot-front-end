@@ -26,7 +26,7 @@ const SubDetails = ({ title, step }) => {
         {
           !isAgree &&
           <div className="text-sm md:text-base text-red-500">
-            You must agree to the Terms and Conditions to continue.
+            Please agree to the Terms and Conditions to continue.
           </div>
         }
       </div>

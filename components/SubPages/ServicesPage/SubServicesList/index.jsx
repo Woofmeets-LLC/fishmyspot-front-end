@@ -15,7 +15,7 @@ const SubServices = ({ items, fetchData, hasMore, images }) => {
         <b>Loading...</b>
       </p>}
       endMessage={<p style={{ textAlign: 'center', display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-        <b>Nothing Left Here!</b>
+        <b>Click on Fish Now and add your favorite spots!</b>
       </p>}
     >
       {

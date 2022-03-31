@@ -14,7 +14,7 @@ const SubWireFramesSection = () => {
           <div className="col-span-12 md:col-span-7 order-1 md:order-2">
             <iframe
               className='w-full h-[220px] sm:h-[240px] md:h-full'
-              src="https://www.youtube.com/embed/DoA_D6tmo6o"
+              src="https://www.youtube.com/embed/_Ye8q5U_nGg"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

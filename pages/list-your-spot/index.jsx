@@ -35,6 +35,32 @@ const ListYourPond = () => {
     const fishes = useSelector(state => state.listSpotContents.fishes);
     const fishesObject = fishes?.map(fish => fish.name + "_" + fish.id)
         ?.reduce((prevObj, key) => ({ ...prevObj, [key]: false }), {});
+    const { isTransferActivated, loaded } = useSelector(state => state.stripeAccount);
+
+    useEffect(() => {
+        if (loaded) {
+            !isTransferActivated
+        }
+    }, [loaded])
+
+    const redirectToStripe = () => {
+        const originURL = window.location.origin;
+        getSdk().stripeAccountLinks.create({
+            failureURL: originURL,
+            successURL: originURL + "/list-your-spot",
+            type: "account_onboarding",
+            collect: "currently_due",
+        })
+            .then(res => {
+                if (typeof (window) !== "undefined") {
+                    window.location = res.data?.data?.attributes?.url;
+                }
+            })
+            .catch(err => {
+                console.dir(err)
+            })
+    }
+
 
     // available time data 
     const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "everyday"];
@@ -256,51 +282,69 @@ const ListYourPond = () => {
                 fallbackUrl: "/",
             }}>
             <TopImageCard />
-            <MultiStepForm
-                initialValues={initialValues}
-                timelineArray={timelineArray}
-                stepControllerBtns={stepControllerBtns}
-                onSubmit={handleSubmit}
-                successComponent={<div>Success</div>}
-            >
-                <FormStep validationSchema={validation.pondListing}>
-                    <SubPondListing />
-                </FormStep>
-                <FormStep validationSchema={validation.pondOwnerDetails}>
-                    <SubPondOwnerDetails />
-                </FormStep>
-                <FormStep>
-                    <SubPricing />
-                </FormStep>
-                <FormStep validationSchema={validation.pondOwnerInfo}>
-                    <SubPondOwnerInfo />
-                </FormStep>
-                <FormStep>
-                    <SubAvailableTime />
-                </FormStep>
-                <FormStep validationSchema={validation.description}>
-                    <SubDescription />
-                </FormStep>
-                <FormStep validationSchema={validation.accessToPond}>
-                    <SubAccessToPond />
-                </FormStep>
-                <FormStep>
-                    <SubAmenities />
-                </FormStep>
-                <FormStep >
-                    <SubAdditionalInformation />
-                </FormStep>
-                <FormStep >
-                    {
-                        loading
-                            ? <div className="flex justify-center items-center flex-wrap my-10">
-                                <ClipLoader size={50} color={'#1971ff'} />
-                                <h2 className="w-full text-center font-semibold mt-2">Creating your pond...</h2>
+            {
+                isTransferActivated
+                    ? (
+                        <MultiStepForm
+                            initialValues={initialValues}
+                            timelineArray={timelineArray}
+                            stepControllerBtns={stepControllerBtns}
+                            onSubmit={handleSubmit}
+                            successComponent={<div>Success</div>}
+                        >
+                            <FormStep validationSchema={validation.pondListing}>
+                                <SubPondListing />
+                            </FormStep>
+                            <FormStep validationSchema={validation.pondOwnerDetails}>
+                                <SubPondOwnerDetails />
+                            </FormStep>
+                            <FormStep>
+                                <SubPricing />
+                            </FormStep>
+                            <FormStep validationSchema={validation.pondOwnerInfo}>
+                                <SubPondOwnerInfo />
+                            </FormStep>
+                            <FormStep>
+                                <SubAvailableTime />
+                            </FormStep>
+                            <FormStep validationSchema={validation.description}>
+                                <SubDescription />
+                            </FormStep>
+                            <FormStep validationSchema={validation.accessToPond}>
+                                <SubAccessToPond />
+                            </FormStep>
+                            <FormStep>
+                                <SubAmenities />
+                            </FormStep>
+                            <FormStep >
+                                <SubAdditionalInformation />
+                            </FormStep>
+                            <FormStep >
+                                {
+                                    loading
+                                        ? <div className="flex justify-center items-center flex-wrap my-10">
+                                            <ClipLoader size={50} color={'#1971ff'} />
+                                            <h2 className="w-full text-center font-semibold mt-2">Creating your pond...</h2>
+                                        </div>
+                                        : <SubAgreementSection />
+                                }
+                            </FormStep>
+                        </MultiStepForm>
+                    )
+                    : (
+                        loaded
+                            ? <div className="text-center my-10">
+                                <div className="text-red-500 font-trade-gothic text-xl my-5">Your payment method is not connected.</div>
+                                <button
+                                    onClick={redirectToStripe}
+                                    className="bg-secondary text-lg text-white px-8 py-2 rounded">Connect stripe account</button>
                             </div>
-                            : <SubAgreementSection />
-                    }
-                </FormStep>
-            </MultiStepForm>
+                            : <div className="flex justify-center items-center flex-wrap my-10">
+                                <ClipLoader size={50} color={'#1971ff'} />
+                                <h2 className="w-full text-center font-semibold mt-2">Loading...</h2>
+                            </div>
+                    )
+            }
         </HomeLayout>
     );
 };

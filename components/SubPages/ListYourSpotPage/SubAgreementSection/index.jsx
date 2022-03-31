@@ -30,7 +30,7 @@ const SubAgreementSection = () => {
             </div>
 
             {!termsField.value ? (
-                <div className="mt-2 text-red-500 text-sm">You must be agree with the terms and condition</div>
+                <div className="mt-2 text-red-500 text-sm">Please agree by clicking on the box</div>
             ) : null}
 
             <div className={'flex gap-3 my-2 items-center cursor-pointer'}
@@ -49,7 +49,7 @@ const SubAgreementSection = () => {
             </div>
 
             {!licenseField.value ? (
-                <div className="mt-2 text-red-500 text-sm">You must be agree with the License and Agreement</div>
+                <div className="mt-2 text-red-500 text-sm">Please agree by clicking on the box!</div>
             ) : null}
 
         </div>
