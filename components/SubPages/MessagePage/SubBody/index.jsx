@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useCurrentUser } from '../../../../hooks/users/currentUserHooks';
-import { getSdk } from '../../../../sharetribe/sharetribeSDK';
-import MessageBody from './MessageBody';
-import MessageFooter from './MessageFooter/MessageFooter';
-import MessageHeader from './MessageHeader/MessageHeader';
+import React, { useEffect, useState } from "react";
+import { useCurrentUser } from "../../../../hooks/users/currentUserHooks";
+import { getSdk } from "../../../../sharetribe/sharetribeSDK";
+import MessageBody from "./MessageBody";
+import MessageFooter from "./MessageFooter/MessageFooter";
+import MessageHeader from "./MessageHeader/MessageHeader";
 
 const SubBody = ({
   isActive: activeTransactionId,
   includedMessageData,
   setIncludedMessageData,
   currentUserId,
-  listingTitle
+  listingTitle,
 }) => {
   const [messages, setMessages] = useState([]);
   const currentUser = useCurrentUser();
@@ -26,7 +26,7 @@ const SubBody = ({
       getSdk()
         .messages.query({
           transactionId: activeTransactionId,
-          include: ['sender'],
+          include: ["sender"],
         })
         .then((res) => {
           if (
@@ -45,11 +45,15 @@ const SubBody = ({
   return (
     <div className="w-full h-full flex flex-col pl-2 sm:pl-4 md:pl-0 pr-4 lg:pr-16">
       <MessageHeader name={listingTitle} />
-      <MessageBody messages={messages} currentUserId={currentUserId} />
+      <MessageBody
+        messages={messages}
+        currentUserId={currentUserId}
+        activeTransactionId={activeTransactionId}
+      />
       <hr />
       <MessageFooter
-        messages={messages}
-        setMessages={setMessages}
+        // messages={messages}
+        // setMessages={setMessages}
         activeTransactionId={activeTransactionId}
         currentUserId={currentUserId}
       />

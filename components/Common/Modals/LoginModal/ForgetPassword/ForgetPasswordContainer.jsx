@@ -39,7 +39,7 @@ const ForgetPasswordContainer = () => {
                         alt="" />
                 </div>
                 <h2 className="font-food-truck text-3xl xl:text-4xl 2xl:text-[44px] 3xl:text-5xl text-primary text-center mb-3 2xl:mb-5"> {isSuccess ? "EMAIL SENT" : "FORGOT PASSWORD"} </h2>
-                <p className="font-trade-gothic text-center px-2 mb-4 2xl:mb-6">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut</p>
+                <p className="font-trade-gothic text-center px-2 mb-4 2xl:mb-6">That&apos;s okay, it happens! Fill in your email and we&apos;ll send you instructions to reset your password.</p>
 
                 {/* Formik form  */}
                 {

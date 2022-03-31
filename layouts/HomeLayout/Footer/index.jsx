@@ -27,10 +27,7 @@ const Footer = () => {
                             <Link href="/blogs">
                                 <a className="block font-trade-gothic mb-2">Blog</a>
                             </Link>
-                            <Link href="/family">
-                                <a className="block font-trade-gothic mb-2">Family</a>
-                            </Link>
-                            <Link href="/benefits">
+                            <Link href="/benefits-guide">
                                 <a className="block font-trade-gothic mb-2">Benefits</a>
                             </Link>
                             <Link href="/contact-us">
@@ -64,27 +61,27 @@ const Footer = () => {
                         <div className="space-x-4 mt-7 2xl:mt-10">
                             <a
                                 className="inline-block"
-                                href="http://" target="_blank" rel="noopener noreferrer">
+                                href="http://www.facebook.com/fishmyspotllc" target="_blank" rel="noopener noreferrer">
                                 <FaFacebook className="text-3xl 3xl:text-4xl" />
                             </a>
                             <a
                                 className="inline-block"
-                                href="http://" target="_blank" rel="noopener noreferrer">
+                                href="http://www.instagram.com/fishmyspot/" target="_blank" rel="noopener noreferrer">
                                 <FaInstagram className="text-3xl 3xl:text-4xl" />
                             </a>
                             <a
                                 className="inline-block"
-                                href="http://" target="_blank" rel="noopener noreferrer">
+                                href="http://www.linkedin.com/company/fishmyspot" target="_blank" rel="noopener noreferrer">
                                 <FaLinkedinIn className="text-3xl 3xl:text-4xl" />
                             </a>
                             <a
                                 className="inline-block"
-                                href="http://" target="_blank" rel="noopener noreferrer">
+                                href="http://twitter.com/FishMySpot" target="_blank" rel="noopener noreferrer">
                                 <FaTwitter className="text-3xl 3xl:text-4xl" />
                             </a>
                             <a
                                 className="inline-block"
-                                href="http://" target="_blank" rel="noopener noreferrer">
+                                href="https://www.youtube.com/channel/UCnzLuJ3etJZB7mxIHFE8tuA" target="_blank" rel="noopener noreferrer">
                                 <FaYoutube className="text-3xl 3xl:text-4xl" />
                             </a>
                         </div>
