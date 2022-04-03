@@ -31,7 +31,7 @@ const SubBody = ({
         .then((res) => {
           if (
             res?.data?.data?.length !==
-            includedMessageData[activeTransactionId]?.data.length
+            includedMessageData[activeTransactionId]?.data?.length
           ) {
             setIncludedMessageData({
               ...includedMessageData,

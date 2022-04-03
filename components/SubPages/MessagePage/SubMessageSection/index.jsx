@@ -38,9 +38,9 @@ const SubMessageSection = () => {
         tempTransactionIds = res?.data?.data?.map(item => {
           tempTransactionIdToListingId = {
             ...tempTransactionIdToListingId,
-            [item.id.uuid]: item.relationships.listing.data.id.uuid,
+            [item.id.uuid]: item?.relationships?.listing?.data?.id?.uuid,
           };
-          return item.id.uuid
+          return item?.id?.uuid
         });
         // res?.data?.data?.forEach((item) => {
         //   tempTransactionIds.push(item.id.uuid);
@@ -54,7 +54,7 @@ const SubMessageSection = () => {
           if (data.type === 'listing') {
             listingData = {
               ...listingData,
-              [data.id.uuid]: data.attributes.title || '',
+              [data.id.uuid]: data?.attributes?.title || '',
             };
           }
         });
@@ -88,17 +88,17 @@ const SubMessageSection = () => {
       if (transactionIds?.length === 0 && !currentUser) return;
 
       const promiseList = await Promise.allSettled([
-        ...transactionIds.map((id) => fetchMessage(id)),
+        ...transactionIds?.map((id) => fetchMessage(id)),
       ]);
 
       const messageResponseList = promiseList
-        .filter((data) => data.status == 'fulfilled')
-        .map((data) => data.value);
+        .filter((data) => data?.status == 'fulfilled')
+        .map((data) => data?.value);
 
       const result = messageResponseList.reduce((prevValue, currentValue) => {
         return {
           ...prevValue,
-          [currentValue.TransactionId]: currentValue.data,
+          [currentValue?.TransactionId]: currentValue?.data,
         };
       }, {});
 
@@ -115,7 +115,7 @@ const SubMessageSection = () => {
       })
       .then((res) => {
         // res.data contains the response data
-        setCurrentUserId(res.data.data.id.uuid);
+        setCurrentUserId(res?.data?.data?.id?.uuid);
       });
   }, []);
 
@@ -126,7 +126,7 @@ const SubMessageSection = () => {
         loading
           ? <div className="text-center">Loading</div>
           : (
-            transactionIds.length ? (
+            transactionIds?.length ? (
               <>
                 <div className="col-span-2 lg:col-span-4">
                   <SubSidebar
