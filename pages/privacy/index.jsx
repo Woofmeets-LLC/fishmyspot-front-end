@@ -16,7 +16,7 @@ const Privacy = () => {
                             Your privacy is important to us. It is FishMySpot's policy to respect your
                             privacy and comply with any applicable law and regulation regarding any
                             personal information we may collect about you, including across our website,
-                            <Link href={'/'}><a>https://fishmyspot.com</a></Link>, and other sites we own and operate.
+                            <Link href={'/'}><a className="text-secondary">https://fishmyspot.com</a></Link>, and other sites we own and operate.
                         </>,
                         <>
                             Personal information is any information about you which can be used to
@@ -256,8 +256,8 @@ const Privacy = () => {
                         </ul>,
                         <>Third parties we currently use include:</>,
                         <ul key={"third-parties-we-use"} className="pl-5 list-disc">
-                            <li>Google Analytics</li>,
-                            <li>MailChimp</li>,
+                            <li>Google Analytics</li>
+                            <li>MailChimp</li>
                             <li>Stripe</li>
                         </ul>
                     ]} />
@@ -358,6 +358,204 @@ const Privacy = () => {
                             specified.
                         </>,
                         <>Please refer to our Cookie Policy for more information. </>
+                    ]} />
+                <SectionTitleDescription
+                    title="Business Transfers"
+                    descriptions={[
+                        <>
+                            If we or our assets are acquired, or in the unlikely event that we go out of
+                            business or enter bankruptcy, we would include data, including your personal
+                            information, among the assets transferred to any parties who acquire us. You
+                            acknowledge that such transfers may occur, and that any parties who
+                            acquire us may, to the extent permitted by applicable law, continue to use
+                            your personal information according to this policy, which they will be
+                            required to assume as it is the basis for any ownership or use rights we have
+                            over such information.
+                        </>,
+                    ]} />
+                <SectionTitleDescription
+                    title="Limits of Our Policy"
+                    descriptions={[
+                        <>
+                            Our website may link to external sites that are not operated by us. Please be
+                            aware that we have no control over the content and policies of those sites,
+                            and cannot accept responsibility or liability for their respective privacy
+                            practices.
+                        </>
+                    ]} />
+                <SectionTitleDescription
+                    title="Changes to This Policy"
+                    descriptions={[
+                        <>
+                            At our discretion, we may change our privacy policy to reflect updates to our
+                            business processes, current acceptable practices, or legislative or regulatory
+                            changes. If we decide to change this privacy policy, we will post the changes
+                            here at the same link by which you are accessing this privacy policy.
+                        </>,
+                        <>
+                            If the changes are significant, or if required by applicable law, we will contact
+                            you (based on your selected preferences for communications from us) and
+                            all our registered users with the new details and links to the updated or
+                            changed policy.
+                        </>,
+                        <>
+                            If required by law, we will get your permission or give you the opportunity to
+                            opt in to or opt out of, as applicable, any new uses of your personal
+                            information.
+                        </>,
+                        <>Additional Disclosures for California Compliance (US)</>,
+                        <>
+                            Under California Civil Code Section 1798.83, if you live in California and your
+                            business relationship with us is mainly for personal, family, or household
+                            purposes, you may ask us about the information we release to other
+                            organizations for their marketing purposes.
+                        </>,
+                        <>
+                            To make such a request, please contact us using the details provided in this
+                            privacy policy with “Request for California privacy information” in the subject
+                            line. You may make this type of request once every calendar year. We will
+                            email you a list of categories of personal information we revealed to other
+                            organizations for their marketing purposes in the last calendar year, along
+                            with their names and addresses. Not all personal information shared in this
+                            way is covered by Section 1798.83 of the California Civil Code.
+                        </>
+                    ]} />
+                <SectionTitleDescription
+                    title="Do Not Track"
+                    descriptions={[
+                        <>
+                            Some browsers have a “Do Not Track” feature that lets you tell websites that
+                            you do not want to have your online activities tracked. At this time, we do
+                            not respond to browser “Do Not Track” signals.
+                        </>,
+                        <>
+                            We adhere to the standards outlined in this privacy policy, ensuring we
+                            collect and process personal information lawfully, fairly, transparently, and
+                            with legitimate, legal reasons for doing so.
+                        </>
+                    ]} />
+                <SectionTitleDescription
+                    title="Cookies and Pixels"
+                    descriptions={[
+                        <>At all times, you may decline cookies from our site if your browser permits.
+                            Most browsers allow you to activate settings on your browser to refuse the
+                            setting of all or some cookies. Accordingly, your ability to limit cookies is
+                            based only on your browser’s capabilities. Please refer to the Cookies section
+                            of this privacy policy for more information.</>
+                    ]} />
+                <SectionTitleDescription
+                    title="CCPA-permitted financial incentives"
+                    descriptions={[
+                        <>
+                            In accordance with your right to non-discrimination, we may offer you certain
+                            financial incentives permitted by the CCPA that can result in different prices,
+                            rates, or quality levels for the goods or services we provide.
+                        </>,
+                        <>
+                            Any CCPA-permitted financial incentive we offer will reasonably relate to the
+                            value of your personal information, and we will provide written terms that
+                            describe clearly the nature of such an offer. Participation in a financial
+                            incentive program requires your prior opt-in consent, which you may revoke
+                            at any time.
+                        </>
+                    ]} />
+                <SectionTitleDescription
+                    title="California Notice of Collection"
+                    descriptions={[
+                        <>
+                            In the past 12 months, we have collected the following categories of personal
+                            information enumerated in the California Consumer Privacy Act:
+                        </>,
+                        <>
+                            Identifiers, such as name, email address, phone number account name, IP
+                            address, and an ID or number assigned to your account.
+                            Customer records, such as billing and shipping address, and credit or debit
+                            card data.
+                        </>,
+                        <>
+                            Demographics, such as your age or gender. This category includes data that
+                            may qualify as protected classifications under other California or federal
+                            laws.
+                        </>,
+                        <>
+                            Commercial information, such as products or services history and purchases.
+                            Internet activity, such as your interactions with our service.
+                        </>,
+                        <>
+                            Audio or visual data, such as photos or videos you share with us or post on
+                            the service.
+                        </>,
+                        <>Geolocation data.</>,
+                        <>
+                            Inferences, such as information about your interests, preferences and
+                            favorites.
+                        </>,
+                        <>
+                            For more information on information we collect, including the sources we
+                            receive information from, review the “Information We Collect” section. We
+                            collect and use these categories of personal information for the business
+                            purposes described in the “Collection and Use of Information” section,
+                            including to provide and manage our Service.
+                        </>
+                    ]} />
+                <SectionTitleDescription
+                    title="Right to Know and Delete"
+                    descriptions={[
+                        <>
+                            If you are a California resident, you have rights to delete your personal
+                            information we collected and know certain information about our data
+                            practices in the preceding 12 months. In particular, you have the right to
+                            request the following from us:
+                        </>,
+                        <>
+                            The categories of personal information we have collected about you;
+                            The categories of sources from which the personal information was collected;
+                            The categories of personal information about you we disclosed for a business
+                            purpose or sold;
+                        </>,
+                        <>
+                            The categories of third parties to whom the personal information was
+                            disclosed for a business purpose or sold;
+                            The business or commercial purpose for collecting or selling the personal
+                            information; and
+                            The specific pieces of personal information we have collected about you.
+                            To exercise any of these rights, please contact us using the details provided
+                            in this privacy policy.
+                        </>
+                    ]} />
+                <SectionTitleDescription
+                    title="Shine the Light"
+                    descriptions={[
+                        <>
+                            If you are a California resident, in addition to the rights discussed above, you
+                            have the right to request information from us regarding the manner in which
+                            we share certain personal information as defined by California’s “Shine the
+                            Light” with third parties and affiliates for their own direct marketing
+                            purposes.
+                        </>,
+                        <>
+                            To receive this information, send us a request using the contact details
+                            provided in this privacy policy. Requests must include “California Privacy
+                            Rights Request” in the first line of the description and include your name,
+                            street address, city, state, and ZIP code.
+                        </>
+                    ]} />
+                <SectionTitleDescription
+                    title="Contact Us"
+                    descriptions={[
+                        <>
+                            For any questions or concerns regarding your privacy, you may contact us
+                            using the following details:
+                        </>,
+                        <>
+                            <span className="block mt-8">Larissa Smith</span>
+                            <span className="block">
+                                <a
+                                    href="mailto:lsmith@fishmyspot.com"
+                                    className="text-secondary">lsmith@fishmyspot.com</a>
+                            </span>
+
+                        </>
                     ]} />
             </div>
         </HomeLayout>
