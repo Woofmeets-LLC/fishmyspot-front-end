@@ -70,6 +70,7 @@ const DayHoursPicker = ({
         if (!isDropDown) return;
 
         function handleClick(event) {
+            console.log({ dropdown, eventTarget: event.target });
             if (dropdown.current && !dropdown.current.contains(event.target)) {
                 setIsDropDown(false);
             }
@@ -78,7 +79,6 @@ const DayHoursPicker = ({
         // clean up
         return () => window.removeEventListener("click", handleClick);
     }, [isDropDown]);
-
     return (
         <div className=" mb-4">
             <div className="flex justify-between items-center">
