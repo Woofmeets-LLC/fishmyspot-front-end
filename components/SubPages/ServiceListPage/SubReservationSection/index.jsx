@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
-import { compareDates } from '../../../../services/date/compare-dates';
 import { setBookingData } from '../../../../store/slices/bookingDataSlice';
 import Calculation from './Calculation';
 import DaysTypeSelect from './DaysTypeSelect';
@@ -51,14 +50,10 @@ const SubReservationSection = ({ pondData }) => {
               time: yup.string().required('Time is required!'),
             })}
             onSubmit={(values, { setSubmitting }) => {
-              const datesCompare = compareDates(new Date(), values.date);
-
-              if (datesCompare.newTime >= datesCompare.todayTime) {
-                dispatch(setBookingData(values));
-                setTimeout(() => {
-                  push('/payment-reservation')
-                }, 1000)
-              }
+              dispatch(setBookingData(values));
+              setTimeout(() => {
+                push('/payment-reservation')
+              }, 1000)
             }}
           >
             <Form>
