@@ -123,6 +123,7 @@ const SelectDateTime = ({ pondData }) => {
                 setLoading(false);
                 setTimeSlotError(res.data.data.length === 0);
                 res.data.data.length !== 0 && timeHelpers.setValue(time);
+                // res.data comains the response data
             })
             .catch(err => {
                 setLoading(false);
