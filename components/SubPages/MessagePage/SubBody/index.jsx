@@ -43,7 +43,7 @@ const SubBody = ({
   }, [activeTransactionId, includedMessageData, setIncludedMessageData]);
 
   return (
-    <div className="w-full h-full flex flex-col pl-2 sm:pl-4 md:pl-0 pr-4 lg:pr-16">
+    <div className="w-full flex flex-col pl-2 sm:pl-4 md:pl-0 pr-4 lg:pr-16">
       <MessageHeader name={listingTitle} />
       <MessageBody
         messages={messages}

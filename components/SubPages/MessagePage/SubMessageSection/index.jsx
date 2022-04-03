@@ -15,8 +15,6 @@ const SubMessageSection = () => {
   const [isActive, setIsActive] = useState(0);
   const currentUser = useCurrentUser();
 
-  // console.log(currentUser.profile.abbreviatedName);
-
   useEffect(() => {
     let tempTransactionIds = [];
     let tempTransactionIdToListingId = {};
@@ -37,7 +35,6 @@ const SubMessageSection = () => {
       .then((res) => {
         setLoading(false);
 
-        console.log("transactions", res.data.data);
         tempTransactionIds = res?.data?.data?.map(item => {
           tempTransactionIdToListingId = {
             ...tempTransactionIdToListingId,
@@ -54,7 +51,6 @@ const SubMessageSection = () => {
         // });
 
         res?.data?.included?.forEach((data) => {
-          console.log(data);
           if (data.type === 'listing') {
             listingData = {
               ...listingData,
@@ -123,10 +119,9 @@ const SubMessageSection = () => {
       });
   }, []);
 
-  console.log({ includedListingData })
 
   return (
-    <div className="w-full grid grid-cols-12 md:gap-x-[30px]">
+    <div className="w-full min-h-[550px] grid grid-cols-12 md:gap-x-[30px]">
       {
         loading
           ? <div className="text-center">Loading</div>
@@ -156,14 +151,18 @@ const SubMessageSection = () => {
                     />
                   ) : (
                     <div className="sm:text-xl md:text-2xl xl:text-3xl h-full flex justify-center items-center font-trade-gothic-bold text-primary">
-                      <h1>Select Transaction</h1>
+                      <h1>Select Message</h1>
                     </div>
                   )}
                 </div>
               </>
             ) : (
               <div className="col-span-full sm:text-xl md:text-2xl xl:text-3xl font-trade-gothic-bold flex justify-center items-center h-screen text-primary">
-                <h1>Make A Transaction First.</h1>
+                {
+                  currentUser?.profile?.publicData?.account_type === 'owner' ?
+                    <h1>You {"don't"} have any message from customer</h1> :
+                    <h1>Make A Transaction First.</h1>
+                }
               </div>
             )
           )
