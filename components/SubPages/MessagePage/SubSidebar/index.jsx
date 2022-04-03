@@ -8,10 +8,6 @@ const SubSidebar = ({
   includedListingData,
   includedMessageData,
 }) => {
-  // console.log(transactionIds);
-  // console.log(transactionIdToListingId);
-  // console.log(includedListingData);
-  // console.log( includedMessageData );
 
   return (
     <div className="p-2 md:pr-3 h-full border-r border-r-gray-300 overflow-y-auto lg:pt-7 message__scrollbar">
@@ -20,7 +16,7 @@ const SubSidebar = ({
         //   console.log({ [id]: { listing: includedListingData[id], message: includedMessageData[id] } });
         // });
 
-        transactionIds.map((id, index) => {
+        transactionIds?.map((id, index) => {
           if (includedMessageData[id]) {
             const { content = '', createdAt = new Date() } =
               includedMessageData[id]?.data[0]?.attributes || {};

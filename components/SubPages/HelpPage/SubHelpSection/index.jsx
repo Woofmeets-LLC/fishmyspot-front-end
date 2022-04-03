@@ -9,9 +9,11 @@ import { AiOutlineBars } from "react-icons/ai";
 //import styles 👇
 import 'react-modern-drawer/dist/index.css'
 import { PageHeader } from '../../../Common';
+import { useSelector } from 'react-redux';
 
 const SubHelpSection = () => {
   const [isShowContent, setIsShowContent] = useState('');
+  const { user } = useSelector(state => state.auth);
 
   const [isOpen, setIsOpen] = React.useState(false)
   const toggleDrawer = () => {
@@ -23,8 +25,8 @@ const SubHelpSection = () => {
       <div className={styles['sub-help-section-heading-wrapper']}>
         <PageHeader
           title={"Help"}
-          userName={"Larissa Smith"}
-          userEmail={"larissa@gmail.com"}
+          userName={`${user?.profile?.firstName} ${user?.profile?.lastName}`}
+          userEmail={`${user?.email}`}
         />
       </div>
       <div className='md:grid md:grid-cols-12 md:gap-14 xl:gap-24'>

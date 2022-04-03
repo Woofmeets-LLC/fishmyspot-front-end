@@ -26,10 +26,9 @@ const MessageFooter = ({ activeTransactionId, currentUserId }) => {
           }
         )
         .then((res) => {
-          console.log(res);
           // res.data contains the response data
           const messageData = {
-            ...res.data.data,
+            ...res?.data?.data,
             relationships: {
               sender: {
                 data: { id: { _sdkType: 'UUID', uuid: currentUserId } },
