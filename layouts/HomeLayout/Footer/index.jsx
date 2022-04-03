@@ -58,6 +58,12 @@ const Footer = () => {
                         <Link href="/trust-and-safety">
                             <a className="block font-trade-gothic mb-2">Trust & Safety</a>
                         </Link>
+                        <Link href="/cookie-policy">
+                            <a className="block font-trade-gothic mb-2">Cookie Policy</a>
+                        </Link>
+                        <Link href="/terms-of-service">
+                            <a className="block font-trade-gothic mb-2">Terms of Service</a>
+                        </Link>
                     </div>
                     <div className="col-span-full sm:mx-auto md:col-span-1 md:mx-0 lg:col-span-full lg:mx-auto xl:col-span-1">
                         <h2 className="text-xl uppercase font-trade-gothic-bold mb-2 sm:text-center md:text-left lg:text-center xl:text-left">Follow us</h2>

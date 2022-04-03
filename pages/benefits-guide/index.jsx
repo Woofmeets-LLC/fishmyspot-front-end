@@ -143,8 +143,8 @@ const BenefitsGuide = () => {
             <p
               className="font-trade-gothic">
               Visit {" "}
-              <Link href={"https://www.fishmyspot.com/list-your-spot"}>
-                <a className="text-blue-500">ListYourSpot</a>
+              <Link href={"/list-your-spot"}>
+                <a>https://www.fishmyspot.com/list-your-spot</a>
               </Link> {" "}
               and fill in the  requested  information. Photos of your pond are
               helpful in creating the design and description of your pond for our website.

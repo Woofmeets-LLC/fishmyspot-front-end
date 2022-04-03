@@ -11,7 +11,7 @@ const fetcher = async (activeTransactionId) => {
       include: ['sender'],
     })
     .then((res) => {
-      return res.data.data.reverse();
+      return res?.data?.data?.reverse();
     });
 };
 
