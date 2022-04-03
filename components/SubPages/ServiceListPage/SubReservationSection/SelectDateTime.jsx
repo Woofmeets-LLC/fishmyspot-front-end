@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import addDays from 'date-fns/addDays';
 import { useField } from 'formik';
 import React, { useEffect, useRef, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { MdCalendarToday } from "react-icons/md";
-import { compareDates } from '../../../../services/date/compare-dates';
 import { bookingTimeFormatter } from '../../../../services/date/date-overflow-handler';
 import { preDefinedLongHours } from '../../../../services/listing-spot-data-organiging/availableTimeFormatting';
 import { getSdk } from '../../../../sharetribe/sharetribeSDK';
@@ -17,6 +17,7 @@ const SelectDateTime = ({ pondData }) => {
     const [timeSlotError, setTimeSlotError] = useState(false);
     const [dateError, setDateError] = useState({ status: false, message: '' });
     const [loading, setLoading] = useState(false);
+    const [dates, setDates] = useState([]);
 
     const [dateField, dateMeta, dateHelpers] = useField('date');
     const [timeField, timeMeta, timeHelpers] = useField('time');
@@ -25,6 +26,14 @@ const SelectDateTime = ({ pondData }) => {
     const entries = pondData?.attributes?.publicData?.availabilityPlan?.entries;
 
     const dropdown = useRef(null);
+
+    useEffect(() => {
+        let dates = [];
+        for (let i = 0; i < 90; i++) {
+            dates.push(addDays(new Date(), i));
+        }
+        setDates([...dates]);
+    }, []);
 
     useEffect(() => {
         // only add the event listener when the dropdown is opened
@@ -90,13 +99,6 @@ const SelectDateTime = ({ pondData }) => {
         // Time Slot making
         const dayName = weekDay[date.getDay()];
         getNewTimeSlotsForReservation(entries, dayName);
-
-        const datesCompare = compareDates(new Date(), date);
-        if (datesCompare.newTime >= datesCompare.todayTime) {
-            setDateError({ status: false, message: '' });
-        } else {
-            setDateError({ status: true, message: 'The selected date is in the past!' });
-        }
     }
 
     const handleTimeChange = (time) => {
@@ -130,7 +132,7 @@ const SelectDateTime = ({ pondData }) => {
             });
 
     }
-    console.log(dateField.value);
+    console.log(dates);
     return (
         <>
             <div className='mb-4 xl:mb-5'>
@@ -147,6 +149,7 @@ const SelectDateTime = ({ pondData }) => {
                     <DatePicker
                         selected={dateField.value}
                         onChange={handleDateChange}
+                        includeDates={dates}
                         placeholderText={`${dateField.value}`}
                         className="w-full py-3 px-5 focus:outline-none text-base"
                     />
