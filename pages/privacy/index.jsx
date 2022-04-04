@@ -15,8 +15,7 @@ const Privacy = () => {
                         <>
                             Your privacy is important to us. It is FishMySpot's policy to respect your
                             privacy and comply with any applicable law and regulation regarding any
-                            personal information we may collect about you, including across our website,
-                            <Link href={'/'}><a className="text-secondary">https://fishmyspot.com</a></Link>, and other sites we own and operate.
+                            personal information we may collect about you, including across our website, <Link href={'/'}><a className="text-secondary">https://fishmyspot.com</a></Link>, and other sites we own and operate.
                         </>,
                         <>
                             Personal information is any information about you which can be used to
