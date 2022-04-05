@@ -118,7 +118,7 @@ const UserRating = ({ ratings, setRatings }) => {
                         value={option}
                         checked={ratings?.includes(option) ? true : false}
                         onChange={() => ratingsAddOrRemove(option)}
-                        className="accent-secondary w-4 h-4 md:w-5 md:h-5"
+                        className="accent-secondary w-4 h-4 md:w-5 md:h-5 cursor-pointer"
                       />
                     </div>
                     <div className="hidden sm:block sm:col-span-4">
@@ -126,6 +126,7 @@ const UserRating = ({ ratings, setRatings }) => {
                         htmlFor={option}
                         variants={hoverVariants}
                         whileHover="hover"
+                        className="cursor-pointer"
                       >
                         {option}
                       </motion.label>
@@ -136,7 +137,7 @@ const UserRating = ({ ratings, setRatings }) => {
                           Array.from({ length: i + 1 }, (_, i) => i + 1).map(star => (
                             <span
                               key={star + 100}
-                              className="text-base text-secondary"
+                              className="text-base text-secondary cursor-pointer"
                             >
                               <FaStar className='inline-block -mr-2' />
                             </span>
@@ -144,37 +145,7 @@ const UserRating = ({ ratings, setRatings }) => {
                         }
                       </label>
                     </div>
-                    {/* <div className='flex items-center space-x-2'>
-                      <input
-                        type={"radio"}
-                        name={option}
-                        id={option}
-                        value={option}
-                        checked={ratings?.includes(option) ? true : false}
-                        onChange={() => ratingsAddOrRemove(option)}
-                        className="accent-secondary w-4 h-4 md:w-5 md:h-5"
-                      />
-                      <motion.label
-                        htmlFor={option}
-                        variants={hoverVariants}
-                        whileHover="hover"
-                        className='hidden sm:block'
-                      >
-                        {option}
-                      </motion.label>
-                    </div>
-                    <div className='flex items-center space-x-3'>
-                      {
-                        Array.from({ length: i + 1 }, (_, i) => i + 1).map(star => (
-                          <span
-                            key={star + 100}
-                            className="text-base text-secondary"
-                          >
-                            <FaStar className='inline-block -mr-2' />
-                          </span>
-                        ))
-                      }
-                    </div> */}
+
                   </div>
                 ))
               }

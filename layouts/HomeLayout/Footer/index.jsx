@@ -98,7 +98,18 @@ const Footer = () => {
                 </div>
 
                 <hr className="md:w-1/2 mx-auto" />
-                <div className="text-white py-6 text-center">&copy; 2018 – 2021 by FishMySpot</div>
+                <div className="grid lg:grid-cols-12 lg:gap-2">
+                    <div className="lg:col-span-3">
+                        <p className="text-white py-2 lg:py-6 text-center lg:text-left">Phone Number: 1-844-446-3474</p>
+                    </div>
+                    <div className="lg:col-span-6 order-3 lg:order-2">
+                        <div className="text-white py-2 lg:py-6 text-center">&copy; 2018 – 2021 by FishMySpot</div>
+                    </div>
+                    <div className="lg:col-span-3 order-2 lg:order-3">
+                        <p className="text-white lg:py-6 text-center lg:text-left">E-mail: info@fishmyspot.com</p>
+                    </div>
+                </div>
+
             </div>
         </footer>
     );
