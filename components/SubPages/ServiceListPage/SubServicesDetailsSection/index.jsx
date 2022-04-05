@@ -77,7 +77,7 @@ const SubServicesDetailsSection = ({ pondData }) => {
                 <Features
                   title={"POND ACREAGE"}
                   items={[
-                    `${pondData?.attributes?.publicData?.acre} acr`,
+                    `${pondData?.attributes?.publicData?.acre} acre`,
                   ]}
                 />
               </div>

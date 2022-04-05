@@ -1,0 +1,38 @@
+{{~#*inline "format-money"~}}
+{{money-amount money}}
+{{money.currency}}
+{{~/inline~}}
+{{~#*inline "format-date"~}}
+{{date date format="MMM dd,YYYY hh:mm a" tz="Etc/UTC-8"}}
+{{~/inline~}}
+
+<html>
+
+<body>
+  {{#with transaction}}
+  <pre>
+    Hi {{provider.display-name}},
+    
+    This is a confirmation of cancellation of the following booking:
+    Pond Listing: {{listing.title}}
+    
+    Booking Date: {{> format-date date=run-at}}
+    
+    Booking Time: {{> format-date date=booking.start}}
+    
+    Angler: {{customer.display-name}}
+  </pre>
+
+
+  {{/with}}
+
+
+  <hr />
+
+
+
+  <p>You have received this email notification because you are a member of {{marketplace.name}}. If you no longer wish
+    to receive these emails, please contact {{marketplace.name}} team.</p>
+</body>
+
+</html>
