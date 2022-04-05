@@ -115,6 +115,10 @@
    :on :transition/confirm-payment,
    :to :actor.role/customer,
    :template :booking-request-accepted}
+   {:name :notification/booking-request-accepted-notification-to-provider,
+   :on :transition/confirm-payment,
+   :to :actor.role/provider,
+   :template :booking-request-accepted-notification-to-provider}
   {:name :notification/money-paid,
    :on :transition/complete,
    :to :actor.role/provider,
@@ -142,4 +146,13 @@
   {:name :notification/review-by-customer-second,
    :on :transition/review-2-by-customer,
    :to :actor.role/provider,
-   :template :review-by-other-party-published}]}
+   :template :review-by-other-party-published}
+  {:name :notification/cancel-transaction-by-actor,
+   :on :transition/cancel,
+   :to :actor.role/customer,
+   :template :cancel-payment}
+   {:name :notification/cancel-notification-to-provider,
+   :on :transition/cancel,
+   :to :actor.role/provider,
+   :template :cancel-notification-to-provider}
+   ]}

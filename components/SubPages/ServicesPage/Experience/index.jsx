@@ -113,12 +113,13 @@ const Experience = ({ experience, setExperience }) => {
                     value={option}
                     checked={experience?.includes(option) ? true : false}
                     onChange={() => experienceAddOrRemove(option)}
-                    className="accent-secondary w-4 h-4 md:w-5 md:h-5"
+                    className="accent-secondary w-4 h-4 md:w-5 md:h-5 cursor-pointer"
                   />
                   <motion.label
                     htmlFor={option}
                     variants={hoverVariants}
                     whileHover="hover"
+                    className="cursor-pointer"
                   >
                     {option}
                   </motion.label>

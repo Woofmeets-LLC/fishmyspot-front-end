@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { setBookingData } from '../../../../store/slices/bookingDataSlice';
@@ -59,7 +59,9 @@ const SubReservationSection = ({ pondData }) => {
             <Form>
               <DaysTypeSelect pondData={pondData} />
 
-              <SelectDateTime pondData={pondData} />
+              <SelectDateTime
+                pondData={pondData}
+              />
 
               {/* Experience field */}
               <ExperienceSelect pondData={pondData} />

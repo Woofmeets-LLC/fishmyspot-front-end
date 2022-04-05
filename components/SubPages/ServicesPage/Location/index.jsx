@@ -129,12 +129,13 @@ const Location = ({ selectedCities, setSelectedCities }) => {
                         value={option.value}
                         checked={selectedCities === option.value ? true : false}
                         onChange={() => cityAddOrRemove(option.value)}
-                        className="accent-secondary w-4 h-4 md:w-5 md:h-5"
+                        className="accent-secondary w-4 h-4 md:w-5 md:h-5 cursor-pointer"
                       />
                       <motion.label
                         htmlFor={option.value}
                         variants={hoverVariants}
                         whileHover="hover"
+                        className="cursor-pointer"
                       >
                         {option.name}
                       </motion.label>
