@@ -21,6 +21,8 @@ const MultiStepForm = ({
     const isFirstStep = step === 0;
     const isLastStep = step === timelineArray.length;
 
+
+
     // Redux 
     const { isLoggedIn } = useSelector(state => state.auth);
     return (

@@ -24,6 +24,8 @@ import { listingImagesUpload } from '../../services/listing-spot-data-organiging
 import { getRequest } from '../../services/requests';
 import { getSdk } from '../../sharetribe/sharetribeSDK';
 import { setFishes } from '../../store/slices/listSpotContentsSlice';
+import { setStripeAccount } from '../../store/slices/stripeAccountSlice';
+
 
 const ListYourPond = () => {
     const [loading, setLoading] = useState(false);
@@ -37,24 +39,49 @@ const ListYourPond = () => {
         ?.reduce((prevObj, key) => ({ ...prevObj, [key]: false }), {});
     const { isTransferActivated, loaded } = useSelector(state => state.stripeAccount);
 
+
     useEffect(() => {
         if (loaded) {
             !isTransferActivated
         }
     }, [loaded])
 
-    const redirectToStripe = () => {
-        const originURL = window.location.origin;
-        getSdk().stripeAccountLinks.create({
-            failureURL: originURL,
-            successURL: originURL + "/list-your-spot",
-            type: "account_onboarding",
-            collect: "currently_due",
+
+    
+
+    const redirectToStripe = () => {        
+        if(typeof window !== 'undefined'){
+            const originURL = window.location.origin;
+            getSdk().stripeAccountLinks.create({
+                failureURL: originURL,
+                successURL: originURL + "/list-your-spot?sl=dl",
+                type: "account_onboarding",
+                collect: "currently_due",
+            })
+                .then(res => {
+                    if (typeof (window) !== "undefined") {
+                        window.open(
+                            res.data?.data?.attributes?.url,
+                            '_blank'
+                        )                       
+                    }
+                })
+                .catch(err => {
+                    console.dir(err)
+                })
+        }
+       
+    }
+
+    const createStripeAccount = () => {
+        getSdk().stripeAccount.create({
+            country: "US",
+            requestedCapabilities: ["transfers", "card_payments"]
+        }, {
+            expand: true
         })
             .then(res => {
-                if (typeof (window) !== "undefined") {
-                    window.location = res.data?.data?.attributes?.url;
-                }
+                redirectToStripe();
             })
             .catch(err => {
                 console.dir(err)
@@ -86,6 +113,27 @@ const ListYourPond = () => {
 
     // Updating fishes image to redux
     useEffect(() => {
+        if(typeof window !== 'undefined'){
+            window.onfocus = () => {
+                getSdk().stripeAccount.fetch()
+                    .then(res => {
+                        const stripeData = res?.data?.data;
+                        const isTransferActivated = stripeData?.attributes?.stripeAccountData?.capabilities?.card_payments == 'active' || stripeData?.attributes?.stripeAccountData?.capabilities?.transfers == 'active';
+
+                        dispatch(setStripeAccount({ ...stripeData, isTransferActivated, loaded: true }));
+                    })
+                    .catch(error => {
+                        dispatch(setStripeAccount({
+                        attributes: null,
+                        id: null,
+                        type: null,
+                        isTransferActivated: null,
+                        loaded: true,
+                    }));
+            });
+            }
+        }
+       
         getRequest('fishes')
             .then(res => {
                 dispatch(setFishes(res.data));
@@ -94,6 +142,16 @@ const ListYourPond = () => {
                 // console.log(err);
             })
     }, [])
+
+    useEffect(() => {
+        if(router.query?.sl){
+            if(router.query.sl == 'dl'){
+                if(typeof window !== 'undefined'){
+                    window.close()
+                }
+            }
+        }
+    }, [router])
 
 
     const initialValues = {
@@ -240,7 +298,10 @@ const ListYourPond = () => {
             back: <BackBtn text="Go back" />, next: <NextBtn
                 text="List My Spot" />
         }, {}, {}, {}, {}, {}, {},
-        { next: <NextBtn text="List My Spot" /> },
+        { next: <NextBtn 
+            text={isTransferActivated  ? 'List My Spot' : 'Connect Stripe First!'} 
+            type={isTransferActivated  ? 'submit' : 'button'} 
+            onClick={() => { !isTransferActivated && createStripeAccount(); }} /> },
     ]
 
     const handleSubmit = async (values, helpers) => {
@@ -281,10 +342,8 @@ const ListYourPond = () => {
                 account_type: "owner",
                 fallbackUrl: "/",
             }}>
-            <TopImageCard />
-            {
-                isTransferActivated
-                    ? (
+            <TopImageCard />            {
+                
                         <MultiStepForm
                             initialValues={initialValues}
                             timelineArray={timelineArray}
@@ -330,20 +389,7 @@ const ListYourPond = () => {
                                 }
                             </FormStep>
                         </MultiStepForm>
-                    )
-                    : (
-                        loaded
-                            ? <div className="text-center my-10">
-                                <div className="text-red-500 font-trade-gothic text-xl my-5">Your payment method is not connected.</div>
-                                <button
-                                    onClick={redirectToStripe}
-                                    className="bg-secondary text-lg text-white px-8 py-2 rounded">Connect stripe account</button>
-                            </div>
-                            : <div className="flex justify-center items-center flex-wrap my-10">
-                                <ClipLoader size={50} color={'#1971ff'} />
-                                <h2 className="w-full text-center font-semibold mt-2">Loading...</h2>
-                            </div>
-                    )
+                   
             }
         </HomeLayout>
     );
