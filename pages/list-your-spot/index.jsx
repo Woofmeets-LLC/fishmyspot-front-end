@@ -29,7 +29,7 @@ import { setStripeAccount } from '../../store/slices/stripeAccountSlice';
 
 const ListYourPond = () => {
     const [loading, setLoading] = useState(false);
-
+    const [stripeLoading, setStripeLoading] = useState(false)
     // Redux
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
@@ -74,6 +74,7 @@ const ListYourPond = () => {
     }
 
     const createStripeAccount = () => {
+        setStripeLoading(true)
         getSdk().stripeAccount.create({
             country: "US",
             requestedCapabilities: ["transfers", "card_payments"]
@@ -117,12 +118,14 @@ const ListYourPond = () => {
             window.onfocus = () => {
                 getSdk().stripeAccount.fetch()
                     .then(res => {
+                        setStripeLoading(false)
                         const stripeData = res?.data?.data;
                         const isTransferActivated = stripeData?.attributes?.stripeAccountData?.capabilities?.card_payments == 'active' || stripeData?.attributes?.stripeAccountData?.capabilities?.transfers == 'active';
 
                         dispatch(setStripeAccount({ ...stripeData, isTransferActivated, loaded: true }));
                     })
                     .catch(error => {
+                        setStripeLoading(false)
                         dispatch(setStripeAccount({
                         attributes: null,
                         id: null,
@@ -299,9 +302,14 @@ const ListYourPond = () => {
                 text="List My Spot" />
         }, {}, {}, {}, {}, {}, {},
         { next: <NextBtn 
-            text={isTransferActivated  ? 'List My Spot' : 'Connect Stripe First!'} 
+            text={isTransferActivated  ? 'List My Spot' :(stripeLoading ? "Loading..." :  'Connect Stripe First!')} 
             type={isTransferActivated  ? 'submit' : 'button'} 
-            onClick={() => { !isTransferActivated && createStripeAccount(); }} /> },
+            onClick={() => { 
+                if(stripeLoading){
+                    return;
+                }
+                !isTransferActivated && createStripeAccount();
+             }} /> },
     ]
 
     const handleSubmit = async (values, helpers) => {
