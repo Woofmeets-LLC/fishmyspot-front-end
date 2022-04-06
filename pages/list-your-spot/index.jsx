@@ -112,17 +112,20 @@ const ListYourPond = () => {
     // routes 
     const router = useRouter();
 
-    // Updating fishes image to redux
-    useEffect(() => {
-        if(typeof window !== 'undefined'){
-            window.onfocus = () => {
+    const getStripeAccount = () => {
+        
                 getSdk().stripeAccount.fetch()
                     .then(res => {
-                        setStripeLoading(false)
+                        
                         const stripeData = res?.data?.data;
                         const isTransferActivated = stripeData?.attributes?.stripeAccountData?.capabilities?.card_payments == 'active' || stripeData?.attributes?.stripeAccountData?.capabilities?.transfers == 'active';
 
                         dispatch(setStripeAccount({ ...stripeData, isTransferActivated, loaded: true }));
+                        if(isTransferActivated){
+                            setStripeLoading(false)                            
+                        }else{
+                            getStripeAccount()
+                        }
                     })
                     .catch(error => {
                         setStripeLoading(false)
@@ -134,6 +137,15 @@ const ListYourPond = () => {
                         loaded: true,
                     }));
             });
+            
+        
+    }
+
+    // Updating fishes image to redux
+    useEffect(() => {
+        if(typeof window !== 'undefined'){
+            window.onfocus = () => {
+                getStripeAccount()
             }
         }
        
@@ -301,15 +313,30 @@ const ListYourPond = () => {
             back: <BackBtn text="Go back" />, next: <NextBtn
                 text="List My Spot" />
         }, {}, {}, {}, {}, {}, {},
-        { next: <NextBtn 
-            text={isTransferActivated  ? 'List My Spot' :(stripeLoading ? "Loading..." :  'Connect Stripe First!')} 
+        { next: <>
+        <NextBtn 
+            text={isTransferActivated  ? 'List My Spot' :(stripeLoading ? "Connecting stripe..." :  'Connect Stripe First!')} 
             type={isTransferActivated  ? 'submit' : 'button'} 
             onClick={() => { 
                 if(stripeLoading){
                     return;
                 }
                 !isTransferActivated && createStripeAccount();
-             }} /> },
+             }} />
+             <hr />
+             
+             {
+                stripeLoading ? (
+                    <NextBtn
+                    text={'Reset Link!'} 
+                    type={'button'} 
+                    onClick={() => {                        
+                        !isTransferActivated && createStripeAccount();
+                     }} />
+                ) : null
+             }
+            
+        </> },
     ]
 
     const handleSubmit = async (values, helpers) => {
