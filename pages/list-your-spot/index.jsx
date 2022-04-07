@@ -98,6 +98,7 @@ const ListYourPond = () => {
 
     const initialValues = {
         // Pond Listing
+        title: '',
         acre: "",
         "stocked-pond": "",
         "catch-requirements": "",
