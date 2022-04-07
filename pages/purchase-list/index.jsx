@@ -65,7 +65,10 @@ const PurchaseList = () => {
 
           <div className="mb-4">
             <div className="flex gap-4">
-              <span className="inline-block text-lg font-trade-gothic-bold pb-1 border-b-4 border-secondary cursor-pointer">Purchases ({purchaseList.length})</span>
+              <span className="inline-block text-lg font-trade-gothic-bold pb-1 border-b-4 border-secondary cursor-pointer">Waiting for approval ({purchaseList.length})</span>
+              <Link href="/purchase-list/accepted">
+                <a className="inline-block text-lg font-trade-gothic-bold">Approved</a>
+              </Link>
               <Link href="/purchase-list/ready-to-review">
                 <a className="inline-block text-lg font-trade-gothic-bold">Ready to review</a>
               </Link>
@@ -86,7 +89,7 @@ const PurchaseList = () => {
                     <PurchaseCard
                       key={purchase?.id?.uuid}
                       purchaseData={purchase}
-                      status={"Purchased"} />
+                      status={"Pending"} />
                   ))
                   : <div className="flex justify-center items-center flex-wrap my-10">
                     <h2 className="w-full text-center font-semibold text-red-500 text-xl mt-2">No purchase found</h2>

@@ -32,7 +32,7 @@ export const listingDataOrganizing = (values) => {
     }))
 
     const data = {
-        title: values?.address,
+        title: values?.title,
         description: values?.description,
         geolocation: values?.latLng,
         availabilityPlan: {

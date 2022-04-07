@@ -48,7 +48,7 @@ const AccessPondImages = () => {
                     title={fileField?.value?.length > 0 ? "Choose an image" : "Choose an thumbnail"} />
 
             </div>
-            <div className="text-gray-500 text-sm">Tip: Choose the top 2-4 photos of your home from different angles in good light that really show the Spot.</div>
+            <div className="text-gray-500 text-sm">Tip: Choose the top 2-4 photos of your home from different angles in good light that really show the Spot and photo size should not be more than 1MB!</div>
             {
                 fileMeta?.touched && fileMeta?.error ? (
                     <div className="mt-2 text-red-500 text-sm">{fileMeta?.error}</div>

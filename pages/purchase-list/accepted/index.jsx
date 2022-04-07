@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ClipLoader } from "react-spinners";
-import { PageHeader, PurchaseCard } from "../../../components/Common";
-import HomeLayout from "../../../layouts/HomeLayout";
+import { ClipLoader } from 'react-spinners';
+import { PageHeader, PurchaseCard } from '../../../components/Common';
+import HomeLayout from '../../../layouts/HomeLayout';
 import { getSdk } from '../../../sharetribe/sharetribeSDK';
 
-const Reviewed = () => {
+const AcceptedPurchases = () => {
     const [purchaseList, setPurchaseList] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -16,12 +16,8 @@ const Reviewed = () => {
         setLoading(true);
         getSdk().transactions.query({
             only: "order",
-            lastTransitions: [
-                "transition/review-1-by-customer",
-                "transition/review-2-by-provider",
-                "transition/expire-provider-review-period"
-            ],
-            include: ['booking', 'listing', 'provider', 'reviews']
+            lastTransitions: ["transition/accept"],
+            include: ['booking', 'listing', 'provider']
         })
             .then(res => {
                 setLoading(false);
@@ -30,7 +26,6 @@ const Reviewed = () => {
                 const bookings = res.data?.included?.filter(item => item.type === 'booking');
                 const listings = res.data?.included?.filter(item => item.type === 'listing');
                 const providers = res.data?.included?.filter(item => item.type === 'user');
-                const reviews = res.data?.included?.filter(item => item.type === 'review');
 
                 const formattedData = transactions?.map(transaction => {
                     return {
@@ -39,8 +34,7 @@ const Reviewed = () => {
                             ...transaction?.relationships,
                             booking: bookings?.find(booking => booking?.id?.uuid === transaction?.relationships?.booking?.data?.id?.uuid),
                             listing: listings?.find(listing => listing?.id?.uuid === transaction?.relationships?.listing?.data?.id?.uuid),
-                            provider: providers?.find(provider => provider?.id?.uuid === transaction?.relationships?.provider?.data?.id?.uuid),
-                            reviews: reviews?.filter(review => transaction?.relationships?.reviews?.data?.map(rev => rev?.id?.uuid).includes(review?.id?.uuid))
+                            provider: providers?.find(provider => provider?.id?.uuid === transaction?.relationships?.provider?.data?.id?.uuid)
                         }
                     }
                 });
@@ -51,7 +45,6 @@ const Reviewed = () => {
                 setLoading(false);
             });
     }, []);
-
     return (
         <HomeLayout
             isPrivate
@@ -72,15 +65,15 @@ const Reviewed = () => {
                     <div className="mb-4">
                         <div className="flex gap-4">
                             <Link href="/purchase-list">
-                                <a className="inline-block text-lg font-trade-gothic-bold">Purchases</a>
+                                <a className="inline-block text-lg font-trade-gothic-bold">Waiting for approval</a>
                             </Link>
-                            <Link href="/purchase-list/accepted">
-                                <a className="inline-block text-lg font-trade-gothic-bold">Approved</a>
-                            </Link>
+                            <span className="inline-block text-lg font-trade-gothic-bold pb-1 border-b-4 border-secondary cursor-pointer">Approved ({purchaseList.length})</span>
                             <Link href="/purchase-list/ready-to-review">
                                 <a className="inline-block text-lg font-trade-gothic-bold">Ready to review</a>
                             </Link>
-                            <span className="inline-block text-lg font-trade-gothic-bold pb-1 border-b-4 border-secondary cursor-pointer">Reviewed ({purchaseList.length})</span>
+                            <Link href="/purchase-list/reviewed">
+                                <a className="inline-block text-lg font-trade-gothic-bold">Reviewed</a>
+                            </Link>
                         </div>
                     </div>
                     {
@@ -95,7 +88,7 @@ const Reviewed = () => {
                                         <PurchaseCard
                                             key={purchase?.id?.uuid}
                                             purchaseData={purchase}
-                                            status={"Reviewed"} />
+                                            status={"Approved"} />
                                     ))
                                     : <div className="flex justify-center items-center flex-wrap my-10">
                                         <h2 className="w-full text-center font-semibold text-red-500 text-xl mt-2">No purchase found</h2>
@@ -108,4 +101,4 @@ const Reviewed = () => {
     );
 };
 
-export default Reviewed;
+export default AcceptedPurchases;

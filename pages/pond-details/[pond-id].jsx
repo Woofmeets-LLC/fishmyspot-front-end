@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
-import SubMapSection from '../../components/SubPages/ServiceListPage/SubMapSection';
 import SubReservationSection from '../../components/SubPages/ServiceListPage/SubReservationSection';
 import SubServicesDetailsSection from '../../components/SubPages/ServiceListPage/SubServicesDetailsSection';
 import SubServicesListHeroSection from '../../components/SubPages/ServiceListPage/SubServicesListHeroSection';
@@ -94,7 +93,7 @@ const PondDetails = () => {
                 </div>
 
                 {/* map */}
-                <SubMapSection />
+                {/* <SubMapSection /> */}
 
               </div>
             </div>

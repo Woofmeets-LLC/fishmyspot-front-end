@@ -22,13 +22,13 @@ const PurchaseCard = ({ setPurchaseList, purchaseData, status }) => {
     const dayPrice = convertAmountToFloat(+dayInfo?.lineTotal?.amount);
 
     const experiences = purchaseData?.attributes?.lineItems
-        ?.filter(item => !['line-item/half-day', 'line-item/full-day', 'line-item/service-charge'].includes(item.code)) || [];
+        ?.filter(item => !['line-item/half-day', 'line-item/full-day', 'line-item/service-charge', 'line-item/provider-commission'].includes(item.code)) || [];
 
     const serviceCharge = purchaseData?.attributes?.lineItems
         ?.find(item => ['line-item/service-charge'].includes(item.code))
         ?.lineTotal?.amount || 0;
 
-    const total = convertAmountToFloat(+purchaseData?.attributes?.payoutTotal?.amount);
+    const total = convertAmountToFloat(+purchaseData?.attributes?.payinTotal?.amount);
 
     return (
         <div className='md:w-[650px] 2xl:w-[690px] bg-white shadow-md p-4 md:py-6 md:px-7 2xl:py-8 2xl:px-9 rounded-lg'>
@@ -77,7 +77,6 @@ const PurchaseCard = ({ setPurchaseList, purchaseData, status }) => {
                                 value={`$${convertAmountToFloat(+experience.lineTotal.amount)}`}
                             />)
                         }
-
                         <ListItem
                             title={"Service Charge"}
                             value={`$${convertAmountToFloat(+serviceCharge)}`}
