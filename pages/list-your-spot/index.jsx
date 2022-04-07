@@ -240,7 +240,13 @@ const ListYourPond = () => {
             back: <BackBtn text="Go back" />, next: <NextBtn
                 text="List My Spot" />
         }, {}, {}, {}, {}, {}, {},
-        { next: <NextBtn text="List My Spot" /> },
+        {
+            next: <NextBtn
+                text="List My Spot"
+                type={isTransferActivated ? 'submit' : 'button'}
+                onClick={() => console.log("Hello boss")}
+            />
+        },
     ]
 
     const handleSubmit = async (values, helpers) => {

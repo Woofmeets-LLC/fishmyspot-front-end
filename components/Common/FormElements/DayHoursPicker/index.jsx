@@ -37,13 +37,35 @@ const DayHoursPicker = ({
 
     // Formik 
     const [field, meta, helpers] = useField({ name, type: 'checkbox' });
-    // Formik for all available days
     const [everydayField] = useField({ name: "availableTime[everyday]" });
+    // Formik for all available days
+    const [allDaysField, { }, allDaysHelpers] = useField({ name: "availableTime" });
 
     const isAnyHourSelected = field?.value?.isSelected ? (Object.values(field?.value?.hours)?.includes(true)) : true;
 
     const handleDayClick = () => {
-        helpers.setValue({ ...field.value, isSelected: !field?.value?.isSelected });
+        if (name == 'availableTime[everyday]') {
+            allDaysHelpers.setValue(Object.keys(allDaysField.value)?.reduce((prevObj, currKey) => {
+                return {
+                    ...prevObj,
+                    [currKey]: {
+                        isSelected: currKey == 'everyday' ? !everydayField.value.isSelected : false,
+                        hours: Object.keys(allDaysField.value[currKey]?.hours).reduce((prevHours, currHour) => {
+                            return {
+                                ...prevHours,
+                                [currHour]: false
+                            }
+                        }, {})
+                    }
+                }
+            }, {}));
+            helpers.setValue({ ...field.value, isSelected: !field?.value?.isSelected });
+        } else {
+            helpers.setValue({
+                ...field.value,
+                isSelected: everydayField?.value.isSelected ? false : !field?.value?.isSelected
+            });
+        }
     };
 
 
