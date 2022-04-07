@@ -26,12 +26,17 @@ const BookingCard = ({ setBookingList, setPurchaseList, bookingData, status }) =
     const dayPrice = convertAmountToFloat(+dayInfo?.lineTotal?.amount);
 
     const experiences = bookingData?.attributes?.lineItems
-        ?.filter(item => !['line-item/half-day', 'line-item/full-day', 'line-item/service-charge'].includes(item.code)) || [];
+        ?.filter(item => !['line-item/half-day', 'line-item/full-day', 'line-item/service-charge', 'line-item/provider-commission'].includes(item.code)) || [];
 
     const serviceCharge = bookingData?.attributes?.lineItems
         ?.find(item => ['line-item/service-charge'].includes(item.code))
         ?.lineTotal?.amount || 0;
 
+    const providerCommission = +bookingData?.attributes?.lineItems
+        ?.find(item => ['line-item/provider-commission'].includes(item.code))
+        ?.lineTotal?.amount || 0;
+
+    const subTotal = convertAmountToFloat(+bookingData?.attributes?.payinTotal?.amount);
     const total = convertAmountToFloat(+bookingData?.attributes?.payoutTotal?.amount);
 
 
@@ -121,6 +126,15 @@ const BookingCard = ({ setBookingList, setPurchaseList, bookingData, status }) =
                         <ListItem
                             title={"Service Charge"}
                             value={`$${convertAmountToFloat(+serviceCharge)}`}
+                        />
+                        <ListItem
+                            title={"Sub Total"}
+                            value={`$${subTotal}`}
+                        />
+                        <span className="block h-2"></span>
+                        <ListItem
+                            title={"FishMySpot Commission"}
+                            value={`$${convertAmountToFloat(+providerCommission)}`}
                         />
 
                         <ListItem
