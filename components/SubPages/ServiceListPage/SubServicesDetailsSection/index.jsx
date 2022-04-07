@@ -54,9 +54,6 @@ const SubServicesDetailsSection = ({ pondData }) => {
             ({reviewCount})
           </div>
         </div>
-        <div className='mb-4'>
-          <p className='text-base font-trade-gothic-bold text-primary'>4 guests | pet friendly</p>
-        </div>
         <div className='mb-6 md:mb-8 2xl:mb-11'>
           <h3 className='text-lg md:text-xl xl:text-2xl 2xl:text-3xl font-food-truck uppercase text-primary mb-3'>Description</h3>
           <p className='text-sm md:text-base font-trade-gothic text-highlight-1'>

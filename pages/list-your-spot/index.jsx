@@ -288,6 +288,7 @@ const ListYourPond = () => {
             phone: yup.string().required("Required!"),
         }),
         description: yup.object({
+            title: yup.string().required("Pond title is required"),
             description: yup.string().required("Description is required"),
         }),
         accessToPond: yup.object({
@@ -357,6 +358,8 @@ const ListYourPond = () => {
         const uploadedImages = await listingImagesUpload(allImages);
         // Setting images uuids to newData
         newData.images = uploadedImages?.success ? uploadedImages?.uuids : [];
+
+        console.log({ newData });
 
         // Creating listing
         getSdk().ownListings.create(newData, { expand: true, include: ['images'] })

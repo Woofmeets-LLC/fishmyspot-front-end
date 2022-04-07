@@ -76,8 +76,12 @@ const BookingDelivered = () => {
                     <div className="mb-4">
                         <div className="flex gap-4">
                             <Link href="/seller-dashboard/booked-list">
-                                <a className="inline-block text-lg font-trade-gothic-bold">Reservations</a>
+                                <a className="inline-block text-lg font-trade-gothic-bold">Waiting for approval</a>
                             </Link>
+                            <Link href="/seller-dashboard/booked-list/accepted">
+                                <a className="inline-block text-lg font-trade-gothic-bold">Approved</a>
+                            </Link>
+
                             <span className="inline-block text-lg font-trade-gothic-bold pb-1 border-b-4 border-secondary cursor-pointer">Delivered ({bookingList.length})</span>
                             <Link href="/seller-dashboard/booked-list/ready-to-review">
                                 <a className="inline-block text-lg font-trade-gothic-bold">Ready to review</a>

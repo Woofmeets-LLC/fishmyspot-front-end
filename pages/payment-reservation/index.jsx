@@ -93,7 +93,7 @@ const PaymentReservation = () => {
   const handleInitiateTransaction = () => {
     setLoading(true);
     getSdk().transactions.initiate({
-      processAlias: "flex-default-process/hourly-instant-booking-with-stripe",
+      processAlias: "flex-default-process/hourly-pre-authorized-booking-with-stripe",
       transition: "transition/enquire",
       params: {
         listingId: bookingData['pond-id'],

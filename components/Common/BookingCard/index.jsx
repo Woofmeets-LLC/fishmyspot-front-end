@@ -1,10 +1,14 @@
 import { format } from 'date-fns';
-import React from 'react';
+import { useState } from 'react';
 import { StatusButton } from '..';
+import { getSdk } from '../../../sharetribe/sharetribeSDK';
 import ListItem from '../ListItem';
 import CreateReviewForOnwer from './CreateReviewForOwner';
 
-const BookingCard = ({ setPurchaseList, bookingData, status }) => {
+const BookingCard = ({ setBookingList, setPurchaseList, bookingData, status }) => {
+    const [approveLoading, setApproveLoading] = useState(false);
+    const [declineLoading, setDeclineLoading] = useState(false);
+
     const convertAmountToFloat = (amount) => parseFloat((+amount / 100) || 0).toFixed(2);
     const titleFormatter = (title) => title?.replace("line-item/", "")?.replaceAll("-", " ")
 
@@ -29,6 +33,43 @@ const BookingCard = ({ setPurchaseList, bookingData, status }) => {
         ?.lineTotal?.amount || 0;
 
     const total = convertAmountToFloat(+bookingData?.attributes?.payoutTotal?.amount);
+
+
+    const handleApprove = () => {
+        if (approveLoading || declineLoading) return;
+
+        setApproveLoading(true);
+        getSdk().transactions.transition({
+            id: bookingData?.id?.uuid,
+            transition: "transition/accept",
+            params: {}
+        })
+            .then(res => {
+                setBookingList(bookingList => bookingList.filter(item => item.id.uuid !== bookingData?.id?.uuid));
+                setApproveLoading(false);
+            })
+            .catch(err => {
+                setApproveLoading(false);
+            });
+    }
+    const handleDecline = () => {
+        if (approveLoading || declineLoading) return;
+
+        setDeclineLoading(true);
+        getSdk().transactions.transition({
+            id: bookingData?.id?.uuid,
+            transition: "transition/decline",
+            params: {}
+        })
+            .then(res => {
+                setBookingList(bookingList => bookingList.filter(item => item.id.uuid !== bookingData?.id?.uuid));
+                setDeclineLoading(false);
+            })
+            .catch(err => {
+                setDeclineLoading(false);
+            });
+    }
+
     return (
         <div className='md:w-[650px] 2xl:w-[690px] bg-white shadow-md p-4 md:py-6 md:px-7 2xl:py-8 2xl:px-9 rounded-lg'>
             <div className='grid grid-cols-12 gap-3'>
@@ -92,6 +133,47 @@ const BookingCard = ({ setPurchaseList, bookingData, status }) => {
                         value={"Visa Debit Card"}
                     /> */}
                     </div>
+                    {
+                        status === "Pending" &&
+                        <div className="space-x-2">
+                            <button
+                                onClick={handleApprove}
+                                type="button"
+                                className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150">
+                                {
+                                    approveLoading
+                                        ? (
+                                            <>
+                                                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                Processing...
+                                            </>
+                                        )
+                                        : "Approve"
+                                }
+                            </button>
+                            <button
+                                onClick={handleDecline}
+                                type="button"
+                                className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-red-500 hover:bg-red-400 transition ease-in-out duration-150">
+                                {
+                                    declineLoading
+                                        ? (
+                                            <>
+                                                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                Processing...
+                                            </>
+                                        )
+                                        : "Decline"
+                                }
+                            </button>
+                        </div>
+                    }
                     {
                         status == 'Ready for review' &&
                         <CreateReviewForOnwer

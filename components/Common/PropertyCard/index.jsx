@@ -12,7 +12,7 @@ import {
 } from '../../../store/slices/authSlice';
 import styles from './PropertyCard.module.css';
 
-const PropertyCard = ({ delay, image, id, title, ratings, price, reviewCount = 0 }) => {
+const PropertyCard = ({ delay, location, image, id, title, ratings, price, reviewCount = 0 }) => {
   const user = useCurrentUser();
   const dispatch = useDispatch();
   const [isFavorite, setIsFavorite] = useState(false);
@@ -125,7 +125,7 @@ const PropertyCard = ({ delay, image, id, title, ratings, price, reviewCount = 0
             <span className="text-secondary inline-block">
               <FaMapMarkerAlt />
             </span>
-            <span className="font-trade-gothic text-highlight-1">location</span>
+            <span className="font-trade-gothic text-[11px] text-highlight-1">{location}</span>
           </div>
           <div className="mt-1 md:my-2 xl:w-[230px] 2xl:max-w-[240px] sm:h-14">
             <Link href={`/pond-details/${id}`}>

@@ -68,7 +68,10 @@ const BookingReadyToReview = () => {
                     <div className="mb-4">
                         <div className="flex gap-4">
                             <Link href="/seller-dashboard/booked-list">
-                                <a className="inline-block text-lg font-trade-gothic-bold">Reservations</a>
+                                <a className="inline-block text-lg font-trade-gothic-bold">Waiting for approval</a>
+                            </Link>
+                            <Link href="/seller-dashboard/booked-list/accepted">
+                                <a className="inline-block text-lg font-trade-gothic-bold">Approved</a>
                             </Link>
                             <Link href="/seller-dashboard/booked-list/delivered">
                                 <a className="inline-block text-lg font-trade-gothic-bold">Delivered</a>
