@@ -24,11 +24,6 @@ export default async function handler(req, res) {
                     percentage: -30,
                     includeFor: ['provider']
                 }],
-                payoutTotal: {
-                    amount: 30 * 100,
-                    currency: 'USD',
-                    _sdkType: 'Money'
-                }
             }
         }, {
             expand: true
