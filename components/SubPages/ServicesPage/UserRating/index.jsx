@@ -103,14 +103,14 @@ const UserRating = ({ ratings, setRatings }) => {
               animate="visible"
               exit="hidden"
               ref={dropdown}
-              className={styles['dropdown']}>
+              className="absolute bg-white pt-3 pb-1 px-4 z-50 rounded-lg shadow border-gray-100">
               {
                 options?.map((option, i) => (
                   <div
                     key={i}
-                    className={styles['user-rating']}
+                    className="grid grid-cols-7 sm:grid-cols-11 items-center space-x-3 mb-2 text-sm md:text-base font-trade-gothic-bold"
                   >
-                    <div className='flex items-center space-x-2'>
+                    <div className="col-span-1 mt-2">
                       <input
                         type={"radio"}
                         name={option}
@@ -118,28 +118,34 @@ const UserRating = ({ ratings, setRatings }) => {
                         value={option}
                         checked={ratings?.includes(option) ? true : false}
                         onChange={() => ratingsAddOrRemove(option)}
-                        className="accent-secondary w-4 h-4 md:w-5 md:h-5"
+                        className="accent-secondary w-4 h-4 md:w-5 md:h-5 cursor-pointer"
                       />
+                    </div>
+                    <div className="hidden sm:block sm:col-span-4">
                       <motion.label
                         htmlFor={option}
                         variants={hoverVariants}
                         whileHover="hover"
+                        className="cursor-pointer"
                       >
                         {option}
                       </motion.label>
                     </div>
-                    <div className='flex items-center space-x-3'>
-                      {
-                        Array.from({ length: i + 1 }, (_, i) => i + 1).map(star => (
-                          <span
-                            key={star + 100}
-                            className="text-base text-secondary"
-                          >
-                            <FaStar className='inline-block -mr-2' />
-                          </span>
-                        ))
-                      }
+                    <div className="col-span-5">
+                      <label htmlFor={option} className='flex items-center space-x-3'>
+                        {
+                          Array.from({ length: i + 1 }, (_, i) => i + 1).map(star => (
+                            <span
+                              key={star + 100}
+                              className="text-base text-secondary cursor-pointer"
+                            >
+                              <FaStar className='inline-block -mr-2' />
+                            </span>
+                          ))
+                        }
+                      </label>
                     </div>
+
                   </div>
                 ))
               }

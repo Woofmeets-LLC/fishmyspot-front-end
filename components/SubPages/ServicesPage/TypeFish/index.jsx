@@ -125,12 +125,13 @@ const TypeFish = ({ typeFish, setTypeFish }) => {
                                             value={option}
                                             checked={typeFish?.includes(option) ? true : false}
                                             onChange={() => typeFishAddOrRemove(option)}
-                                            className="accent-secondary w-4 h-4 md:w-5 md:h-5"
+                                            className="accent-secondary w-4 h-4 md:w-5 md:h-5 cursor-pointer"
                                         />
                                         <motion.label
                                             htmlFor={option}
                                             variants={hoverVariants}
                                             whileHover="hover"
+                                            className="cursor-pointer"
                                         >
                                             {option}
                                         </motion.label>

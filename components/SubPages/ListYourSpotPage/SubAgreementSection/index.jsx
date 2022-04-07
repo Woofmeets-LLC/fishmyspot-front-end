@@ -22,7 +22,7 @@ const SubAgreementSection = () => {
                 </div>
                 <p className={`transition-all duration-300 font-trade gothic-bold ${termsField.value == true ? 'text-gray-900' : ''}`}>I have read and agree with the
                     <Link href={"/terms-of-use"}>
-                        <a>
+                        <a target={"_blank"}>
                             <span className={'text-blue-400 underline cursor-pointer ml-1'}>Terms and Conditions.</span>
                         </a>
                     </Link>
@@ -41,7 +41,7 @@ const SubAgreementSection = () => {
                 </div>
                 <p className={`transition-all duration-300 font-trade gothic-bold ${licenseField.value == true ? 'text-gray-900' : ''}`}>I have read and agree with the
                     <Link href={"/license-agreement"}>
-                        <a>
+                        <a target={"_blank"}>
                             <span className={'text-blue-400 underline cursor-pointer ml-1'}>License Agreement.</span>
                         </a>
                     </Link>

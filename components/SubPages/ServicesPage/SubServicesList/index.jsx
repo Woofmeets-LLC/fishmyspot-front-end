@@ -11,11 +11,15 @@ const SubServices = ({ items, fetchData, hasMore, images }) => {
       dataLength={items.length} //This is important field to render the next data
       next={fetchData}
       hasMore={hasMore}
-      loader={<p style={{ textAlign: 'center', display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+      loader={<p
+        className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4"
+        style={{ textAlign: 'center', display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
         <b>Loading...</b>
       </p>}
-      endMessage={<p style={{ textAlign: 'center', display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-        <b>Click on Fish Now and add your favorite spots!</b>
+      endMessage={<p
+        className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4"
+        style={{ textAlign: 'center', display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <b>No more ponds found. Click on Fish Now and add your favorite spots!!</b>
       </p>}
     >
       {

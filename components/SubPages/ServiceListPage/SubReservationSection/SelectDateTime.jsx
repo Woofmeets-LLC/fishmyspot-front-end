@@ -19,6 +19,7 @@ const SelectDateTime = ({ pondData }) => {
     const [loading, setLoading] = useState(false);
     const [dates, setDates] = useState([]);
 
+
     const [dateField, dateMeta, dateHelpers] = useField('date');
     const [timeField, timeMeta, timeHelpers] = useField('time');
     const [dayTypeField] = useField('dayType');
@@ -178,7 +179,7 @@ const SelectDateTime = ({ pondData }) => {
                     <>This time slot is not available!</>
                 }
                 {timeSlotError && timeMeta.error && " & "}
-                {timeMeta.error ? (
+                {timeMeta.touched && timeMeta.error ? (
                     <>{timeMeta.error}</>
                 ) : null}
             </div>
