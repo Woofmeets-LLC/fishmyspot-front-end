@@ -30,6 +30,7 @@ const SubServices = ({ items, fetchData, hasMore, images }) => {
               delay={(Math.floor(Math.random() * 10)) / 10}
               id={item?.id?.uuid}
               image={images?.[item?.relationships?.images?.data?.[0]?.id?.uuid]?.variants?.default?.url}
+              location={`${item?.attributes?.publicData?.city} - ${item?.attributes?.publicData?.zipCode}`}
               title={item?.attributes?.title.substring(0, 30) + (item?.attributes?.title.length > 30 ? '...' : '')}
               price={`$ ${parseFloat(item?.attributes?.publicData?.halfDay).toFixed(2)}`}
               ratings={item?.attributes?.publicData?.absoluteRating || item?.attributes?.publicData?.rating}

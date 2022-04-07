@@ -24,10 +24,12 @@ import { listingImagesUpload } from '../../services/listing-spot-data-organiging
 import { getRequest } from '../../services/requests';
 import { getSdk } from '../../sharetribe/sharetribeSDK';
 import { setFishes } from '../../store/slices/listSpotContentsSlice';
+import { setStripeAccount } from '../../store/slices/stripeAccountSlice';
+
 
 const ListYourPond = () => {
     const [loading, setLoading] = useState(false);
-
+    const [stripeLoading, setStripeLoading] = useState(false)
     // Redux
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
@@ -37,24 +39,50 @@ const ListYourPond = () => {
         ?.reduce((prevObj, key) => ({ ...prevObj, [key]: false }), {});
     const { isTransferActivated, loaded } = useSelector(state => state.stripeAccount);
 
+
     useEffect(() => {
         if (loaded) {
             !isTransferActivated
         }
     }, [loaded])
 
+
+
+
     const redirectToStripe = () => {
-        const originURL = window.location.origin;
-        getSdk().stripeAccountLinks.create({
-            failureURL: originURL,
-            successURL: originURL + "/list-your-spot",
-            type: "account_onboarding",
-            collect: "currently_due",
+        if (typeof window !== 'undefined') {
+            const originURL = window.location.origin;
+            getSdk().stripeAccountLinks.create({
+                failureURL: originURL,
+                successURL: originURL + "/list-your-spot?sl=dl",
+                type: "account_onboarding",
+                collect: "currently_due",
+            })
+                .then(res => {
+                    if (typeof (window) !== "undefined") {
+                        window.open(
+                            res.data?.data?.attributes?.url,
+                            '_blank'
+                        )
+                    }
+                })
+                .catch(err => {
+                    console.dir(err)
+                })
+        }
+
+    }
+
+    const createStripeAccount = () => {
+        setStripeLoading(true)
+        getSdk().stripeAccount.create({
+            country: "US",
+            requestedCapabilities: ["transfers", "card_payments"]
+        }, {
+            expand: true
         })
             .then(res => {
-                if (typeof (window) !== "undefined") {
-                    window.location = res.data?.data?.attributes?.url;
-                }
+                redirectToStripe();
             })
             .catch(err => {
                 console.dir(err)
@@ -84,8 +112,43 @@ const ListYourPond = () => {
     // routes 
     const router = useRouter();
 
+    const getStripeAccount = () => {
+
+        getSdk().stripeAccount.fetch()
+            .then(res => {
+
+                const stripeData = res?.data?.data;
+                const isTransferActivated = stripeData?.attributes?.stripeAccountData?.capabilities?.card_payments == 'active' || stripeData?.attributes?.stripeAccountData?.capabilities?.transfers == 'active';
+
+                dispatch(setStripeAccount({ ...stripeData, isTransferActivated, loaded: true }));
+                if (isTransferActivated) {
+                    setStripeLoading(false)
+                } else {
+                    getStripeAccount()
+                }
+            })
+            .catch(error => {
+                setStripeLoading(false)
+                dispatch(setStripeAccount({
+                    attributes: null,
+                    id: null,
+                    type: null,
+                    isTransferActivated: null,
+                    loaded: true,
+                }));
+            });
+
+
+    }
+
     // Updating fishes image to redux
     useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.onfocus = () => {
+                getStripeAccount()
+            }
+        }
+
         getRequest('fishes')
             .then(res => {
                 dispatch(setFishes(res.data));
@@ -95,9 +158,20 @@ const ListYourPond = () => {
             })
     }, [])
 
+    useEffect(() => {
+        if (router.query?.sl) {
+            if (router.query.sl == 'dl') {
+                if (typeof window !== 'undefined') {
+                    window.close()
+                }
+            }
+        }
+    }, [router])
+
 
     const initialValues = {
         // Pond Listing
+        title: '',
         acre: "",
         "stocked-pond": "",
         "catch-requirements": "",
@@ -214,6 +288,7 @@ const ListYourPond = () => {
             phone: yup.string().required("Required!"),
         }),
         description: yup.object({
+            title: yup.string().required("Pond title is required"),
             description: yup.string().required("Description is required"),
         }),
         accessToPond: yup.object({
@@ -240,7 +315,32 @@ const ListYourPond = () => {
             back: <BackBtn text="Go back" />, next: <NextBtn
                 text="List My Spot" />
         }, {}, {}, {}, {}, {}, {},
-        { next: <NextBtn text="List My Spot" /> },
+        {
+            next: <>
+                <NextBtn
+                    text={isTransferActivated ? 'List My Spot' : (stripeLoading ? "Connecting stripe..." : 'Connect Stripe First!')}
+                    type={isTransferActivated ? 'submit' : 'button'}
+                    onClick={() => {
+                        if (stripeLoading) {
+                            return;
+                        }
+                        !isTransferActivated && createStripeAccount();
+                    }} />
+                <hr />
+
+                {
+                    stripeLoading ? (
+                        <NextBtn
+                            text={'Reset Link!'}
+                            type={'button'}
+                            onClick={() => {
+                                !isTransferActivated && createStripeAccount();
+                            }} />
+                    ) : null
+                }
+
+            </>
+        },
     ]
 
     const handleSubmit = async (values, helpers) => {
@@ -258,6 +358,8 @@ const ListYourPond = () => {
         const uploadedImages = await listingImagesUpload(allImages);
         // Setting images uuids to newData
         newData.images = uploadedImages?.success ? uploadedImages?.uuids : [];
+
+        console.log({ newData });
 
         // Creating listing
         getSdk().ownListings.create(newData, { expand: true, include: ['images'] })
@@ -281,69 +383,54 @@ const ListYourPond = () => {
                 account_type: "owner",
                 fallbackUrl: "/",
             }}>
-            <TopImageCard />
-            {
-                isTransferActivated
-                    ? (
-                        <MultiStepForm
-                            initialValues={initialValues}
-                            timelineArray={timelineArray}
-                            stepControllerBtns={stepControllerBtns}
-                            onSubmit={handleSubmit}
-                            successComponent={<div>Success</div>}
-                        >
-                            <FormStep validationSchema={validation.pondListing}>
-                                <SubPondListing />
-                            </FormStep>
-                            <FormStep validationSchema={validation.pondOwnerDetails}>
-                                <SubPondOwnerDetails />
-                            </FormStep>
-                            <FormStep>
-                                <SubPricing />
-                            </FormStep>
-                            <FormStep validationSchema={validation.pondOwnerInfo}>
-                                <SubPondOwnerInfo />
-                            </FormStep>
-                            <FormStep>
-                                <SubAvailableTime />
-                            </FormStep>
-                            <FormStep validationSchema={validation.description}>
-                                <SubDescription />
-                            </FormStep>
-                            <FormStep validationSchema={validation.accessToPond}>
-                                <SubAccessToPond />
-                            </FormStep>
-                            <FormStep>
-                                <SubAmenities />
-                            </FormStep>
-                            <FormStep >
-                                <SubAdditionalInformation />
-                            </FormStep>
-                            <FormStep >
-                                {
-                                    loading
-                                        ? <div className="flex justify-center items-center flex-wrap my-10">
-                                            <ClipLoader size={50} color={'#1971ff'} />
-                                            <h2 className="w-full text-center font-semibold mt-2">Creating your pond...</h2>
-                                        </div>
-                                        : <SubAgreementSection />
-                                }
-                            </FormStep>
-                        </MultiStepForm>
-                    )
-                    : (
-                        loaded
-                            ? <div className="text-center my-10">
-                                <div className="text-red-500 font-trade-gothic text-xl my-5">Your payment method is not connected.</div>
-                                <button
-                                    onClick={redirectToStripe}
-                                    className="bg-secondary text-lg text-white px-8 py-2 rounded">Connect stripe account</button>
-                            </div>
-                            : <div className="flex justify-center items-center flex-wrap my-10">
-                                <ClipLoader size={50} color={'#1971ff'} />
-                                <h2 className="w-full text-center font-semibold mt-2">Loading...</h2>
-                            </div>
-                    )
+            <TopImageCard />            {
+
+                <MultiStepForm
+                    initialValues={initialValues}
+                    timelineArray={timelineArray}
+                    stepControllerBtns={stepControllerBtns}
+                    onSubmit={handleSubmit}
+                    successComponent={<div>Success</div>}
+                >
+                    <FormStep validationSchema={validation.pondListing}>
+                        <SubPondListing />
+                    </FormStep>
+                    <FormStep validationSchema={validation.pondOwnerDetails}>
+                        <SubPondOwnerDetails />
+                    </FormStep>
+                    <FormStep>
+                        <SubPricing />
+                    </FormStep>
+                    <FormStep validationSchema={validation.pondOwnerInfo}>
+                        <SubPondOwnerInfo />
+                    </FormStep>
+                    <FormStep>
+                        <SubAvailableTime />
+                    </FormStep>
+                    <FormStep validationSchema={validation.description}>
+                        <SubDescription />
+                    </FormStep>
+                    <FormStep validationSchema={validation.accessToPond}>
+                        <SubAccessToPond />
+                    </FormStep>
+                    <FormStep>
+                        <SubAmenities />
+                    </FormStep>
+                    <FormStep >
+                        <SubAdditionalInformation />
+                    </FormStep>
+                    <FormStep >
+                        {
+                            loading
+                                ? <div className="flex justify-center items-center flex-wrap my-10">
+                                    <ClipLoader size={50} color={'#1971ff'} />
+                                    <h2 className="w-full text-center font-semibold mt-2">Creating your pond...</h2>
+                                </div>
+                                : <SubAgreementSection />
+                        }
+                    </FormStep>
+                </MultiStepForm>
+
             }
         </HomeLayout>
     );

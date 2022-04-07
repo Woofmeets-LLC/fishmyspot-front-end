@@ -90,7 +90,6 @@ const SelectDateTime = ({ pondData }) => {
     }, [dayTypeField.value, pondData]);
 
 
-
     const handleDateChange = (date) => {
         setDateError({ status: false, message: '' });
         // Setting the date value

@@ -68,6 +68,9 @@ const ReadyToReview = () => {
                             <Link href="/purchase-list">
                                 <a className="inline-block text-lg font-trade-gothic-bold">Purchases</a>
                             </Link>
+                            <Link href="/purchase-list/accepted">
+                                <a className="inline-block text-lg font-trade-gothic-bold">Approved</a>
+                            </Link>
                             <span className="inline-block text-lg font-trade-gothic-bold pb-1 border-b-4 border-secondary cursor-pointer">Ready to review ({purchaseList.length})</span>
                             <Link href="/purchase-list/reviewed">
                                 <a className="inline-block text-lg font-trade-gothic-bold">Reviewed</a>

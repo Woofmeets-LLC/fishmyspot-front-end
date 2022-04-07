@@ -66,7 +66,10 @@ const BookedList = () => {
 
                     <div className="mb-4">
                         <div className="flex gap-4">
-                            <span className="inline-block text-lg font-trade-gothic-bold pb-1 border-b-4 border-secondary cursor-pointer">Reservations ({bookingList.length})</span>
+                            <span className="inline-block text-lg font-trade-gothic-bold pb-1 border-b-4 border-secondary cursor-pointer">Waiting for approval ({bookingList.length})</span>
+                            <Link href="/seller-dashboard/booked-list/accepted">
+                                <a className="inline-block text-lg font-trade-gothic-bold">Approved</a>
+                            </Link>
                             <Link href="/seller-dashboard/booked-list/delivered">
                                 <a className="inline-block text-lg font-trade-gothic-bold">Delivered</a>
                             </Link>
@@ -87,7 +90,8 @@ const BookedList = () => {
                                         <BookingCard
                                             key={booking?.id?.uuid}
                                             bookingData={booking}
-                                            status={"Booked"} />
+                                            setBookingList={setBookingList}
+                                            status={"Pending"} />
                                     ))
                                     : <div className="flex justify-center items-center flex-wrap my-10">
                                         <h2 className="w-full text-center font-semibold text-red-500 text-xl mt-2">No booking found</h2>

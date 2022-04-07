@@ -12,9 +12,9 @@ const SubAvailableTime = () => {
             <DayHoursPicker label="Monday" name="availableTime[monday]" />
             <DayHoursPicker label="Tuesday" name="availableTime[tuesday]" />
             <DayHoursPicker label="Wednesday" name="availableTime[wednesday]" />
-            <DayHoursPicker label="Thursday" name="availableTime[thursday]" />
-            <DayHoursPicker label="Saturday" name="availableTime[saturday]" />
+            <DayHoursPicker label="Thursday" name="availableTime[thursday]" />            
             <DayHoursPicker label="Friday" name="availableTime[friday]" />
+            <DayHoursPicker label="Saturday" name="availableTime[saturday]" />
             <DayHoursPicker label="Every Day" name="availableTime[everyday]" />
             {!isSelectedAny ? (
                 <div className="mt-2 text-red-500 text-sm">{"You must select at least one day"}</div>
