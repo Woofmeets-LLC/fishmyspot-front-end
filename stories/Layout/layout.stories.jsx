@@ -8,10 +8,11 @@ export default {
     component: Header,
 }
 
-export const LayoutStoryA = () => <Header />;
+export const LayoutStory = () => <div>Layout</div>;
+const LayoutStoryA = () => <Header />;
 LayoutStoryA.storyName = "Header";
 
-export const LayoutStoryB = () => <Footer />;
+const LayoutStoryB = () => <Footer />;
 LayoutStoryB.storyName = "Footer";
 
 const Template = (args) => {
@@ -22,7 +23,7 @@ const Template = (args) => {
     )
 };
 
-export const LayoutStoryC = Template.bind({});
+const LayoutStoryC = Template.bind({});
 LayoutStoryC.args = {
     children: "Content will go here...",
     isPrivate: false,
