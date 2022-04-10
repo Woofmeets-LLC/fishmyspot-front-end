@@ -1,13 +1,12 @@
 import React from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { PropertyCard } from '../../../Common';
-import styles from './SubServices.module.css';
 
 const SubServices = ({ items, fetchData, hasMore, images }) => {
   return (
 
     <InfiniteScroll
-      className={`${styles['services-container']} no-scrollbar`}
+      className={`grid gap-y-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-3 md:gap-4 xl:gap-x-7 xl:gap-y-14 pb-20 no-scrollbar`}
       dataLength={items.length} //This is important field to render the next data
       next={fetchData}
       hasMore={hasMore}
