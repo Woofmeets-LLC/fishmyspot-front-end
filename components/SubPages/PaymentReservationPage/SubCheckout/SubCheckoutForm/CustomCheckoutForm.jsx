@@ -42,16 +42,16 @@ const CustomCheckoutForm = ({ setStep, tran, sk, reset }) => {
         setAddressError({ isError: false, message: "" });
 
         setAddress(place.formatted_address);
-        setCity("");
+        // setCity("");
         setState("");
         setZipCode("");
 
-        let errorCount = 3;
+        let errorCount = 2;
         place.address_components.forEach(component => {
-            if (component.types[0] === 'administrative_area_level_2') {
-                setCity(component?.short_name)
-                errorCount--;
-            }
+            // if (component.types[0] === 'administrative_area_level_2') {
+            //     setCity(component?.short_name)
+            //     errorCount--;
+            // }
             if (component.types[0] == 'postal_code') {
                 setZipCode(component?.short_name);
                 errorCount--;
@@ -164,7 +164,6 @@ const CustomCheckoutForm = ({ setStep, tran, sk, reset }) => {
                             setValue={setCity}
                             setErrors={setErrors}
                             errors={errors}
-                            disabled
                         />
                         <CheckoutInput
                             label="State"

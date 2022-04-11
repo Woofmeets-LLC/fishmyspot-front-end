@@ -1,1 +1,1 @@
-Your booking is canceled #{{transaction.listing.title}}!
+Your booking is canceled #{{listing.title}}!

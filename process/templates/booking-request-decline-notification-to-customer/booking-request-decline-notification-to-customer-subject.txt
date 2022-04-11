@@ -1,0 +1,12 @@
+{{~#*inline "format-money"~}}
+{{money-amount money}} {{money.currency}}
+{{~/inline~}}
+
+{{~#*inline "format-date"~}}
+{{date date format="MMM dd, YYYY"}}
+{{~/inline~}}
+
+{{~#*inline "format-time"~}}
+{{date date format="hh:mm a"}}
+{{~/inline~}}
+Reservation For {{> format-date date=transaction.booking.start}} Is Declined
