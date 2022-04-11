@@ -12,9 +12,9 @@ const FeaturedSpot = ({ img, title, description }) => {
           {description}
         </p>
 
-        <span className="text-sm font-trade-gothic-bold text-highlight-3 cursor-pointer">
+        {/* <span className="text-sm font-trade-gothic-bold text-highlight-3 cursor-pointer">
           Book Now
-        </span>
+        </span> */}
       </div>
     </div>
   );
