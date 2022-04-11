@@ -51,28 +51,28 @@ const SubFeaturedSpotSection = () => {
             img={'/images/Green-Pond-Compressed.PNG'}
             title={'Trophy Fishing in Green, OH'}
             description={
-              'Gorgeous 2 acre pond with trophy fish and many amenities included such as, metal boat, pond prowler, kayak, dock, and picnic tables.'
+              'Gorgeous 2 acre pond with trophy fish and many amenities included such as, metal boat, pond prowler, kayak, dock, and picnic tables. Book now.'
             }
           />
           <FeaturedSpot
             img={'/images/East-Canton.jpeg'}
             title={'Varian Orchard E. Canton, OH'}
             description={
-              ' This gorgeous lake comes in at 5.2 acres with plenty of shoreline to fish from and a dock. You will enjoy the backdrop of lush trees. '
+              ' This gorgeous lake comes in at 5.2 acres with plenty of shoreline to fish from and a dock. You will enjoy the backdrop of lush trees.  Book now.'
             }
           />
           <FeaturedSpot
             img={'/images/North-Royalton-Pond-W-Logo.png'}
             title={'Farm Pond in N. Royalton, OH'}
             description={
-              'This beautiful farm pond is located in North Royalton! Pond is part of an organic produce farm and it is chemical free. Deepest depth of pond is 15 feet.'
+              'This beautiful farm pond is located in North Royalton! Pond is part of an organic produce farm and it is chemical free. Deepest depth of pond is 15 feet. Book now.'
             }
           />
           <FeaturedSpot
             img={'/images/East-Canton.jpeg'}
             title={'Varian Orchard E. Canton, OH'}
             description={
-              'This gorgeous lake comes in at 5.2 acres with plenty of shoreline to fish from and a dock. You will enjoy the backdrop of lush trees. '
+              'This gorgeous lake comes in at 5.2 acres with plenty of shoreline to fish from and a dock. You will enjoy the backdrop of lush trees. Book now'
             }
           />
         </Slider>
