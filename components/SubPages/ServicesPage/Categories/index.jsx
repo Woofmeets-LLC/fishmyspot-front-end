@@ -1,22 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import queryString from 'query-string';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from "react-redux";
 import Experience from '../Experience';
 import Location from '../Location';
 import PriceSlider from '../PriceSlider';
 import TypeFish from '../TypeFish';
 import UserRating from '../UserRating';
-import styles from './Categories.module.css';
-import {useSelector} from "react-redux";
 
 
-const Categories = ({getQuery}) => {
-    const {isFirst, latLng} = useSelector(state => state.place);
+const Categories = ({ getQuery }) => {
+    const { isFirst, latLng } = useSelector(state => state.place);
     const router = useRouter();
     const [firstTime, setFirstTime] = useState(true)
 
-    const [query, setQuery] = useState({location: '', typeFish: [], rating: [], experience: [], price: [0, 1000]});
+    const [query, setQuery] = useState({ location: '', typeFish: [], rating: [], experience: [], price: [0, 1000] });
 
     useEffect(() => {
         if (!firstTime) router.push('/services?' + queryString.stringify(query, {
@@ -28,13 +27,13 @@ const Categories = ({getQuery}) => {
     }, [query]);
     useEffect(() => {
         if (!isFirst) {
-            setQuery({...query, location: latLng})
+            setQuery({ ...query, location: latLng })
         }
     }, [latLng])
 
     useEffect(() => {
         if (typeof window !== 'undefined' && window.location.search) {
-            const parsed = queryString.parse(window.location.search, {arrayFomate: 'comma'})
+            const parsed = queryString.parse(window.location.search, { arrayFomate: 'comma' })
             for (const p in parsed) {
                 if (p === 'location') {
                     parsed[p] = parsed[p];
@@ -42,13 +41,13 @@ const Categories = ({getQuery}) => {
                     parsed[p] = parsed[p].split(',');
                 }
             }
-            const parsedQuery = {...query, ...parsed}
+            const parsedQuery = { ...query, ...parsed }
             setQuery((prevState) => {
                 return {
                     ...parsedQuery
                 }
             })
-            router.push('/services?' + queryString.stringify(parsedQuery, {arrayFormat: 'comma', skipNull: true}));
+            router.push('/services?' + queryString.stringify(parsedQuery, { arrayFormat: 'comma', skipNull: true }));
 
         }
         setFirstTime(false)
@@ -57,12 +56,12 @@ const Categories = ({getQuery}) => {
 
 
     const handlePriceClear = () => {
-        setQuery({...query, price: [0, 1000]});
+        setQuery({ ...query, price: [0, 1000] });
     }
 
 
     return (
-        <div className={styles['categories-container']}>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-7 3xl:grid-cols-8 gap-4 py-6 md:py-10 xl:pt-16 xl:pb-14">
             <Location
                 selectedCities={query.location}
                 setSelectedCities={setQuery}

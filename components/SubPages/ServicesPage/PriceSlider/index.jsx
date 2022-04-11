@@ -2,7 +2,6 @@ import { AnimatePresence } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import Slider from '../Slider';
-import styles from '../Categories/Categories.module.css';
 
 const PriceSlider = ({ priceRange, setPriceRange, handlePriceClear }) => {
   const [isDropDown, setIsDropDown] = useState(false);
@@ -34,7 +33,7 @@ const PriceSlider = ({ priceRange, setPriceRange, handlePriceClear }) => {
   return (
     <div>
       <div
-        className={styles['list-item']}
+        className="bg-white flex items-center justify-between border border-gray-300 rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary"
         onClick={() => setIsDropDown(!isDropDown)}
       >
         Price range
