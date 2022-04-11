@@ -34,12 +34,38 @@
    :to :state/payment-expired}
   {:name :transition/confirm-payment,
    :actor :actor.role/customer,
-   :actions
-   [{:name :action/stripe-confirm-payment-intent}
-    {:name :action/accept-booking}
-    {:name :action/stripe-capture-payment-intent}],
+   :actions [{:name :action/stripe-confirm-payment-intent}],
    :from :state/pending-payment,
+   :to :state/preauthorized}
+  {:name :transition/decline,
+   :actor :actor.role/provider,
+   :actions
+   [{:name :action/decline-booking}
+    {:name :action/calculate-full-refund}
+    {:name :action/stripe-refund-payment}],
+   :from :state/preauthorized,
+   :to :state/declined}
+  {:name :transition/accept,
+   :actor :actor.role/provider,
+   :actions
+   [{:name :action/accept-booking}
+    {:name :action/stripe-capture-payment-intent}],
+   :from :state/preauthorized,
    :to :state/accepted}
+  {:name :transition/expire,
+   :at
+   {:fn/min
+    [{:fn/plus
+      [{:fn/timepoint [:time/first-entered-state :state/preauthorized]}
+       {:fn/period ["P1D"]}]}
+     {:fn/plus
+      [{:fn/timepoint [:time/booking-end]} {:fn/period ["P1D"]}]}]},
+   :actions
+   [{:name :action/decline-booking}
+    {:name :action/calculate-full-refund}
+    {:name :action/stripe-refund-payment}],
+   :from :state/preauthorized,
+   :to :state/declined}
   {:name :transition/complete,
    :at {:fn/timepoint [:time/booking-end]},
    :actions [{:name :action/stripe-create-payout}],
@@ -107,19 +133,7 @@
    :from :state/reviewed-by-provider,
    :to :state/reviewed}],
  :notifications
- [{:name :notification/new-booking-request,
-   :on :transition/confirm-payment,
-   :to :actor.role/provider,
-   :template :new-booking-request}
-  {:name :notification/booking-request-accepted,
-   :on :transition/confirm-payment,
-   :to :actor.role/customer,
-   :template :booking-request-accepted}
-   {:name :notification/booking-request-accepted-notification-to-provider,
-   :on :transition/confirm-payment,
-   :to :actor.role/provider,
-   :template :booking-request-accepted-notification-to-provider}
-  {:name :notification/money-paid,
+ [{:name :notification/money-paid,
    :on :transition/complete,
    :to :actor.role/provider,
    :template :money-paid}
@@ -151,8 +165,28 @@
    :on :transition/cancel,
    :to :actor.role/customer,
    :template :cancel-payment}
-   {:name :notification/cancel-notification-to-provider,
-   :on :transition/cancel,
+  {:name
+   :notification/booking-request-from-customer-notification-to-customer,
+   :on :transition/confirm-payment,
+   :to :actor.role/customer,
+   :template :booking-request-from-customer}
+  {:name
+   :notification/booking-request-from-customer-notification-to-provider,
+   :on :transition/confirm-payment,
    :to :actor.role/provider,
-   :template :cancel-notification-to-provider}
-   ]}
+   :template :booking-requst-from-customer-for-pond-owner}
+  {:name
+   :notification/booking-request-accept-by-provier-notification-to-customer,
+   :on :transition/accept,
+   :to :actor.role/customer,
+   :template :booking-request-accept-notification-to-customer}
+  {:name
+   :notification/booking-request-cancel-by-provier-notification-to-customer,
+   :on :transition/decline,
+   :to :actor.role/customer,
+   :template :booking-request-decline-notification-to-customer}
+  {:name
+   :notification/booking-request-cancel-by-system-notification-to-customer,
+   :on :transition/expire,
+   :to :actor.role/customer,
+   :template :booking-request-cancel-notification-to-customer}]}

@@ -1,0 +1,43 @@
+
+{{~#*inline "format-money"~}}
+{{money-amount money}} {{money.currency}}
+{{~/inline~}}
+
+{{~#*inline "format-date"~}}
+{{date date format="MMM dd, YYYY"}}
+{{~/inline~}}
+
+{{~#*inline "format-time"~}}
+{{date date format="hh:mm a"}}
+{{~/inline~}}
+
+
+<html>
+  <body>
+    
+
+{{#with transaction}}
+    
+        
+<p>
+    Hello, {{customer.display-name}}.
+    <br>
+    Due to unforeseen circumstances, your request to fish at <b>{{listing.title}}</b> has been declined. We will refund you fully and hope that you book again in the near future.
+</p>
+
+
+
+
+
+
+<pre>
+Sincerely, 
+The FishMySpot Team
+<img src="https://fishmyspot.com/images/logo.png" alt="fms" style="height: 50px;" />
+</pre>
+   
+
+{{/with}}
+
+     </body>
+</html>
