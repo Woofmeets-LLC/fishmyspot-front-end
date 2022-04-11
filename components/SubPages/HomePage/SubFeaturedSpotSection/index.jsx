@@ -1,8 +1,6 @@
 // import Slider from "react-slick";
-import dynamic from 'next/dynamic';
+import Slider from "react-slick";
 import FeaturedSpot from '../FeauturedSpot';
-
-const Slider = dynamic(() => import('react-slick'), { ssr: true });
 
 
 const SubFeaturedSpotSection = () => {
@@ -48,11 +46,22 @@ const SubFeaturedSpotSection = () => {
           <span className='w-[140px] h-[6px] bg-secondary inline-block rounded-full mt-4'></span>
         </div>
         <Slider {...settings}>
-          <FeaturedSpot />
-          <FeaturedSpot />
-          <FeaturedSpot />
-          <FeaturedSpot />
-          <FeaturedSpot />
+          <FeaturedSpot
+            img={"/images/Green-Pond-Compressed.PNG"}
+            title={"Trophy Fishing in Green, OH"}
+          />
+          <FeaturedSpot
+            img={"/images/East-Canton.jpeg"}
+            title={"Varian Orchard E. Canton, OH"}
+          />
+          <FeaturedSpot
+            img={"/images/North-Royalton-Pond-W-Logo.png"}
+            title={"Farm Pond in N. Royalton, OH"}
+          />
+          <FeaturedSpot
+            img={"/images/East-Canton.jpeg"}
+            title={"Varian Orchard E. Canton, OH"}
+          />
         </Slider>
       </div>
     </section>

@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useCurrentUser } from '../../../hooks/users/currentUserHooks';
 import { getSdk } from '../../../sharetribe/sharetribeSDK';
-import { PropertyCard } from '../../Common';
 import SubServices from '../ServicesPage/SubServicesList';
 
 const SubFavoritePondList = () => {

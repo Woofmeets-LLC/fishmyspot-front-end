@@ -46,6 +46,7 @@ const SubEditSpotListSection = () => {
             price={`$${listing?.attributes?.publicData?.halfDay}`}
             ratings={listing?.attributes?.publicData?.absoluteRating || listing?.attributes?.publicData?.rating}
             reviewCount={listing?.attributes?.publicData?.reviewCount || 0}
+            location={`${listing?.attributes?.publicData?.city} - ${listing?.attributes?.publicData?.zipCode}`}
           />
         ))
       }

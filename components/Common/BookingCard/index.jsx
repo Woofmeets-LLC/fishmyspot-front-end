@@ -134,7 +134,7 @@ const BookingCard = ({ setBookingList, setPurchaseList, bookingData, status }) =
                         <span className="block h-2"></span>
                         <ListItem
                             title={"FishMySpot Commission"}
-                            value={`$${convertAmountToFloat(+providerCommission)}`}
+                            value={`$${convertAmountToFloat(+providerCommission * -1)}`}
                         />
 
                         <ListItem

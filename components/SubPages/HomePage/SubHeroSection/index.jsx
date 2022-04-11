@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
 import Link from 'next/link';
-import styles from './SubHeroSection.module.css';
 
 const SubHeroSection = () => {
     return (
@@ -14,10 +13,10 @@ const SubHeroSection = () => {
                             className='w-full 3xl:h-[704px] 3xl:object-cover'
                         />
                     </div>
-                    <div className={styles['hero-content']}>
-                        <h1 className={styles['hero-title']}>UNFORGETTABLE FISHING LOCALLY</h1>
+                    <div className="absolute max-w-[200px] xl:max-w-[290px] 2xl:max-w-[390px] left-8 sm:left-12 md:left-16 lg:left-32 xl:left-36 2xl:left-28">
+                        <h1 className="text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl text-white font-food-truck mb-3 md:mb-6 drop-shadow-lg">UNFORGETTABLE FISHING LOCALLY</h1>
                         <Link href="/services">
-                            <a className={styles['hero-button']}>
+                            <a className="bg-secondary text-white text-xs sm:text-sm lg:text-base py-2 px-3 sm:py-2 sm:px-4 lg:py-3 lg:px-6 rounded font-trade-gothic-bold">
                                 Fish Now
                             </a>
                         </Link>

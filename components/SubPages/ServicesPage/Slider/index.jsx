@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Range } from 'rc-slider';
 import { motion } from 'framer-motion';
+import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import styles from './Slider.module.css';
+import React from 'react';
 
 const variants = {
   hidden: {
@@ -40,10 +39,10 @@ const Slider = ({
       animate="visible"
       exit="hidden"
       ref={dropdown}
-      className={styles['slider-container']}>
+      className="absolute bg-white py-3 px-4 z-50 rounded-lg shadow border-gray-100">
 
       <div className='text-base font-trade-gothic-bold'>
-        <div className={styles['slider-title']}>
+        <div className="text-lg md:text-2xl font-trade-gothic-bold text-primary mb-2">
           <h3>Price range:</h3>
         </div>
 
@@ -59,7 +58,7 @@ const Slider = ({
                 price: [e.target.value, prevState.price[1]]
               }
             })}
-            className={styles['slider-input']}
+            className="w-10 sm:w-16 md:w-20 focus:outline-none border-b-2 border-b-secondary text-base md:text-lg font-trade-gothic text-primary text-center"
           />
           <input
             value={value[1]}
@@ -71,7 +70,7 @@ const Slider = ({
                 price: [prevState.price[0], e.target.value]
               }
             })}
-            className={styles['slider-input']}
+            className="w-10 sm:w-16 md:w-20 focus:outline-none border-b-2 border-b-secondary text-base md:text-lg font-trade-gothic text-primary text-center"
           />
         </div>
 
@@ -85,7 +84,7 @@ const Slider = ({
           />
         </div>
 
-        <div className={styles['slider-buttons-area']}>
+        <div className="flex justify-between items-center text-sm md:text-base text-primary mt-6">
           <span
             className='font-trade-gothic cursor-pointer'
             onClick={handlePriceClear}

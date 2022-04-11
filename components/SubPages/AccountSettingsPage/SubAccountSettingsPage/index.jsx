@@ -7,13 +7,12 @@ import { BiMessageRoundedError } from "react-icons/bi";
 import { useSelector } from 'react-redux';
 import { PageHeader } from '../../../Common';
 import SettingCard from '../SettingCard';
-import styles from './SubAccountSecttings.module.css';
 
 
 const SubAccountSettingsPage = () => {
   const { user } = useSelector(state => state.auth);
   return (
-    <div className={styles['sub-account-settings-container']}>
+    <div className="pt-6 sm:pt-8 md:pt-10 xl:pt-16 2xl:pt-[76px] pb-10 sm:pb-14 md:pb-20 lg:pb-24 2xl:pb-[180px]">
       <div className='mb-4 sm:mb-6 md:mb-8 lg:mb-10'>
         <PageHeader
           title={"Account"}
@@ -21,7 +20,7 @@ const SubAccountSettingsPage = () => {
           userEmail={user?.email}
         />
       </div>
-      <div className={styles['sub-account-settings-items']}>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 xl:gap-x-7 xl:gap-y-9">
         <SettingCard
           title={"Account Settings"}
           description={"Provide personal details and how we can reach you."}

@@ -10,7 +10,6 @@ import { getSdk } from '../../../sharetribe/sharetribeSDK';
 import {
   updateUser
 } from '../../../store/slices/authSlice';
-import styles from './PropertyCard.module.css';
 
 const PropertyCard = ({ delay, location, image, id, title, ratings, price, reviewCount = 0 }) => {
   const user = useCurrentUser();
@@ -84,7 +83,7 @@ const PropertyCard = ({ delay, location, image, id, title, ratings, price, revie
       transition={{
         delay: delay,
       }}
-      className={styles['card-container']}
+      className="bg-white rounded-xl overflow-hidden shadow-lg"
     >
       <div className="relative">
         <Link href={`/pond-details/${id}`}>
@@ -98,10 +97,10 @@ const PropertyCard = ({ delay, location, image, id, title, ratings, price, revie
             </div>
           </a>
         </Link>
-        <span className={styles.feature}>Feature Spot</span>
+        <span className="absolute bg-secondary text-xs font-trade-gothic-bold text-primary py-1 px-2 sm:px-2 sm:py-1 md:py-2 md:px-3 top-3 left-3 lg:top-5 lg:left-4 rounded">Feature Spot</span>
         <div className="p-3">
           <div className="absolute -mt-6 right-2">
-            <span className={styles.wishlist}>
+            <span className="bg-secondary inline-block text-base md:text-lg text-white rounded-md p-2 cursor-pointer">
               {isFavorite ? (
                 <FaHeart
                   onClick={() => {
@@ -121,29 +120,29 @@ const PropertyCard = ({ delay, location, image, id, title, ratings, price, revie
               )}
             </span>
           </div>
-          <div className={styles.location}>
+          <div className="flex items-center space-x-1 text-sm md:text-base">
             <span className="text-secondary inline-block">
               <FaMapMarkerAlt />
             </span>
-            <span className="font-trade-gothic text-[11px] text-highlight-1">{location}</span>
+            <span className="font-trade-gothic text-[15px] text-highlight-1">{location}</span>
           </div>
           <div className="mt-1 md:my-2 xl:w-[230px] 2xl:max-w-[240px] sm:h-14">
             <Link href={`/pond-details/${id}`}>
               <a>
-                <h4 className={styles['card-heading']}>{title}</h4>
+                <h4 className="font-trade-gothic-bold text-base md:text-lg xl:text-xl text-primary uppercase">{title}</h4>
               </a>
             </Link>
           </div>
           <div className="flex justify-between">
-            <div className={styles.ratings}>
+            <div className="flex items-center space-x-1 xl:space-x-2 text-highlight-3 text-sm xl:text-base">
               {
                 [1, 2, 3, 4, 5].map((i) => (i <= Math.floor(+ratings || 5) ? <AiFillStar key={i} /> : <AiOutlineStar key={i} />))
               }
               {" "}({reviewCount})
             </div>
             <div>
-              <span className={styles.price}>{price}</span>
-              <span className={styles['per-hour']}>half day</span>
+              <span className="font-trade-gothic-bold text-base sm:text-lg md:text-xl xl:text-2xl text-primary block">{price}</span>
+              <span className="font-trade-gothic text-xs text-highlight-3">half day</span>
             </div>
           </div>
         </div>

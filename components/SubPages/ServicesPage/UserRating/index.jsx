@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import styles from '../Categories/Categories.module.css';
 
 const variants = {
   hidden: {
@@ -84,7 +83,7 @@ const UserRating = ({ ratings, setRatings }) => {
   return (
     <div className='ml-0'>
       <div
-        className={styles['list-item']}
+        className="bg-white flex items-center justify-between border border-gray-300 rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary"
         onClick={() => setIsDropDown(!isDropDown)}
       >
         User rating

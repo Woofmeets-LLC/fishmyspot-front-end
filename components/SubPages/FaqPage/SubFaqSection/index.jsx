@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import FaqContent from '../FaqContent';
 import Link from 'next/link'
 import {
   Accordion,
@@ -8,7 +7,6 @@ import {
   AccordionItemButton,
   AccordionItemPanel,
 } from 'react-accessible-accordion';
-import styles from './SubFaqSection.module.css';
 
 // Demo styles, see 'Styles' section below for some notes on use.
 import 'react-accessible-accordion/dist/fancy-example.css';
@@ -21,9 +19,9 @@ const SubFaqSection = () => {
       {
         user?.profile?.publicData?.account_type === 'owner' ? (
           <>
-            <div className={styles['sub-faq-section-container']}>
-              <div className={styles['sub-faq-section-heading-wrapper']}>
-                <h1 className={styles['sub-faq-section-heading']}>Faq</h1>
+            <div className="pt-6 sm:pt-8 md:pt-10 xl:pt-16 pb-10 sm:pb-14 md:pb-20 lg:pb-24 2xl:pt-20 2xl:pb-52 xl:w-[1024px] 3xl:w-[1180px] mx-auto">
+              <div className="text-primary space-y-2 md:space-y-3 lg:space-y-5 mb-5 md:mb-6 lg:mb-10">
+                <h1 className="text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl font-food-truck uppercase">Faq</h1>
               </div>
               <Accordion preExpanded={['a']}>
                 <AccordionItem uuid={"a"}>
@@ -225,9 +223,9 @@ const SubFaqSection = () => {
           </>
         ) : (
           <>
-            <div className={styles['sub-faq-section-container']}>
-              <div className={styles['sub-faq-section-heading-wrapper']}>
-                <h1 className={styles['sub-faq-section-heading']}>Faq</h1>
+            <div className="pt-6 sm:pt-8 md:pt-10 xl:pt-16 pb-10 sm:pb-14 md:pb-20 lg:pb-24 2xl:pt-20 2xl:pb-52 xl:w-[1024px] 3xl:w-[1180px] mx-auto">
+              <div className="text-primary space-y-2 md:space-y-3 lg:space-y-5 mb-5 md:mb-6 lg:mb-10">
+                <h1 className="text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl font-food-truck uppercase">Faq</h1>
               </div>
               <Accordion preExpanded={['a']}>
                 <AccordionItem uuid={"a"}>
