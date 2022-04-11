@@ -1,8 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useState } from 'react';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { useState } from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
 import { FiMinus } from "react-icons/fi";
-import styles from '../SubSideBar/SubSideBar.module.css';
 import SafetyDropDown from '../SafetyDropDown';
 import TermsAndPolicyDropDown from '../TermsAndPolicyDropDown';
 import HelpCenterDropDown from '../HelpCenterDropDown';
@@ -41,7 +40,7 @@ const AboutFishMySpot = ({ setIsShowContent }) => {
   return (
     <div>
       <div
-        className={`${styles['list-item']} border-b-[1px]`}
+        className={`flex items-center justify-between pb-3 cursor-pointer text-xl font-trade-gothic text-primary border-b-[1px]`}
         onClick={() => setIsDropDown(!isDropDown)}
       >
         About FishMySpot
@@ -60,7 +59,7 @@ const AboutFishMySpot = ({ setIsShowContent }) => {
               initial="hidden"
               animate="visible"
               exit="hidden"
-              className={styles['']}>
+              className="">
               {
                 <>
                   <SafetyDropDown setIsShowContent={setIsShowContent} />

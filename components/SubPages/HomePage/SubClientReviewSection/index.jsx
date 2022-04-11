@@ -1,4 +1,3 @@
-import React from 'react';
 import Slider from "react-slick";
 import Review from '../Review';
 
@@ -7,7 +6,7 @@ const SubClientReviewSection = () => {
     dots: true,
     infinite: true,
     autoplay: true,
-    speed: 2000,
+    speed: 1000,
     autoplaySpeed: 5000,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -30,14 +29,14 @@ const SubClientReviewSection = () => {
           dots: false
         }
       },
-      {
-        breakpoint: 540,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots: false
-        }
-      }
+      // {
+      //   breakpoint: 540,
+      //   settings: {
+      //     slidesToShow: 1,
+      //     slidesToScroll: 1,
+      //     dots: false
+      //   }
+      // }
     ]
   };
 

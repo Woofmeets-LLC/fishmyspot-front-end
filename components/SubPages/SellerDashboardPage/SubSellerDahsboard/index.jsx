@@ -1,4 +1,3 @@
-import React from 'react';
 import { IoIosSettings } from "react-icons/io";
 import { MdMessage } from "react-icons/md";
 import { FaClipboardList } from "react-icons/fa";
@@ -6,18 +5,17 @@ import { GiBoatFishing } from "react-icons/gi";
 import { useSelector } from 'react-redux';
 import { PageHeader } from '../../../Common';
 import SettingCard from '../../AccountSettingsPage/SettingCard';
-import styles from './SubSellerDashboard.module.css';
 
 const SubSellerDashboard = () => {
   const { user } = useSelector(state => state.auth);
   return (
-    <div className={styles['sub-seller-dashboard-container']}>
+    <div className="pt-6 sm:pt-8 md:pt-10 xl:pt-16 2xl:pt-[76px] pb-10 sm:pb-14 md:pb-20 lg:pb-24 2xl:pb-[180px]">
       <PageHeader
         title={"Account"}
         userName={user?.profile?.firstName + " " + user?.profile?.lastName}
         userEmail={user?.email}
       />
-      <div className={styles['sub-settings-items']}>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 mt-5 gap-4 md:gap-5 xl:gap-x-7 xl:gap-y-9">
         <SettingCard
           title={"Account Settings"}
           description={"Provide personal details and how we can reach you."}

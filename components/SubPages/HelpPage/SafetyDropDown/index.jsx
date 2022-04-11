@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import styles from '../SubSideBar/SubSideBar.module.css';
 
 const variants = {
   hidden: {
@@ -43,7 +42,7 @@ const SafetyDropDown = ({ setIsShowContent }) => {
   return (
     <div>
       <div
-        className={`${styles['list-item']} pt-7`}
+        className={`flex items-center justify-between pb-3 cursor-pointer text-xl font-trade-gothic text-primary pt-7`}
         onClick={() => setIsDropDown(!isDropDown)}
       >
         Safety
@@ -62,13 +61,13 @@ const SafetyDropDown = ({ setIsShowContent }) => {
               initial="hidden"
               animate="visible"
               exit="hidden"
-              className={styles['dropdown']}>
+              className="pt-5 pl-4 pr-6 z-50">
               {
                 options?.map((option, i) => {
                   return (
                     <div
                       key={"safety" + (i + 1)}
-                      className={styles['dropdown-item']}
+                      className="flex items-center space-x-3 mb-4 text-sm md:text-base font-trade-gothic text-primary cursor-pointer max-w-[237px]"
                       onClick={() => setIsShowContent("safety" + (i + 1))}
                     >
                       <motion.span
