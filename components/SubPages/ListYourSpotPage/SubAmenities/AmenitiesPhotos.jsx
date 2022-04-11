@@ -11,8 +11,8 @@ const AmenitiesPhotos = () => {
     const handleFileUpload = (e) => {
         onSelectFile(e).then((file) => {
             const fileData = file;
-            fileHelpers?.setValue([...fileField.value, fileData?.file]);
-            base64Helpers?.setValue([...base64Field.value, fileData?.base64]);
+            fileHelpers?.setValue([...fileField.value, ...fileData?.files]);
+            base64Helpers?.setValue([...base64Field.value, ...fileData?.base64s]);
         });
     };
 

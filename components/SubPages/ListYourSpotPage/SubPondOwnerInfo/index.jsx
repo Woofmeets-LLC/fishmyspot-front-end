@@ -23,16 +23,16 @@ const SubPondOwnerInfo = () => {
         console.log(place);
 
         addressHelpers.setValue(place.formatted_address);
-        cityHelpers.setValue("");
+        // cityHelpers.setValue("");
         stateHelpers.setValue("");
         zipCodeHelpers.setValue("");
 
-        let errorCount = 3;
+        let errorCount = 2;
         place.address_components.forEach(component => {
-            if (component.types[0] === 'administrative_area_level_2') {
-                cityHelpers.setValue(component?.short_name)
-                errorCount--;
-            }
+            // if (component.types[0] === 'administrative_area_level_2') {
+            //     cityHelpers.setValue(component?.short_name)
+            //     errorCount--;
+            // }
             if (component.types[0] == 'postal_code') {
                 zipCodeHelpers.setValue(component?.short_name);
                 errorCount--;
@@ -95,7 +95,7 @@ const SubPondOwnerInfo = () => {
                 ) : null}
             </div>
             <div className="grid grid-cols-3 gap-4 xl:gap-6">
-                <FormInput name="city" label="City" placeholder="Please enter city" disabled />
+                <FormInput name="city" label="City" placeholder="Please enter city" />
                 <FormInput name="state" label="State" placeholder="Please enter state" disabled />
                 <FormInput name="zipCode" label="zip" placeholder="Please enter zipCode" disabled />
             </div>

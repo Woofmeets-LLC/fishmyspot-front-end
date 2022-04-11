@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
-const EditPropertyCard = ({ id, image, title, price, delay, ratings, reviewCount = 0 }) => {
+const EditPropertyCard = ({ id, image, title, price, delay, ratings, reviewCount = 0, location }) => {
   return (
     <motion.div
       initial={{
@@ -29,7 +29,7 @@ const EditPropertyCard = ({ id, image, title, price, delay, ratings, reviewCount
             <span className="text-secondary inline-block">
               <FaMapMarkerAlt />
             </span>
-            <span className="font-trade-gothic text-highlight-1">location</span>
+            <span className="font-trade-gothic text-[15px] text-highlight-1">{location}</span>
           </div>
           <div className="mt-1 md:my-2 xl:w-[230px] 2xl:max-w-[240px] sm:h-14">
             <h4 className="font-trade-gothic-bold text-base md:text-lg xl:text-xl text-primary uppercase">{title}</h4>

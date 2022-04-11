@@ -1,0 +1,49 @@
+
+{{~#*inline "format-money"~}}
+{{money-amount money}} {{money.currency}}
+{{~/inline~}}
+
+{{~#*inline "format-date"~}}
+{{date date format="MMM dd, YYYY"}}
+{{~/inline~}}
+
+{{~#*inline "format-time"~}}
+{{date date format="hh:mm a"}}
+{{~/inline~}}
+
+
+<html>
+  <body>
+    
+
+{{#with transaction}}
+    
+        
+<pre>
+Good news! <b>{{customer.display-name}}</b> has booked a fishing trip 
+at <b>{{listing.title}}</b> 
+for {{> format-date date=booking.start}} beginning at {{> format-time date=booking.start}}.
+    
+Client Information: {{customer.display-name}}
+    
+Additional information from the angler is {{customer.email}}.
+    
+Here is the breakdown- Payment you earn from this booking is {{> format-money money=payout-total}}.
+
+<b><em>Please accept the request within 24 hours.</em></b> 
+
+Otherwise the request will be expired and you will not receive payment. 
+If the requested reservation date does not work, you can choose to decline the request.
+ <a href="{{marketplace.url}}/seller-dashboard/booked-list">Accept or decline the booking</a>
+If you need customer support or help, 
+reach out to our team at 1-844-446-3474 or info@fishmyspot.com
+Best Regards,
+The FishMySpot Team     
+<img src="https://fishmyspot.com/images/logo.png" alt="fms" style="height: 50px;" />
+</pre>
+   
+
+{{/with}}
+
+     </body>
+</html>

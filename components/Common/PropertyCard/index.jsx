@@ -124,7 +124,7 @@ const PropertyCard = ({ delay, location, image, id, title, ratings, price, revie
             <span className="text-secondary inline-block">
               <FaMapMarkerAlt />
             </span>
-            <span className="font-trade-gothic text-[11px] text-highlight-1">{location}</span>
+            <span className="font-trade-gothic text-[15px] text-highlight-1">{location}</span>
           </div>
           <div className="mt-1 md:my-2 xl:w-[230px] 2xl:max-w-[240px] sm:h-14">
             <Link href={`/pond-details/${id}`}>
