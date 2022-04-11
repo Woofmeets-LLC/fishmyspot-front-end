@@ -1,14 +1,12 @@
-import React from 'react';
 import Slider from "react-slick";
 import Review from '../Review';
-import styles from './SubClientReviewSection.module.css';
 
 const SubClientReviewSection = () => {
   const settings = {
     dots: true,
     infinite: true,
     autoplay: true,
-    speed: 2000,
+    speed: 1000,
     autoplaySpeed: 5000,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -31,14 +29,14 @@ const SubClientReviewSection = () => {
           dots: false
         }
       },
-      {
-        breakpoint: 540,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          dots: false
-        }
-      }
+      // {
+      //   breakpoint: 540,
+      //   settings: {
+      //     slidesToShow: 1,
+      //     slidesToScroll: 1,
+      //     dots: false
+      //   }
+      // }
     ]
   };
 
@@ -82,7 +80,7 @@ const SubClientReviewSection = () => {
   ]
   return (
     <section className='bg-[#fcfcfc] overflow-x-hidden'>
-      <div className={`${styles['client-review-container']} reviews-container`}>
+      <div className={`py-6 sm:py-8 md:py-10 lg:py-16 xl:py-20 2xl:py-32 bg-[#fcfcfc] reviews-container`}>
         <div className='mb-10 xl:mb-16 2xl:mb-24 text-primary text-center'>
           <h1 className='text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-food-truck uppercase'>OUR TRUSTED REVIEWS</h1>
         </div>

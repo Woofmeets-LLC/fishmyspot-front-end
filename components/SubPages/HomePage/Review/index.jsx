@@ -1,13 +1,10 @@
-import React from 'react';
-import styles from './Review.module.css';
-
 const Review = ({ name, review, location, image }) => {
   return (
-    <div className={styles['review-area']}>
-      <div className={styles['review-area-wrapper']}>
-        <div className="h-[213px] grid grid-cols-12 gap-4 smd:gap-0 md:gap-4">
+    <div className="bg-white shadow-xl rounded-2xl pointer-events-none mx-3 overflow-hidden">
+      <div className="overflow-hidden">
+        <div className="h-[213px] grid grid-cols-12 gap-4">
           <div className="col-span-4 overflow-hidden">
-            <div className="h-full aspect-[20/25]">
+            <div className="h-full">
               <img
                 src={image}
                 className="w-full h-full object-cover" alt="" />

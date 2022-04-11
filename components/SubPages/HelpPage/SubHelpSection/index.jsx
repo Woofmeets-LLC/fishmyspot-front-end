@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Drawer from 'react-modern-drawer'
-import styles from './SubHelpSection.module.css';
 import SubSideBar from '../SubSideBar';
 import SubContentArea from '../SubContentArea';
 
@@ -15,14 +14,14 @@ const SubHelpSection = () => {
   const [isShowContent, setIsShowContent] = useState('');
   const { user } = useSelector(state => state.auth);
 
-  const [isOpen, setIsOpen] = React.useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState)
   }
 
   return (
-    <div className={styles['sub-help-section-container']}>
-      <div className={styles['sub-help-section-heading-wrapper']}>
+    <div className="pt-6 sm:pt-8 md:pt-10 xl:pt-16 pb-10 sm:pb-14 md:pb-20 lg:pb-24 2xl:pt-20 2xl:pb-52">
+      <div className="text-primary space-y-2 md:space-y-3 lg:space-y-5 mb-5 md:mb-6 lg:mb-10">
         {
           user?.email ?
             <PageHeader

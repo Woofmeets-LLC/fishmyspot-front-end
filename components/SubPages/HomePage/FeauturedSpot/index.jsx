@@ -5,10 +5,10 @@ const FeaturedSpot = ({ img, title }) => {
         <img src={img} alt="Pond" className='w-full h-full 2xl:h-full' />
       </div>
       <div className='p-3 2xl:py-6 2xl:pl-4 2xl:pr-6'>
-        <h4 className='text-base md:text-lg xl:text-xl text-primary font-trade-gothic-bold capitalize mb-3 2xl:mb-4'>{title}</h4>
-        <p className='text-sm font-trade-gothic text-highlight-1 mb-3 2xl:mb-5'>This lovely, quaint pond comes in at .5 acre. Though this pond may be on the smaller size, the fish in the pond are HUGE.</p>
+        <h4 className='text-base md:text-lg lg:text-base xl:text-xl text-primary font-trade-gothic-bold capitalize mb-3 2xl:mb-4'>{title}</h4>
+        {/* <p className='text-sm font-trade-gothic text-highlight-1 mb-3 2xl:mb-5'>This lovely, quaint pond comes in at .5 acre. Though this pond may be on the smaller size, the fish in the pond are HUGE.</p> */}
 
-        <span className='text-sm font-trade-gothic-bold text-highlight-3'>Read more</span>
+        {/* <span className='text-sm font-trade-gothic-bold text-highlight-3 cursor-pointer'>Read more</span> */}
       </div>
     </div>
   );

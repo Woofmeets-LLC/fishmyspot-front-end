@@ -1,7 +1,0 @@
-.sub-account-settings-container {
-  @apply pt-6 sm:pt-8 md:pt-10 xl:pt-16 2xl:pt-[76px] pb-10 sm:pb-14 md:pb-20 lg:pb-24 2xl:pb-[180px];
-}
-
-.sub-account-settings-items {
-  @apply grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 xl:gap-x-7 xl:gap-y-9;
-}
