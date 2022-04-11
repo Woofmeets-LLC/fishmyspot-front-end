@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import styles from '../Categories/Categories.module.css';
 
 const variants = {
   hidden: {
@@ -94,7 +93,7 @@ const Location = ({ selectedCities, setSelectedCities }) => {
   return (
     <div>
       <div
-        className={styles['list-item']}
+        className="bg-white flex items-center justify-between border border-gray-300 rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary"
         onClick={() => setIsDropDown(!isDropDown)}
       >
         Location
@@ -114,13 +113,13 @@ const Location = ({ selectedCities, setSelectedCities }) => {
               animate="visible"
               exit="hidden"
               ref={dropdown}
-              className={styles['dropdown']}>
+              className="absolute bg-white pt-5 pl-4 pr-6 z-50 rounded-lg shadow border-gray-100">
               {
                 options?.map((option, i) => {
                   return (
                     <div
                       key={i}
-                      className={styles['dropdown-item']}
+                      className="flex items-center space-x-3 mb-4 text-sm md:text-base font-trade-gothic-bold"
                     >
                       <input
                         type={"radio"}
