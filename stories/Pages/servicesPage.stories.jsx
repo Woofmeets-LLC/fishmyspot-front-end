@@ -1,10 +1,14 @@
 /* eslint-disable import/no-anonymous-default-export */
 
-// import Categories from "../../components/SubPages/ServicesPage/Categories";
+import { useState } from "react";
+import Categories from "../../components/SubPages/ServicesPage/Categories";
 
 export default {
     title: 'pages/Services Page'
 }
 
-// export const ServicesStoryA = () => <Categories getQuery={q => console.log(q)} />;
-export const Categories = () => <div>Categories</div>;
+export const ServicesStoryA = () => {
+    const [query, setQuery] = useState({ location: '', typeFish: [], rating: [], experience: [], price: [0, 1000] });
+    return (<Categories getQuery={q => setQuery(q)} />)
+};
+ServicesStoryA.storyName = "Categories";
