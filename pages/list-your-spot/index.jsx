@@ -37,7 +37,7 @@ const ListYourPond = () => {
     const fishes = useSelector(state => state.listSpotContents.fishes);
     const fishesObject = fishes?.map(fish => fish.name + "_" + fish.id)
         ?.reduce((prevObj, key) => ({ ...prevObj, [key]: false }), {});
-    const { isTransferActivated, loaded } = useSelector(state => state.stripeAccount);
+    const { isTransferActivated, loaded, attributes } = useSelector(state => state.stripeAccount);
 
 
     useEffect(() => {
@@ -326,7 +326,7 @@ const ListYourPond = () => {
                         }
                         !isTransferActivated && createStripeAccount();
                     }} />
-                <hr />
+                <div className='my-2' />
 
                 {
                     stripeLoading ? (
@@ -367,7 +367,7 @@ const ListYourPond = () => {
                 setLoading(false);
                 toast.success("Listing created successfully!");
                 // console.log(listingRes);
-                router.push(`/list-your-spot/success`);
+                router.push(`/list-your-spot/success?listed=true`);
             })
             .catch(err => {
                 setLoading(false);
@@ -426,7 +426,26 @@ const ListYourPond = () => {
                                     <ClipLoader size={50} color={'#1971ff'} />
                                     <h2 className="w-full text-center font-semibold mt-2">Creating your pond...</h2>
                                 </div>
-                                : <SubAgreementSection />
+                                : (
+                                    stripeLoading
+                                        ? <div className="flex justify-center items-center flex-wrap my-10">
+                                            <ClipLoader size={50} color={'#1971ff'} />
+                                            <h2 className="w-full text-center font-semibold mt-2">Connecting to stripe...</h2>
+
+                                            {
+                                                (attributes?.stripeAccountData?.capabilities?.card_payments == 'inactive' || attributes?.stripeAccountData?.capabilities?.transfers == 'inactive')
+                                                && <h2 className="w-full text-center text-sm font-semibold mt-2">You did not completed stripe connect step yet. Complete first!</h2>
+                                            }
+                                            {
+                                                (attributes?.stripeAccountData?.capabilities?.card_payments == 'pending' || attributes?.stripeAccountData?.capabilities?.transfers == 'pending')
+                                                && <>
+                                                    <h2 className="w-full text-center text-sm font-semibold mt-2">Stripe received your info and verifying...</h2>
+                                                    <h2 className="w-full text-center text-sm font-semibold mt-2">Please wait and do not refresh your screen!</h2>
+                                                </>
+                                            }
+                                        </div>
+                                        : <SubAgreementSection />
+                                )
                         }
                     </FormStep>
                 </MultiStepForm>
