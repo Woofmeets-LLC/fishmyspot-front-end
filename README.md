@@ -103,6 +103,42 @@ Please make sure some file content before dockerize.
 docker build -t fish_my_spot . && docker run -p 80:3000 -d fish_my_spot
 ```
 
+
+# Run the storybook locally
+## Prerequisites
+
+- Node JS - V > 14.*
+- yarn - V > 1.22.*
+
+`Please make sure you have those installed on your system`
+
+#### Clone the repository
+Clone the repository:
+```shell
+git clone <repository link>
+```
+
+If you want to clone any specific branch of the repository, then run the command:
+```shell
+git clone -b <branch-name> <repository-link>
+```
+
+#### Install dependencies 
+For running the storybook of the project in locally first you have to install necessary dependencies. We setup in the repository. 
+
+Run the command:
+```shell
+yarn install --frozen-lockfile
+```
+
+#### Run the storybook 
+If you followed above instruction, run the command now:
+```shell
+yarn storybook
+```
+Your application will be start on port 6006
+The storybook of the project will run and open in the url: http://localhost:6006/ 
+
 --- IT'S DONE---
 
 
