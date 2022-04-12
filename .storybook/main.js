@@ -8,6 +8,7 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "storybook-addon-next-router",
+    "@storybook/addon-actions",
     {
       name: '@storybook/addon-postcss',
       options: {

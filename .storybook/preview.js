@@ -1,4 +1,3 @@
-
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { Provider } from 'react-redux';
 import store from '../store';
