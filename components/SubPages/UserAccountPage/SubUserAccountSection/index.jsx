@@ -1,4 +1,8 @@
-import { useSelector } from 'react-redux';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSdk } from '../../../../sharetribe/sharetribeSDK';
+import { updateUser } from '../../../../store/slices/authSlice';
 import { PageHeader } from '../../../Common';
 import ChangePassword from '../ChangePassword';
 import PersonalInfo from '../PersonalInfo';
@@ -6,6 +10,23 @@ import UserAccountSectionTitle from '../UserAccountSectionTitle';
 
 const SubUserAccountSection = () => {
   const { user } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!user?.profile?.publicData?.email) {
+      getSdk().currentUser.updateProfile({
+        publicData: {
+          email: user?.email
+        }
+      }, {
+        expand: true,
+      })
+        .then(() => {
+          dispatch(updateUser());
+        })
+        .catch(() => { })
+    }
+  }, [])
 
   return (
     <div className='pb-12 sm:pb-16 md:pb-20 lg:pb-28 2xl:pb-32'>

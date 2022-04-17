@@ -11,4 +11,3 @@ module.exports = {
     NEXT_STRIPE_PUBLISHABLE_KEY: 'pk_live_SwWuArAnBV4Qf7dUETKjgMNw',
   },
 };
-
