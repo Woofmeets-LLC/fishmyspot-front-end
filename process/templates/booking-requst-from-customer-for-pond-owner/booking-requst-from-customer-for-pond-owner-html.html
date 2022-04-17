@@ -1,4 +1,3 @@
-
 {{~#*inline "format-money"~}}
 {{money-amount money}} {{money.currency}}
 {{~/inline~}}
@@ -13,22 +12,23 @@
 
 
 <html>
-  <body>
-    
 
-{{#with transaction}}
-    
-        
-<pre>
+<body>
+
+
+  {{#with transaction}}
+
+
+  <pre>
 Good news! <b>{{customer.display-name}}</b> has booked a fishing trip 
 at <b>{{listing.title}}</b> 
 for {{> format-date date=booking.start}} beginning at {{> format-time date=booking.start}}.
     
-Client Information: {{customer.display-name}}
+Client Information: {{customer.first-name}} {{customer.last-name}}
     
-Additional information from the angler is {{customer.email}}.
+Additional information from the angler is  {{customer.public-data.phone}} | {{customer.private-data.email}} | {{customer.public-data.address}}.
     
-Here is the breakdown- Payment you earn from this booking is {{> format-money money=payout-total}}.
+<!-- Here is the breakdown- Payment you earn from this booking is {{> format-money money=payout-total}}. -->
 
 <b><em>Please accept the request within 24 hours.</em></b> 
 
@@ -41,9 +41,10 @@ Best Regards,
 The FishMySpot Team     
 <img src="https://fishmyspot.com/images/logo.png" alt="fms" style="height: 50px;" />
 </pre>
-   
 
-{{/with}}
 
-     </body>
+  {{/with}}
+
+</body>
+
 </html>
