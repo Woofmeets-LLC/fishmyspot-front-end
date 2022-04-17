@@ -49,11 +49,9 @@ const SignUpModal = () => {
             lastName: values?.lastName,
             publicData: {
                 gender: values?.gender,
-                account_type: values?.type
+                account_type: values?.type,
+                email: values?.email
             },
-            privateData: {
-                email: values?.email,
-            }
         }, {
             expand: true
         }).then((res) => {
