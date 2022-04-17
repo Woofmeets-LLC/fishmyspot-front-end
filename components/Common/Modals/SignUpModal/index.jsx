@@ -50,6 +50,9 @@ const SignUpModal = () => {
             publicData: {
                 gender: values?.gender,
                 account_type: values?.type
+            },
+            privateData: {
+                email: values?.email,
             }
         }, {
             expand: true
