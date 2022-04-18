@@ -13,7 +13,7 @@ const FishDetails = ({ label, name, image = "/images/pond1.jpg", ...props }) => 
                         {...{
                             ...field,
                             checked: field?.value,
-                            onChange: () => console.log(),
+                            onChange: () => { },
                             onClick: () => helpers.setValue(!field.value)
                         }}
                         {...props}

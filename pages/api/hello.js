@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   userId && (queryData.userId = userId);
   lastTransitions && (queryData.lastTransitions = lastTransitions);
 
-  // console.log(queryData);
+
   try {
     const result = await integrationSdk.transactions.query(queryData);
 

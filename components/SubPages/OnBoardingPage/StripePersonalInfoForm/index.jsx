@@ -8,11 +8,6 @@ const PersonalInfoContainer = () => {
   const onSumbit = async (values, helpers) => {
 
     const { token, error } = createStripeAccountToken(values);
-    if (error) {
-      console.log(error);
-    } else {
-      // console.log(token);
-    }
   };
 
   return (

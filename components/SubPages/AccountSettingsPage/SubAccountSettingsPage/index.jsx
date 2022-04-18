@@ -75,6 +75,12 @@ const SubAccountSettingsPage = () => {
           Icon={BiMessageRoundedError}
           href={"/faq"}
         />
+        <SettingCard
+          title={"Gift Card"}
+          description={"Gather more information before your fishing trip."}
+          Icon={BiMessageRoundedError}
+          href={"/create-gift-card"}
+        />
       </div>
     </div>
   );

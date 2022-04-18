@@ -25,17 +25,6 @@ const MessageBody = ({ currentUserId, activeTransactionId }) => {
   //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   // }, [])
 
-  // if (error) {
-  //   console.log(error);
-  // }
-
-  // if (!data) {
-  //   console.log("loading");
-  // }
-
-  // if (data) {
-  //   console.log({ data });
-  // }
 
   return (
     <div className="overflow-y-auto h-[62vh] pb-2 pr-3 pt-2 message__scrollbar">

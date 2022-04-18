@@ -132,7 +132,7 @@ const SelectDateTime = ({ pondData }) => {
             });
 
     }
-    console.log(dates);
+
     return (
         <>
             <div className='mb-4 xl:mb-5'>

@@ -18,15 +18,12 @@ const PaypalOnboardButton = () => {
   //       }
   //     );
   //     const data = res.data;
-  //     console.log(data);
   //     const onboardUrl = data?.links?.[1]?.href;
   //     if (!onboardUrl) {
   //       throw Error("No redirect url found");
   //     }
   //     setRedirectUrl(() => onboardUrl);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
+  //   } catch (error) {}
   //   setLoadingState(false);
   // };
 
