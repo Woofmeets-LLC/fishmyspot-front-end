@@ -9,9 +9,9 @@ const PersonalInfoContainer = () => {
 
     const { token, error } = createStripeAccountToken(values);
     if (error) {
-      console.log(error);
+
     } else {
-      // console.log(token);
+
     }
   };
 

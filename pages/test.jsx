@@ -27,11 +27,8 @@ const Test = () => {
     // })
     //   .then(res => {
     //     // res.data contains the response data
-    //     console.log(res);
     //   })
-    //   .catch(err => {
-    //     console.dir(err);
-    //   });
+    //   .catch(err => {});
     axios.post('/api/hello', {
       userId: "62305252-d42f-47dd-af63-03a080124326",
       lastTransitions: ["transition/review-1-by-customer"],
@@ -68,14 +65,10 @@ const Test = () => {
       type: "account_onboarding",
       collect: "currently_due",
     })
-      .then(res => {
-        console.log(res.data?.data?.attributes?.url);
-      })
+      .then(res => { })
       .catch(err => {
         console.dir(err)
       })
-
-    console.log({ mcc, url, isTransferActivated, stripeAccount });
   }
 
   return (

@@ -13,7 +13,7 @@ const SubSidebar = ({
     <div className="p-2 md:pr-3 h-full border-r border-r-gray-300 overflow-y-auto lg:pt-7 message__scrollbar">
       {
         // transactionIds.forEach(id => {
-        //   console.log({ [id]: { listing: includedListingData[id], message: includedMessageData[id] } });
+        //    });
         // });
 
         transactionIds?.map((id, index) => {

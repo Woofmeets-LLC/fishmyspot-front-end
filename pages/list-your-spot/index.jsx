@@ -153,9 +153,7 @@ const ListYourPond = () => {
             .then(res => {
                 dispatch(setFishes(res.data));
             })
-            .catch(err => {
-                // console.log(err);
-            })
+            .catch(err => { })
     }, [])
 
     useEffect(() => {
@@ -359,20 +357,16 @@ const ListYourPond = () => {
         // Setting images uuids to newData
         newData.images = uploadedImages?.success ? uploadedImages?.uuids : [];
 
-        console.log({ newData });
-
         // Creating listing
         getSdk().ownListings.create(newData, { expand: true, include: ['images'] })
             .then(listingRes => {
                 setLoading(false);
                 toast.success("Listing created successfully!");
-                // console.log(listingRes);
                 router.push(`/list-your-spot/success?listed=true`);
             })
             .catch(err => {
                 setLoading(false);
                 toast.error("Failed listing creation!");
-                // console.log(err);
             })
     }
 
