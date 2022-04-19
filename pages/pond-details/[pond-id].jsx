@@ -85,7 +85,13 @@ const PondDetails = () => {
                       : <div className="order-1 lg:order-2 w-full md:w-2/3 lg:w-[420px] 2xl:w-[510px] ">
                         <div className="mx-auto shadow-lg rounded-lg bg-white">
                           <div className='px-4 py-6 sm:px-7 sm:pt-8 sm:pb-10'>
-                            <h2 className="text-center font-trade-gothic-bold">You can not book the spot.</h2>
+                            <h2 className="text-center font-trade-gothic-bold">
+                              {
+                                !isLoggedIn
+                                  ? "Login in to book the spot."
+                                  : "As you are a pond owner you can not book any pond."
+                              }
+                            </h2>
                           </div>
                         </div>
                       </div>
