@@ -20,7 +20,6 @@ const SubPondOwnerInfo = () => {
 
     const getAddress = (place) => {
         setAddressError({ isError: false, message: "" });
-        console.log(place);
 
         addressHelpers.setValue(place.formatted_address);
         // cityHelpers.setValue("");

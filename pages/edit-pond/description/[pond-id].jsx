@@ -32,7 +32,6 @@ const DescriptionEdit = () => {
             })
             .catch(err => {
                 setFishesLoading(false);
-                // console.log(err);
             })
     }
 

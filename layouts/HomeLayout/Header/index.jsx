@@ -72,12 +72,9 @@ const Header = () => {
             expand: true
         })
             .then(res => {
-                console.log("createStripeAccount", res);
                 createAccountLink();
             })
-            .catch(err => {
-                console.dir(err)
-            })
+            .catch(err => { })
     }
 
     const recentVerificationEmail = () => {

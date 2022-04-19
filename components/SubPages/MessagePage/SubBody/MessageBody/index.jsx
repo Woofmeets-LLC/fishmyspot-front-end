@@ -26,15 +26,12 @@ const MessageBody = ({ currentUserId, activeTransactionId }) => {
   // }, [])
 
   // if (error) {
-  //   console.log(error);
   // }
 
   // if (!data) {
-  //   console.log("loading");
   // }
 
   // if (data) {
-  //   console.log({ data });
   // }
 
   return (
