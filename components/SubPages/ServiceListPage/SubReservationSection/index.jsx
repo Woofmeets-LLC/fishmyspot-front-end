@@ -11,6 +11,7 @@ import DaysTypeSelect from './DaysTypeSelect';
 import ExperienceSelect from './ExperienceSelect';
 import SelectDateTime from './SelectDateTime';
 import Link from 'next/link';
+import GiftCard from './GiftCard';
 
 const SubReservationSection = ({ pondData }) => {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ const SubReservationSection = ({ pondData }) => {
       })
   }
 
+
   return (
     <div className="order-1 lg:order-2 w-full md:w-2/3 mx-auto lg:w-[420px] 2xl:w-[510px]">
       <div className="bg-white shadow-lg rounded-lg">
@@ -73,7 +75,8 @@ const SubReservationSection = ({ pondData }) => {
               time: '',
               experience,
               serviceFee: "3.52",
-              total: 0
+              total: 0,
+              giftCode: "",
             }}
             validationSchema={yup.object({
               dayType: yup.string().required('Select a day type!'),
@@ -98,6 +101,8 @@ const SubReservationSection = ({ pondData }) => {
               <ExperienceSelect pondData={pondData} />
 
               <Calculation />
+
+              <GiftCard />
 
               {
                 (!user?.emailVerified && !isProfileUpdated)
@@ -140,6 +145,8 @@ const SubReservationSection = ({ pondData }) => {
               </button>
             </Form>
           </Formik>
+
+
         </div>
       </div>
     </div>

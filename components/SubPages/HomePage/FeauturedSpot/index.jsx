@@ -1,4 +1,6 @@
-const FeaturedSpot = ({ img, title, description }) => {
+import Link from "next/link";
+
+const FeaturedSpot = ({ img, title, description, siteLink }) => {
   return (
     <div className="mx-3 xl:mx-5 shadow-xl rounded-xl overflow-hidden">
       <div className="w-full h-[180px] lg:h-[160px] 2xl:h-[200px] 3xl:h-[227px] rounded-xl overflow-hidden">
@@ -12,9 +14,11 @@ const FeaturedSpot = ({ img, title, description }) => {
           {description}
         </p>
 
-        {/* <span className="text-sm font-trade-gothic-bold text-highlight-3 cursor-pointer">
-          Book Now
-        </span> */}
+        <Link href={siteLink}>
+          <a className="bg-secondary inline-block w-full text-center text-sm font-trade-gothic-bold text-yellow-50 py-1 px-4 rounded cursor-pointer">
+            Book Now
+          </a>
+        </Link>
       </div>
     </div>
   );

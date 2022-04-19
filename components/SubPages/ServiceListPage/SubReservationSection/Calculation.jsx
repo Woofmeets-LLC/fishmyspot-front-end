@@ -25,7 +25,7 @@ const Calculation = () => {
         totalHelpers.setValue(total)
     }, [total])
     return (
-        <div className='lg:text-lg 2xl:text-xl font-trade-gothic text-highlight-1 my-8 xl:my-14'>
+        <div className='lg:text-lg 2xl:text-xl font-trade-gothic text-highlight-1 mt-8 mb-4 xl:mt-14 xl:mb-8'>
             <div className='flex justify-between mb-2 lg:mb-3 2xl:mb-4'>
                 <p>{
                     dayTypeField.value == 'fullDay' ? 'Full Day' : 'Half Day'

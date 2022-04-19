@@ -51,29 +51,33 @@ const SubFeaturedSpotSection = () => {
             img={'/images/Green-Pond-Compressed.PNG'}
             title={'Trophy Fishing in Green, OH'}
             description={
-              'Gorgeous 2 acre pond with trophy fish and many amenities included such as, metal boat, pond prowler, kayak, dock, and picnic tables. Book now.'
+              'Gorgeous 2 acre pond with trophy fish and many amenities included such as, metal boat, pond prowler, kayak, dock, and picnic tables.'
             }
+            siteLink={"https://fishmyspot.com/pond-details/62545651-2876-4a6a-81dd-cc9783567b4c"}
           />
           <FeaturedSpot
             img={'/images/East-Canton.jpeg'}
             title={'Varian Orchard E. Canton, OH'}
             description={
-              ' This gorgeous lake comes in at 5.2 acres with plenty of shoreline to fish from and a dock. You will enjoy the backdrop of lush trees.  Book now.'
+              ' This gorgeous lake comes in at 5.2 acres with plenty of shoreline to fish from and a dock. You will enjoy the backdrop of lush trees.'
             }
+            siteLink={"https://fishmyspot.com/pond-details/6254592b-210f-46cf-b555-388163e1d8a8"}
           />
           <FeaturedSpot
             img={'/images/North-Royalton-Pond-W-Logo.png'}
             title={'Farm Pond in N. Royalton, OH'}
             description={
-              'This beautiful farm pond is located in North Royalton! Pond is part of an organic produce farm and it is chemical free. Deepest depth of pond is 15 feet. Book now.'
+              'This beautiful farm pond is located in North Royalton! Pond is part of an organic produce farm and it is chemical free. Deepest depth of pond is 15 feet.'
             }
+            siteLink={"https://fishmyspot.com/pond-details/62545ddf-11e8-4ea1-bef1-8b5646af6828"}
           />
           <FeaturedSpot
             img={'/images/East-Canton.jpeg'}
             title={'Varian Orchard E. Canton, OH'}
             description={
-              'This gorgeous lake comes in at 5.2 acres with plenty of shoreline to fish from and a dock. You will enjoy the backdrop of lush trees. Book now'
+              'This gorgeous lake comes in at 5.2 acres with plenty of shoreline to fish from and a dock. You will enjoy the backdrop of lush trees.'
             }
+            siteLink={"https://fishmyspot.com/pond-details/6254592b-210f-46cf-b555-388163e1d8a8"}
           />
         </Slider>
       </div>

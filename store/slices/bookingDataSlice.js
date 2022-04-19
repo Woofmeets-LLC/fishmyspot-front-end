@@ -11,7 +11,8 @@ const bookingDataSlice = createSlice({
         experience: '',
         time: '',
         serviceFee: '',
-        total: ''
+        total: '',
+        giftCode: '',
     },
     reducers: {
         setBookingData: (state, action) => {
@@ -24,6 +25,7 @@ const bookingDataSlice = createSlice({
             state.time = action.payload.time;
             state.serviceFee = action.payload.serviceFee;
             state.total = action.payload.total;
+            state.giftCode = action.payload.giftCode;
         },
     },
 });
