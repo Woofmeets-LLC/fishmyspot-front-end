@@ -88,8 +88,8 @@ const PondDetails = () => {
                             <h2 className="text-center font-trade-gothic-bold">
                               {
                                 !isLoggedIn
-                                  ? "Login in to book the spot."
-                                  : "As you are a pond owner you can not book any pond."
+                                  ? "Log in to book the spot."
+                                  : "As you are a pond owner, you can not book any pond."
                               }
                             </h2>
                           </div>
