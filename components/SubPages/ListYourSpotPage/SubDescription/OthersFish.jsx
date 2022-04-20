@@ -13,7 +13,7 @@ const OthersFish = () => {
                         {...{
                             ...isSelectedField,
                             checked: isSelectedField.value,
-                            onChange: () => console.log(),
+                            onChange: () => { },
                             onClick: () => isSelectedHelpers.setValue(!isSelectedField.value)
                         }}
                         // checked={field.value == radioBtn.value}
