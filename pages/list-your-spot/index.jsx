@@ -153,9 +153,7 @@ const ListYourPond = () => {
             .then(res => {
                 dispatch(setFishes(res.data));
             })
-            .catch(err => {
-                // console.log(err);
-            })
+            .catch(err => { })
     }, [])
 
     useEffect(() => {
@@ -359,20 +357,24 @@ const ListYourPond = () => {
         // Setting images uuids to newData
         newData.images = uploadedImages?.success ? uploadedImages?.uuids : [];
 
-        console.log({ newData });
-
         // Creating listing
         getSdk().ownListings.create(newData, { expand: true, include: ['images'] })
             .then(listingRes => {
                 setLoading(false);
                 toast.success("Listing created successfully!");
-                // console.log(listingRes);
                 router.push(`/list-your-spot/success?listed=true`);
             })
             .catch(err => {
                 setLoading(false);
                 toast.error("Failed listing creation!");
-                // console.log(err);
+            })
+    }
+
+    const recentVerificationEmail = () => {
+        getSdk().currentUser.sendVerificationEmail()
+            .then(res => {
+                // res.data
+                toast.success("Verification email sent.", { duration: 3000 });
             })
     }
 
@@ -383,73 +385,83 @@ const ListYourPond = () => {
                 account_type: "owner",
                 fallbackUrl: "/",
             }}>
-            <TopImageCard />            {
+            <TopImageCard />
 
-                <MultiStepForm
-                    initialValues={initialValues}
-                    timelineArray={timelineArray}
-                    stepControllerBtns={stepControllerBtns}
-                    onSubmit={handleSubmit}
-                    successComponent={<div>Success</div>}
-                >
-                    <FormStep validationSchema={validation.pondListing}>
-                        <SubPondListing />
-                    </FormStep>
-                    <FormStep validationSchema={validation.pondOwnerDetails}>
-                        <SubPondOwnerDetails />
-                    </FormStep>
-                    <FormStep>
-                        <SubPricing />
-                    </FormStep>
-                    <FormStep validationSchema={validation.pondOwnerInfo}>
-                        <SubPondOwnerInfo />
-                    </FormStep>
-                    <FormStep>
-                        <SubAvailableTime />
-                    </FormStep>
-                    <FormStep validationSchema={validation.description}>
-                        <SubDescription />
-                    </FormStep>
-                    <FormStep validationSchema={validation.accessToPond}>
-                        <SubAccessToPond />
-                    </FormStep>
-                    <FormStep>
-                        <SubAmenities />
-                    </FormStep>
-                    <FormStep >
-                        <SubAdditionalInformation />
-                    </FormStep>
-                    <FormStep >
-                        {
-                            loading
-                                ? <div className="flex justify-center items-center flex-wrap my-10">
-                                    <ClipLoader size={50} color={'#1971ff'} />
-                                    <h2 className="w-full text-center font-semibold mt-2">Creating your pond...</h2>
-                                </div>
-                                : (
-                                    stripeLoading
+            {
+                user?.emailVerified
+                    ? (
+                        <MultiStepForm
+                            initialValues={initialValues}
+                            timelineArray={timelineArray}
+                            stepControllerBtns={stepControllerBtns}
+                            onSubmit={handleSubmit}
+                            successComponent={<div>Success</div>}
+                        >
+                            <FormStep validationSchema={validation.pondListing}>
+                                <SubPondListing />
+                            </FormStep>
+                            <FormStep validationSchema={validation.pondOwnerDetails}>
+                                <SubPondOwnerDetails />
+                            </FormStep>
+                            <FormStep>
+                                <SubPricing />
+                            </FormStep>
+                            <FormStep validationSchema={validation.pondOwnerInfo}>
+                                <SubPondOwnerInfo />
+                            </FormStep>
+                            <FormStep>
+                                <SubAvailableTime />
+                            </FormStep>
+                            <FormStep validationSchema={validation.description}>
+                                <SubDescription />
+                            </FormStep>
+                            <FormStep validationSchema={validation.accessToPond}>
+                                <SubAccessToPond />
+                            </FormStep>
+                            <FormStep>
+                                <SubAmenities />
+                            </FormStep>
+                            <FormStep >
+                                <SubAdditionalInformation />
+                            </FormStep>
+                            <FormStep >
+                                {
+                                    loading
                                         ? <div className="flex justify-center items-center flex-wrap my-10">
                                             <ClipLoader size={50} color={'#1971ff'} />
-                                            <h2 className="w-full text-center font-semibold mt-2">Connecting to stripe...</h2>
-
-                                            {
-                                                (attributes?.stripeAccountData?.capabilities?.card_payments == 'inactive' || attributes?.stripeAccountData?.capabilities?.transfers == 'inactive')
-                                                && <h2 className="w-full text-center text-sm font-semibold mt-2">You did not completed stripe connect step yet. Complete first!</h2>
-                                            }
-                                            {
-                                                (attributes?.stripeAccountData?.capabilities?.card_payments == 'pending' || attributes?.stripeAccountData?.capabilities?.transfers == 'pending')
-                                                && <>
-                                                    <h2 className="w-full text-center text-sm font-semibold mt-2">Stripe received your info and verifying...</h2>
-                                                    <h2 className="w-full text-center text-sm font-semibold mt-2">Please wait and do not refresh your screen!</h2>
-                                                </>
-                                            }
+                                            <h2 className="w-full text-center font-semibold mt-2">Creating your pond...</h2>
                                         </div>
-                                        : <SubAgreementSection />
-                                )
-                        }
-                    </FormStep>
-                </MultiStepForm>
+                                        : (
+                                            stripeLoading
+                                                ? <div className="flex justify-center items-center flex-wrap my-10">
+                                                    <ClipLoader size={50} color={'#1971ff'} />
+                                                    <h2 className="w-full text-center font-semibold mt-2">Connecting to stripe...</h2>
 
+                                                    {
+                                                        (attributes?.stripeAccountData?.capabilities?.card_payments == 'inactive' || attributes?.stripeAccountData?.capabilities?.transfers == 'inactive')
+                                                        && <h2 className="w-full text-center text-sm font-semibold mt-2">You did not completed stripe connect step yet. Complete first!</h2>
+                                                    }
+                                                    {
+                                                        (attributes?.stripeAccountData?.capabilities?.card_payments == 'pending' || attributes?.stripeAccountData?.capabilities?.transfers == 'pending')
+                                                        && <>
+                                                            <h2 className="w-full text-center text-sm font-semibold mt-2">Stripe received your info and verifying...</h2>
+                                                            <h2 className="w-full text-center text-sm font-semibold mt-2">Please wait and do not refresh your screen!</h2>
+                                                        </>
+                                                    }
+                                                </div>
+                                                : <SubAgreementSection />
+                                        )
+                                }
+                            </FormStep>
+                        </MultiStepForm>
+                    )
+                    : (
+                        <div className="container">
+                            <div className="md:w-3/4 mx-auto my-10 shadow p-8 text-center text-lg font-trade-gothic text-red-500 rounded">
+                                Your email is not verified. Please <button className='text-secondary underline font-trade-gothic-bold' onClick={recentVerificationEmail}>verify your email</button> first to list your spot.
+                            </div>
+                        </div>
+                    )
             }
         </HomeLayout>
     );

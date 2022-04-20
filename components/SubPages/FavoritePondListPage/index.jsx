@@ -6,10 +6,8 @@ import SubServices from '../ServicesPage/SubServicesList';
 
 const SubFavoritePondList = () => {
   const user = useCurrentUser();
-  // console.log(user);
   const [favouriteList, setFavouriteList] = useState([]);
   const favouriteListingIds = user?.profile?.publicData?.favouriteList?.length ? user.profile.publicData?.favouriteList : [];
-  console.log(favouriteListingIds);
 
   const [images, setImages] = useState({})
   const [hasMore, setHasMore] = useState(true)
@@ -55,7 +53,7 @@ const SubFavoritePondList = () => {
   //       // res.data contains the response data
   //       setFavouriteList(res.data);
   //     })
-  //     .catch(err => console.log(err));
+  //     .catch(err => {});
   // }, [])
 
   return (

@@ -92,7 +92,6 @@ const DayHoursPicker = ({
         if (!isDropDown) return;
 
         function handleClick(event) {
-            console.log({ dropdown, eventTarget: event.target });
             if (dropdown.current && !dropdown.current.contains(event.target)) {
                 setIsDropDown(false);
             }

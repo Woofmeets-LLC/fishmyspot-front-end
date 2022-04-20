@@ -1,1 +1,0 @@
-Booking Request For {{transaction.booking.title}}
