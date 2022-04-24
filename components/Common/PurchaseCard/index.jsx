@@ -32,8 +32,6 @@ const PurchaseCard = ({ setPurchaseList, purchaseData, status }) => {
 
     const total = convertAmountToFloat(+purchaseData?.attributes?.payinTotal?.amount);
 
-    console.log(new Date(purchaseData?.relationships?.booking?.attributes?.displayStart).toLocaleString('en-US', { timeZone: 'America/New_York' }));
-
     return (
         <div className='md:w-[650px] 2xl:w-[690px] bg-white shadow-md p-4 md:py-6 md:px-7 2xl:py-8 2xl:px-9 rounded-lg'>
             <div className='grid grid-cols-12 gap-3'>
@@ -53,11 +51,11 @@ const PurchaseCard = ({ setPurchaseList, purchaseData, status }) => {
                         />
                         <ListItem
                             title={"Start Date & Time"}
-                            value={bookingStart ? format(bookingStart, "hh:mm a, MMM dd, yyyy") : "N/A"}
+                            value={bookingStart ? `${format(bookingStart, "hh:mm a, MMM dd, yyyy")} (GMT -04:00)` : "N/A"}
                         />
                         <ListItem
                             title={"End Date & Time"}
-                            value={bookingEnd ? format(bookingEnd, "hh:mm a, MMM dd, yyyy") : "N/A"}
+                            value={bookingEnd ? `${format(bookingEnd, "hh:mm a, MMM dd, yyyy")} (GMT -04:00)` : "N/A"}
                         />
                         <ListItem
                             title={"Time Type"}

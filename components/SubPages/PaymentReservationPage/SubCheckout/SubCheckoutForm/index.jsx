@@ -64,7 +64,6 @@ const SubCheckoutForm = ({ setStep, id, secret, billing_details, reset }) => {
                     })
                     .catch(sdkError => {
                         setLoading(false);
-                        console.dir(sdkError);
                     })
             }
         } catch (error) {

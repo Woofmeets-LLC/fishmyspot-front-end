@@ -128,7 +128,6 @@ const SelectDateTime = ({ pondData }) => {
             .catch(err => {
                 setLoading(false);
                 setTimeSlotError(true);
-                console.dir(err);
             });
 
     }

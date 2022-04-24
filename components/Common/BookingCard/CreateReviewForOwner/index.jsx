@@ -36,7 +36,6 @@ const CreateReviewForOnwer = ({ purchaseData, setPurchaseList, listingId, transa
             })
             .catch(err => {
                 setLoading(false);
-                console.dir(err);
             });
     };
 

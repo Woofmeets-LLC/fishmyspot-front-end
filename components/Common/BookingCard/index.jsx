@@ -10,8 +10,6 @@ const BookingCard = ({ setBookingList, setPurchaseList, bookingData, status }) =
     const [approveLoading, setApproveLoading] = useState(false);
     const [declineLoading, setDeclineLoading] = useState(false);
 
-    console.log(bookingData);
-
     const convertAmountToFloat = (amount) => parseFloat((+amount / 100) || 0).toFixed(2);
     const titleFormatter = (title) => title?.replace("line-item/", "")?.replaceAll("-", " ")
 
@@ -97,11 +95,11 @@ const BookingCard = ({ setBookingList, setPurchaseList, bookingData, status }) =
                         />
                         <ListItem
                             title={"Start Date & Time"}
-                            value={bookingStart ? format(bookingStart, "hh:mm a, MMM dd, yyyy") : "N/A"}
+                            value={bookingStart ? `${format(bookingStart, "hh:mm a, MMM dd, yyyy")} (GMT -04:00)` : "N/A"}
                         />
                         <ListItem
                             title={"End Date & Time"}
-                            value={bookingEnd ? format(bookingEnd, "hh:mm a, MMM dd, yyyy") : "N/A"}
+                            value={bookingEnd ? `${format(bookingEnd, "hh:mm a, MMM dd, yyyy")} (GMT -04:00)` : "N/A"}
                         />
                         <ListItem
                             title={"Time Type"}
