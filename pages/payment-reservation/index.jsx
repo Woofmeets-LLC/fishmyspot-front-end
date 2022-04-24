@@ -86,7 +86,6 @@ const PaymentReservation = () => {
       .catch(err => {
         setLoading(false);
         setError({ status: true, message: "Something went wrong, please try again later" });
-        console.dir(err);
       });
   }
 
@@ -110,7 +109,6 @@ const PaymentReservation = () => {
       .catch(err => {
         setLoading(false);
         setError({ status: true, message: "Something went wrong, please try again later" });
-        console.dir(err)
       })
   }
 

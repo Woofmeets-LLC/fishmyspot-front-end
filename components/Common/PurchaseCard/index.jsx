@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import React from 'react';
 import { StatusButton } from '..';
+import { getTimeZoneWiseDateTime } from '../../../services/date/get-time-zone-wise-date-time';
 import ListItem from '../ListItem';
 import CreateReview from './CreateReview';
 
@@ -10,8 +11,9 @@ const PurchaseCard = ({ setPurchaseList, purchaseData, status }) => {
 
     const pondOwner = purchaseData?.relationships?.provider?.attributes?.profile?.displayName || "N/A";
     const phoneNumber = purchaseData?.relationships?.listing?.attributes?.publicData?.phone || "N/A";
-    const bookingStart = purchaseData?.relationships?.booking?.attributes?.displayStart;
-    const bookingEnd = purchaseData?.relationships?.booking?.attributes?.displayEnd;
+    // const bookingStart = purchaseData?.relationships?.booking?.attributes?.displayStart;
+    const bookingStart = getTimeZoneWiseDateTime(purchaseData?.relationships?.booking?.attributes?.displayStart);
+    const bookingEnd = getTimeZoneWiseDateTime(purchaseData?.relationships?.booking?.attributes?.displayEnd);
     const location = purchaseData?.relationships?.listing?.attributes?.title || "N/A";
 
     const dayInfo = purchaseData?.attributes?.lineItems
@@ -49,11 +51,11 @@ const PurchaseCard = ({ setPurchaseList, purchaseData, status }) => {
                         />
                         <ListItem
                             title={"Start Date & Time"}
-                            value={bookingStart ? format(bookingStart, "hh:mm a, MMM dd, yyyy") : "N/A"}
+                            value={bookingStart ? `${format(bookingStart, "hh:mm a, MMM dd, yyyy")} (GMT -04:00)` : "N/A"}
                         />
                         <ListItem
                             title={"End Date & Time"}
-                            value={bookingEnd ? format(bookingEnd, "hh:mm a, MMM dd, yyyy") : "N/A"}
+                            value={bookingEnd ? `${format(bookingEnd, "hh:mm a, MMM dd, yyyy")} (GMT -04:00)` : "N/A"}
                         />
                         <ListItem
                             title={"Time Type"}

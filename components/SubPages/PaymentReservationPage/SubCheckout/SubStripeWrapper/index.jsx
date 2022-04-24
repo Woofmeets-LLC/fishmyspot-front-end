@@ -12,7 +12,6 @@ const SubStripeWrapper = ({ children }) => {
                 setCustomLoadStripe(load);
             } catch (err) {
                 setCustomLoadStripe(null);
-                console.dir("err", err);
             }
         }
         getLoad();
