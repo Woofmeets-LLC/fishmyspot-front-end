@@ -95,6 +95,19 @@ const HomeLayout = ({
 
     return (
         <>
+            <Head>
+                <title>{ogTags.title ? ogTags.title : title}</title>
+                {
+                    Object.keys(ogTags)
+                        ?.map(key => {
+                            // Returning if og tag has no value
+                            if (!ogTags[key]) return null;
+
+                            // Return og tag
+                            return <meta key={key} property={`og:${key}`} content={ogTags[key]} />
+                        })
+                }
+            </Head>
             {
                 isLoading || guardChecking
                     ? (
@@ -107,19 +120,6 @@ const HomeLayout = ({
                     )
                     : (
                         <>
-                            <Head>
-                                <title>{ogTags.title ? ogTags.title : title}</title>
-                                {
-                                    Object.keys(ogTags)
-                                        ?.map(key => {
-                                            // Returning if og tag has no value
-                                            if (!ogTags[key]) return null;
-
-                                            // Return og tag
-                                            return <meta key={key} property={`og:${key}`} content={ogTags[key]} />
-                                        })
-                                }
-                            </Head>
                             <Header />
                             <main>
                                 {children}
