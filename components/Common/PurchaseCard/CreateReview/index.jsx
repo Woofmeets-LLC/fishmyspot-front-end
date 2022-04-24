@@ -58,7 +58,6 @@ const CreateReview = ({ purchaseData, setPurchaseList, listingId, transactionId 
             })
             .catch(err => {
                 setLoading(false);
-                console.dir(err);
             });
     };
 

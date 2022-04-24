@@ -192,16 +192,6 @@ Chrome
     }
 }
 
-/* ::-webkit-scrollbar {
-    width: 10px;
-  } */
-
-/* Track */
-/* html {
-    background: #f1f1f1;
-    scrollbar-width: normal;
-  } */
-
 /* Handle */
 .message__scrollbar::-webkit-scrollbar-thumb {
     background: rgb(192, 192, 192);
@@ -221,7 +211,6 @@ Chrome
 #card-element {
     @apply border px-1 py-2 mb-3 rounded;
 }
-
 
 /* faq page */
 .list-alpha {
