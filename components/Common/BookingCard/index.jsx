@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { StatusButton } from '..';
+import { getTimeZoneWiseDateTime } from '../../../services/date/get-time-zone-wise-date-time';
 import { getSdk } from '../../../sharetribe/sharetribeSDK';
 import ListItem from '../ListItem';
 import CreateReviewForOnwer from './CreateReviewForOwner';
@@ -9,13 +10,15 @@ const BookingCard = ({ setBookingList, setPurchaseList, bookingData, status }) =
     const [approveLoading, setApproveLoading] = useState(false);
     const [declineLoading, setDeclineLoading] = useState(false);
 
+    console.log(bookingData);
+
     const convertAmountToFloat = (amount) => parseFloat((+amount / 100) || 0).toFixed(2);
     const titleFormatter = (title) => title?.replace("line-item/", "")?.replaceAll("-", " ")
 
     const pondOwner = bookingData?.relationships?.customer?.attributes?.profile?.displayName || "N/A";
     const phoneNumber = bookingData?.relationships?.customer?.attributes?.profile?.publicData?.phone || "N/A";
-    const bookingStart = bookingData?.relationships?.booking?.attributes?.displayStart;
-    const bookingEnd = bookingData?.relationships?.booking?.attributes?.displayEnd;
+    const bookingStart = getTimeZoneWiseDateTime(bookingData?.relationships?.booking?.attributes?.displayStart);
+    const bookingEnd = getTimeZoneWiseDateTime(bookingData?.relationships?.booking?.attributes?.displayEnd);
     const location = bookingData?.relationships?.listing?.attributes?.title || "N/A";
 
     const dayInfo = bookingData?.attributes?.lineItems
