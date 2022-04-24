@@ -67,7 +67,7 @@ const ListYourPond = () => {
                     }
                 })
                 .catch(err => {
-                    console.dir(err)
+
                 })
         }
 
@@ -85,7 +85,7 @@ const ListYourPond = () => {
                 redirectToStripe();
             })
             .catch(err => {
-                console.dir(err)
+
             })
     }
 

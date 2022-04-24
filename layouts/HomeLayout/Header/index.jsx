@@ -59,7 +59,7 @@ const Header = () => {
                 }
             })
             .catch(err => {
-                console.dir(err)
+
             })
     }
 
