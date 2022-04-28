@@ -6,6 +6,7 @@ import SubFooterImageCard from "../components/SubPages/HomePage/SubFooterImageCa
 import SubHeroSection from "../components/SubPages/HomePage/SubHeroSection";
 import SubListingYourSpotSection from "../components/SubPages/HomePage/SubListingYourSpotSection";
 import SubWireFramesSection from "../components/SubPages/HomePage/SubWireFramesSection";
+import SubExploreFishMySpotByState from "../components/SubPages/HomePage/SubExploreFishMySpotByState";
 import HomeLayout from "../layouts/HomeLayout";
 
 const SubFeaturedSpotSection = dynamic(() => import("../components/SubPages/HomePage/SubFeaturedSpotSection"), { ssr: false });
@@ -19,6 +20,7 @@ const Home = () => {
             <SubFeaturedSpotSection />
             <SubClientReviewSection />
             <SubListingYourSpotSection />
+            <SubExploreFishMySpotByState />
             <SubFooterImageCard />
         </HomeLayout>
     );
