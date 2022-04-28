@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
+import slugify from "slugify";
 
 const states = [
   {
@@ -211,12 +212,8 @@ const states = [
 const SubExploreFishMySpotByState = () => {
   const router = useRouter();
 
-  const handleClick = (state) => {
-    router.push(`/${state}`)
-  }
-
   return (
-    <section className="">
+    <section className="bg-[#EDF0F2]">
       <div className="container py-20">
         <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-food-truck text-primary">Explore fish my spot By State</h1>
         <div className="w-16 md:w-20 lg:w-24 xl:w-28 2xl:w-36 h-1 xl:h-[6px] bg-secondary rounded mt-1 lg:mt-3 2xl:mt-5 mb-6 md:mb-10 2xl:mb-16"></div>
@@ -224,14 +221,13 @@ const SubExploreFishMySpotByState = () => {
           {
             states?.map((state, ind) => {
               return (
-                <div key={ind}>
-                  <span
-                    onClick={() => handleClick(state?.stateName)}
+                <Link key={ind} href={`/services/${slugify(state?.stateName).toLowerCase()}`}>
+                  <a
                     className="underline text-sm md:text-base 2xl:text-lg font-trade-gothic text-primary cursor-pointer"
                   >
                     {state?.stateName}
-                  </span>
-                </div>
+                  </a>
+                </Link>
               )
             })
           }

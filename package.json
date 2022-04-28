@@ -37,6 +37,7 @@
     "sharetribe-flex-integration-sdk": "^1.7.0",
     "sharetribe-flex-sdk": "^1.15.0",
     "slick-carousel": "^1.8.1",
+    "slugify": "^1.6.5",
     "stripe": "^8.207.0",
     "swr": "^1.2.2",
     "yarn": "^1.22.17",

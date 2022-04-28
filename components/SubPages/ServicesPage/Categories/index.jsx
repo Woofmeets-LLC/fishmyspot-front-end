@@ -10,7 +10,7 @@ import TypeFish from '../TypeFish';
 import UserRating from '../UserRating';
 
 
-const Categories = ({ getQuery }) => {
+const Categories = ({ getQuery, state }) => {
     const { isFirst, latLng } = useSelector(state => state.place);
     const router = useRouter();
     const [firstTime, setFirstTime] = useState(true)
@@ -18,10 +18,20 @@ const Categories = ({ getQuery }) => {
     const [query, setQuery] = useState({ location: '', typeFish: [], rating: [], experience: [], price: [0, 1000] });
 
     useEffect(() => {
-        if (!firstTime) router.push('/services?' + queryString.stringify(query, {
-            arrayFormat: 'comma',
-            skipNull: true
-        }));
+        if (!firstTime) {
+          if (state) {
+            router.push(`/services/${state}?` + queryString.stringify(query, {
+              arrayFormat: 'comma',
+              skipNull: true
+            }));
+          }
+          else {
+            router.push(`/services?` + queryString.stringify(query, {
+              arrayFormat: 'comma',
+              skipNull: true
+            }));
+          }
+        }
         getQuery(query)
 
     }, [query]);
@@ -47,7 +57,12 @@ const Categories = ({ getQuery }) => {
                     ...parsedQuery
                 }
             })
-            router.push('/services?' + queryString.stringify(parsedQuery, { arrayFormat: 'comma', skipNull: true }));
+            if (state) {
+              router.push(`/services/${state}?` + queryString.stringify(parsedQuery, { arrayFormat: 'comma', skipNull: true }));
+            }
+            else {
+              router.push(`/services?` + queryString.stringify(parsedQuery, { arrayFormat: 'comma', skipNull: true }));
+            }
 
         }
         setFirstTime(false)
