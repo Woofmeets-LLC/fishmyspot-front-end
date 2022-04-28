@@ -37,7 +37,7 @@ const Test = () => {
 
       })
       .catch(listingErr => {
-        console.dir(listingErr);
+
       })
   }
 
@@ -53,7 +53,7 @@ const Test = () => {
         dispatch(setStripeAccount({ ...stripeData, isTransferActivated }));
       })
       .catch(error => {
-        console.dir(error);
+
       });
   }
 
@@ -67,7 +67,7 @@ const Test = () => {
     })
       .then(res => { })
       .catch(err => {
-        console.dir(err)
+
       })
   }
 

@@ -114,6 +114,10 @@ const SelectDateTime = ({ pondData }) => {
 
         const timeObject = bookingTimeFormatter(dateField.value, slots[time]);
 
+        const getMilliseconds = (date) => {
+            return date ? new Date(date).getTime() : new Date().getTime();
+        }
+
         getSdk().timeslots.query({
             listingId: pondData?.id?.uuid,
             start: new Date(timeObject.bookingStart).toISOString(),
@@ -121,14 +125,18 @@ const SelectDateTime = ({ pondData }) => {
         })
             .then(res => {
                 setLoading(false);
-                setTimeSlotError(res.data.data.length === 0);
-                res.data.data.length !== 0 && timeHelpers.setValue(time);
-                // res.data comains the response data
+
+                const nowTime = new Date().getTime();
+                const selectedTime = new Date(new Date(timeObject.bookingStart).toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone})).getTime();
+
+                const isSelectedPastTime = selectedTime < nowTime;
+
+                setTimeSlotError(res.data.data.length === 0 || isSelectedPastTime);
+                res.data.data.length !== 0 && !isSelectedPastTime && timeHelpers.setValue(time);
             })
             .catch(err => {
                 setLoading(false);
                 setTimeSlotError(true);
-                console.dir(err);
             });
 
     }
@@ -163,7 +171,7 @@ const SelectDateTime = ({ pondData }) => {
 
             {/* Time field */}
             <TimeSelect
-                label={"Time"}
+                label={"Time (New York Time Zone)"}
                 isActive={isTimeActive}
                 setIsActive={setIsTimeActive}
                 setSelectedItem={setSelectedTimeItem}
@@ -178,7 +186,7 @@ const SelectDateTime = ({ pondData }) => {
                     timeSlotError &&
                     <>This time slot is not available!</>
                 }
-                {timeSlotError && timeMeta.error && " & "}
+                {timeSlotError && timeMeta.touched && timeMeta.error && " & "}
                 {timeMeta.touched && timeMeta.error ? (
                     <>{timeMeta.error}</>
                 ) : null}
