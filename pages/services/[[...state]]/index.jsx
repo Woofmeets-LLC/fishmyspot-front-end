@@ -121,11 +121,11 @@ const ServicesByState = () => {
 
       // q.bounds = boundsCalculator(1000, parseFloat(lat), parseFloat(lng))
     }
-
-    console.log("query", q);
     
-    getSdk().listings.query(q)
+    if (router.isReady) {
+      getSdk().listings.query(q)
       .then(res => {
+
         if (res.data.meta.totalItems) {
           res.data.included.filter(d => {
             return d.type == 'image'
@@ -141,11 +141,11 @@ const ServicesByState = () => {
           setHasMore(false)
         }
 
-        console.log(res.data);
       })
       .catch(err => {
         setData([])
       })
+    }
   }
 
   useEffect(() => {
