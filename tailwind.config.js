@@ -29,6 +29,12 @@ module.exports = {
         "highlight-2": '#65947E',
         "highlight-3": '#7BAED4',
       },
+      gridTemplateRows: {
+        '9': 'repeat(9, minmax(0, 1fr))',
+        '13': 'repeat(13, minmax(0, 1fr))',
+        '17': 'repeat(17, minmax(0, 1fr))',
+        '26': 'repeat(26, minmax(0, 1fr))',
+      }
     },
   },
   plugins: [

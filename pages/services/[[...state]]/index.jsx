@@ -1,18 +1,76 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import * as sharetribeSdk from 'sharetribe-flex-sdk';
-import Categories from '../../components/SubPages/ServicesPage/Categories';
-import SubServices from '../../components/SubPages/ServicesPage/SubServicesList';
-import HomeLayout from '../../layouts/HomeLayout';
-import { getSdk } from "../../sharetribe/sharetribeSDK";
-const { types } = sharetribeSdk
+import {useRouter} from "next/router";
+import SubServices from '../../../components/SubPages/ServicesPage/SubServicesList';
+import HomeLayout from '../../../layouts/HomeLayout';
+import { getSdk } from '../../../sharetribe/sharetribeSDK';
+import slugify from "slugify";
+import Categories from '../../../components/SubPages/ServicesPage/Categories';
+const { types } = sharetribeSdk;
 
-const Services = () => {
+const states = {
+  "alabama": "AL",
+  "alaska": "AK",
+  "arizona": "AZ",
+  "arkansas": "AR",
+  "california": "CA",
+  "colorado": "CO",
+  "connecticut": "CT",
+  "delaware": "DE",
+  "florida": "FL",
+  "georgia": "GA",
+  "hawaii": "HI",
+  "idaho": "ID",
+  "illinois": "IL",
+  "indiana": "IN",
+  "iowa": "IA",
+  "kansas": "KS",
+  "kentucky": "KY",
+  "louisiana": "LA",
+  "maine": "ME",
+  "maryland": "MD",
+  "massachusetts": "MA",
+  "michigan": "MI",
+  "minnesota": "MN",
+  "mississippi": "MS",
+  "missouri": "MO",
+  "montana": "MT",
+  "nebraska": "NE",
+  "nevada": "NV",
+  "new-hampshire": "NH",
+  "new-jersey": "NJ",
+  "new-mexico": "NM",
+  "new-york": "NY",
+  "north-carolina": "NC",
+  "north-dakota": "ND",
+  "ohio": "OH",
+  "oklahoma": "OK",
+  "oregon": "OR",
+  "pennsylvania": "PA",
+  "rhode-island": "RI",
+  "south-carolina": "SC",
+  "south-dakota": "SD",
+  "tennessee": "TN",
+  "texas": "TX",
+  "utah": "UT",
+  "vermont": "VT",
+  "virginia": "VA",
+  "washington": "WA",
+  "west virginia": "WV",
+  "wisconsin": "WI",
+  "wyoming": "WY"
+}
+
+const ServicesByState = () => {
   const [images, setImages] = useState({})
   const [query, setQuery] = useState({ location: '', typeFish: [], rating: [], experience: [], price: [0, 1000] });
   const [hasMore, setHasMore] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
   const [data, setData] = useState([])
+
+  const router = useRouter();
+  const {state} = router.query;
 
   const getData = (page, newData) => {
     if (newData) {
@@ -23,6 +81,10 @@ const Services = () => {
       perPage: 10,
       page: page,
       include: ['images']
+    }
+
+    if (state?.[0]) {
+      q.pub_state = states[slugify(state[0]).toLowerCase()];
     }
 
     if (query.typeFish.length) {
@@ -59,8 +121,11 @@ const Services = () => {
 
       // q.bounds = boundsCalculator(1000, parseFloat(lat), parseFloat(lng))
     }
-    getSdk().listings.query(q)
+    
+    if (router.isReady) {
+      getSdk().listings.query(q)
       .then(res => {
+
         if (res.data.meta.totalItems) {
           res.data.included.filter(d => {
             return d.type == 'image'
@@ -76,11 +141,11 @@ const Services = () => {
           setHasMore(false)
         }
 
-
       })
       .catch(err => {
         setData([])
       })
+    }
   }
 
   useEffect(() => {
@@ -95,6 +160,7 @@ const Services = () => {
         <div className="container">
           <Categories
             getQuery={q => setQuery(q)}
+            state={state}
           />
           <SubServices
             fetchData={() => {
@@ -111,4 +177,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default ServicesByState;
