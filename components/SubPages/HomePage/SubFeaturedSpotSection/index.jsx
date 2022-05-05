@@ -1,6 +1,17 @@
 // import Slider from "react-slick";
+import axios from 'axios';
 import Slider from 'react-slick';
+import useSWR from 'swr';
 import FeaturedSpot from '../FeauturedSpot';
+
+const fetcher = (url) =>
+  axios
+    .get(url, {
+      headers: {
+        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
+      },
+    })
+    .then((res) => res.data.data);
 
 const SubFeaturedSpotSection = () => {
   const settings = {
@@ -37,51 +48,39 @@ const SubFeaturedSpotSection = () => {
       },
     ],
   };
+  const { data: featuredSpots, error } = useSWR(
+    'https://cms.fishmyspot.com/api/featured-spots?populate=*',
+    fetcher
+  );
+
+  if (error) console.log({ error });
+
+  if (!featuredSpots) return <></>;
+
   return (
-    <section className="container">
-      <div className="featured-spot-slider py-6 sm:py-8 md:py-10 lg:py-16 xl:py-20 2xl:py-32">
-        <div className=" text-primary text-center">
-          <h1 className="text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-food-truck uppercase">
-            Some of our featured spots
-          </h1>
-          <span className="w-[140px] h-[6px] bg-secondary inline-block rounded-full mt-4"></span>
+    featuredSpots && (
+      <section className="container">
+        <div className="featured-spot-slider py-6 sm:py-8 md:py-10 lg:py-16 xl:py-20 2xl:py-32">
+          <div className=" text-primary text-center">
+            <h1 className="text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-food-truck uppercase">
+              Some of our featured spots
+            </h1>
+            <span className="w-[140px] h-[6px] bg-secondary inline-block rounded-full mt-4"></span>
+          </div>
+          <Slider {...settings}>
+            {featuredSpots?.map(({ id, ...featuredData }) => (
+              <FeaturedSpot
+                key={id}
+                title={featuredData?.attributes?.title}
+                img={featuredData?.attributes?.image?.data[0]?.attributes?.url}
+                description={featuredData?.attributes?.description}
+                spotLink={featuredData?.attributes?.spotLink}
+              />
+            ))}
+          </Slider>
         </div>
-        <Slider {...settings}>
-          <FeaturedSpot
-            img={'/images/Green-Pond-Compressed.PNG'}
-            title={'Trophy Fishing in Green, OH'}
-            description={
-              'Gorgeous 2 acre pond with trophy fish and many amenities included such as, metal boat, pond prowler, kayak, dock, and picnic tables.'
-            }
-            spotLink={"https://fishmyspot.com/pond-details/62545651-2876-4a6a-81dd-cc9783567b4c"}
-          />
-          <FeaturedSpot
-            img={'/images/East-Canton.jpeg'}
-            title={'Varian Orchard E. Canton, OH'}
-            description={
-              ' This gorgeous lake comes in at 5.2 acres with plenty of shoreline to fish from and a dock. You will enjoy the backdrop of lush trees.'
-            }
-            spotLink={"https://fishmyspot.com/pond-details/6254592b-210f-46cf-b555-388163e1d8a8"}
-          />
-          <FeaturedSpot
-            img={'/images/North-Royalton-Pond-W-Logo.png'}
-            title={'Farm Pond in N. Royalton, OH'}
-            description={
-              'This beautiful farm pond is located in North Royalton! Pond is part of an organic produce farm and it is chemical free. Deepest depth of pond is 15 feet.'
-            }
-            spotLink={"https://fishmyspot.com/pond-details/62545ddf-11e8-4ea1-bef1-8b5646af6828"}
-          />
-          <FeaturedSpot
-            img={'/images/East-Canton.jpeg'}
-            title={'Varian Orchard E. Canton, OH'}
-            description={
-              'This gorgeous lake comes in at 5.2 acres with plenty of shoreline to fish from and a dock. You will enjoy the backdrop of lush trees.'
-            }
-            spotLink={"https://fishmyspot.com/pond-details/6254592b-210f-46cf-b555-388163e1d8a8"}
-          />
-        </Slider>
-      </div>
-    </section>
+      </section>
+    )
   );
 };
 
