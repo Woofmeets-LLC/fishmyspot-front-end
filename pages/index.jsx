@@ -9,21 +9,24 @@ import SubWireFramesSection from "../components/SubPages/HomePage/SubWireFramesS
 import SubExploreFishMySpotByState from "../components/SubPages/HomePage/SubExploreFishMySpotByState";
 import HomeLayout from "../layouts/HomeLayout";
 
-const SubFeaturedSpotSection = dynamic(() => import("../components/SubPages/HomePage/SubFeaturedSpotSection"), { ssr: false });
+const SubFeaturedSpotSection = dynamic(
+  () => import("../components/SubPages/HomePage/SubFeaturedSpotSection"),
+  { ssr: false }
+);
 
 const Home = () => {
-    return (
-        <HomeLayout>
-            <SubHeroSection />
-            <SubFeaturesSection />
-            <SubWireFramesSection />
-            <SubFeaturedSpotSection />
-            <SubClientReviewSection />
-            <SubListingYourSpotSection />
-            <SubExploreFishMySpotByState />
-            <SubFooterImageCard />
-        </HomeLayout>
-    );
+  return (
+    <HomeLayout>
+      <SubHeroSection />
+      <SubFeaturesSection />
+      <SubWireFramesSection />
+      <SubFeaturedSpotSection />
+      <SubClientReviewSection />
+      <SubListingYourSpotSection />
+      {/* <SubExploreFishMySpotByState /> */}
+      <SubFooterImageCard />
+    </HomeLayout>
+  );
 };
 
 export default Home;
