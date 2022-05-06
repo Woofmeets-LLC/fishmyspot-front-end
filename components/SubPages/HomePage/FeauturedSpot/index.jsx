@@ -11,7 +11,7 @@ const FeaturedSpot = ({ img, title, description, spotLink }) => {
           {title}
         </h4>
         <p className="text-sm font-trade-gothic text-highlight-1 mb-3 2xl:mb-5">
-          {description.slice(0, 153) + "..."}
+          {description}
         </p>
 
         <Link href={spotLink}>
