@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-const baseURL = 'https://fish-backend.algosolver.com/';
+const baseURL = "https://api.fishmyspot.com/";
 
 const axiosInstance = axios.create({
   baseURL,
