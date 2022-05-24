@@ -1,4 +1,5 @@
 module.exports = {
+  swcMinify: true,
   reactStrictMode: true,
   env: {
     FLEX_INTEGRATION_API_SECRET_KEY: "d926026f41c414dcf97db68fc32a771be1c4f0d5",

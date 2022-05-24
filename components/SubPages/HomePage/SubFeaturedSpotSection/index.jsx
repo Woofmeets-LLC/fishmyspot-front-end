@@ -72,7 +72,7 @@ const SubFeaturedSpotSection = () => {
               <FeaturedSpot
                 key={id}
                 title={featuredData?.attributes?.title}
-                img={featuredData?.attributes?.image?.data[0]?.attributes?.url}
+                img={featuredData?.attributes?.image?.data?.attributes?.url}
                 description={featuredData?.attributes?.description}
                 spotLink={featuredData?.attributes?.spotLink}
               />
