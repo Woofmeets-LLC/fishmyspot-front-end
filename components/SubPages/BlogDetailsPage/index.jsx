@@ -110,12 +110,14 @@ const SubBlogDetailsSection = ({ data: blogDetails }) => {
               </div>
             </div>
             <div className="mx-auto hidden pt-10 lg:col-span-4 lg:block lg:pl-4">
-              <MoreBlogsSection
-                relatedBlogs={blogDetails?.relatedBlogs}
-                category={
-                  blogDetails?.attributes?.category?.data?.attributes?.name
-                }
-              />
+              {blogDtails?.relatedBlogs.length !== 0 && (
+                <MoreBlogsSection
+                  relatedBlogs={blogDetails?.relatedBlogs}
+                  category={
+                    blogDetails?.attributes?.category?.data?.attributes?.name
+                  }
+                />
+              )}
             </div>
           </div>
         </div>
@@ -127,10 +129,14 @@ const SubBlogDetailsSection = ({ data: blogDetails }) => {
       )}
       <div className="container pb-10 lg:hidden lg:pb-0">
         <div className="mx-auto pt-10">
-          <MoreBlogsSection
-            relatedBlogs={blogDetails?.relatedBlogs}
-            category={blogDetails?.attributes?.category?.data?.attributes?.name}
-          />
+          {blogDtails?.relatedBlogs.length !== 0 && (
+            <MoreBlogsSection
+              relatedBlogs={blogDetails?.relatedBlogs}
+              category={
+                blogDetails?.attributes?.category?.data?.attributes?.name
+              }
+            />
+          )}
         </div>
       </div>
       <SubListedYourSpotSection />
