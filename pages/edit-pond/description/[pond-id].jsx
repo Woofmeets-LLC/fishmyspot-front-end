@@ -11,6 +11,7 @@ import { getRequest } from '../../../services/requests';
 import { getSdk } from '../../../sharetribe/sharetribeSDK';
 import { UUID } from '../../../types';
 
+
 const DescriptionEdit = () => {
     const [fishes, setFishes] = useState([]);
     const [loading, setLoading] = useState(false);

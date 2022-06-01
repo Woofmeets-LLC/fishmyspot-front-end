@@ -2,200 +2,217 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css';
 
 @font-face {
-    font-family: "food-truck";
-    src: url("/fonts/food-truck-signage-regular.ttf");
+  font-family: 'food-truck';
+  src: url('/fonts/food-truck-signage-regular.ttf');
 }
 @font-face {
-    font-family: "trade-gothic";
-    src: url("/fonts/Trade-Gothic-LT.ttf");
+  font-family: 'trade-gothic';
+  src: url('/fonts/Trade-Gothic-LT.ttf');
 }
 @font-face {
-    font-family: "trade-gothic-bold";
-    src: url("/fonts/Trade-Gothic-LT-Bold.ttf");
+  font-family: 'trade-gothic-bold';
+  src: url('/fonts/Trade-Gothic-LT-Bold.ttf');
 }
 
 /* rc slider css [start] */
 .rc-slider-track.rc-slider-track-1 {
-    @apply bg-primary;
+  @apply bg-primary;
 }
 .rc-slider-handle.rc-slider-handle-1,
 .rc-slider-handle.rc-slider-handle-2 {
-    @apply border-primary;
+  @apply border-primary;
 }
 
 .rc-slider-handle:active,
 .rc-slider-handle:hover,
 .rc-slider-handle-click-focused,
 .rc-slider-handle-dragging {
-    @apply border-primary shadow-none !important;
+  @apply border-primary shadow-none !important;
 }
 /* rc slider css [end] */
+
+/* mile slider */
+.rc-slider .rc-slider-track {
+  @apply bg-primary;
+}
+
+.rc-slider .rc-slider-handle {
+  @apply border-primary;
+}
 
 /* input field  */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input[type="number"] {
-    -moz-appearance: textfield; /* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield; /* Firefox */
 }
 
-/* 
-=========== [ custom scroll bar ] ==============  
+/*
+=========== [ custom scroll bar ] ==============
 Chrome
 */
 .sidebar::-webkit-scrollbar {
-    width: 3px;
+  width: 3px;
 }
 .sidebar::-webkit-scrollbar-track {
-    background: #ddd;
+  background: #ddd;
 }
 .sidebar::-webkit-scrollbar-thumb {
-    @apply bg-secondary rounded-[7px] cursor-pointer;
+  @apply cursor-pointer rounded-[7px] bg-secondary;
 }
 /* Custom scroll bar Firefox */
 .sidebar {
-    overflow-y: auto;
-    scrollbar-color: #f7be32 #ddd !important;
-    scrollbar-width: 3px !important;
+  overflow-y: auto;
+  scrollbar-color: #f7be32 #ddd !important;
+  scrollbar-width: 3px !important;
 }
 /* No scrollbar  */
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 .no-scrollbar {
-    overflow-y: auto;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 /* slider */
 .reviews-container .slick-list {
-    @apply pb-10 2xl:pb-20 !important;
+  @apply pb-10 2xl:pb-20 !important;
 }
 
 .reviews-container .slick-dots li button:before {
-    @apply text-[#6f6d71] text-base;
+  @apply text-base text-[#6f6d71];
 }
 
 .reviews-container .slick-dots li.slick-active button:before {
-    @apply text-secondary !important;
-    opacity: 0.75;
+  @apply text-secondary !important;
+  opacity: 0.75;
 }
 
-.featured-spot-slider .slick-prev {
-    @apply left-0 lg:left-3 z-10 !important;
+.featured-spot-slider .slick-prev,
+.feature-fishing-spot .slick-prev {
+  @apply left-0 z-10 lg:left-3 !important;
 }
-.featured-spot-slider .slick-next {
-    @apply right-0 lg:right-6 z-10 !important;
+.featured-spot-slider .slick-next,
+.feature-fishing-spot .slick-next {
+  @apply right-0 z-10 lg:right-6 !important;
 }
 
 .featured-spot-slider .slick-prev:before,
 .featured-spot-slider .slick-next:before {
-    @apply text-secondary text-xl lg:text-3xl 2xl:text-4xl;
+  @apply text-xl text-secondary lg:text-3xl 2xl:text-4xl;
 }
 
 .featured-spot-slider .slick-list {
-    @apply py-14;
+  @apply py-14;
 }
 
 .featured-spot-slider .slick-slide.slick-active.slick-current {
-    @apply transform lg:-rotate-6 lg:translate-y-4;
+  @apply transform lg:translate-y-4 lg:-rotate-6;
 }
 
-.featured-spot-slider .slick-slide.slick-active.slick-current + .slick-slide.slick-active + .slick-slide.slick-active {
-    @apply transform lg:rotate-6 lg:translate-y-4;
+.featured-spot-slider
+  .slick-slide.slick-active.slick-current
+  + .slick-slide.slick-active
+  + .slick-slide.slick-active {
+  @apply transform lg:translate-y-4 lg:rotate-6;
 }
 
-.featured-spot-slider .slick-slide.slick-active.slick-current + .featured-spot-slider .slick-slide.slick-active {
-    @apply lg:-translate-y-2;
+.featured-spot-slider
+  .slick-slide.slick-active.slick-current
+  + .featured-spot-slider
+  .slick-slide.slick-active {
+  @apply lg:-translate-y-2;
 }
 
 .featured-spot-slider .slick-slide {
-    @apply transition-all duration-200 lg:px-5;
+  @apply transition-all duration-200 lg:px-5;
 }
 
 .slick-slider.center.slick-initialized {
-    @apply px-5 lg:px-3;
+  @apply px-5 lg:px-3;
 }
 
 /* settings icons */
 .icons svg {
-    @apply text-2xl sm:text-3xl md:text-4xl 2xl:text-6xl text-secondary;
+  @apply text-2xl text-secondary sm:text-3xl md:text-4xl 2xl:text-6xl;
 }
 
 /* payment card icons */
 .card-icons svg {
-    @apply text-3xl text-highlight-3;
+  @apply text-3xl text-highlight-3;
 }
 
 /* accordion */
 .accordion {
-    @apply border-none !important;
+  @apply border-none !important;
 }
 .accordion__item {
-    @apply mb-4 lg:mb-5 text-base lg:text-lg font-trade-gothic-bold text-primary !important;
+  @apply mb-4 font-trade-gothic-bold text-base text-primary lg:mb-5 lg:text-lg !important;
 }
 
 .accordion__item + .accordion__item {
-    @apply border-t-0 !important;
+  @apply border-t-0 !important;
 }
 .accordion__button {
-    @apply flex items-center justify-between bg-[#fcfcfc] xl:py-7 xl:pl-8 xl:pr-20 !important;
-    box-shadow: 0 1px 9px 0 rgba(123, 174, 212, 0.12);
+  @apply flex items-center justify-between bg-[#fcfcfc] xl:py-7 xl:pl-8 xl:pr-20 !important;
+  box-shadow: 0 1px 9px 0 rgba(123, 174, 212, 0.12);
 }
 .accordion__button:before {
-    @apply order-2;
-    transform: rotate(47deg) !important;
+  @apply order-2;
+  transform: rotate(47deg) !important;
 }
 
-.accordion__button[aria-expanded="true"]::before,
-.accordion__button[aria-selected="true"]::before {
-    transform: rotate(224deg) !important;
+.accordion__button[aria-expanded='true']::before,
+.accordion__button[aria-selected='true']::before {
+  transform: rotate(224deg) !important;
 }
 
 .accordion__panel {
-    @apply xl:px-8 xl:py-8 bg-[#fcfcfc] text-sm lg:text-base font-trade-gothic !important;
-    box-shadow: 0 1px 9px 0 rgba(123, 174, 212, 0.12);
+  @apply bg-[#fcfcfc] font-trade-gothic text-sm lg:text-base xl:px-8 xl:py-8 !important;
+  box-shadow: 0 1px 9px 0 rgba(123, 174, 212, 0.12);
 }
 
 /* services list page modal */
 .view-image-modal .slick-prev:before,
 .view-image-modal .slick-next:before {
-    @apply text-secondary text-xl lg:text-3xl 2xl:text-4xl z-50 !important;
+  @apply z-50 text-xl text-secondary lg:text-3xl 2xl:text-4xl !important;
 }
 
 .view-image-modal .slick-prev {
-    @apply left-0 lg:left-3 z-10 !important;
+  @apply left-0 z-10 lg:left-3 !important;
 }
 .view-image-modal .slick-next {
-    @apply right-0 lg:right-6 z-10 !important;
+  @apply right-0 z-10 lg:right-6 !important;
 }
 
 @media screen and (max-width: 768px) {
-    .view-image-modal .slick-prev,
-    .view-image-modal .slick-next {
-        top: 50% !important;
-    }
+  .view-image-modal .slick-prev,
+  .view-image-modal .slick-next {
+    top: 50% !important;
+  }
 }
 @media screen and (min-width: 769px) {
-    .view-image-modal .slick-prev,
-    .view-image-modal .slick-next {
-        top: 50% !important;
-    }
+  .view-image-modal .slick-prev,
+  .view-image-modal .slick-next {
+    top: 50% !important;
+  }
 }
 
 /* Handle */
 .message__scrollbar::-webkit-scrollbar-thumb {
-    background: rgb(192, 192, 192);
-    border-radius: 15px !important;
+  background: rgb(192, 192, 192);
+  border-radius: 15px !important;
 }
 
 /* Handle on hover */
@@ -204,26 +221,102 @@ Chrome
 } */
 
 .message__scrollbar::-webkit-scrollbar {
-    width: 2px;
+  width: 2px;
 }
 
 /* Stripe Card Styling  */
 #card-element {
-    @apply border px-1 py-2 mb-3 rounded;
+  @apply mb-3 rounded border px-1 py-2;
 }
 
 /* faq page */
 .list-alpha {
-    list-style: lower-alpha;
-    list-style-position: inside;
+  list-style: lower-alpha;
+  list-style-position: inside;
 }
 
 .list-upper-alpha {
-    list-style: upper-alpha;
-    list-style-position: inside;
+  list-style: upper-alpha;
+  list-style-position: inside;
 }
 
 .list-roman {
-    list-style: lower-roman;
-    list-style-position: inside;
+  list-style: lower-roman;
+  list-style-position: inside;
+}
+
+/* blogs style */
+.blog-details h1 {
+  @apply text-3xl;
+}
+
+.blog-details h2 {
+  @apply text-2xl;
+}
+
+.blog-details h3 {
+  @apply text-xl;
+}
+
+.blog-details h4 {
+  @apply text-lg;
+}
+
+.blog-details h5 {
+  @apply text-lg;
+}
+
+.blog-details h6 {
+  @apply text-base;
+}
+
+.blog-details ol li {
+  @apply mb-2 list-decimal;
+}
+
+.blog-details ul li {
+  @apply mb-2 list-disc;
+}
+
+.blog-details tbody tr td {
+  @apply border px-4 py-2 text-center;
+}
+
+.blog-details pre {
+  @apply mb-7 bg-gray-100 p-3 md:mb-10;
+}
+
+.blog-details blockquote footer {
+  @apply text-right;
+}
+
+.blog-details figure figcaption {
+  @apply p-2;
+}
+
+.blog-details a {
+  @apply underline decoration-2 underline-offset-1;
+}
+
+.feature-fishing-spot .slick-list {
+  @apply pb-10;
+}
+
+.feature-fishing-spot .slick-prev:before,
+.feature-fishing-spot .slick-next:before {
+  @apply text-3xl text-secondary 2xl:text-4xl;
+}
+
+.feature-fishing-spot .slick-prev {
+  @apply left-0 z-10 lg:-left-2 !important;
+}
+
+.feature-fishing-spot .slick-next {
+  @apply right-2 z-10 lg:-right-1 !important;
+}
+
+@media screen and (min-width: 1024px) {
+  .listing-spot {
+    clip-path: polygon(0 0, 100% 0%, 86% 100%, 0% 100%);
+  }
 }
