@@ -15,9 +15,9 @@ const variants = {
       delay: 0.2,
       duration: 1,
       type: 'spring',
-      stiffness: 120
-    }
-  }
+      stiffness: 120,
+    },
+  },
 };
 
 const Slider = ({
@@ -27,11 +27,8 @@ const Slider = ({
   min,
   max,
   handlePriceClear,
-  dropdown
+  dropdown,
 }) => {
-
-
-
   return (
     <motion.div
       variants={variants}
@@ -39,38 +36,44 @@ const Slider = ({
       animate="visible"
       exit="hidden"
       ref={dropdown}
-      className="absolute bg-white py-3 px-4 z-50 rounded-lg shadow border-gray-100">
-
-      <div className='text-base font-trade-gothic-bold'>
-        <div className="text-lg md:text-2xl font-trade-gothic-bold text-primary mb-2">
+      className="absolute z-50 rounded-lg border-gray-100 bg-white py-3 px-4 shadow"
+    >
+      <div className="font-trade-gothic-bold text-base">
+        <div className="mb-2 font-trade-gothic-bold text-lg text-primary md:text-2xl">
           <h3>Price range:</h3>
         </div>
 
-        <div className='flex justify-between space-x-10 mb-4'>
+        <div className="mb-4 flex justify-between space-x-10">
           <input
             value={value[0]}
             min={0}
             max={value[1]}
             type="number"
-            onChange={(e) => setValue((prevState) => {
-              return {
-                ...prevState,
-                price: [e.target.value, prevState.price[1]]
-              }
-            })}
-            className="w-10 sm:w-16 md:w-20 focus:outline-none border-b-2 border-b-secondary text-base md:text-lg font-trade-gothic text-primary text-center"
+            onChange={(e) => {
+              // setValue((prevState) => {
+              //   return {
+              //     ...prevState,
+              //     price: [e.target.value, prevState.price[1]],
+              //   };
+              // });
+              onSliderChange([e.target.value, value[1]]);
+            }}
+            className="w-10 border-b-2 border-b-secondary text-center font-trade-gothic text-base text-primary focus:outline-none sm:w-16 md:w-20 md:text-lg"
           />
           <input
             value={value[1]}
             min={value[0]}
             type="number"
-            onChange={(e) => setValue((prevState) => {
-              return {
-                ...prevState,
-                price: [prevState.price[0], e.target.value]
-              }
-            })}
-            className="w-10 sm:w-16 md:w-20 focus:outline-none border-b-2 border-b-secondary text-base md:text-lg font-trade-gothic text-primary text-center"
+            onChange={(e) => {
+              // setValue((prevState) => {
+              //   return {
+              //     ...prevState,
+              //     price: [prevState.price[0], e.target.value],
+              //   };
+              // });
+              onSliderChange([value[0], e.target.value]);
+            }}
+            className="w-10 border-b-2 border-b-secondary text-center font-trade-gothic text-base text-primary focus:outline-none sm:w-16 md:w-20 md:text-lg"
           />
         </div>
 
@@ -84,18 +87,14 @@ const Slider = ({
           />
         </div>
 
-        <div className="flex justify-between items-center text-sm md:text-base text-primary mt-6">
+        <div className="mt-6 flex items-center justify-between text-sm text-primary md:text-base">
           <span
-            className='font-trade-gothic cursor-pointer'
+            className="cursor-pointer font-trade-gothic"
             onClick={handlePriceClear}
           >
             Clear
           </span>
-          <span
-            className='font-trade-gothic-bold cursor-pointer'
-          >
-            Apply
-          </span>
+          <span className="cursor-pointer font-trade-gothic-bold">Apply</span>
         </div>
       </div>
     </motion.div>

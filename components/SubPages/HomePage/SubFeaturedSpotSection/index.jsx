@@ -1,8 +1,8 @@
 // import Slider from "react-slick";
-import axios from 'axios';
-import Slider from 'react-slick';
-import useSWR from 'swr';
-import FeaturedSpot from '../FeauturedSpot';
+import axios from "axios";
+import Slider from "react-slick";
+import useSWR from "swr";
+import FeaturedSpot from "../FeauturedSpot";
 
 const fetcher = (url) =>
   axios
@@ -15,11 +15,11 @@ const fetcher = (url) =>
 
 const SubFeaturedSpotSection = () => {
   const settings = {
-    className: 'center',
+    className: "center",
     centerMode: false,
     infinite: true,
     slidesToShow: 3,
-    centerPadding: '60px',
+    centerPadding: "60px",
     speed: 500,
     responsive: [
       {
@@ -49,7 +49,7 @@ const SubFeaturedSpotSection = () => {
     ],
   };
   const { data: featuredSpots, error } = useSWR(
-    'https://cms.fishmyspot.com/api/featured-spots?populate=*',
+    "https://cms.fishmyspot.com/api/featured-spots?populate=*",
     fetcher
   );
 
@@ -61,11 +61,11 @@ const SubFeaturedSpotSection = () => {
     featuredSpots && (
       <section className="container">
         <div className="featured-spot-slider py-6 sm:py-8 md:py-10 lg:py-16 xl:py-20 2xl:py-32">
-          <div className=" text-primary text-center">
-            <h1 className="text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-food-truck uppercase">
+          <div className=" text-center text-primary">
+            <h1 className="font-food-truck text-xl uppercase sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl">
               Some of our featured spots
             </h1>
-            <span className="w-[140px] h-[6px] bg-secondary inline-block rounded-full mt-4"></span>
+            <span className="mt-4 inline-block h-[6px] w-[140px] rounded-full bg-secondary"></span>
           </div>
           <Slider {...settings}>
             {featuredSpots?.map(({ id, ...featuredData }) => (

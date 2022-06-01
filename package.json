@@ -5,7 +5,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install",
+    "cm": "cz"
   },
   "dependencies": {
     "@emailjs/browser": "^3.4.0",
@@ -16,9 +18,11 @@
     "axios": "^0.26.0",
     "body-scroll-lock": "^4.0.0-beta.0",
     "date-fns": "^2.28.0",
+    "editorjs-blocks-react-renderer": "^1.2.4",
     "formik": "^2.2.9",
     "framer-motion": "^6.2.6",
     "next": "12.0.10",
+    "next-share": "^0.13.0",
     "query-string": "^7.1.1",
     "rc-slider": "^9.7.5",
     "react": "17.0.2",
@@ -44,13 +48,28 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
+    "@digitalroute/cz-conventional-changelog-for-jira": "^7.3.0",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.4",
+    "commitizen": "^4.2.4",
     "eslint": "8.8.0",
     "eslint-config-next": "12.0.10",
+    "husky": "^8.0.1",
     "postcss": "^8.4.6",
     "prettier": "^2.6.2",
     "prettier-plugin-tailwindcss": "^0.1.11",
     "tailwindcss": "^3.0.21"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/@digitalroute/cz-conventional-changelog-for-jira",
+      "jiraOptional": true,
+      "jiraPrefix": "FMS"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
   }
 }

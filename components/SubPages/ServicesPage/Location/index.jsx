@@ -1,6 +1,7 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import LocationSlider from './LocationSlider';
 
 const variants = {
   hidden: {
@@ -14,9 +15,9 @@ const variants = {
       delay: 0.2,
       duration: 1,
       type: 'spring',
-      stiffness: 120
-    }
-  }
+      stiffness: 120,
+    },
+  },
 };
 
 const hoverVariants = {
@@ -26,11 +27,11 @@ const hoverVariants = {
     transition: {
       type: 'spring',
       stiffness: 200,
-    }
-  }
-}
+    },
+  },
+};
 
-const Location = ({ selectedCities, setSelectedCities }) => {
+const Location = ({ mileRange, setMileRange, handleMileClear }) => {
   const [isDropDown, setIsDropDown] = useState(false);
   // create a React ref for the dropdown element
   const dropdown = useRef(null);
@@ -43,31 +44,31 @@ const Location = ({ selectedCities, setSelectedCities }) => {
         setIsDropDown(false);
       }
     }
-    window.addEventListener("click", handleClick);
+    window.addEventListener('click', handleClick);
     // clean up
-    return () => window.removeEventListener("click", handleClick);
+    return () => window.removeEventListener('click', handleClick);
   }, [isDropDown]);
 
   const options = [
     {
       name: 'Florida',
-      value: '27.6648:81.5158'
+      value: '27.6648:81.5158',
     },
     {
       name: 'California',
-      value: '36.7783:119.4179'
+      value: '36.7783:119.4179',
     },
     {
       name: 'Georgia',
-      value: '32.1656:82.9001'
+      value: '32.1656:82.9001',
     },
     {
       name: 'Alabama',
-      value: '32.3182:86.9023'
+      value: '32.3182:86.9023',
     },
     {
       name: 'District of Columbia',
-      value: '38.9072:77.0369'
+      value: '38.9072:77.0369',
     },
   ];
 
@@ -76,76 +77,96 @@ const Location = ({ selectedCities, setSelectedCities }) => {
       setSelectedCities((prevState) => {
         return {
           ...prevState,
-          location: ''
-        }
+          location: '',
+        };
       });
-    }
-    else {
+    } else {
       setSelectedCities((prevState) => {
         return {
           ...prevState,
-          location: value
-        }
+          location: value,
+        };
       });
     }
-  }
+  };
+  const timeout = useRef(null);
+  const [value, setValue] = useState(mileRange);
+
+  const onSliderChange = (mile) => {
+    clearTimeout(timeout.current);
+    setValue(mile);
+    timeout.current = setTimeout(() => {
+      setMileRange((prevState) => {
+        return {
+          ...prevState,
+          mile,
+          isBoundChanged: true,
+        };
+      });
+    }, 500);
+  };
 
   return (
     <div>
       <div
-        className="bg-white flex items-center justify-between border border-gray-300 rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary"
+        className="flex cursor-pointer items-center justify-between rounded-3xl border border-gray-300 bg-white py-1 px-3 font-trade-gothic text-base text-primary lg:py-2 lg:px-5"
         onClick={() => setIsDropDown(!isDropDown)}
       >
-        Location
-        {
-          isDropDown ?
-            <IoIosArrowUp /> :
-            <IoIosArrowDown />
-        }
+        Mile range
+        {isDropDown ? <IoIosArrowUp /> : <IoIosArrowDown />}
       </div>
       <AnimatePresence>
-        {
-          isDropDown &&
-          (
-            <motion.div
-              variants={variants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              ref={dropdown}
-              className="absolute bg-white pt-5 pl-4 pr-6 z-50 rounded-lg shadow border-gray-100">
-              {
-                options?.map((option, i) => {
-                  return (
-                    <div
-                      key={i}
-                      className="flex items-center space-x-3 mb-4 text-sm md:text-base font-trade-gothic-bold"
-                    >
-                      <input
-                        type={"radio"}
-                        name={"location"}
-                        id={option.value}
-                        value={option.value}
-                        checked={selectedCities === option.value ? true : false}
-                        onChange={() => cityAddOrRemove(option.value)}
-                        className="accent-secondary w-4 h-4 md:w-5 md:h-5 cursor-pointer"
-                      />
-                      <motion.label
-                        htmlFor={option.value}
-                        variants={hoverVariants}
-                        whileHover="hover"
-                        className="cursor-pointer"
-                      >
-                        {option.name}
-                      </motion.label>
+        {isDropDown && (
+          <LocationSlider
+            min={5}
+            max={500}
+            setValue={setValue}
+            value={value}
+            onSliderChange={onSliderChange}
+            handleMileClear={() => {
+              handleMileClear();
+              setValue(250);
+            }}
+            dropdown={dropdown}
+          />
+          // <motion.div
+          //   variants={variants}
+          //   initial="hidden"
+          //   animate="visible"
+          //   exit="hidden"
+          //   ref={dropdown}
+          //   className="absolute bg-white pt-5 pl-4 pr-6 z-50 rounded-lg shadow border-gray-100">
+          //   {
+          //     options?.map((option, i) => {
+          //       return (
+          //         <div
+          //           key={i}
+          //           className="flex items-center space-x-3 mb-4 text-sm md:text-base font-trade-gothic-bold"
+          //         >
+          //           <input
+          //             type={"radio"}
+          //             name={"location"}
+          //             id={option.value}
+          //             value={option.value}
+          //             checked={selectedCities === option.value ? true : false}
+          //             onChange={() => cityAddOrRemove(option.value)}
+          //             className="accent-secondary w-4 h-4 md:w-5 md:h-5 cursor-pointer"
+          //           />
+          //           <motion.label
+          //             htmlFor={option.value}
+          //             variants={hoverVariants}
+          //             whileHover="hover"
+          //             className="cursor-pointer"
+          //           >
+          //             {option.name}
+          //           </motion.label>
 
-                    </div>
-                  )
-                })
-              }
-            </motion.div>
-          )
-        }
+          //         </div>
+          //       )
+          //     })
+          //   }
+          // </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );

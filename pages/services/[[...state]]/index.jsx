@@ -1,11 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import DefaultErrorPage from 'next/error';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import * as sharetribeSdk from 'sharetribe-flex-sdk';
+import slugify from 'slugify';
 import Categories from '../../../components/SubPages/ServicesPage/Categories';
+import SubServicesBannerSection from '../../../components/SubPages/ServicesPage/SubServicesBannerSection';
 import SubServices from '../../../components/SubPages/ServicesPage/SubServicesList';
 import HomeLayout from '../../../layouts/HomeLayout';
 import { getSdk } from '../../../sharetribe/sharetribeSDK';
+
 const { types } = sharetribeSdk;
 
 const states = {
@@ -17,6 +22,7 @@ const states = {
   colorado: 'CO',
   connecticut: 'CT',
   delaware: 'DE',
+  'district-of-columbia': 'DC',
   florida: 'FL',
   georgia: 'GA',
   hawaii: 'HI',
@@ -55,10 +61,46 @@ const states = {
   utah: 'UT',
   vermont: 'VT',
   virginia: 'VA',
-  washington: 'WA',
-  'west virginia': 'WV',
+  washington: 'DC',
+  'west-virginia': 'WV',
   wisconsin: 'WI',
   wyoming: 'WY',
+};
+
+const computeOffset = (from, distance, heading) => {
+  distance /= 6378100;
+  heading = heading * (Math.PI / 180);
+  const fromLat = from.latitude * (Math.PI / 180);
+  const fromLng = from.longitude * (Math.PI / 180);
+  const cosDistance = Math.cos(distance);
+  const sinDistance = Math.sin(distance);
+  const sinFromLat = Math.sin(fromLat);
+  const cosFromLat = Math.cos(fromLat);
+  const sinLat =
+    cosDistance * sinFromLat + sinDistance * cosFromLat * Math.cos(heading);
+  const dLng = Math.atan2(
+    sinDistance * cosFromLat * Math.sin(heading),
+    cosDistance - sinFromLat * sinLat
+  );
+  return `${(Math.asin(sinLat) * 180) / Math.PI},${
+    ((fromLng + dLng) * 180) / Math.PI
+  }`;
+};
+
+const toBounds = (center, radiusInMiles) => {
+  const radiusInMeters = radiusInMiles * 1609;
+  const distanceFromCenterToCorner = radiusInMeters * Math.sqrt(2.0);
+  const southwestCorner = computeOffset(
+    center,
+    distanceFromCenterToCorner,
+    225.0
+  );
+  const northeastCorner = computeOffset(
+    center,
+    distanceFromCenterToCorner,
+    45.0
+  );
+  return `${northeastCorner},${southwestCorner}`;
 };
 
 const ServicesByState = () => {
@@ -69,6 +111,8 @@ const ServicesByState = () => {
     rating: [],
     experience: [],
     price: [0, 1000],
+    mile: 20,
+    isBoundChanged: false,
   });
   const [hasMore, setHasMore] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -88,9 +132,9 @@ const ServicesByState = () => {
       include: ['images'],
     };
 
-    // if (state?.[0]) {
-    //   q.pub_state = states[slugify(state[0]).toLowerCase()];
-    // }
+    if (state?.[0]) {
+      q.pub_state = states[slugify(state[0]).toLowerCase()];
+    }
 
     if (query.typeFish.length) {
       q.pub_fishes = `has_any:${query.typeFish.join(',')}`;
@@ -100,10 +144,13 @@ const ServicesByState = () => {
       q.pub_experiences = `has_any:${query.experience.join(',')}`;
     }
 
-    if (query.location) {
+    if (query?.location) {
       const [lat, lng] = query.location.split(':');
       q.origin = new types.LatLng(parseFloat(lat), parseFloat(lng));
       // q.bounds = boundsCalculator(1000, parseFloat(lat), parseFloat(lng))
+      if (!state?.[0] && query?.isBoundChanged) {
+        q.bounds = toBounds({ latitude: lat, longitude: lng }, query.mile);
+      }
     }
     if (query.rating.length) {
       const ratingOptions = {
@@ -165,11 +212,40 @@ const ServicesByState = () => {
     getData(1, true);
   }, [query]);
 
+  if (state?.[0] && states[state?.[0]] === undefined)
+    return (
+      <>
+        <Head>
+          <meta name="robots" content="noindex" />
+        </Head>
+        <DefaultErrorPage statusCode={404} />
+      </>
+    );
+
   return (
     <HomeLayout>
+      {state?.[0] && (
+        <SubServicesBannerSection
+          state={state?.[0]
+            .split('-')
+            .map((w) => w[0].toUpperCase() + w.slice(1).toLowerCase())
+            .join(' ')}
+        />
+      )}
       <section className="bg-[#fbfbfb]">
-        <div className="container">
-          <Categories getQuery={(q) => setQuery(q)} state={state} />
+        <div className="container min-h-screen">
+          <div className="mt-5 items-center xl:mt-0 xl:flex">
+            {state?.length > 0 && (
+              <h2 className="font-food-truck text-2xl uppercase text-primary md:text-3xl 2xl:text-4xl 3xl:text-5xl">
+                Fishmyspot{' '}
+                {state?.[0]
+                  .split('-')
+                  .map((w) => w[0].toUpperCase() + w.slice(1).toLowerCase())
+                  .join(' ')}
+              </h2>
+            )}
+            <Categories getQuery={(q) => setQuery(q)} state={state} />
+          </div>
           <SubServices
             fetchData={() => {
               getData(currentPage + 1);
