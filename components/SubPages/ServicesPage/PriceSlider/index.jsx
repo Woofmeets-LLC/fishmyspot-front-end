@@ -16,49 +16,54 @@ const PriceSlider = ({ priceRange, setPriceRange, handlePriceClear }) => {
         setIsDropDown(false);
       }
     }
-    window.addEventListener("click", handleClick);
+    window.addEventListener('click', handleClick);
     // clean up
-    return () => window.removeEventListener("click", handleClick);
+    return () => window.removeEventListener('click', handleClick);
   }, [isDropDown]);
 
+  const timeout = useRef(null);
+  const [value, setValue] = useState(priceRange);
+
   const onSliderChange = (priceValue) => {
-    setPriceRange((prevState) => {
-      return {
-        ...prevState,
-        price: priceValue
-      }
-    });
+    clearTimeout(timeout.current);
+    setValue(priceValue);
+    timeout.current = setTimeout(() => {
+      setPriceRange((prevState) => {
+        return {
+          ...prevState,
+          price: priceValue,
+        };
+      });
+    }, 500);
   };
 
   return (
     <div>
       <div
-        className="bg-white flex items-center justify-between border border-gray-300 rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary"
+        className="flex cursor-pointer items-center justify-between rounded-3xl border border-gray-300 bg-white py-1 px-3 font-trade-gothic text-base text-primary lg:py-2 lg:px-5"
         onClick={() => setIsDropDown(!isDropDown)}
       >
         Price range
-        {
-          isDropDown ?
-            <IoIosArrowUp /> :
-            <IoIosArrowDown />
-        }
+        {isDropDown ? <IoIosArrowUp /> : <IoIosArrowDown />}
       </div>
       <AnimatePresence>
-        {
-          isDropDown && (
-            <Slider
-              min={0}
-              max={1000}
-              setValue={setPriceRange}
-              value={priceRange}
-              onSliderChange={onSliderChange}
-              handlePriceClear={handlePriceClear}
-              dropdown={dropdown}
-            />
-            // <div className='absolute w-full'>
-            // </div>
-          )
-        }
+        {isDropDown && (
+          <Slider
+            title={'Price range:'}
+            min={0}
+            max={1000}
+            setValue={setValue}
+            value={value}
+            onSliderChange={onSliderChange}
+            handlePriceClear={() => {
+              handlePriceClear();
+              setValue([0, 1000]);
+            }}
+            dropdown={dropdown}
+          />
+          // <div className='absolute w-full'>
+          // </div>
+        )}
       </AnimatePresence>
     </div>
   );

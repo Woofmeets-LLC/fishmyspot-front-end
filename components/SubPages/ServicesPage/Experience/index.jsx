@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const variants = {
   hidden: {
@@ -13,10 +13,10 @@ const variants = {
     transition: {
       delay: 0.2,
       duration: 1,
-      type: 'spring',
-      stiffness: 120
-    }
-  }
+      type: "spring",
+      stiffness: 120,
+    },
+  },
 };
 
 const hoverVariants = {
@@ -24,14 +24,13 @@ const hoverVariants = {
     scale: 1.03,
     originX: 0,
     transition: {
-      type: 'spring',
+      type: "spring",
       stiffness: 200,
-    }
-  }
+    },
+  },
 };
 
 const Experience = ({ experience, setExperience }) => {
-
   const [isDropDown, setIsDropDown] = useState(false);
   // create a React ref for the dropdown element
   const dropdown = useRef(null);
@@ -49,85 +48,75 @@ const Experience = ({ experience, setExperience }) => {
     return () => window.removeEventListener("click", handleClick);
   }, [isDropDown]);
 
-  const options = [
-    'Pond Trawler/Metal Boat',
-    'Campsite',
-  ];
+  const options = ["Pond Trawler/Metal Boat", "Campsite", "Additional Fisherman"];
 
   const experienceAddOrRemove = (exp) => {
-    const findExperience = experience?.length > 0 ? experience?.find(e => e === exp) : undefined;
+    const findExperience =
+      experience?.length > 0 ? experience?.find((e) => e === exp) : undefined;
 
     if (findExperience !== undefined) {
-      const filterExperience = experience?.filter(e => e !== exp);
+      const filterExperience = experience?.filter((e) => e !== exp);
       setExperience((prevState) => {
         return {
           ...prevState,
-          experience: filterExperience
-        }
+          experience: filterExperience,
+        };
       });
-    }
-    else {
+    } else {
       setExperience((prevState) => {
         return {
           ...prevState,
-          experience: [...prevState.experience, exp]
-        }
+          experience: [...prevState.experience, exp],
+        };
       });
     }
-  }
+  };
 
   return (
     <div>
       <div
-        className="bg-white flex items-center justify-between border border-gray-300 rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary"
+        className="flex cursor-pointer items-center justify-between rounded-3xl border border-gray-300 bg-white py-1 px-3 font-trade-gothic text-base text-primary lg:py-2 lg:px-5"
         onClick={() => setIsDropDown(!isDropDown)}
       >
         Experience
-        {
-          isDropDown ?
-            <IoIosArrowUp /> :
-            <IoIosArrowDown />
-        }
+        {isDropDown ? <IoIosArrowUp /> : <IoIosArrowDown />}
       </div>
       <AnimatePresence>
-        {
-          isDropDown &&
-          (<motion.div
+        {isDropDown && (
+          <motion.div
             variants={variants}
             initial="hidden"
             animate="visible"
             exit="hidden"
             ref={dropdown}
-            className="absolute bg-white pt-5 pl-4 pr-6 z-50 rounded-lg shadow border-gray-100">
-            {
-              options?.map((option, i) => (
-                <div
-                  key={i}
-                  className="flex items-center space-x-3 mb-4 text-sm md:text-base font-trade-gothic-bold"
+            className="absolute z-50 rounded-lg border-gray-100 bg-white pt-5 pl-4 pr-6 shadow"
+          >
+            {options?.map((option, i) => (
+              <div
+                key={i}
+                className="mb-4 flex items-center space-x-3 font-trade-gothic-bold text-sm md:text-base"
+              >
+                <input
+                  type={"checkbox"}
+                  name={option}
+                  id={option}
+                  value={option}
+                  checked={experience?.includes(option) ? true : false}
+                  onChange={() => experienceAddOrRemove(option)}
+                  className="h-4 w-4 cursor-pointer accent-secondary md:h-5 md:w-5"
+                />
+                <motion.label
+                  htmlFor={option}
+                  variants={hoverVariants}
+                  whileHover="hover"
+                  className="cursor-pointer"
                 >
-                  <input
-                    type={"checkbox"}
-                    name={option}
-                    id={option}
-                    value={option}
-                    checked={experience?.includes(option) ? true : false}
-                    onChange={() => experienceAddOrRemove(option)}
-                    className="accent-secondary w-4 h-4 md:w-5 md:h-5 cursor-pointer"
-                  />
-                  <motion.label
-                    htmlFor={option}
-                    variants={hoverVariants}
-                    whileHover="hover"
-                    className="cursor-pointer"
-                  >
-                    {option}
-                  </motion.label>
-
-                </div>
-              ))
-            }
-          </motion.div>)
-        }
+                  {option}
+                </motion.label>
+              </div>
+            ))}
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );

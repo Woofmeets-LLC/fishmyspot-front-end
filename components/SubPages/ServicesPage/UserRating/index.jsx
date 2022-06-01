@@ -1,7 +1,8 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
-import { FaStar } from 'react-icons/fa';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { FaStar } from "react-icons/fa";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { useRouter } from "next/router";
 
 const variants = {
   hidden: {
@@ -14,10 +15,10 @@ const variants = {
     transition: {
       delay: 0.2,
       duration: 1,
-      type: 'spring',
-      stiffness: 120
-    }
-  }
+      type: "spring",
+      stiffness: 120,
+    },
+  },
 };
 
 const hoverVariants = {
@@ -25,14 +26,14 @@ const hoverVariants = {
     scale: 1.03,
     originX: 0,
     transition: {
-      type: 'spring',
+      type: "spring",
       stiffness: 200,
-    }
-  }
+    },
+  },
 };
 
 const UserRating = ({ ratings, setRatings }) => {
-
+  const router = useRouter();
   const [isDropDown, setIsDropDown] = useState(false);
   // create a React ref for the dropdown element
   const dropdown = useRef(null);
@@ -51,106 +52,100 @@ const UserRating = ({ ratings, setRatings }) => {
   }, [isDropDown]);
 
   const options = [
-    'One star',
-    'Two star',
-    'Three star',
-    'Four star',
-    'Five star'
+    "One star",
+    "Two star",
+    "Three star",
+    "Four star",
+    "Five star",
   ];
 
   const ratingsAddOrRemove = (rating) => {
-    const findRating = ratings?.length > 0 ? ratings?.find(r => r === rating) : undefined;
+    const findRating =
+      ratings?.length > 0 ? ratings?.find((r) => r === rating) : undefined;
     if (findRating !== undefined) {
-      const filterRatings = ratings?.filter(r => r !== rating);
+      const filterRatings = ratings?.filter((r) => r !== rating);
       setRatings((prevState) => {
         return {
           ...prevState,
-          rating: filterRatings
-        }
+          rating: filterRatings,
+        };
       });
-    }
-    else {
+    } else {
       setRatings((prevState) => {
         return {
           ...prevState,
-          rating: [rating]
-        }
+          rating: [rating],
+        };
       });
     }
-  }
-
+  };
 
   return (
-    <div className='ml-0'>
+    <div className="ml-0">
       <div
-        className="bg-white flex items-center justify-between border border-gray-300 rounded-3xl py-1 px-3 lg:py-2 lg:px-5 cursor-pointer text-base font-trade-gothic text-primary"
+        className="flex cursor-pointer items-center justify-between rounded-3xl border border-gray-300 bg-white py-1 px-3 font-trade-gothic text-base text-primary lg:py-2 lg:px-5"
         onClick={() => setIsDropDown(!isDropDown)}
       >
         User rating
-        {
-          isDropDown ?
-            <IoIosArrowUp /> :
-            <IoIosArrowDown />
-        }
+        {isDropDown ? <IoIosArrowUp /> : <IoIosArrowDown />}
       </div>
       <AnimatePresence>
-        {
-          isDropDown && (
-            <motion.div
-              variants={variants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              ref={dropdown}
-              className="absolute bg-white pt-3 pb-1 px-4 z-50 rounded-lg shadow border-gray-100">
-              {
-                options?.map((option, i) => (
-                  <div
-                    key={i}
-                    className="grid grid-cols-7 sm:grid-cols-11 items-center space-x-3 mb-2 text-sm md:text-base font-trade-gothic-bold"
+        {isDropDown && (
+          <motion.div
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            ref={dropdown}
+            className="absolute z-50 rounded-lg border-gray-100 bg-white px-4 pt-3 pb-1 shadow"
+          >
+            {options?.map((option, i) => (
+              <div
+                key={i}
+                className="mb-2 grid grid-cols-7 items-center space-x-3 font-trade-gothic-bold text-sm sm:grid-cols-11 md:text-base"
+              >
+                <div className="col-span-1 mt-2">
+                  <input
+                    type={"radio"}
+                    name={option}
+                    id={option}
+                    value={option}
+                    checked={ratings?.includes(option) ? true : false}
+                    onChange={() => ratingsAddOrRemove(option)}
+                    className="h-4 w-4 cursor-pointer accent-secondary md:h-5 md:w-5"
+                  />
+                </div>
+                <div className="hidden sm:col-span-4 sm:block">
+                  <motion.label
+                    htmlFor={option}
+                    variants={hoverVariants}
+                    whileHover="hover"
+                    className="cursor-pointer"
                   >
-                    <div className="col-span-1 mt-2">
-                      <input
-                        type={"radio"}
-                        name={option}
-                        id={option}
-                        value={option}
-                        checked={ratings?.includes(option) ? true : false}
-                        onChange={() => ratingsAddOrRemove(option)}
-                        className="accent-secondary w-4 h-4 md:w-5 md:h-5 cursor-pointer"
-                      />
-                    </div>
-                    <div className="hidden sm:block sm:col-span-4">
-                      <motion.label
-                        htmlFor={option}
-                        variants={hoverVariants}
-                        whileHover="hover"
-                        className="cursor-pointer"
-                      >
-                        {option}
-                      </motion.label>
-                    </div>
-                    <div className="col-span-5">
-                      <label htmlFor={option} className='flex items-center space-x-3'>
-                        {
-                          Array.from({ length: i + 1 }, (_, i) => i + 1).map(star => (
-                            <span
-                              key={star + 100}
-                              className="text-base text-secondary cursor-pointer"
-                            >
-                              <FaStar className='inline-block -mr-2' />
-                            </span>
-                          ))
-                        }
-                      </label>
-                    </div>
-
-                  </div>
-                ))
-              }
-            </motion.div>
-          )
-        }
+                    {option}
+                  </motion.label>
+                </div>
+                <div className="col-span-5">
+                  <label
+                    htmlFor={option}
+                    className="flex items-center space-x-3"
+                  >
+                    {Array.from({ length: i + 1 }, (_, i) => i + 1).map(
+                      (star) => (
+                        <span
+                          key={star + 100}
+                          className="cursor-pointer text-base text-secondary"
+                        >
+                          <FaStar className="-mr-2 inline-block" />
+                        </span>
+                      )
+                    )}
+                  </label>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );
