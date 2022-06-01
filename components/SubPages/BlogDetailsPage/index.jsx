@@ -110,7 +110,7 @@ const SubBlogDetailsSection = ({ data: blogDetails }) => {
               </div>
             </div>
             <div className="mx-auto hidden pt-10 lg:col-span-4 lg:block lg:pl-4">
-              {blogDtails?.relatedBlogs.length !== 0 && (
+              {blogDetails?.relatedBlogs.length !== 0 && (
                 <MoreBlogsSection
                   relatedBlogs={blogDetails?.relatedBlogs}
                   category={
@@ -129,7 +129,7 @@ const SubBlogDetailsSection = ({ data: blogDetails }) => {
       )}
       <div className="container pb-10 lg:hidden lg:pb-0">
         <div className="mx-auto pt-10">
-          {blogDtails?.relatedBlogs.length !== 0 && (
+          {blogDetails?.relatedBlogs.length !== 0 && (
             <MoreBlogsSection
               relatedBlogs={blogDetails?.relatedBlogs}
               category={
