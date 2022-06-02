@@ -1,21 +1,17 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import Autocomplete from 'react-google-autocomplete';
 import toast, { Toaster } from 'react-hot-toast';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { BiCurrentLocation } from 'react-icons/bi';
 import { FaUserCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginModal, SignUpModal } from '../../../components/Common';
 import { getSdk } from '../../../sharetribe/sharetribeSDK';
 import { logoutAction } from '../../../store/slices/authSlice';
-import { set } from '../../../store/slices/autocompletetionSlice';
 import {
   setShowLoginModal,
   setShowSignUpModal,
 } from '../../../store/slices/modalsSlice';
+import SearchBar from './SearchBar';
 
 const backdropVariants = {
   hidden: {
@@ -33,18 +29,6 @@ const backdropVariants = {
 };
 
 const Header = () => {
-  const router = useRouter();
-  const getAddress = (place) => {
-    dispatch(
-      set({
-        isFirst: false,
-        latLng: `${place.geometry.location.lat()}:${place.geometry.location.lng()}`,
-      })
-    ); // router.pathname !== "/services"
-    router.push(
-      `/services?location=${place.geometry.location.lat()}%3A${place.geometry.location.lng()}&price=0,1000`
-    );
-  };
   // States
   const [isActive, setIsActive] = useState(false);
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -100,20 +84,6 @@ const Header = () => {
       });
   };
 
-  const getCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords: { latitude: lat, longitude: lng } }) => {
-        dispatch(
-          set({
-            isFirst: false,
-            latLng: `${lat}:${lng}`,
-          })
-        ); // router.pathname !== "/services"
-        router.push(`/services?location=${lat}%3A${lng}&price=0,1000`);
-      }
-    );
-  };
-
   return (
     <>
       <SignUpModal />
@@ -129,30 +99,9 @@ const Header = () => {
             </a>
           </Link>
           <div className="hidden h-full w-[300px] items-center border-l px-8 md:flex lg:w-[400px] lg:px-16 xl:w-[550px] 2xl:w-[620px] 3xl:w-[750px]">
-            <div className="flex h-8 w-full rounded border xl:h-[35px] 2xl:h-[42px] 3xl:h-[47px]">
-              <span className="flex h-full w-8 items-center justify-center px-2 2xl:w-10">
-                <AiOutlineSearch className="text-primary xl:text-xl 2xl:text-2xl" />
-              </span>
-              <Autocomplete
-                placeholder={'Search...'}
-                className="block w-full appearance-none border-none bg-transparent p-1 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
-                apiKey={process.env.GOOGLE_MAP_API_KEY}
-                onPlaceSelected={(place) => {
-                  getAddress(place);
-                }}
-                options={{
-                  types: [],
-                }}
-              />
-              <span
-                title="Search by your location"
-                className="flex h-full w-8 cursor-pointer items-center justify-center border-l px-2 2xl:w-10"
-                onClick={getCurrentLocation}
-              >
-                <BiCurrentLocation className="text-primary xl:text-xl 2xl:text-2xl" />
-              </span>
-            </div>
+            <SearchBar />
           </div>
+
           {/* Before login right side items */}
           {!isLoggedIn && (
             <>
@@ -357,6 +306,10 @@ const Header = () => {
               </motion.div>
             )}
           </AnimatePresence>
+        </div>
+
+        <div className="container px-10 pb-4 md:hidden">
+          <SearchBar />
         </div>
       </header>
       {isLoggedIn && !user?.emailVerified && (
