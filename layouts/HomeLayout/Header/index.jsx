@@ -1,55 +1,41 @@
-import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import Autocomplete from "react-google-autocomplete";
-import toast, { Toaster } from "react-hot-toast";
-import { AiOutlineSearch } from "react-icons/ai";
-import { FaUserCircle } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { LoginModal, SignUpModal } from "../../../components/Common";
-import { getSdk } from "../../../sharetribe/sharetribeSDK";
-import { logoutAction } from "../../../store/slices/authSlice";
-import { set } from "../../../store/slices/autocompletetionSlice";
+import { AnimatePresence, motion } from 'framer-motion';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { FaUserCircle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { LoginModal, SignUpModal } from '../../../components/Common';
+import { getSdk } from '../../../sharetribe/sharetribeSDK';
+import { logoutAction } from '../../../store/slices/authSlice';
 import {
   setShowLoginModal,
   setShowSignUpModal,
-} from "../../../store/slices/modalsSlice";
+} from '../../../store/slices/modalsSlice';
+import SearchBar from './SearchBar';
 
 const backdropVariants = {
   hidden: {
     opacity: 0,
-    minHeight: "0px",
+    minHeight: '0px',
   },
   visible: {
     opacity: 1,
-    minHeight: "100px",
+    minHeight: '100px',
   },
   exit: {
     opacity: 0,
-    minHeight: "0px",
+    minHeight: '0px',
   },
 };
 
 const Header = () => {
-  const router = useRouter();
-  const getAddress = (place) => {
-    dispatch(
-      set({
-        isFirst: false,
-        latLng: `${place.geometry.location.lat()}:${place.geometry.location.lng()}`,
-      })
-    ); // router.pathname !== "/services"
-    router.push(
-      `/services?location=${place.geometry.location.lat()}%3A${place.geometry.location.lng()}&price=0,1000`
-    );
-  };
   // States
   const [isActive, setIsActive] = useState(false);
   const [isMenuActive, setIsMenuActive] = useState(false);
 
   const { isLoggedIn, user } = useSelector((state) => state.auth);
   const { isTransferActivated } = useSelector((state) => state.stripeAccount);
+  const { isFirst, latLng } = useSelector((state) => state.place);
 
   // Dispatch
   const dispatch = useDispatch();
@@ -59,12 +45,12 @@ const Header = () => {
     getSdk()
       .stripeAccountLinks.create({
         failureURL: originURL,
-        successURL: originURL + "/list-your-spot",
-        type: "account_onboarding",
-        collect: "currently_due",
+        successURL: originURL + '/list-your-spot',
+        type: 'account_onboarding',
+        collect: 'currently_due',
       })
       .then((res) => {
-        if (typeof window !== "undefined") {
+        if (typeof window !== 'undefined') {
           window.location = res.data?.data?.attributes?.url;
         }
       })
@@ -76,8 +62,8 @@ const Header = () => {
     getSdk()
       .stripeAccount.create(
         {
-          country: "US",
-          requestedCapabilities: ["transfers", "card_payments"],
+          country: 'US',
+          requestedCapabilities: ['transfers', 'card_payments'],
         },
         {
           expand: true,
@@ -94,7 +80,7 @@ const Header = () => {
       .currentUser.sendVerificationEmail()
       .then((res) => {
         // res.data
-        toast.success("Verification email sent.", { duration: 3000 });
+        toast.success('Verification email sent.', { duration: 3000 });
       });
   };
 
@@ -113,32 +99,18 @@ const Header = () => {
             </a>
           </Link>
           <div className="hidden h-full w-[300px] items-center border-l px-8 md:flex lg:w-[400px] lg:px-16 xl:w-[550px] 2xl:w-[620px] 3xl:w-[750px]">
-            <div className="flex h-8 w-full rounded border xl:h-[35px] 2xl:h-[42px] 3xl:h-[47px]">
-              <span className="flex h-full w-8 items-center justify-center 2xl:w-10">
-                <AiOutlineSearch className="text-primary xl:text-xl 2xl:text-2xl" />
-              </span>
-              <Autocomplete
-                placeholder={"Search..."}
-                className="block w-full appearance-none border-none bg-transparent p-1 leading-tight text-gray-700 focus:border-gray-500 focus:bg-white focus:outline-none"
-                apiKey={process.env.GOOGLE_MAP_API_KEY}
-                onPlaceSelected={(place) => {
-                  getAddress(place);
-                }}
-                options={{
-                  types: "ALL",
-                }}
-              />
-            </div>
+            <SearchBar />
           </div>
+
           {/* Before login right side items */}
           {!isLoggedIn && (
             <>
               <div
-                style={{ transition: "all 0.2s ease!important" }}
+                style={{ transition: 'all 0.2s ease!important' }}
                 className={`absolute top-[74px] right-0 block w-[150px] transform space-y-2 bg-white px-2 transition md:static md:ml-auto md:flex md:h-[70px] md:w-auto md:items-center md:space-y-0 md:space-x-10 2xl:h-[85px] 3xl:h-[102px] ${
                   isActive
-                    ? "h-auto rounded border py-2 md:border-0"
-                    : "h-0 overflow-hidden py-0"
+                    ? 'h-auto rounded border py-2 md:border-0'
+                    : 'h-0 overflow-hidden py-0'
                 }`}
               >
                 <button
@@ -177,22 +149,22 @@ const Header = () => {
                     <span
                       className={`transform rounded-sm bg-primary transition duration-500 ${
                         isActive
-                          ? "mb-2 h-1 w-7 translate-y-3 rotate-45"
-                          : "mb-[6px] h-[3px] w-7 translate-y-0 rotate-0"
+                          ? 'mb-2 h-1 w-7 translate-y-3 rotate-45'
+                          : 'mb-[6px] h-[3px] w-7 translate-y-0 rotate-0'
                       }`}
                     ></span>
                     <span
                       className={` w-5 transform rounded-sm bg-primary transition duration-500 ${
                         isActive
-                          ? "mb-2 h-1 opacity-0"
-                          : "opacity-1 mb-[6px] h-[3px]"
+                          ? 'mb-2 h-1 opacity-0'
+                          : 'opacity-1 mb-[6px] h-[3px]'
                       }`}
                     ></span>
                     <span
                       className={`w-7 transform rounded-sm bg-primary transition duration-500 ${
                         isActive
-                          ? "h-1 -translate-y-3 -rotate-45"
-                          : "h-[3px] translate-y-0 rotate-0"
+                          ? 'h-1 -translate-y-3 -rotate-45'
+                          : 'h-[3px] translate-y-0 rotate-0'
                       }`}
                     ></span>
                   </div>
@@ -204,10 +176,10 @@ const Header = () => {
           {/* After login  right side items*/}
           {isLoggedIn && (
             <div
-              style={{ transition: "all 0.2s ease!important" }}
+              style={{ transition: 'all 0.2s ease!important' }}
               className={`ml-auto flex h-[70px] w-auto transform items-center space-y-0 space-x-10 rounded border-0 bg-white px-2 py-2 transition 2xl:h-[85px] 3xl:h-[102px]`}
             >
-              {user?.profile?.publicData?.account_type == "owner" && (
+              {user?.profile?.publicData?.account_type == 'owner' && (
                 <Link href="/list-your-spot">
                   <a
                     className={`hidden font-trade-gothic-bold text-primary md:inline-block 2xl:text-[18px]`}
@@ -216,7 +188,7 @@ const Header = () => {
                   </a>
                 </Link>
               )}
-              {user?.profile?.publicData?.account_type == "angler" && (
+              {user?.profile?.publicData?.account_type == 'angler' && (
                 <Link href="/services">
                   <a
                     className={`hidden font-trade-gothic-bold text-primary md:inline-block 2xl:text-[18px]`}
@@ -235,20 +207,20 @@ const Header = () => {
                       <span
                         className={`h-[3px] transform rounded-sm bg-primary transition duration-500 ${
                           isMenuActive
-                            ? "mb-2 w-5 translate-y-[11px] rotate-[48deg]"
-                            : "mb-1 w-5 translate-y-0 rotate-0"
+                            ? 'mb-2 w-5 translate-y-[11px] rotate-[48deg]'
+                            : 'mb-1 w-5 translate-y-0 rotate-0'
                         }`}
                       ></span>
                       <span
                         className={` h-[3px] w-5 transform rounded-sm bg-primary transition duration-500 ${
-                          isMenuActive ? "mb-2 opacity-0" : "opacity-1 mb-1"
+                          isMenuActive ? 'mb-2 opacity-0' : 'opacity-1 mb-1'
                         }`}
                       ></span>
                       <span
                         className={`h-[3px] w-5 transform rounded-sm bg-primary transition duration-500 ${
                           isMenuActive
-                            ? "-translate-y-[11px] -rotate-[48deg]"
-                            : "translate-y-0 rotate-0"
+                            ? '-translate-y-[11px] -rotate-[48deg]'
+                            : 'translate-y-0 rotate-0'
                         }`}
                       ></span>
                     </div>
@@ -269,7 +241,7 @@ const Header = () => {
                 variants={backdropVariants}
                 className={`absolute top-[74px] right-[20px] block h-auto w-[150px] space-y-2 rounded border bg-white px-4 py-2 md:ml-auto md:w-auto`}
               >
-                {user?.profile?.publicData?.account_type == "owner" && (
+                {user?.profile?.publicData?.account_type == 'owner' && (
                   <Link href="/list-your-spot">
                     <a
                       className={`block font-trade-gothic-bold text-sm text-primary md:hidden md:text-base lg:text-base 2xl:text-[18px]`}
@@ -278,7 +250,7 @@ const Header = () => {
                     </a>
                   </Link>
                 )}
-                {user?.profile?.publicData?.account_type == "angler" && (
+                {user?.profile?.publicData?.account_type == 'angler' && (
                   <Link href="/services">
                     <a
                       className={`block font-trade-gothic-bold text-sm text-primary md:hidden md:text-base lg:text-base 2xl:text-[18px]`}
@@ -297,31 +269,31 @@ const Header = () => {
                 {/* <Link href="/notifications" >
                                     <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Notification </a>
                                 </Link> */}
-                {user?.profile?.publicData?.account_type === "angler" && (
+                {user?.profile?.publicData?.account_type === 'angler' && (
                   <Link href="/favorite-pond-list">
                     <a className="block font-trade-gothic-bold text-sm text-primary md:text-base lg:text-base 2xl:text-[18px]">
-                      Favorite Ponds{" "}
+                      Favorite Ponds{' '}
                     </a>
                   </Link>
                 )}
                 <Link
                   href={
-                    user?.profile?.publicData?.account_type === "angler"
-                      ? "/settings"
-                      : "/seller-dashboard"
+                    user?.profile?.publicData?.account_type === 'angler'
+                      ? '/settings'
+                      : '/seller-dashboard'
                   }
                 >
                   <a className="block font-trade-gothic-bold text-sm text-primary md:text-base lg:text-base 2xl:text-[18px]">
-                    Dashboard{" "}
+                    Dashboard{' '}
                   </a>
                 </Link>
                 {/* <Link href="/cancellation" >
                                     <a className="block text-primary font-trade-gothic-bold text-sm md:text-base lg:text-base 2xl:text-[18px]">Cancellation  </a>
                                 </Link> */}
-                {user?.profile?.publicData?.account_type === "angler" && (
+                {user?.profile?.publicData?.account_type === 'angler' && (
                   <Link href="/help">
                     <a className="block font-trade-gothic-bold text-sm text-primary md:text-base lg:text-base 2xl:text-[18px]">
-                      Help{" "}
+                      Help{' '}
                     </a>
                   </Link>
                 )}
@@ -335,18 +307,22 @@ const Header = () => {
             )}
           </AnimatePresence>
         </div>
+
+        <div className="container px-10 pb-4 md:hidden">
+          <SearchBar />
+        </div>
       </header>
       {isLoggedIn && !user?.emailVerified && (
         <div className="bg-secondary text-center text-white">
           <div className="container">
-            Please{" "}
+            Please{' '}
             <button className="underline" onClick={recentVerificationEmail}>
               verify your email
             </button>
-            . Without email verification you can not{" "}
-            {user?.profile?.publicData?.account_type == "angler"
-              ? "book ponds."
-              : "list your spots."}
+            . Without email verification you can not{' '}
+            {user?.profile?.publicData?.account_type == 'angler'
+              ? 'book ponds.'
+              : 'list your spots.'}
           </div>
         </div>
       )}

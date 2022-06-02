@@ -2,6 +2,8 @@ import { useField } from 'formik';
 
 const AdditionalAngler = () => {
   const [field, meta] = useField('additional-guests');
+  const [experiencefield, experienceMeta] = useField('experience');
+
   return (
     <div>
       <label
@@ -19,6 +21,13 @@ const AdditionalAngler = () => {
           {...field}
         />
       </div>
+      {experiencefield.value['Additional Fisherman'].checked && (
+        <span className="text-sm text-red-400">
+          {`You will be charged $${experiencefield.value['Additional Fisherman'].price}`}
+          {` `}
+          per additional guests for additional fisherman addon
+        </span>
+      )}
       {meta.touched && meta.error && (
         <div className="text-sm text-red-500">{meta.error}</div>
       )}

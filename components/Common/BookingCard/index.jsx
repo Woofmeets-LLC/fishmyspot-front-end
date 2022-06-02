@@ -60,6 +60,13 @@ const BookingCard = ({
       ['line-item/service-charge'].includes(item.code)
     )?.lineTotal?.amount || 0;
 
+  const numberOfPeople =
+    +(
+      bookingData?.attributes?.lineItems?.find((item) =>
+        ['line-item/additional-guests'].includes(item.code)
+      )?.quantity?.value || 0
+    ) + 1;
+
   const providerCommission =
     +bookingData?.attributes?.lineItems?.find((item) =>
       ['line-item/provider-commission'].includes(item.code)
@@ -148,6 +155,7 @@ const BookingCard = ({
             />
             <ListItem title={'Time Type'} value={dayType} />
             <ListItem title={'Location'} value={location} />
+            <ListItem title={'Total Guests'} value={numberOfPeople} />
           </div>
 
           <div className="rounded-lg bg-white p-4 shadow-md">
