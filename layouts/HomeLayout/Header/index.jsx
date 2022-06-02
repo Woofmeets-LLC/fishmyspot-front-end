@@ -130,7 +130,7 @@ const Header = () => {
           </Link>
           <div className="hidden h-full w-[300px] items-center border-l px-8 md:flex lg:w-[400px] lg:px-16 xl:w-[550px] 2xl:w-[620px] 3xl:w-[750px]">
             <div className="flex h-8 w-full rounded border xl:h-[35px] 2xl:h-[42px] 3xl:h-[47px]">
-              <span className="flex h-full w-8 items-center justify-center 2xl:w-10">
+              <span className="flex h-full w-8 items-center justify-center px-2 2xl:w-10">
                 <AiOutlineSearch className="text-primary xl:text-xl 2xl:text-2xl" />
               </span>
               <Autocomplete

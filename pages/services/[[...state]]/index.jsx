@@ -3,6 +3,7 @@ import DefaultErrorPage from 'next/error';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import * as sharetribeSdk from 'sharetribe-flex-sdk';
 import slugify from 'slugify';
 import Categories from '../../../components/SubPages/ServicesPage/Categories';
@@ -120,6 +121,7 @@ const ServicesByState = () => {
 
   const router = useRouter();
   const { state } = router.query;
+  const { isFirst, latLng } = useSelector((state) => state.place);
 
   const getData = (page, newData) => {
     if (newData) {
@@ -143,8 +145,8 @@ const ServicesByState = () => {
     if (query.experience.length) {
       q.pub_experiences = `has_any:${query.experience.join(',')}`;
     }
-    if (query?.location) {
-      const [lat, lng] = query.location.split(':');
+    if (latLng) {
+      const [lat, lng] = latLng.split(':');
       q.origin = new types.LatLng(parseFloat(lat), parseFloat(lng));
       // q.bounds = boundsCalculator(1000, parseFloat(lat), parseFloat(lng))
       if (!state?.[0] && query?.isBoundChanged) {
