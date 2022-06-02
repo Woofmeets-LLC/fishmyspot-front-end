@@ -93,15 +93,19 @@ const Categories = ({ getQuery, state }) => {
     setFirstTime(false);
   }, []);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !query.location) {
-      navigator.geolocation.getCurrentPosition(
-        ({ coords: { latitude: lat, longitude: lng } }) => {
-          setQuery({ ...query, location: `${lat}:${lng}` });
-        }
-      );
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     const parsed = queryString.parse(window.location.search, {
+  //       arrayFomate: 'comma',
+  //     });
+  //     console.log(parsed);
+  //     // navigator.geolocation.getCurrentPosition(
+  //     //   ({ coords: { latitude: lat, longitude: lng } }) => {
+  //     //     setQuery({ ...query, location: `${lat}:${lng}` });
+  //     //   }
+  //     // );
+  //   }
+  // }, []);
 
   const handlePriceClear = () => {
     setQuery({ ...query, price: [0, 1000] });
