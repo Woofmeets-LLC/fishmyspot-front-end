@@ -49,21 +49,17 @@ const PaymentReservation = () => {
         quantity: 1,
       }));
 
-    if (
-      bookingData?.experience?.['Additional Fisherman'].checked &&
-      parseInt(bookingData?.['additional-guests']) !== 0
-    ) {
+    if (parseInt(bookingData?.['additional-guests']) !== 0) {
       experienceLineItems.push({
         code: `line-item/additional-guests`,
         unitPrice: {
-          amount:
-            +bookingData?.experience?.['Additional Fisherman']?.price *
-            100 *
-            parseInt(bookingData?.['additional-guests']),
+          amount: bookingData?.experience?.['Additional Fisherman'].checked
+            ? bookingData?.experience?.['Additional Fisherman']?.price * 100
+            : 0,
           currency: 'USD',
           _sdkType: 'Money',
         },
-        quantity: 1,
+        quantity: parseInt(bookingData?.['additional-guests']),
       });
     }
 
