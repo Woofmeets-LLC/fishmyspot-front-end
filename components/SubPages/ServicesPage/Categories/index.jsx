@@ -2,7 +2,8 @@
 import { useRouter } from 'next/router';
 import queryString from 'query-string';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { set } from '../../../../store/slices/autocompletetionSlice';
 import Experience from '../Experience';
 import Location from '../Location';
 import PriceSlider from '../PriceSlider';
@@ -12,6 +13,7 @@ import UserRating from '../UserRating';
 const Categories = ({ getQuery, state }) => {
   const { isFirst, latLng } = useSelector((state) => state.place);
   const router = useRouter();
+  const dispatch = useDispatch();
   const [firstTime, setFirstTime] = useState(true);
 
   const [query, setQuery] = useState({
@@ -93,19 +95,27 @@ const Categories = ({ getQuery, state }) => {
     setFirstTime(false);
   }, []);
 
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     const parsed = queryString.parse(window.location.search, {
-  //       arrayFomate: 'comma',
-  //     });
-  //     console.log(parsed);
-  //     // navigator.geolocation.getCurrentPosition(
-  //     //   ({ coords: { latitude: lat, longitude: lng } }) => {
-  //     //     setQuery({ ...query, location: `${lat}:${lng}` });
-  //     //   }
-  //     // );
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const parsed = queryString.parse(window.location.search, {
+        arrayFomate: 'comma',
+      });
+      // navigator.geolocation.getCurrentPosition(
+      //   ({ coords: { latitude: lat, longitude: lng } }) => {
+      //     setQuery({ ...query, location: `${lat}:${lng}` });
+      //   }
+      // );
+
+      if (parsed?.location) {
+        dispatch(
+          set({
+            isFirst: false,
+            latLng: parsed?.location,
+          })
+        );
+      }
+    }
+  }, []);
 
   const handlePriceClear = () => {
     setQuery({ ...query, price: [0, 1000] });
