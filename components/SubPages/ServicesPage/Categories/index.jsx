@@ -45,6 +45,7 @@ const Categories = ({ getQuery, state }) => {
     }
     getQuery(query);
   }, [query]);
+
   useEffect(() => {
     if (!isFirst) {
       setQuery({ ...query, location: latLng });
@@ -64,11 +65,13 @@ const Categories = ({ getQuery, state }) => {
         }
       }
       const parsedQuery = { ...query, ...parsed };
+
       setQuery((prevState) => {
         return {
           ...parsedQuery,
         };
       });
+
       if (state) {
         router.push(
           `/services/${state}?` +
@@ -90,9 +93,8 @@ const Categories = ({ getQuery, state }) => {
     setFirstTime(false);
   }, []);
 
-
   useEffect(() => {
-    if (!query.location) {
+    if (typeof window !== 'undefined' && !query.location) {
       navigator.geolocation.getCurrentPosition(
         ({ coords: { latitude: lat, longitude: lng } }) => {
           setQuery({ ...query, location: `${lat}:${lng}` });

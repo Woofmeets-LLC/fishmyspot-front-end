@@ -143,7 +143,6 @@ const ServicesByState = () => {
     if (query.experience.length) {
       q.pub_experiences = `has_any:${query.experience.join(',')}`;
     }
-
     if (query?.location) {
       const [lat, lng] = query.location.split(':');
       q.origin = new types.LatLng(parseFloat(lat), parseFloat(lng));
