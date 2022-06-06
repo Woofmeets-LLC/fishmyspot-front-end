@@ -1,25 +1,18 @@
 // import Slider from "react-slick";
-import axios from "axios";
-import Slider from "react-slick";
-import useSWR from "swr";
-import FeaturedSpot from "../FeauturedSpot";
+import axios from 'axios';
+import Slider from 'react-slick';
+import useSWR from 'swr';
+import FeaturedSpot from '../FeauturedSpot';
 
-const fetcher = (url) =>
-  axios
-    .get(url, {
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
-      },
-    })
-    .then((res) => res.data.data);
+const fetcher = (url) => axios.get(url).then((res) => res.data.data);
 
 const SubFeaturedSpotSection = () => {
   const settings = {
-    className: "center",
+    className: 'center',
     centerMode: false,
     infinite: true,
     slidesToShow: 3,
-    centerPadding: "60px",
+    centerPadding: '60px',
     speed: 500,
     responsive: [
       {
@@ -49,7 +42,7 @@ const SubFeaturedSpotSection = () => {
     ],
   };
   const { data: featuredSpots, error } = useSWR(
-    "https://cms.fishmyspot.com/api/featured-spots?populate=*",
+    'https://cms.fishmyspot.com/api/featured-spots?populate=*',
     fetcher
   );
 
