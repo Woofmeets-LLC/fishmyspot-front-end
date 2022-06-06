@@ -4,14 +4,7 @@ import useSWR from 'swr';
 import Review from '../Review';
 
 //axios with bearer token
-const fetcher = (url) =>
-  axios
-    .get(url, {
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_BEARER_TOKEN}`,
-      },
-    })
-    .then((res) => res.data.data);
+const fetcher = (url) => axios.get(url).then((res) => res.data.data);
 
 const SubClientReviewSection = () => {
   const settings = {
@@ -100,12 +93,12 @@ const SubClientReviewSection = () => {
   // ]
   return (
     reviews && (
-      <section className="bg-[#fcfcfc] overflow-x-hidden">
+      <section className="overflow-x-hidden bg-[#fcfcfc]">
         <div
-          className={`py-6 sm:py-8 md:py-10 lg:py-16 xl:py-20 2xl:py-32 bg-[#fcfcfc] reviews-container`}
+          className={`reviews-container bg-[#fcfcfc] py-6 sm:py-8 md:py-10 lg:py-16 xl:py-20 2xl:py-32`}
         >
-          <div className="mb-10 xl:mb-16 2xl:mb-24 text-primary text-center">
-            <h1 className="text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-food-truck uppercase">
+          <div className="mb-10 text-center text-primary xl:mb-16 2xl:mb-24">
+            <h1 className="font-food-truck text-xl uppercase sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl">
               OUR TRUSTED REVIEWS
             </h1>
           </div>
