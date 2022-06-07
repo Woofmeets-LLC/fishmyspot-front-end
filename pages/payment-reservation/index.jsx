@@ -164,6 +164,9 @@ const PaymentReservation = () => {
         fallbackUrl: '/',
       }}
     >
+      <div className=" bg-secondary text-center text-white">
+        <div className="container"> Warning: The time slot will be <b className='font-bold'>blocked for 10 minutes</b> if you <b className='font-bold'>reload or return</b> from this page.You can try again in 10 minutes for the same time slot if that is the case. </div>
+      </div>
       <div className="container">
         <div className="mx-auto pt-6 pb-16 lg:w-[800px] xl:w-[965px] xl:pt-10 xl:pb-32">
           <div className="mb-11">
