@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Form, Formik } from 'formik';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,7 +38,7 @@ const SubReservationSection = ({ pondData }) => {
         .then(() => {
           dispatch(updateUser());
         })
-        .catch(() => {});
+        .catch(() => { });
     }
   }, []);
 
@@ -118,56 +117,25 @@ const SubReservationSection = ({ pondData }) => {
 
               <Calculation />
 
-              {!user?.emailVerified && !isProfileUpdated ? (
-                <div className="mb-2 font-trade-gothic text-red-400">
+              {!user?.emailVerified && (
+                <div className="mb-2  font-trade-gothic-bold text-red-400">
+                  Please{' '}
                   <button
                     className="font-trade-gothic-bold text-secondary underline"
                     onClick={recentVerificationEmail}
                   >
-                    Verify your email
+                    verify your email
                   </button>{' '}
-                  and{' '}
-                  <Link href={'/user-account'}>
-                    <a className="font-trade-gothic-bold text-secondary underline">
-                      Update your profile
-                    </a>
-                  </Link>{' '}
-                  to book the pond.
+                  first to book the pond. Or, reload the page if you verified already.
                 </div>
-              ) : (
-                <>
-                  {!user?.emailVerified && (
-                    <div className="mb-2  font-trade-gothic-bold text-red-400">
-                      Your email is not verified. Please{' '}
-                      <button
-                        className="font-trade-gothic-bold text-secondary underline"
-                        onClick={recentVerificationEmail}
-                      >
-                        verify your email
-                      </button>{' '}
-                      first to book the pond.
-                    </div>
-                  )}
-                  {!isProfileUpdated && (
-                    <div className="mb-2 font-trade-gothic">
-                      <Link href={'/user-account'}>
-                        <a className="font-trade-gothic-bold text-secondary underline">
-                          Update your profile
-                        </a>
-                      </Link>{' '}
-                      first to complete transaction.
-                    </div>
-                  )}
-                </>
               )}
 
               <button
                 type={user?.emailVerified ? 'submit' : 'button'}
-                className={`w-full py-2 lg:py-3 2xl:py-5 ${
-                  user?.emailVerified && isProfileUpdated
-                    ? 'bg-secondary'
-                    : 'bg-gray-400'
-                } rounded font-trade-gothic-bold text-white md:text-lg 2xl:text-2xl`}
+                className={`w-full py-2 lg:py-3 2xl:py-5 ${user?.emailVerified && isProfileUpdated
+                  ? 'bg-secondary'
+                  : 'bg-gray-400'
+                  } rounded font-trade-gothic-bold text-white md:text-lg 2xl:text-2xl`}
               >
                 Reserve
               </button>
