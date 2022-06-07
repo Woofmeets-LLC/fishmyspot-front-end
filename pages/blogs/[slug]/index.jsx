@@ -1,28 +1,18 @@
 import axios from 'axios';
-import Head from 'next/head';
 import SubBlogDetailsSection from '../../../components/SubPages/BlogDetailsPage';
 import HomeLayout from '../../../layouts/HomeLayout';
 
 const BlogDetailsPage = ({ data }) => {
   return (
-    <>
-      <Head>
-        <title>{data?.attributes?.title}</title>
-        <meta property="og:title" content={data?.attributes?.seoTitle} />
-        <meta
-          property="og:description"
-          name="description"
-          content={data?.attributes?.seoDescription}
-        />
-        <meta
-          property="og:image"
-          content={data?.attributes?.featuredImage?.data?.attributes?.url}
-        />
-      </Head>
-      <HomeLayout>
-        <SubBlogDetailsSection data={data} />
-      </HomeLayout>
-    </>
+    <HomeLayout
+      ogTags={{
+        title: data?.attributes?.seoTitle,
+        description: data?.attributes?.seoDescription,
+        image: data?.attributes?.featuredImage?.data?.attributes?.url,
+      }}
+    >
+      <SubBlogDetailsSection data={data} />
+    </HomeLayout>
   );
 };
 

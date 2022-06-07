@@ -32,8 +32,9 @@ module.exports = {
 //     // NEXT_STRIPE_PUBLISHABLE_KEY:
 //     //   'pk_test_51JDrfGL6dPTcqE42bUjVOMBz9IlrztzO3WQSLYuIsVaQik9uBgC5l3ubS3NngycpFfOZDAXHHBDzL9CghHFjkkzd00LKieQOlz',
 //     NEXT_STRIPE_PUBLISHABLE_KEY: 'pk_test_rbfLjGSEddnv5RHWU6hhPSBs',
+//   },
 //   //add next image host name
 //   images: {
 //     domains: ['res.cloudinary.com'],
 //   },
-// };
+// }

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Autocomplete from 'react-google-autocomplete';
+import { useSelector } from 'react-redux';
 import SubCheckoutForm from '.';
+import { getSdk } from '../../../../../sharetribe/sharetribeSDK';
 import SubStripeWrapper from '../SubStripeWrapper';
 import CheckoutInput from './CheckoutInput';
-import { useSelector } from 'react-redux';
 
 const CustomCheckoutForm = ({ setStep, tran, sk, reset }) => {
   const [submittedBillingInfo, setSubmittedBillingInfo] = useState(false);
@@ -27,8 +28,8 @@ const CustomCheckoutForm = ({ setStep, tran, sk, reset }) => {
     `${user?.profile?.firstName} ${user?.profile?.lastName}`
   );
   const [email, setEmail] = useState(user?.email);
-  const [phone, setPhone] = useState(user?.profile?.publicData?.phone);
-  const [address, setAddress] = useState(user?.profile?.publicData?.address);
+  const [phone, setPhone] = useState(user?.profile?.publicData?.phone || '');
+  const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [state, setState] = useState('');
@@ -116,6 +117,29 @@ const CustomCheckoutForm = ({ setStep, tran, sk, reset }) => {
     phone: phone,
   };
 
+  const handleSubmit = () => {
+    if (!isAnyFieldEmpty && !hasAnyError) {
+      setSubmittedBillingInfo(true);
+      getSdk().currentUser.updateProfile({
+        privateData: {
+          fullAddress: {
+            city: city,
+            country: null,
+            line1: address,
+            line2: null,
+            postal_code: zipCode,
+            state: state,
+          },
+          address,
+          email,
+          phone,
+        }
+      })
+        .then(res => { })
+        .catch(err => { })
+    }
+
+  }
   return (
     <>
       {!submittedBillingInfo && (
@@ -218,12 +242,9 @@ const CustomCheckoutForm = ({ setStep, tran, sk, reset }) => {
             disabled
           />
           <button
-            onClick={() =>
-              !isAnyFieldEmpty && !hasAnyError && setSubmittedBillingInfo(true)
-            }
-            className={`${
-              !isAnyFieldEmpty && !hasAnyError ? 'bg-secondary' : 'bg-gray-300'
-            } w-full rounded py-2 px-3 font-trade-gothic-bold text-sm text-white sm:py-3 md:text-base 2xl:py-5 2xl:text-xl`}
+            onClick={handleSubmit}
+            className={`${!isAnyFieldEmpty && !hasAnyError ? 'bg-secondary' : 'bg-gray-300'
+              } w-full rounded py-2 px-3 font-trade-gothic-bold text-sm text-white sm:py-3 md:text-base 2xl:py-5 2xl:text-xl`}
           >
             Next Step
           </button>

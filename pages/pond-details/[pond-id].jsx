@@ -53,7 +53,13 @@ const PondDetails = () => {
   }, [query])
 
   return (
-    <HomeLayout>
+    <HomeLayout
+      ogTags={{
+        title: pondData?.attributes?.title,
+        description: pondData?.attributes?.description,
+        image: pondImages?.[0]
+      }}
+    >
       {
         loading
           ? <div className="flex justify-center items-center flex-wrap my-10">
