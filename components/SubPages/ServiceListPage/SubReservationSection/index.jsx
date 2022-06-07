@@ -132,7 +132,7 @@ const SubReservationSection = ({ pondData }) => {
 
               <button
                 type={user?.emailVerified ? 'submit' : 'button'}
-                className={`w-full py-2 lg:py-3 2xl:py-5 ${user?.emailVerified && isProfileUpdated
+                className={`w-full py-2 lg:py-3 2xl:py-5 ${user?.emailVerified
                   ? 'bg-secondary'
                   : 'bg-gray-400'
                   } rounded font-trade-gothic-bold text-white md:text-lg 2xl:text-2xl`}
