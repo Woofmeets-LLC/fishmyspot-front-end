@@ -2,11 +2,15 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import { getSdk } from "../../sharetribe/sharetribeSDK";
+import { updateUser } from "../../store/slices/authSlice";
 
 const VerifyEmail = () => {
     const { query, push } = useRouter();
     const [invalid, setInvalid] = useState(false)
+
+    const dispatch = useDispatch();
     useEffect(() => {
         if (query?.t) {
             getSdk().currentUser.verifyEmail({
@@ -14,7 +18,9 @@ const VerifyEmail = () => {
             }, {
                 expand: true
             }).then(res => {
-                toast.success('Your email has be verified!')
+                toast.success('Your email has be verified!', { duration: 4000 });
+
+                dispatch(updateUser());
                 setTimeout(() => {
                     push('/')
                 }, 500)

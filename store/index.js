@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import LogRocket from 'logrocket';
 import authSliceReducer from "./slices/authSlice";
 import autocompletetionSlice from "./slices/autocompletetionSlice";
 import bookingDataSliceReducer from "./slices/bookingDataSlice";
@@ -18,7 +19,7 @@ export const store = configureStore({
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,
-    }),
+    }).concat(LogRocket.reduxMiddleware()),
 });
 
 

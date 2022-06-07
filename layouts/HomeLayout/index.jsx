@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import LogRocket from 'logrocket';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,11 +20,11 @@ const HomeLayout = ({
     fallbackUrl: '',
   },
   title = 'Fish My Spot',
-  // ogTags = {
-  //     title: '',
-  //     description: 'You will find best fishing spots in your area',
-  //     image: '/fish-my-spot-featured-image.jpg',
-  // }
+  ogTags = {
+    title: '',
+    description: 'You will find best fishing spots in your area',
+    image: '/fish-my-spot-featured-image.jpg',
+  }
 }) => {
   const dispatch = useDispatch();
   const { isLoading, isLoggedIn, user } = useSelector((state) => state.auth);
@@ -30,36 +32,55 @@ const HomeLayout = ({
 
   const { push } = useRouter();
 
+  // This is for initializing the log rocket SDK
+  useEffect(() => {
+    LogRocket.init('7rp2z0/fishmyspot');
+  }, [])
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      LogRocket.identify(user?.id, {
+        name: `${user?.profile?.firstName} ${user?.profile?.lastName}`,
+        email: user?.email,
+
+        // Add your own custom user variables here, ie:
+        account_type: user?.profile?.publicData?.account_type,
+      });
+    }
+  }, [])
+
   useEffect(() => {
     // It will update user data in redux in every reload if user is logged in
     dispatch(login());
 
     // It will update stripe data in redux in every reload if found
-    getSdk()
-      .stripeAccount.fetch()
-      .then((res) => {
-        const stripeData = res?.data?.data;
-        const isTransferActivated =
-          stripeData?.attributes?.stripeAccountData?.capabilities
-            ?.card_payments == 'active' ||
-          stripeData?.attributes?.stripeAccountData?.capabilities?.transfers ==
+    if (user?.profile?.publicData?.account_type == 'owner') {
+      getSdk()
+        .stripeAccount.fetch()
+        .then((res) => {
+          const stripeData = res?.data?.data;
+          const isTransferActivated =
+            stripeData?.attributes?.stripeAccountData?.capabilities
+              ?.card_payments == 'active' ||
+            stripeData?.attributes?.stripeAccountData?.capabilities?.transfers ==
             'active';
 
-        dispatch(
-          setStripeAccount({ ...stripeData, isTransferActivated, loaded: true })
-        );
-      })
-      .catch((error) => {
-        dispatch(
-          setStripeAccount({
-            attributes: null,
-            id: null,
-            type: null,
-            isTransferActivated: null,
-            loaded: true,
-          })
-        );
-      });
+          dispatch(
+            setStripeAccount({ ...stripeData, isTransferActivated, loaded: true })
+          );
+        })
+        .catch((error) => {
+          dispatch(
+            setStripeAccount({
+              attributes: null,
+              id: null,
+              type: null,
+              isTransferActivated: null,
+              loaded: true,
+            })
+          );
+        });
+    }
   }, []);
 
   useEffect(() => {
@@ -105,19 +126,19 @@ const HomeLayout = ({
 
   return (
     <>
-      {/* <Head>
-                <title>{ogTags.title ? ogTags.title : title}</title>
-                {
-                    Object.keys(ogTags)
-                        ?.map(key => {
-                            // Returning if og tag has no value
-                            if (!ogTags[key]) return null;
+      <Head>
+        <title>{ogTags.title ? ogTags.title : title}</title>
+        {
+          Object.keys(ogTags)
+            ?.map(key => {
+              // Returning if og tag has no value
+              if (!ogTags[key]) return null;
 
-                            // Return og tag
-                            return <meta key={key} property={`og:${key}`} content={ogTags[key]} />
-                        })
-                }
-            </Head> */}
+              // Return og tag
+              return <meta key={key} name={key} property={`og:${key}`} content={ogTags[key]} />
+            })
+        }
+      </Head>
       {isLoading || guardChecking ? (
         <div className="flex h-screen w-screen flex-wrap items-center justify-center">
           <div className="flex flex-col items-center justify-center">

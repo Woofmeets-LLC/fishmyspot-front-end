@@ -53,7 +53,7 @@ const PaymentReservation = () => {
       experienceLineItems.push({
         code: `line-item/additional-guests`,
         unitPrice: {
-          amount: bookingData?.experience?.['Additional Fisherman'].checked
+          amount: bookingData?.experience?.['Additional Fisherman']?.checked
             ? bookingData?.experience?.['Additional Fisherman']?.price * 100
             : 0,
           currency: 'USD',
@@ -66,9 +66,8 @@ const PaymentReservation = () => {
     const lineItems = [
       ...experienceLineItems,
       {
-        code: `line-item/${
-          bookingData?.dayType == 'halfDay' ? 'half-day' : 'full-day'
-        }`,
+        code: `line-item/${bookingData?.dayType == 'halfDay' ? 'half-day' : 'full-day'
+          }`,
         unitPrice: {
           amount: +bookingData?.dayRates[bookingData?.dayType] * 100,
           currency: 'USD',
@@ -171,9 +170,6 @@ const PaymentReservation = () => {
             <h1 className="font-food-truck text-xl uppercase text-primary sm:text-2xl md:text-3xl xl:text-4xl">
               PRICE CALCULATOR
             </h1>
-            <p className="mt-2 font-trade-gothic text-base text-highlight-1 md:mt-3 xl:mt-5 xl:text-lg">
-              All printing includes full-color on both sides.
-            </p>
           </div>
 
           {loading ? (
