@@ -127,7 +127,7 @@ const SelectDateTime = ({ pondData }) => {
                 setLoading(false);
 
                 const nowTime = new Date().getTime();
-                const selectedTime = new Date(new Date(timeObject.bookingStart).toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone})).getTime();
+                const selectedTime = new Date(new Date(timeObject.bookingStart).toLocaleString('en-US', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })).getTime();
 
                 const isSelectedPastTime = selectedTime < nowTime;
 
