@@ -25,7 +25,7 @@ module.exports = {
     FLEX_MARKETPLACE_API_CLIENT_ID: '4cdeec35-4566-4bd5-a2dc-3c0ba8c125a4',
     FLEX_MARKETPLACE_API_SECRET_KEY: '2f1391dbaf664df4f453ced7d1b478b0699acbe7',
     GOOGLE_MAP_API_KEY: 'AIzaSyCfhL0D8h89t_m4xilQ-Nb8rlVpzXqAjdo',
-    STRIPE_SECRET_KEY: 'isokay',
+    STRIPE_SECRET_KEY: 'sk_test_sJtmB4zGarC0n7SpUvKpI7N9',
     // STRIPE_PUBLISHABLE_KEY:
     //   'pk_test_51JDrfGL6dPTcqE42bUjVOMBz9IlrztzO3WQSLYuIsVaQik9uBgC5l3ubS3NngycpFfOZDAXHHBDzL9CghHFjkkzd00LKieQOlz',
     STRIPE_PUBLISHABLE_KEY: 'pk_test_rbfLjGSEddnv5RHWU6hhPSBs',
