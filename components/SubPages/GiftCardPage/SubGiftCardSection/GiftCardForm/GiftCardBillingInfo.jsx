@@ -146,6 +146,9 @@ const GiftCardBillingInfo = ({ setStep, step }) => {
   };
   return (
     <>
+      <h1 className="mb-4 font-food-truck text-2xl uppercase text-primary md:text-3xl lg:mb-8 2xl:text-5xl">
+        Billing Info
+      </h1>
       <div>
         <CheckoutInput
           label="Name"
@@ -158,7 +161,7 @@ const GiftCardBillingInfo = ({ setStep, step }) => {
           setErrors={setErrors}
           errors={errors}
         />
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-x-5 md:grid-cols-2">
           <CheckoutInput
             label="Email"
             name="email"
@@ -209,7 +212,7 @@ const GiftCardBillingInfo = ({ setStep, step }) => {
           ) : null}
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-x-5 md:grid-cols-2">
           <CheckoutInput
             label="City"
             name="city"
@@ -245,7 +248,7 @@ const GiftCardBillingInfo = ({ setStep, step }) => {
           onClick={handleSubmit}
           className={`${
             !isAnyFieldEmpty && !hasAnyError ? 'bg-secondary' : 'bg-gray-300'
-          } w-full rounded py-2 px-3 font-trade-gothic-bold text-sm text-primary sm:py-3 md:text-base 2xl:py-5 2xl:text-xl`}
+          } w-full rounded py-2 px-3 font-trade-gothic-bold text-lg text-primary 2xl:py-3`}
         >
           Next Step
         </button>

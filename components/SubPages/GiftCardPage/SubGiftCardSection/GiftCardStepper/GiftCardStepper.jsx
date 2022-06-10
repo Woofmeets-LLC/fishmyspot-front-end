@@ -30,7 +30,7 @@ const GiftCardStepper = () => {
         return null;
     }
   };
-  return <div className="w-full">{getStepItems()}</div>;
+  return <div className="w-full pt-6 md:pt-0">{getStepItems()}</div>;
 };
 
 export default GiftCardStepper;

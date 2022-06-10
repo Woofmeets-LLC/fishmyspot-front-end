@@ -83,7 +83,7 @@ const GiftCardCheckoutForm = ({ step, setStep }) => {
 
       <button
         type={loading ? 'button' : 'submit'}
-        className={`mt-4 flex w-full items-center justify-center rounded bg-secondary py-2 px-3 font-trade-gothic-bold text-sm text-primary sm:py-3 md:text-base 2xl:py-5 2xl:text-xl`}
+        className={`mt-4 flex w-full items-center justify-center rounded bg-secondary py-2 px-3 font-trade-gothic-bold text-lg text-primary 2xl:py-3`}
       >
         {loading && (
           <span className="flex w-7 animate-spin items-center justify-center">
