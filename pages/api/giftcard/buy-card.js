@@ -26,6 +26,6 @@ export default async function handler(req, res) {
       client_secret: paymentIntent.client_secret,
     });
   } else {
-    res.status(400).json('Not found');
+    res.status(404).json('Not found');
   }
 }
