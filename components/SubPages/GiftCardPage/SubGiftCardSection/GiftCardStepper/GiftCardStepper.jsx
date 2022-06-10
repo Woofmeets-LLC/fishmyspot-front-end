@@ -20,7 +20,7 @@ const GiftCardStepper = () => {
       case 2:
         return (
           <SubStripeWrapper>
-            <GiftCardCheckoutForm />
+            <GiftCardCheckoutForm step={step} setStep={setStep} />
           </SubStripeWrapper>
         );
 
