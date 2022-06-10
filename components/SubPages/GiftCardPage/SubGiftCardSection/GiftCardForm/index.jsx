@@ -49,7 +49,7 @@ const GiftCardForm = ({ step, setStep }) => {
       >
         <Form>
           <FormSelect label={'Amount'} name={'amount'}>
-            <FormOption title="Select Type" value="" />
+            <FormOption title="Select Amount" value="" />
             {giftCardAmounts?.map((amount) => (
               <FormOption
                 key={amount?.id}
