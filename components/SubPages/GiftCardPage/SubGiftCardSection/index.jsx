@@ -1,5 +1,5 @@
-import GiftCardForm from './GiftCardForm';
 import GiftCardImageArea from './GiftCardImageArea';
+import GiftCardStepper from './GiftCardStepper/GiftCardStepper';
 
 const SubGiftCardSection = () => {
   return (
@@ -8,7 +8,7 @@ const SubGiftCardSection = () => {
         <div className="pt-20 pb-36">
           <div className="grid grid-cols-2 gap-x-4">
             <GiftCardImageArea />
-            <GiftCardForm />
+            <GiftCardStepper />
           </div>
         </div>
       </div>
