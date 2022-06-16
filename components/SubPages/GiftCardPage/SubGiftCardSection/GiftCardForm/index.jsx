@@ -29,52 +29,65 @@ const GiftCardForm = ({ step, setStep }) => {
     message: yup.string().required('Message is required'),
   });
   const handleSubmit = (values, { setSubmitting }) => {
-    console.log({ values });
     dispatch(setGiftCardData(values));
     setStep(step + 1);
   };
-  return (
-    <div className="">
-      <span className="font-trade-gothic text-sm uppercase text-highlight-1 sm:text-base 2xl:text-lg">
-        Fishmyspot store
-      </span>
-      <h2 className="mb-2 font-food-truck text-2xl uppercase text-primary md:text-3xl 2xl:text-5xl">
-        FishMySpot GIFT Cards
-      </h2>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-        enableReinitialize={true}
-      >
-        <Form>
-          <FormSelect label={'Amount'} name={'amount'}>
-            <FormOption title="Select Amount" value="" />
-            {giftCardAmounts?.map((amount) => (
-              <FormOption
-                key={amount?.id}
-                title={amount?.attributes?.cardAmount}
-                value={amount?.attributes?.cardAmount}
-              />
-            ))}
-          </FormSelect>
-          <FormInput
-            label={'Recipients Email'}
-            name={'recipientEmail'}
-            type="email"
-            placeholder="Enter recipient email"
-          />
-          <FormTextarea label={'Message to the Recipient'} name={'message'} />
 
-          <button
-            className="w-full rounded bg-secondary py-2 px-6 font-trade-gothic-bold text-lg text-primary 2xl:py-3"
-            type="submit"
+  console.log({ giftCardAmounts });
+  return (
+    <>
+      {giftCardAmounts?.length === 0 ? (
+        <div className="flex h-full items-center justify-center font-trade-gothic-bold text-3xl text-primary">
+          No Gift Card Available
+        </div>
+      ) : (
+        <div>
+          <span className="font-trade-gothic text-sm uppercase text-highlight-1 sm:text-base 2xl:text-lg">
+            Fishmyspot store
+          </span>
+          <h2 className="mb-2 font-food-truck text-2xl uppercase text-primary md:text-3xl 2xl:text-5xl">
+            FishMySpot GIFT Cards
+          </h2>
+
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+            enableReinitialize={true}
           >
-            Next Step
-          </button>
-        </Form>
-      </Formik>
-    </div>
+            <Form>
+              <FormSelect label={'Amount'} name={'amount'}>
+                <FormOption title="Select Amount" value="" />
+                {giftCardAmounts?.map((amount) => (
+                  <FormOption
+                    key={amount?.id}
+                    title={amount?.attributes?.cardAmount}
+                    value={amount?.attributes?.cardAmount}
+                  />
+                ))}
+              </FormSelect>
+              <FormInput
+                label={'Recipients Email'}
+                name={'recipientEmail'}
+                type="email"
+                placeholder="Enter recipient email"
+              />
+              <FormTextarea
+                label={'Message to the Recipient'}
+                name={'message'}
+              />
+
+              <button
+                className="w-full rounded bg-secondary py-2 px-6 font-trade-gothic-bold text-lg text-primary 2xl:py-3"
+                type="submit"
+              >
+                Next Step
+              </button>
+            </Form>
+          </Formik>
+        </div>
+      )}
+    </>
   );
 };
 
