@@ -1,6 +1,6 @@
-import { TokenResult } from "@stripe/stripe-js";
-import { loadStripe } from "@stripe/stripe-js/pure";
-import { getStripeClientWithSecretKey } from "./loaders";
+import { TokenResult } from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js/pure';
+import { getStripeClientWithSecretKey } from './loaders';
 
 /**
  *
@@ -9,30 +9,28 @@ import { getStripeClientWithSecretKey } from "./loaders";
  */
 export const createStripeAccountToken = async (obj) => {
   try {
-    if (!process.env.NEXT_STRIPE_PUBLISHABLE_KEY) {
-      throw new Error("Stripe Public Key is undefined");
+    if (!process.env.STRIPE_PUBLISHABLE_KEY) {
+      throw new Error('Stripe Public Key is undefined');
     }
 
-    const stripe = await loadStripe(process.env.NEXT_STRIPE_PUBLISHABLE_KEY);
+    const stripe = await loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 
-    const accountToken = await stripe.createToken("account", {
-      business_type: obj?.[".inp-company-type"],
+    const accountToken = await stripe.createToken('account', {
+      business_type: obj?.['.inp-company-type'],
       company: {
-        name: obj?.[".inp-company-name"],
+        name: obj?.['.inp-company-name'],
         address: {
-          line1: obj?.[".inp-company-street-address1"],
-          city: obj?.[".inp-company-city"],
-          state: obj?.[".inp-company-state"],
-          postal_code: obj?.[".inp-company-zip"],
+          line1: obj?.['.inp-company-street-address1'],
+          city: obj?.['.inp-company-city'],
+          state: obj?.['.inp-company-state'],
+          postal_code: obj?.['.inp-company-zip'],
         },
       },
       tos_shown_and_accepted: true,
     });
 
     return accountToken;
-  } catch (error) {
-    
-  }
+  } catch (error) {}
 };
 
 /**
@@ -51,15 +49,15 @@ export const createStripeBusinessToken = async (obj) => {
     const stripe = getStripeClientWithSecretKey();
     const result = await stripe.tokens.create({
       bank_account: {
-        country: obj?.["country"],
-        currency: obj?.["currency"],
-        account_holder_name: obj?.["account_holder_name"],
-        account_holder_type: obj?.["account_holder_type"],
-        routing_number: obj?.["routing_number"],
-        account_number: obj?.["account_number"],
+        country: obj?.['country'],
+        currency: obj?.['currency'],
+        account_holder_name: obj?.['account_holder_name'],
+        account_holder_type: obj?.['account_holder_type'],
+        routing_number: obj?.['routing_number'],
+        account_number: obj?.['account_number'],
       },
     });
-    
+
     return result;
   } catch (error) {
     return error;
