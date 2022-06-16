@@ -1,5 +1,3 @@
-import React from 'react';
-
 const SubGiftCardRulesSection = () => {
   return (
     <section className="bg-[#efefef]">
@@ -30,7 +28,8 @@ const SubGiftCardRulesSection = () => {
               during checkout on Fishmyspot.com
             </p>
             <p className="py-6">
-              Please Note: Gift Cards do not cover Swimply booking service fees.
+              Please Note: Gift Cards do not cover FishMySpot booking service
+              fees.
             </p>
             <p>*Gift Cards or not redeemable for cash value*</p>
           </div>
