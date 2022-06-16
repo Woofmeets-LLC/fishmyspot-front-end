@@ -56,7 +56,7 @@ const SubSellerDashboard = () => {
           href={"/cancellation"}
         /> */}
         <SettingCard
-          title={'Add Bank Account'}
+          title={'Manage Bank Account'}
           description={'Take your payment through the bank.'}
           Icon={AiTwotoneBank}
           href={'/bank-account'}
