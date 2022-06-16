@@ -1,15 +1,14 @@
-import Image from 'next/image';
+import GiftCardImage from './GiftCardImage';
 
 const GiftCardImageArea = () => {
   return (
-    <div className="relative aspect-video h-full w-full">
-      <Image
-        src={'/images/gift-card.png'}
-        priority
-        layout="fill"
-        alt={'Gift Card Image'}
-        className="object-cover"
-      />
+    <div className="bg-[#ECE9DA]">
+      <div className="grid h-full grid-cols-2 gap-3">
+        <GiftCardImage src={'/images/gift-card-1.png'} />
+        <GiftCardImage src={'/images/gift-card-2.png'} />
+        <GiftCardImage src={'/images/gift-card-3.png'} />
+        <GiftCardImage src={'/images/gift-card-4.png'} />
+      </div>
     </div>
   );
 };
