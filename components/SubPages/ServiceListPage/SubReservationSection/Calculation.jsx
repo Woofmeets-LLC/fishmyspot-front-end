@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useField } from 'formik';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const Calculation = () => {
   const [dayTypeField] = useField('dayType');
@@ -9,6 +9,7 @@ const Calculation = () => {
   const [serviceFeeField] = useField('serviceFee');
   const [additionalAnglerField] = useField('additional-guests');
   const [totalField, totalMeta, totalHelpers] = useField('total');
+  const [couponDiscountField] = useField('coupon-discount');
 
   const dayRate = parseFloat(
     +dayRatesField.value?.[dayTypeField.value]
@@ -29,8 +30,17 @@ const Calculation = () => {
     : 0;
 
   const serviceFee = parseFloat(+serviceFeeField.value).toFixed(2);
+
+  const couponAmount = couponDiscountField?.value
+    ? couponDiscountField?.value
+    : 0.0;
+
   const total = parseFloat(
-    +dayRate + +experienceCost + +serviceFee + additionalAnglerCost
+    +dayRate +
+      +experienceCost +
+      +serviceFee +
+      additionalAnglerCost -
+      +couponAmount
   ).toFixed(2);
 
   useEffect(() => {
@@ -38,7 +48,7 @@ const Calculation = () => {
   }, [total]);
   return (
     <div className="my-8 font-trade-gothic text-highlight-1 lg:text-lg 2xl:text-xl">
-      <div className="mb-2 flex justify-between 2xl:mb-3">
+      <div className="flex justify-between pb-1">
         <p>{dayTypeField.value == 'fullDay' ? 'Full Day' : 'Half Day'}</p>
         <p>${dayRate}</p>
       </div>
@@ -82,11 +92,17 @@ const Calculation = () => {
               </div>
             ))
         : null}
-      <div className="flex justify-between border-b border-highlight-1 pb-3 2xl:pb-4">
+      <div className="flex justify-between pb-1">
         <p>Service fees</p>
         <p>${serviceFee}</p>
       </div>
-      <div className="flex justify-between pt-2 font-trade-gothic-bold text-lg md:pt-3 lg:text-xl 2xl:text-2xl">
+      {couponAmount > 0.0 && (
+        <div className="flex justify-between pb-2">
+          <p>Coupon Discount</p>
+          <p>${couponAmount}</p>
+        </div>
+      )}
+      <div className="flex justify-between border-t border-highlight-1 pt-2 font-trade-gothic-bold text-lg md:pt-3 lg:text-xl 2xl:text-2xl">
         <p>Total</p>
         <p>${total}</p>
       </div>

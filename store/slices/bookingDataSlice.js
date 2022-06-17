@@ -13,6 +13,8 @@ const bookingDataSlice = createSlice({
     serviceFee: '',
     total: '',
     'additional-guests': 0,
+    // giftCode: '',
+    'coupon-discount': 0.0,
   },
   reducers: {
     setBookingData: (state, action) => {
@@ -26,6 +28,8 @@ const bookingDataSlice = createSlice({
       state.time = action.payload.time;
       state.serviceFee = action.payload.serviceFee;
       state.total = action.payload.total;
+      // state.giftCode = action.payload.giftCode;
+      state['coupon-discount'] = action.payload['coupon-discount'];
     },
   },
 });

@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
 import SubPaymentStepper from '../../components/SubPages/PaymentReservationPage/SubPaymentStepper/SubPaymentStepper';
@@ -63,11 +63,25 @@ const PaymentReservation = () => {
       });
     }
 
+    if (bookingData?.['coupon-discount']) {
+      experienceLineItems.push({
+        code: 'line-item/coupon-discount',
+        unitPrice: {
+          amount: -bookingData?.['coupon-discount'] * 100,
+          currency: 'USD',
+          _sdkType: 'Money',
+        },
+        quantity: 1,
+        includeFor: ['customer', 'provider'],
+      });
+    }
+
     const lineItems = [
       ...experienceLineItems,
       {
-        code: `line-item/${bookingData?.dayType == 'halfDay' ? 'half-day' : 'full-day'
-          }`,
+        code: `line-item/${
+          bookingData?.dayType == 'halfDay' ? 'half-day' : 'full-day'
+        }`,
         unitPrice: {
           amount: +bookingData?.dayRates[bookingData?.dayType] * 100,
           currency: 'USD',
@@ -165,7 +179,13 @@ const PaymentReservation = () => {
       }}
     >
       <div className=" bg-secondary text-center text-white">
-        <div className="container"> Warning: The time slot will be <b className='font-bold'>blocked for 10 minutes</b> if you <b className='font-bold'>reload or return</b> from this page.You can try again in 10 minutes for the same time slot if that is the case. </div>
+        <div className="container">
+          {' '}
+          Warning: The time slot will be{' '}
+          <b className="font-bold">blocked for 10 minutes</b> if you{' '}
+          <b className="font-bold">reload or return</b> from this page.You can
+          try again in 10 minutes for the same time slot if that is the case.{' '}
+        </div>
       </div>
       <div className="container">
         <div className="mx-auto pt-6 pb-16 lg:w-[800px] xl:w-[965px] xl:pt-10 xl:pb-32">
