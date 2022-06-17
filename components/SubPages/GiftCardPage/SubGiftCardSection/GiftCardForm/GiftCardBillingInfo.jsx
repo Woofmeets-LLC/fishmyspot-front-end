@@ -20,7 +20,8 @@ const GiftCardBillingInfo = ({ setStep, step }) => {
     zipCode: '',
   });
 
-  const { user } = useSelector((state) => state.auth);
+  const { auth, giftCardData } = useSelector((state) => state);
+  const { user } = auth;
 
   const [name, setName] = useState(
     user?.profile?.firstName && user?.profile?.lastName
@@ -29,10 +30,12 @@ const GiftCardBillingInfo = ({ setStep, step }) => {
   );
   const [email, setEmail] = useState(user?.email || '');
   const [phone, setPhone] = useState(user?.profile?.publicData?.phone || '');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [zipCode, setZipCode] = useState('');
-  const [state, setState] = useState('');
+  const [address, setAddress] = useState(giftCardData?.address?.line1 || '');
+  const [city, setCity] = useState(giftCardData?.address?.city || '');
+  const [zipCode, setZipCode] = useState(
+    giftCardData?.address?.postal_code || ''
+  );
+  const [state, setState] = useState(giftCardData?.address?.state || '');
 
   const states = {
     addressError,
@@ -244,14 +247,28 @@ const GiftCardBillingInfo = ({ setStep, step }) => {
           errors={errors}
           disabled
         />
-        <button
-          onClick={handleSubmit}
-          className={`${
-            !isAnyFieldEmpty && !hasAnyError ? 'bg-secondary' : 'bg-gray-300'
-          } w-full rounded py-2 px-3 font-trade-gothic-bold text-lg text-primary 2xl:py-3`}
-        >
-          Next Step
-        </button>
+        <div className="grid grid-cols-2">
+          <div className="flex justify-start">
+            <button
+              onClick={() => setStep(step - 1)}
+              className="rounded bg-secondary py-2 px-3 font-trade-gothic-bold text-lg text-primary 2xl:py-3"
+            >
+              Go Back
+            </button>
+          </div>
+          <div className="flex justify-end">
+            <button
+              onClick={handleSubmit}
+              className={`${
+                !isAnyFieldEmpty && !hasAnyError
+                  ? 'bg-secondary'
+                  : 'bg-gray-300'
+              } rounded py-2 px-3 font-trade-gothic-bold text-lg text-primary 2xl:py-3`}
+            >
+              Next Step
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -65,28 +65,26 @@ const GiftCardCheckoutForm = ({ step, setStep }) => {
           // Show error to your customer (for example, payment details incomplete)
           console.log(result.error.message);
         } else {
-          fetch(
-            'https://nasty-wombats-train-103-121-221-1.loca.lt/giftcards/promo',
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                code: result.paymentIntent.id,
-              }),
-            }
-          )
+          fetch('http://localhost:5000/giftcards/promo', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              code: result?.paymentIntent?.id,
+            }),
+          })
             .then((res) => res.json())
             .then((res) => {
+              console.log({ res });
               const data = {
                 service_id: 'service_0z8txkg',
                 template_id: 'template_f48yvbp',
                 user_id: 'D9WeGnhaGJceVldKx',
                 template_params: {
                   from_name: giftCardData?.name,
-                  reply_to: giftCardData.recipientEmail,
-                  message: giftCardData.message,
+                  reply_to: giftCardData?.recipientEmail,
+                  message: giftCardData?.message,
                   amount: giftCardData?.amount,
                   coupon_code: res?.promo,
                 },
@@ -122,17 +120,29 @@ const GiftCardCheckoutForm = ({ step, setStep }) => {
       </p>
       <div id="card-element"></div>
 
-      <button
-        type={loading ? 'button' : 'submit'}
-        className={`mt-4 flex w-full items-center justify-center rounded bg-secondary py-2 px-3 font-trade-gothic-bold text-lg text-primary 2xl:py-3`}
-      >
-        {loading && (
-          <span className="flex w-7 animate-spin items-center justify-center">
-            <span className="h-5 w-5 rounded-full border-t-2 border-b-2 border-white"></span>
-          </span>
-        )}
-        {loading ? 'Loading...' : `Buy Now`}
-      </button>
+      <div className="grid grid-cols-2">
+        <div className="flex justify-start">
+          <button
+            onClick={() => setStep(step - 1)}
+            className="rounded bg-secondary py-2 px-3 font-trade-gothic-bold text-lg text-primary 2xl:py-3"
+          >
+            Go Back
+          </button>
+        </div>
+        <div className="flex justify-end">
+          <button
+            type={loading ? 'button' : 'submit'}
+            className={`flex items-center justify-center rounded bg-secondary py-2 px-3 font-trade-gothic-bold text-lg text-primary 2xl:py-3`}
+          >
+            {loading && (
+              <span className="flex w-7 animate-spin items-center justify-center">
+                <span className="h-5 w-5 rounded-full border-t-2 border-b-2 border-white"></span>
+              </span>
+            )}
+            {loading ? 'Loading...' : `Buy Now`}
+          </button>
+        </div>
+      </div>
     </form>
   );
 };

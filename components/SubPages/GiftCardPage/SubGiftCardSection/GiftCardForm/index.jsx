@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Form, Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 import * as yup from 'yup';
 import { setGiftCardData } from '../../../../../store/slices/giftCardSlice';
@@ -18,10 +18,11 @@ const GiftCardForm = ({ step, setStep }) => {
   );
 
   const dispatch = useDispatch();
+  const { giftCardData } = useSelector((state) => state);
   const initialValues = {
-    amount: '',
-    recipientEmail: '',
-    message: '',
+    amount: giftCardData?.amount || '',
+    recipientEmail: giftCardData?.recipientEmail || '',
+    message: giftCardData?.message || '',
   };
   const validationSchema = yup.object({
     amount: yup.string().required('Amount is required'),
@@ -33,7 +34,6 @@ const GiftCardForm = ({ step, setStep }) => {
     setStep(step + 1);
   };
 
-  console.log({ giftCardAmounts });
   return (
     <>
       {giftCardAmounts?.length === 0 ? (
@@ -77,12 +77,14 @@ const GiftCardForm = ({ step, setStep }) => {
                 name={'message'}
               />
 
-              <button
-                className="w-full rounded bg-secondary py-2 px-6 font-trade-gothic-bold text-lg text-primary 2xl:py-3"
-                type="submit"
-              >
-                Next Step
-              </button>
+              <div className="flex justify-end">
+                <button
+                  className="rounded bg-secondary py-2 px-6 font-trade-gothic-bold text-lg text-primary 2xl:py-3"
+                  type="submit"
+                >
+                  Next Step
+                </button>
+              </div>
             </Form>
           </Formik>
         </div>
