@@ -65,15 +65,18 @@ const GiftCardCheckoutForm = ({ step, setStep }) => {
           // Show error to your customer (for example, payment details incomplete)
           console.log(result.error.message);
         } else {
-          fetch('http://localhost:5000/giftcards/promo', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              code: result.paymentIntent.id,
-            }),
-          })
+          fetch(
+            'https://nasty-wombats-train-103-121-221-1.loca.lt/giftcards/promo',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                code: result.paymentIntent.id,
+              }),
+            }
+          )
             .then((res) => res.json())
             .then((res) => {
               const data = {
@@ -101,6 +104,7 @@ const GiftCardCheckoutForm = ({ step, setStep }) => {
             })
             .catch((err) => {
               toast.error('Something went wrong. Please try again!');
+              setLoading(false);
               console.log({ err });
             });
 
