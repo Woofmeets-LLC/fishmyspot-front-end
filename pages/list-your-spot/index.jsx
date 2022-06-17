@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
 import * as yup from 'yup';
 import { BackBtn, MultiStepForm, NextBtn } from '../../components/Common';
 import FormStep from '../../components/Common/FormElements/MultiStepForm/FormStep';
+import BankAccountModal from '../../components/SubPages/ListYourSpotPage/BankAccountModal';
 import SubAccessToPond from '../../components/SubPages/ListYourSpotPage/SubAccessToPond';
 import SubAdditionalInformation from '../../components/SubPages/ListYourSpotPage/SubAdditionalInformation';
 import SubAgreementSection from '../../components/SubPages/ListYourSpotPage/SubAgreementSection';
@@ -19,11 +20,10 @@ import SubPondOwnerInfo from '../../components/SubPages/ListYourSpotPage/SubPond
 import SubPricing from '../../components/SubPages/ListYourSpotPage/SubPricing';
 import TopImageCard from '../../components/SubPages/ListYourSpotPage/SubTopImageCard';
 import HomeLayout from '../../layouts/HomeLayout';
-import { listingDataOrganizing } from '../../services/listing-spot-data-organiging/listingDataFormatting';
-import { listingImagesUpload } from '../../services/listing-spot-data-organiging/listingImageUpload';
 import { getRequest } from '../../services/requests';
 import { getSdk } from '../../sharetribe/sharetribeSDK';
 import { setFishes } from '../../store/slices/listSpotContentsSlice';
+import { setShowBankAccountModal } from '../../store/slices/modalsSlice';
 import { setStripeAccount } from '../../store/slices/stripeAccountSlice';
 
 const ListYourPond = () => {
@@ -359,7 +359,8 @@ const ListYourPond = () => {
               if (stripeLoading) {
                 return;
               }
-              !isTransferActivated && createStripeAccount();
+              // !isTransferActivated && createStripeAccount();
+              dispatch(setShowBankAccountModal());
             }}
           />
           <div className="my-2" />
@@ -380,34 +381,32 @@ const ListYourPond = () => {
 
   const handleSubmit = async (values, helpers) => {
     // set loading
-    setLoading(true);
+    // setLoading(true);
     // Data organizing without images
-    const newData = listingDataOrganizing(values);
-
-    // Formatting Images array and uploading
-    const allImages = [
-      ...values['ATP-images-file'],
-      ...values['amenities-images-file'],
-      ...values['additional-images-file'],
-    ];
-    const uploadedImages = await listingImagesUpload(allImages);
-    // Setting images uuids to newData
-    newData.images = uploadedImages?.success ? uploadedImages?.uuids : [];
-
-    // Creating listing
-    getSdk()
-      .ownListings.create(newData, { expand: true, include: ['images'] })
-      .then((listingRes) => {
-        setLoading(false);
-        toast.success('Listing created successfully!');
-        localStorage.removeItem('currentStep');
-        localStorage.removeItem('listingData');
-        router.push(`/list-your-spot/success?listed=true`);
-      })
-      .catch((err) => {
-        setLoading(false);
-        toast.error('Failed listing creation!');
-      });
+    // const newData = listingDataOrganizing(values);
+    // // Formatting Images array and uploading
+    // const allImages = [
+    //   ...values['ATP-images-file'],
+    //   ...values['amenities-images-file'],
+    //   ...values['additional-images-file'],
+    // ];
+    // const uploadedImages = await listingImagesUpload(allImages);
+    // // Setting images uuids to newData
+    // newData.images = uploadedImages?.success ? uploadedImages?.uuids : [];
+    // // Creating listing
+    // getSdk()
+    //   .ownListings.create(newData, { expand: true, include: ['images'] })
+    //   .then((listingRes) => {
+    //     setLoading(false);
+    //     toast.success('Listing created successfully!');
+    //     localStorage.removeItem('currentStep');
+    //     localStorage.removeItem('listingData');
+    //     router.push(`/list-your-spot/success?listed=true`);
+    //   })
+    //   .catch((err) => {
+    //     setLoading(false);
+    //     toast.error('Failed listing creation!');
+    //   });
   };
 
   const recentVerificationEmail = () => {
@@ -420,108 +419,111 @@ const ListYourPond = () => {
   };
 
   return (
-    <HomeLayout
-      isPrivate
-      guards={{
-        account_type: 'owner',
-        fallbackUrl: '/',
-      }}
-    >
-      <TopImageCard />
+    <>
+      <BankAccountModal />
+      <HomeLayout
+        isPrivate
+        guards={{
+          account_type: 'owner',
+          fallbackUrl: '/',
+        }}
+      >
+        <TopImageCard />
 
-      {user?.emailVerified ? (
-        <MultiStepForm
-          initialValues={initialValues}
-          timelineArray={timelineArray}
-          stepControllerBtns={stepControllerBtns}
-          onSubmit={handleSubmit}
-          successComponent={<div>Success</div>}
-        >
-          <FormStep validationSchema={validation.pondListing}>
-            <SubPondListing />
-          </FormStep>
-          <FormStep validationSchema={validation.pondOwnerDetails}>
-            <SubPondOwnerDetails />
-          </FormStep>
-          <FormStep>
-            <SubPricing />
-          </FormStep>
-          <FormStep validationSchema={validation.pondOwnerInfo}>
-            <SubPondOwnerInfo />
-          </FormStep>
-          <FormStep>
-            <SubAvailableTime />
-          </FormStep>
-          <FormStep validationSchema={validation.description}>
-            <SubDescription />
-          </FormStep>
-          <FormStep validationSchema={validation.accessToPond}>
-            <SubAccessToPond />
-          </FormStep>
-          <FormStep>
-            <SubAmenities />
-          </FormStep>
-          <FormStep>
-            <SubAdditionalInformation />
-          </FormStep>
-          <FormStep>
-            {loading ? (
-              <div className="my-10 flex flex-wrap items-center justify-center">
-                <ClipLoader size={50} color={'#1971ff'} />
-                <h2 className="mt-2 w-full text-center font-semibold">
-                  Creating your pond...
-                </h2>
-              </div>
-            ) : stripeLoading ? (
-              <div className="my-10 flex flex-wrap items-center justify-center">
-                <ClipLoader size={50} color={'#1971ff'} />
-                <h2 className="mt-2 w-full text-center font-semibold">
-                  Connecting to stripe...
-                </h2>
-
-                {(attributes?.stripeAccountData?.capabilities?.card_payments ==
-                  'inactive' ||
-                  attributes?.stripeAccountData?.capabilities?.transfers ==
-                    'inactive') && (
-                  <h2 className="mt-2 w-full text-center text-sm font-semibold">
-                    You did not completed stripe connect step yet. Complete
-                    first!
+        {user?.emailVerified ? (
+          <MultiStepForm
+            initialValues={initialValues}
+            timelineArray={timelineArray}
+            stepControllerBtns={stepControllerBtns}
+            onSubmit={handleSubmit}
+            successComponent={<div>Success</div>}
+          >
+            <FormStep validationSchema={validation.pondListing}>
+              <SubPondListing />
+            </FormStep>
+            <FormStep validationSchema={validation.pondOwnerDetails}>
+              <SubPondOwnerDetails />
+            </FormStep>
+            <FormStep>
+              <SubPricing />
+            </FormStep>
+            <FormStep validationSchema={validation.pondOwnerInfo}>
+              <SubPondOwnerInfo />
+            </FormStep>
+            <FormStep>
+              <SubAvailableTime />
+            </FormStep>
+            <FormStep validationSchema={validation.description}>
+              <SubDescription />
+            </FormStep>
+            <FormStep validationSchema={validation.accessToPond}>
+              <SubAccessToPond />
+            </FormStep>
+            <FormStep>
+              <SubAmenities />
+            </FormStep>
+            <FormStep>
+              <SubAdditionalInformation />
+            </FormStep>
+            <FormStep>
+              {loading ? (
+                <div className="my-10 flex flex-wrap items-center justify-center">
+                  <ClipLoader size={50} color={'#1971ff'} />
+                  <h2 className="mt-2 w-full text-center font-semibold">
+                    Creating your pond...
                   </h2>
-                )}
-                {(attributes?.stripeAccountData?.capabilities?.card_payments ==
-                  'pending' ||
-                  attributes?.stripeAccountData?.capabilities?.transfers ==
-                    'pending') && (
-                  <>
+                </div>
+              ) : stripeLoading ? (
+                <div className="my-10 flex flex-wrap items-center justify-center">
+                  <ClipLoader size={50} color={'#1971ff'} />
+                  <h2 className="mt-2 w-full text-center font-semibold">
+                    Connecting to stripe...
+                  </h2>
+
+                  {(attributes?.stripeAccountData?.capabilities
+                    ?.card_payments == 'inactive' ||
+                    attributes?.stripeAccountData?.capabilities?.transfers ==
+                      'inactive') && (
                     <h2 className="mt-2 w-full text-center text-sm font-semibold">
-                      Stripe received your info and verifying...
+                      You did not completed stripe connect step yet. Complete
+                      first!
                     </h2>
-                    <h2 className="mt-2 w-full text-center text-sm font-semibold">
-                      Please wait and do not refresh your screen!
-                    </h2>
-                  </>
-                )}
-              </div>
-            ) : (
-              <SubAgreementSection />
-            )}
-          </FormStep>
-        </MultiStepForm>
-      ) : (
-        <div className="container">
-          <div className="mx-auto my-10 rounded p-8 text-center font-trade-gothic text-lg text-red-500 shadow md:w-3/4">
-            Your email is not verified. Please{' '}
-            <button
-              className="font-trade-gothic-bold text-secondary underline"
-              onClick={recentVerificationEmail}
-            >
-              verify your email
-            </button>{' '}
-            first to list your spot.
+                  )}
+                  {(attributes?.stripeAccountData?.capabilities
+                    ?.card_payments == 'pending' ||
+                    attributes?.stripeAccountData?.capabilities?.transfers ==
+                      'pending') && (
+                    <>
+                      <h2 className="mt-2 w-full text-center text-sm font-semibold">
+                        Stripe received your info and verifying...
+                      </h2>
+                      <h2 className="mt-2 w-full text-center text-sm font-semibold">
+                        Please wait and do not refresh your screen!
+                      </h2>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <SubAgreementSection />
+              )}
+            </FormStep>
+          </MultiStepForm>
+        ) : (
+          <div className="container">
+            <div className="mx-auto my-10 rounded p-8 text-center font-trade-gothic text-lg text-red-500 shadow md:w-3/4">
+              Your email is not verified. Please{' '}
+              <button
+                className="font-trade-gothic-bold text-secondary underline"
+                onClick={recentVerificationEmail}
+              >
+                verify your email
+              </button>{' '}
+              first to list your spot.
+            </div>
           </div>
-        </div>
-      )}
-    </HomeLayout>
+        )}
+      </HomeLayout>
+    </>
   );
 };
 

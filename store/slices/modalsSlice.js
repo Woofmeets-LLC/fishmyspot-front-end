@@ -1,10 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const modalsSlice = createSlice({
-  name: "modals",
+  name: 'modals',
   initialState: {
     showLoginModal: false,
-    showSignUpModal:false,
+    showSignUpModal: false,
+    showBankAccountModal: false,
   },
   reducers: {
     setShowLoginModal: (state) => {
@@ -15,12 +16,20 @@ const modalsSlice = createSlice({
       state.showLoginModal = false;
       state.showSignUpModal = true;
     },
+    setShowBankAccountModal: (state) => {
+      state.showLoginModal = false;
+      state.showSignUpModal = false;
+      state.showBankAccountModal = true;
+    },
     setCloseLoginModal: (state) => {
-        state.showLoginModal = false;
+      state.showLoginModal = false;
     },
     setCloseSignUpModal: (state) => {
-        state.showSignUpModal = false;
-    }
+      state.showSignUpModal = false;
+    },
+    setCloseBankAccountModal: (state) => {
+      state.showBankAccountModal = false;
+    },
   },
 });
 
@@ -30,5 +39,9 @@ export const selectCount = (state) => state.modal;
 
 export const setShowLoginModal = modalsSlice.actions.setShowLoginModal;
 export const setShowSignUpModal = modalsSlice.actions.setShowSignUpModal;
+export const setShowBankAccountModal =
+  modalsSlice.actions.setShowBankAccountModal;
 export const setCloseLoginModal = modalsSlice.actions.setCloseLoginModal;
 export const setCloseSignUpModal = modalsSlice.actions.setCloseSignUpModal;
+export const setCloseBankAccountModal =
+  modalsSlice.actions.setCloseBankAccountModal;
