@@ -19,7 +19,6 @@ export default async function handler(req, res) {
         user_id,
       },
     });
-
     //return payment intent details
     res.status(200).json({
       client_secret: paymentIntent.client_secret,

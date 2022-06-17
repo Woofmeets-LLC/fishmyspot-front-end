@@ -2,6 +2,7 @@
 import { useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 
 const GiftCardCheckoutForm = ({ step, setStep }) => {
@@ -59,14 +60,50 @@ const GiftCardCheckoutForm = ({ step, setStep }) => {
           client_secret,
           requestData
         );
-
         if (result.error) {
           setLoading(false);
           // Show error to your customer (for example, payment details incomplete)
           console.log(result.error.message);
         } else {
-          setStep(step + 1);
-          setLoading(false);
+          fetch('http://localhost:5000/giftcards/promo', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              code: result.paymentIntent.id,
+            }),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              const data = {
+                service_id: 'service_0z8txkg',
+                template_id: 'template_f48yvbp',
+                user_id: 'D9WeGnhaGJceVldKx',
+                template_params: {
+                  from_name: giftCardData?.name,
+                  reply_to: giftCardData.recipientEmail,
+                  message: giftCardData.message,
+                  amount: giftCardData?.amount,
+                  coupon_code: res?.promo,
+                },
+              };
+              fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              }).then(() => {
+                setStep(step + 1);
+                setLoading(false);
+              });
+            })
+            .catch((err) => {
+              toast.error('Something went wrong. Please try again!');
+              console.log({ err });
+            });
+
           // Your customer will be redirected to your `return_url`. For some payment
           // methods like iDEAL, your customer will be redirected to an intermediate
           // site first to authorize the payment, then redirected to the `return_url`.
