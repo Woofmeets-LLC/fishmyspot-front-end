@@ -118,6 +118,7 @@ const SubBankAccountFormSection = () => {
             duration: 3000,
             loading: 'Bank Account Creating...',
             success: (res) => {
+              updateBankAccToRedux();
               setLoading(false);
               return `Your Bank Account Created successfully!`;
             },
@@ -133,7 +134,7 @@ const SubBankAccountFormSection = () => {
         toast.error('Something went wrong!');
       });
 
-    // resetForm({ values: '' });
+    resetForm({ values: '' });
   };
 
   return (
