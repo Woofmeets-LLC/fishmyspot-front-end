@@ -90,6 +90,7 @@ const SubReservationSection = ({ pondData }) => {
               'additional-guests': 0,
               giftCode: '',
               'coupon-discount': 0.0,
+              'applied-discount': 0.0,
             }}
             validationSchema={yup.object({
               dayType: yup.string().required('Select a day type!'),

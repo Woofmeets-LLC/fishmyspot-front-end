@@ -19,7 +19,7 @@ const PaymentReservation = () => {
   });
   const [keyValue, setKeyValue] = useState(1);
 
-  const bookingData = useSelector((state) => state.bookingData);
+  const { bookingData, auth } = useSelector((state) => state);
   const router = useRouter();
 
   const proceedTransaction = (id) => {
@@ -63,11 +63,11 @@ const PaymentReservation = () => {
       });
     }
 
-    if (bookingData?.['coupon-discount']) {
+    if (bookingData?.['applied-discount']) {
       experienceLineItems.push({
         code: 'line-item/coupon-discount',
         unitPrice: {
-          amount: -bookingData?.['coupon-discount'] * 100,
+          amount: -bookingData?.['applied-discount'] * 100,
           currency: 'USD',
           _sdkType: 'Money',
         },
@@ -111,19 +111,48 @@ const PaymentReservation = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        setLoading(false);
+        // setLoading(false);
+        console.log({ res });
         const stripeSecretKey =
           res?.data?.data?.attributes?.protectedData?.stripePaymentIntents
             ?.default?.stripePaymentIntentClientSecret;
+        const stripePaymentIntentId =
+          res?.data?.data?.attributes?.protectedData?.stripePaymentIntents
+            ?.default?.stripePaymentIntentId;
         setTransactionInfo({
           tran: id,
           sk: stripeSecretKey,
         });
+        if (bookingData?.['applied-discount']) {
+          axios
+            .post('http://localhost:5000/giftcards/apply', {
+              usedAmount: bookingData?.['applied-discount'],
+              promo: bookingData?.giftCode,
+              anglerId: auth?.user?.id,
+              transactionId: id,
+              pondId: bookingData?.['pond-id'],
+              pondOwnerId:
+                bookingData?.pondData?.relationships?.author?.data?.id?.uuid,
+              paymentIntent: stripePaymentIntentId,
+            })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log({ err });
+              setError({
+                status: true,
+                message: 'Something went wrong, please try again later',
+              });
+            });
+        }
+        setLoading(false);
         // const stripePaymentIntentId = res?.data?.data?.attributes?.protectedData?.stripePaymentIntents?.default?.stripePaymentIntentId;
         // router.push(`/payment-reservation/payment?tran=${id}&sk=${stripeSecretKey}`);
       })
       .catch((err) => {
         setLoading(false);
+        console.log({ err });
         setError({
           status: true,
           message: 'Something went wrong, please try again later',

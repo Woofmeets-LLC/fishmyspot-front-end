@@ -10,8 +10,10 @@ const Calculation = () => {
   const [additionalAnglerField] = useField('additional-guests');
   const [totalField, totalMeta, totalHelpers] = useField('total');
   const [couponDiscountField] = useField('coupon-discount');
+  const [appliedDiscount, appliedDiscountMeta, appliedDiscountHelpers] =
+    useField('applied-discount');
 
-  const dayRate = parseFloat(
+  const dayRate = +parseFloat(
     +dayRatesField.value?.[dayTypeField.value]
   ).toFixed(2);
 
@@ -29,28 +31,47 @@ const Calculation = () => {
     ? additionalAnglerField?.value * 10
     : 0;
 
-  const serviceFee = parseFloat(+serviceFeeField.value).toFixed(2);
+  const serviceFee = +parseFloat(+serviceFeeField.value).toFixed(2);
 
-  const couponAmount = couponDiscountField?.value
+  const couponDiscount = couponDiscountField?.value
     ? couponDiscountField?.value
     : 0.0;
 
-  const total = parseFloat(
-    +dayRate +
-      +experienceCost +
-      +serviceFee +
-      additionalAnglerCost -
-      +couponAmount
-  ).toFixed(2);
+  // const total = parseFloat(
+  //   +dayRate +
+  //     +experienceCost +
+  //     +serviceFee +
+  //     additionalAnglerCost -
+  //     +couponDiscount
+  // ).toFixed(2);
 
   useEffect(() => {
-    totalHelpers.setValue(total);
-  }, [total]);
+    // totalHelpers.setValue(total);
+    const totalWithoutServiceFee =
+      dayRate + experienceCost + additionalAnglerCost;
+
+    if (totalWithoutServiceFee >= couponDiscount) {
+      appliedDiscountHelpers.setValue(couponDiscount);
+      totalHelpers.setValue(
+        totalWithoutServiceFee - couponDiscount + serviceFee
+      );
+    } else {
+      appliedDiscountHelpers.setValue(totalWithoutServiceFee);
+      totalHelpers.setValue(serviceFee);
+    }
+  }, [
+    dayRate,
+    experienceCost,
+    serviceFee,
+    additionalAnglerCost,
+    couponDiscount,
+  ]);
+
   return (
     <div className="my-8 font-trade-gothic text-highlight-1 lg:text-lg 2xl:text-xl">
       <div className="flex justify-between pb-1">
         <p>{dayTypeField.value == 'fullDay' ? 'Full Day' : 'Half Day'}</p>
-        <p>${dayRate}</p>
+        <p>${dayRate.toFixed(2)}</p>
       </div>
       {Object?.keys(experienceField.value || {}).length
         ? Object.keys(experienceField.value)
@@ -96,15 +117,15 @@ const Calculation = () => {
         <p>Service fees</p>
         <p>${serviceFee}</p>
       </div>
-      {couponAmount > 0.0 && (
+      {appliedDiscount.value > 0.0 && (
         <div className="flex justify-between pb-2">
           <p>Coupon Discount</p>
-          <p>${couponAmount}</p>
+          <p>{`-$${appliedDiscount.value.toFixed(2)}`}</p>
         </div>
       )}
       <div className="flex justify-between border-t border-highlight-1 pt-2 font-trade-gothic-bold text-lg md:pt-3 lg:text-xl 2xl:text-2xl">
         <p>Total</p>
-        <p>${total}</p>
+        <p>${totalField.value}</p>
       </div>
     </div>
   );

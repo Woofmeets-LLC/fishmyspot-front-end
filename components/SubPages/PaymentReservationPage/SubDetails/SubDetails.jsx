@@ -95,13 +95,13 @@ const SubDetails = ({ title, step }) => {
             value={`$${parseFloat(+bookingData?.serviceFee).toFixed(2)}`}
           />
         </div>
-        {bookingData?.['coupon-discount'] && (
+        {bookingData?.['applied-discount'] && (
           <div className="pb-1 2xl:pb-3">
             <SubDetailsItem
               item={'Coupon Discount'}
-              value={`$${parseFloat(+bookingData?.['coupon-discount']).toFixed(
-                2
-              )}`}
+              value={`-$${parseFloat(
+                +bookingData?.['applied-discount']
+              ).toFixed(2)}`}
             />
           </div>
         )}

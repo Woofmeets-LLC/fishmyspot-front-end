@@ -72,6 +72,7 @@ const GiftCardCheckoutForm = ({ step, setStep }) => {
             },
             body: JSON.stringify({
               code: result?.paymentIntent?.id,
+              email: giftCardData?.recipientEmail,
             }),
           })
             .then((res) => res.json())
