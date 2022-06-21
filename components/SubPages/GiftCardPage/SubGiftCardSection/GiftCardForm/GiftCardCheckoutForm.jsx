@@ -63,7 +63,8 @@ const GiftCardCheckoutForm = ({ step, setStep, setIsError }) => {
         if (result.error) {
           setLoading(false);
           // Show error to your customer (for example, payment details incomplete)
-          console.log(result.error.message);
+          setIsError(true);
+          setStep(step + 1);
         } else {
           fetch('http://localhost:5000/giftcards/promo', {
             method: 'POST',
@@ -77,7 +78,6 @@ const GiftCardCheckoutForm = ({ step, setStep, setIsError }) => {
           })
             .then((res) => res.json())
             .then((res) => {
-              console.log({ res });
               const data = {
                 service_id: 'service_0z8txkg',
                 template_id: 'template_f48yvbp',
@@ -112,6 +112,12 @@ const GiftCardCheckoutForm = ({ step, setStep, setIsError }) => {
           // methods like iDEAL, your customer will be redirected to an intermediate
           // site first to authorize the payment, then redirected to the `return_url`.
         }
+      })
+      .catch((err) => {
+        toast.error('Something went wrong. Please try again!');
+        setLoading(false);
+        setIsError(true);
+        setStep(step + 1);
       });
   };
 
