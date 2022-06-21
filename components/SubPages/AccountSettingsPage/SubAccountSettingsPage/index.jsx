@@ -1,4 +1,3 @@
-import React from 'react';
 import { BiMessageRoundedError } from 'react-icons/bi';
 import { FaClipboardList, FaGift, FaHeart } from 'react-icons/fa';
 // icons
@@ -82,7 +81,7 @@ const SubAccountSettingsPage = () => {
           title={'Gift Card'}
           description={'Gather more information before your fishing trip.'}
           Icon={FaGift}
-          href={'/create-gift-card'}
+          href={'/buy-gift-card'}
         />
       </div>
     </div>

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 
-const GiftCardCheckoutForm = ({ step, setStep }) => {
+const GiftCardCheckoutForm = ({ step, setStep, setIsError }) => {
   const [loading, setLoading] = useState(false);
 
   const stripe = useStripe();
@@ -104,7 +104,8 @@ const GiftCardCheckoutForm = ({ step, setStep }) => {
             .catch((err) => {
               toast.error('Something went wrong. Please try again!');
               setLoading(false);
-              console.log({ err });
+              setIsError(true);
+              setStep(step + 1);
             });
 
           // Your customer will be redirected to your `return_url`. For some payment

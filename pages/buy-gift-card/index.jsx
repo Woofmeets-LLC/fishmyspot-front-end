@@ -2,7 +2,7 @@ import SubGiftCardRulesSection from '../../components/SubPages/GiftCardPage/SubG
 import SubGiftCardSection from '../../components/SubPages/GiftCardPage/SubGiftCardSection';
 import HomeLayout from '../../layouts/HomeLayout';
 
-const CreateGiftCard = () => {
+const BuyGiftCard = () => {
   return (
     <HomeLayout>
       <SubGiftCardSection />
@@ -11,4 +11,4 @@ const CreateGiftCard = () => {
   );
 };
 
-export default CreateGiftCard;
+export default BuyGiftCard;
