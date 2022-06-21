@@ -112,7 +112,6 @@ const PaymentReservation = () => {
       )
       .then((res) => {
         // setLoading(false);
-        console.log({ res });
         const stripeSecretKey =
           res?.data?.data?.attributes?.protectedData?.stripePaymentIntents
             ?.default?.stripePaymentIntentClientSecret;
@@ -136,7 +135,7 @@ const PaymentReservation = () => {
               paymentIntent: stripePaymentIntentId,
             })
             .then((res) => {
-              console.log(res);
+              // console.log(res);
             })
             .catch((err) => {
               console.log({ err });

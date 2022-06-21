@@ -10,8 +10,6 @@ const GiftCardStepper = () => {
   const [step, setStep] = useState(0);
   const [isError, setIsError] = useState(false);
 
-  console.log({ step });
-
   const getStepItems = () => {
     switch (step) {
       case 0:

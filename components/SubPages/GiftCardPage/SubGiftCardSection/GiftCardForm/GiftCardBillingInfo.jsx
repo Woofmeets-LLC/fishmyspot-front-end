@@ -122,7 +122,6 @@ const GiftCardBillingInfo = ({ setStep, step }) => {
 
   const handleSubmit = () => {
     if (!isAnyFieldEmpty && !hasAnyError) {
-      console.log({ billingDetails });
       dispatch(setGiftCardData(billingDetails));
 
       setStep(step + 1);

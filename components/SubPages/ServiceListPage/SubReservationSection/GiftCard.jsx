@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useField } from 'formik';
 import { useState } from 'react';
 
@@ -10,17 +11,17 @@ const GiftCard = () => {
 
   const handleGiftCode = () => {
     setIsLoading(true);
-    fetch(`http://localhost:5000/giftcards/${field.value}`)
-      .then((res) => res.json())
+    axios(`http://localhost:5000/giftcards/${field.value}`)
       .then((res) => {
         setIsLoading(false);
         setCouponApplied(true);
-        couponDiscountHelpers.setValue(res.amount);
+        couponDiscountHelpers.setValue(res.data.amount);
       })
       .catch((err) => {
         helpers.setError(true);
         helpers.setValue('', false);
         setIsLoading(false);
+        setCouponApplied(false);
       });
   };
 
