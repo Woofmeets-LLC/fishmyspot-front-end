@@ -354,7 +354,9 @@ const ListYourPond = () => {
                 ? 'List My Spot'
                 : stripeLoading
                 ? 'Connecting stripe...'
-                : 'Connect Stripe First!'
+                : attributes?.stripeAccountId
+                ? 'Connect Stripe!'
+                : 'Add Bank Account First!'
             }
             type={isTransferActivated ? 'submit' : 'button'}
             onClick={() => {
