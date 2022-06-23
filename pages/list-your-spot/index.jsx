@@ -350,15 +350,22 @@ const ListYourPond = () => {
         <>
           <NextBtn
             text={
-              isTransferActivated
+              isTransferActivated &&
+              attributes?.stripeAccountData?.external_accounts?.data?.length
                 ? 'List My Spot'
                 : stripeLoading
                 ? 'Connecting stripe...'
-                : attributes?.stripeAccountId
+                : attributes?.stripeAccountData?.external_accounts?.data
+                    ?.length && !isTransferActivated
                 ? 'Connect Stripe!'
                 : 'Add Bank Account First!'
             }
-            type={isTransferActivated ? 'submit' : 'button'}
+            type={
+              isTransferActivated &&
+              attributes?.stripeAccountData?.external_accounts?.data?.length
+                ? 'submit'
+                : 'button'
+            }
             onClick={() => {
               if (stripeLoading) {
                 return;

@@ -13,6 +13,7 @@ import { FormInput, FormOption, FormSelect, Modal } from '../../../Common';
 const BankAccountModal = () => {
   const [loading, setLoading] = useState(false);
   const { showBankAccountModal } = useSelector((state) => state.modals);
+  const { stripeAccount, auth } = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
@@ -78,30 +79,54 @@ const BankAccountModal = () => {
         ...values,
       })
       .then((data) => {
-        const createBankAccount = getSdk().stripeAccount.create(
-          {
-            country: values?.country,
-            bankAccountToken: data?.data?.id,
-            requestedCapabilities: ['transfers', 'card_payments'],
-          },
-          {
-            expand: true,
-          }
-        );
+        if (stripeAccount?.attributes?.stripeAccountId) {
+          const updateBankAccount = getSdk().stripeAccount.update(
+            {
+              bankAccountToken: data?.data?.id,
+            },
+            {
+              expand: true,
+            }
+          );
 
-        toast.promise(createBankAccount, {
-          duration: 3000,
-          loading: 'Bank Account Creating...',
-          success: (res) => {
-            updateBankAccToRedux();
-            setLoading(false);
-            return `Your Bank Account Created successfully!`;
-          },
-          error: (err) => {
-            setLoading(false);
-            return `Something went wrong. Please try again!`;
-          },
-        });
+          toast.promise(updateBankAccount, {
+            duration: 3000,
+            loading: 'Bank Account Updating...',
+            success: (res) => {
+              updateBankAccToRedux();
+              setLoading(false);
+              return `Your Bank Account Updated successfully!`;
+            },
+            error: (err) => {
+              setLoading(false);
+              return `Something went wrong. Please try again!`;
+            },
+          });
+        } else {
+          const createBankAccount = getSdk().stripeAccount.create(
+            {
+              country: values?.country,
+              bankAccountToken: data?.data?.id,
+              requestedCapabilities: ['transfers', 'card_payments'],
+            },
+            {
+              expand: true,
+            }
+          );
+          toast.promise(createBankAccount, {
+            duration: 3000,
+            loading: 'Bank Account Creating...',
+            success: (res) => {
+              updateBankAccToRedux();
+              setLoading(false);
+              return `Your Bank Account Created successfully!`;
+            },
+            error: (err) => {
+              setLoading(false);
+              return `Something went wrong. Please try again!`;
+            },
+          });
+        }
       })
       .catch((err) => {
         setLoading(false);
