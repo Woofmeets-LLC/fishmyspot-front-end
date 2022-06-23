@@ -8,9 +8,15 @@ const GiftCardPaymentSuccess = () => {
         Thank you,{' '}
         {user && `${user?.profile?.firstName} ${user?.profile?.lastName}`}!
       </h1>
-      <h1 className="font-food-truck text-xl uppercase text-primary underline md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+      <h1 className="mb-5 font-food-truck text-xl uppercase text-primary underline md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
         For Purchasing Gift Card
       </h1>
+      <button
+        onClick={() => window?.location?.reload()}
+        className="rounded bg-secondary py-2 px-3 font-trade-gothic-bold text-lg text-primary 2xl:py-3"
+      >
+        Buy More
+      </button>
     </div>
   );
 };

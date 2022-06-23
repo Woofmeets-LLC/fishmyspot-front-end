@@ -15,6 +15,10 @@ const GiftCardCheckoutForm = ({ step, setStep, setIsError }) => {
   useEffect(() => {
     cardElement = elements?.create('card');
     cardElement?.mount('#card-element');
+
+    return () => {
+      cardElement?.unmount();
+    };
   }, []);
 
   const { giftCardData, auth } = useSelector((state) => state);

@@ -8,14 +8,19 @@ const GiftCard = () => {
     useField('coupon-discount');
   const [couponApplied, setCouponApplied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isAvailableBalance, setIsAvailableBalance] = useState(true);
 
   const handleGiftCode = () => {
     setIsLoading(true);
     axios(`http://localhost:5000/giftcards/${field.value}`)
       .then((res) => {
         setIsLoading(false);
-        setCouponApplied(true);
-        couponDiscountHelpers.setValue(res.data.amount);
+        if (res?.data?.amount > 0) {
+          setCouponApplied(true);
+          couponDiscountHelpers.setValue(res?.data?.amount);
+        } else {
+          couponDiscountHelpers.setError(true);
+        }
       })
       .catch((err) => {
         helpers.setError(true);
@@ -63,9 +68,12 @@ const GiftCard = () => {
           </button>
         </div>
       </div>
+      {couponDiscountMeta?.error && (
+        <div className="mb-4 text-sm text-red-500">No funds available!</div>
+      )}
       {meta?.error ? (
         <div className="mt-2 mb-4 text-sm text-red-500">
-          Coupon code is not valid
+          Coupon code is not valid!
         </div>
       ) : null}
     </>
