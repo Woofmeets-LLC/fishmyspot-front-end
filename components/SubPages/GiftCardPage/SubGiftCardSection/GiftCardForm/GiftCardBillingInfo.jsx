@@ -26,10 +26,14 @@ const GiftCardBillingInfo = ({ setStep, step }) => {
   const [name, setName] = useState(
     user?.profile?.firstName && user?.profile?.lastName
       ? `${user?.profile?.firstName} ${user?.profile?.lastName}`
+      : giftCardData?.name
+      ? giftCardData.name
       : ''
   );
-  const [email, setEmail] = useState(user?.email || '');
-  const [phone, setPhone] = useState(user?.profile?.publicData?.phone || '');
+  const [email, setEmail] = useState(user?.email || giftCardData?.email || '');
+  const [phone, setPhone] = useState(
+    user?.profile?.publicData?.phone || giftCardData?.phone || ''
+  );
   const [address, setAddress] = useState(giftCardData?.address?.line1 || '');
   const [city, setCity] = useState(giftCardData?.address?.city || '');
   const [zipCode, setZipCode] = useState(
