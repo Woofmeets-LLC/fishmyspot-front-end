@@ -37,8 +37,8 @@ const Footer = () => {
                 <a className="mb-2 block font-trade-gothic">Blog</a>
               </Link>
               {/* <Link href="/family">
-                                <a className="block font-trade-gothic mb-2">Family</a>
-                            </Link> */}
+                <a className="mb-2 block font-trade-gothic">Family</a>
+              </Link> */}
               <Link href="/benefits-guide">
                 <a className="mb-2 block font-trade-gothic">Benefits</a>
               </Link>
