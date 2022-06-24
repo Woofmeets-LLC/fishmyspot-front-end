@@ -11,9 +11,9 @@ const Footer = () => {
   return (
     <footer className="bg-primary">
       <div className="container">
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 md:gap-20 text-white py-10 xl:py-16 3xl:py-20">
-          <div className="md:-mt-6 col-span-2 md:col-span-1">
-            <div className="w-[200px] h-[100px] flex items-center">
+        <div className="grid grid-cols-2 gap-10 py-10 text-white md:grid-cols-2 md:gap-20 lg:grid-cols-3 xl:grid-cols-4 xl:py-16 3xl:py-20">
+          <div className="col-span-2 md:col-span-1 md:-mt-6">
+            <div className="flex h-[100px] w-[200px] items-center">
               <img className="w-1/2" src="/images/footer-logo.png" alt="" />
             </div>
             <div className="font-trade-gothic">
@@ -24,65 +24,68 @@ const Footer = () => {
           </div>
           <div className="col-span-2 sm:col-span-1">
             <div className="w-28 lg:mx-auto">
-              <h2 className="text-xl uppercase font-trade-gothic-bold mb-2">
+              <h2 className="mb-2 font-trade-gothic-bold text-xl uppercase">
                 About
               </h2>
               <Link href="/">
-                <a className="block font-trade-gothic mb-2">Home</a>
+                <a className="mb-2 block font-trade-gothic">Home</a>
               </Link>
               <Link href="/about">
-                <a className="block font-trade-gothic mb-2">About</a>
+                <a className="mb-2 block font-trade-gothic">About</a>
               </Link>
               <Link href="/blogs">
-                <a className="block font-trade-gothic mb-2">Blog</a>
+                <a className="mb-2 block font-trade-gothic">Blog</a>
               </Link>
               {/* <Link href="/family">
                                 <a className="block font-trade-gothic mb-2">Family</a>
                             </Link> */}
               <Link href="/benefits-guide">
-                <a className="block font-trade-gothic mb-2">Benefits</a>
+                <a className="mb-2 block font-trade-gothic">Benefits</a>
               </Link>
               <Link href="/contact-us">
-                <a className="block font-trade-gothic mb-2">Contact</a>
+                <a className="mb-2 block font-trade-gothic">Contact</a>
+              </Link>
+              <Link href="/buy-gift-card">
+                <a className="mb-2 block font-trade-gothic">Gift Card</a>
               </Link>
               <Link href="/faq">
-                <a className="block font-trade-gothic mb-2">FAQ</a>
+                <a className="mb-2 block font-trade-gothic">FAQ</a>
               </Link>
             </div>
           </div>
           <div className="col-span-2 sm:col-span-1">
-            <h2 className="text-xl uppercase font-trade-gothic-bold mb-2">
+            <h2 className="mb-2 font-trade-gothic-bold text-xl uppercase">
               Terms & Policies
             </h2>
             <Link href="/terms-of-use">
-              <a className="block font-trade-gothic mb-2">Terms of Use</a>
+              <a className="mb-2 block font-trade-gothic">Terms of Use</a>
             </Link>
             <Link href="/help">
-              <a className="block font-trade-gothic mb-2">Help Center</a>
+              <a className="mb-2 block font-trade-gothic">Help Center</a>
             </Link>
             <Link href="/privacy">
-              <a className="block font-trade-gothic mb-2">Privacy Policy</a>
+              <a className="mb-2 block font-trade-gothic">Privacy Policy</a>
             </Link>
             <Link href="/acceptable-use-policy">
-              <a className="block font-trade-gothic mb-2">
+              <a className="mb-2 block font-trade-gothic">
                 Acceptable Use Policy
               </a>
             </Link>
             <Link href="/trust-and-safety">
-              <a className="block font-trade-gothic mb-2">Trust & Safety</a>
+              <a className="mb-2 block font-trade-gothic">Trust & Safety</a>
             </Link>
             <Link href="/cookie-policy">
-              <a className="block font-trade-gothic mb-2">Cookie Policy</a>
+              <a className="mb-2 block font-trade-gothic">Cookie Policy</a>
             </Link>
             <Link href="/terms-of-service">
-              <a className="block font-trade-gothic mb-2">Terms of Service</a>
+              <a className="mb-2 block font-trade-gothic">Terms of Service</a>
             </Link>
           </div>
           <div className="col-span-full sm:mx-auto md:col-span-1 md:mx-0 lg:col-span-full lg:mx-auto xl:col-span-1">
-            <h2 className="text-xl uppercase font-trade-gothic-bold mb-2 sm:text-center md:text-left lg:text-center xl:text-left">
+            <h2 className="mb-2 font-trade-gothic-bold text-xl uppercase sm:text-center md:text-left lg:text-center xl:text-left">
               Follow us
             </h2>
-            <div className="space-x-4 mt-7 2xl:mt-10">
+            <div className="mt-7 space-x-4 2xl:mt-10">
               <a
                 className="inline-block"
                 href="https://www.facebook.com/fishmyspotllc"
@@ -127,20 +130,20 @@ const Footer = () => {
           </div>
         </div>
 
-        <hr className="md:w-1/2 mx-auto" />
+        <hr className="mx-auto md:w-1/2" />
         <div className="grid lg:grid-cols-12 lg:gap-2">
           <div className="lg:col-span-3">
-            <p className="text-white py-2 lg:py-6 text-center lg:text-left">
+            <p className="py-2 text-center text-white lg:py-6 lg:text-left">
               1-844-446-3474
             </p>
           </div>
-          <div className="lg:col-span-6 order-3 lg:order-2">
-            <div className="text-white py-2 lg:py-6 text-center">
+          <div className="order-3 lg:order-2 lg:col-span-6">
+            <div className="py-2 text-center text-white lg:py-6">
               &copy; 2018 – 2021 by FishMySpot
             </div>
           </div>
-          <div className="lg:col-span-3 order-2 lg:order-3">
-            <p className="text-white lg:py-6 text-center lg:text-left">
+          <div className="order-2 lg:order-3 lg:col-span-3">
+            <p className="text-center text-white lg:py-6 lg:text-left">
               info@fishmyspot.com
             </p>
           </div>
