@@ -33,17 +33,17 @@ const HomeLayout = ({
 
   // This is for initializing the log rocket SDK
 
-  useEffect(() => {
-    //  LogRocket.init('7rp2z0/fishmyspot');
-    // if (isLoggedIn) {
-    //   LogRocket.identify(user?.id, {
-    //     name: `${user?.profile?.firstName} ${user?.profile?.lastName}`,
-    //     email: user?.email,
-    // Add your own custom user variables here, ie:
-    // account_type: user?.profile?.publicData?.account_type,
-    //   });
-    // }
-  }, []);
+  // useEffect(() => {
+  //  LogRocket.init('7rp2z0/fishmyspot');
+  // if (isLoggedIn) {
+  //   LogRocket.identify(user?.id, {
+  //     name: `${user?.profile?.firstName} ${user?.profile?.lastName}`,
+  //     email: user?.email,
+  // Add your own custom user variables here, ie:
+  // account_type: user?.profile?.publicData?.account_type,
+  //   });
+  // }
+  // }, []);
 
   useEffect(() => {
     // It will update user data in redux in every reload if user is logged in
