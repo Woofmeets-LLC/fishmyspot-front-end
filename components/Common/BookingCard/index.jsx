@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { StatusButton } from '..';
@@ -5,7 +6,6 @@ import { getTimeZoneWiseDateTime } from '../../../services/date/get-time-zone-wi
 import { getSdk } from '../../../sharetribe/sharetribeSDK';
 import ListItem from '../ListItem';
 import CreateReviewForOnwer from './CreateReviewForOwner';
-
 const BookingCard = ({
   setBookingList,
   setPurchaseList,
@@ -90,10 +90,80 @@ const BookingCard = ({
         params: {},
       })
       .then((res) => {
-        setBookingList((bookingList) =>
-          bookingList.filter((item) => item.id.uuid !== bookingData?.id?.uuid)
-        );
-        setApproveLoading(false);
+        axios
+          .post('http://localhost:5000/giftcards/approvetransaction', {
+            transactionId: bookingData?.id?.uuid,
+          })
+          .then(async (couponResult) => {
+            console.log({ couponResult, bookingData });
+            const promo_code = couponResult?.data?.promo;
+            const user_name =
+              bookingData?.relationships?.customer?.attributes?.profile
+                ?.displayName;
+            const pond_title =
+              bookingData?.relationships?.listing?.attributes?.title;
+            const promo_result = await axios.get(
+              `http://localhost:5000/giftcards/${promo_code}`
+            );
+            const amount_left = promo_result?.data?.amount;
+            const to_email = promo_result?.data?.email;
+
+            const data = {
+              service_id: 'service_0z8txkg',
+              template_id: 'template_kkpjo9d',
+              user_id: 'D9WeGnhaGJceVldKx',
+              template_params: {
+                user_name,
+                promo_code,
+                pond_title,
+                amount_left,
+                to_email,
+              },
+            };
+            await axios
+              .post('https://api.emailjs.com/api/v1.0/email/send', data)
+              .catch((err) => console.log(err));
+
+            const angler_name = user_name;
+            const transaction_id = couponResult?.data?.transactionId;
+            const angler_id = couponResult?.data?.anglerId;
+            const pondowner_id = couponResult?.data.pondOwnerId;
+            const amount_used = couponResult?.data?.usedAmount;
+            const amount_payable = amount_used / 2;
+
+            const dataToOperator = {
+              service_id: 'service_0z8txkg',
+              template_id: 'template_yh9z0ed',
+              user_id: 'D9WeGnhaGJceVldKx',
+              template_params: {
+                angler_name,
+                transaction_id,
+                angler_id,
+                pondowner_id,
+                amount_used,
+                amount_payable,
+                pond_title,
+              },
+            };
+            await axios
+              .post(
+                'https://api.emailjs.com/api/v1.0/email/send',
+                dataToOperator
+              )
+              .catch((err) => console.log(err));
+
+            // console.log({ couponResult, bookingData, promo_result });
+            setBookingList((bookingList) =>
+              bookingList.filter(
+                (item) => item.id.uuid !== bookingData?.id?.uuid
+              )
+            );
+            setApproveLoading(false);
+          })
+          .catch((err) => {
+            console.log(err);
+            setApproveLoading(false);
+          });
       })
       .catch((err) => {
         setApproveLoading(false);
