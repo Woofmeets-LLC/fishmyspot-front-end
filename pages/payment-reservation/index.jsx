@@ -124,16 +124,19 @@ const PaymentReservation = () => {
         });
         if (bookingData?.['applied-discount']) {
           axios
-            .post('http://localhost:5000/giftcards/apply', {
-              usedAmount: bookingData?.['applied-discount'],
-              promo: bookingData?.giftCode,
-              anglerId: auth?.user?.id,
-              transactionId: id,
-              pondId: bookingData?.['pond-id'],
-              pondOwnerId:
-                bookingData?.pondData?.relationships?.author?.data?.id?.uuid,
-              paymentIntent: stripePaymentIntentId,
-            })
+            .post(
+              'https://fish-my-spot-backend-op74rtdzqa-uc.a.run.app/giftcards/apply',
+              {
+                usedAmount: bookingData?.['applied-discount'],
+                promo: bookingData?.giftCode,
+                anglerId: auth?.user?.id,
+                transactionId: id,
+                pondId: bookingData?.['pond-id'],
+                pondOwnerId:
+                  bookingData?.pondData?.relationships?.author?.data?.id?.uuid,
+                paymentIntent: stripePaymentIntentId,
+              }
+            )
             .then((res) => {
               // console.log(res);
             })

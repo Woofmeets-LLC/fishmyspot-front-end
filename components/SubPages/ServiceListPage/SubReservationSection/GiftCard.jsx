@@ -12,7 +12,9 @@ const GiftCard = () => {
 
   const handleGiftCode = () => {
     setIsLoading(true);
-    axios(`http://localhost:5000/giftcards/${field.value}`)
+    axios(
+      `https://fish-my-spot-backend-op74rtdzqa-uc.a.run.app/giftcards/${field.value}`
+    )
       .then((res) => {
         setIsLoading(false);
         if (res?.data?.amount > 0) {
