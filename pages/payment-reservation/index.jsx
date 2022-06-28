@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
 import SubPaymentStepper from '../../components/SubPages/PaymentReservationPage/SubPaymentStepper/SubPaymentStepper';
@@ -19,7 +19,7 @@ const PaymentReservation = () => {
   });
   const [keyValue, setKeyValue] = useState(1);
 
-  const bookingData = useSelector((state) => state.bookingData);
+  const { bookingData, auth } = useSelector((state) => state);
   const router = useRouter();
 
   const proceedTransaction = (id) => {
@@ -63,11 +63,25 @@ const PaymentReservation = () => {
       });
     }
 
+    if (bookingData?.['applied-discount']) {
+      experienceLineItems.push({
+        code: 'line-item/coupon-discount',
+        unitPrice: {
+          amount: -bookingData?.['applied-discount'] * 100,
+          currency: 'USD',
+          _sdkType: 'Money',
+        },
+        quantity: 1,
+        includeFor: ['customer', 'provider'],
+      });
+    }
+
     const lineItems = [
       ...experienceLineItems,
       {
-        code: `line-item/${bookingData?.dayType == 'halfDay' ? 'half-day' : 'full-day'
-          }`,
+        code: `line-item/${
+          bookingData?.dayType == 'halfDay' ? 'half-day' : 'full-day'
+        }`,
         unitPrice: {
           amount: +bookingData?.dayRates[bookingData?.dayType] * 100,
           currency: 'USD',
@@ -97,19 +111,50 @@ const PaymentReservation = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        setLoading(false);
+        // setLoading(false);
         const stripeSecretKey =
           res?.data?.data?.attributes?.protectedData?.stripePaymentIntents
             ?.default?.stripePaymentIntentClientSecret;
+        const stripePaymentIntentId =
+          res?.data?.data?.attributes?.protectedData?.stripePaymentIntents
+            ?.default?.stripePaymentIntentId;
         setTransactionInfo({
           tran: id,
           sk: stripeSecretKey,
         });
+        if (bookingData?.['applied-discount']) {
+          axios
+            .post(
+              'https://fish-my-spot-backend-op74rtdzqa-uc.a.run.app/giftcards/apply',
+              {
+                usedAmount: bookingData?.['applied-discount'],
+                promo: bookingData?.giftCode,
+                anglerId: auth?.user?.id,
+                transactionId: id,
+                pondId: bookingData?.['pond-id'],
+                pondOwnerId:
+                  bookingData?.pondData?.relationships?.author?.data?.id?.uuid,
+                paymentIntent: stripePaymentIntentId,
+              }
+            )
+            .then((res) => {
+              // console.log(res);
+            })
+            .catch((err) => {
+              console.log({ err });
+              setError({
+                status: true,
+                message: 'Something went wrong, please try again later',
+              });
+            });
+        }
+        setLoading(false);
         // const stripePaymentIntentId = res?.data?.data?.attributes?.protectedData?.stripePaymentIntents?.default?.stripePaymentIntentId;
         // router.push(`/payment-reservation/payment?tran=${id}&sk=${stripeSecretKey}`);
       })
       .catch((err) => {
         setLoading(false);
+        console.log({ err });
         setError({
           status: true,
           message: 'Something went wrong, please try again later',
@@ -165,7 +210,13 @@ const PaymentReservation = () => {
       }}
     >
       <div className=" bg-secondary text-center text-white">
-        <div className="container"> Warning: The time slot will be <b className='font-bold'>blocked for 10 minutes</b> if you <b className='font-bold'>reload or return</b> from this page.You can try again in 10 minutes for the same time slot if that is the case. </div>
+        <div className="container">
+          {' '}
+          Warning: The time slot will be{' '}
+          <b className="font-bold">blocked for 10 minutes</b> if you{' '}
+          <b className="font-bold">reload or return</b> from this page.You can
+          try again in 10 minutes for the same time slot if that is the case.{' '}
+        </div>
       </div>
       <div className="container">
         <div className="mx-auto pt-6 pb-16 lg:w-[800px] xl:w-[965px] xl:pt-10 xl:pb-32">

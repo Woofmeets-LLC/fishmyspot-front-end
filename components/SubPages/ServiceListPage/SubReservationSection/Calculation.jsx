@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useField } from 'formik';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 const Calculation = () => {
   const [dayTypeField] = useField('dayType');
@@ -9,8 +9,11 @@ const Calculation = () => {
   const [serviceFeeField] = useField('serviceFee');
   const [additionalAnglerField] = useField('additional-guests');
   const [totalField, totalMeta, totalHelpers] = useField('total');
+  const [couponDiscountField] = useField('coupon-discount');
+  const [appliedDiscount, appliedDiscountMeta, appliedDiscountHelpers] =
+    useField('applied-discount');
 
-  const dayRate = parseFloat(
+  const dayRate = +parseFloat(
     +dayRatesField.value?.[dayTypeField.value]
   ).toFixed(2);
 
@@ -28,19 +31,47 @@ const Calculation = () => {
     ? additionalAnglerField?.value * 10
     : 0;
 
-  const serviceFee = parseFloat(+serviceFeeField.value).toFixed(2);
-  const total = parseFloat(
-    +dayRate + +experienceCost + +serviceFee + additionalAnglerCost
-  ).toFixed(2);
+  const serviceFee = +parseFloat(+serviceFeeField.value).toFixed(2);
+
+  const couponDiscount = couponDiscountField?.value
+    ? couponDiscountField?.value
+    : 0.0;
+
+  // const total = parseFloat(
+  //   +dayRate +
+  //     +experienceCost +
+  //     +serviceFee +
+  //     additionalAnglerCost -
+  //     +couponDiscount
+  // ).toFixed(2);
 
   useEffect(() => {
-    totalHelpers.setValue(total);
-  }, [total]);
+    // totalHelpers.setValue(total);
+    const totalWithoutServiceFee =
+      dayRate + experienceCost + additionalAnglerCost;
+
+    if (totalWithoutServiceFee >= couponDiscount) {
+      appliedDiscountHelpers.setValue(couponDiscount);
+      totalHelpers.setValue(
+        totalWithoutServiceFee - couponDiscount + serviceFee
+      );
+    } else {
+      appliedDiscountHelpers.setValue(totalWithoutServiceFee);
+      totalHelpers.setValue(serviceFee);
+    }
+  }, [
+    dayRate,
+    experienceCost,
+    serviceFee,
+    additionalAnglerCost,
+    couponDiscount,
+  ]);
+
   return (
     <div className="my-8 font-trade-gothic text-highlight-1 lg:text-lg 2xl:text-xl">
-      <div className="mb-2 flex justify-between 2xl:mb-3">
+      <div className="flex justify-between pb-1">
         <p>{dayTypeField.value == 'fullDay' ? 'Full Day' : 'Half Day'}</p>
-        <p>${dayRate}</p>
+        <p>${dayRate.toFixed(2)}</p>
       </div>
       {Object?.keys(experienceField.value || {}).length
         ? Object.keys(experienceField.value)
@@ -82,13 +113,19 @@ const Calculation = () => {
               </div>
             ))
         : null}
-      <div className="flex justify-between border-b border-highlight-1 pb-3 2xl:pb-4">
+      <div className="flex justify-between pb-1">
         <p>Service fees</p>
         <p>${serviceFee}</p>
       </div>
-      <div className="flex justify-between pt-2 font-trade-gothic-bold text-lg md:pt-3 lg:text-xl 2xl:text-2xl">
+      {appliedDiscount.value > 0.0 && (
+        <div className="flex justify-between pb-2">
+          <p>Coupon Discount</p>
+          <p>{`-$${appliedDiscount.value.toFixed(2)}`}</p>
+        </div>
+      )}
+      <div className="flex justify-between border-t border-highlight-1 pt-2 font-trade-gothic-bold text-lg md:pt-3 lg:text-xl 2xl:text-2xl">
         <p>Total</p>
-        <p>${total}</p>
+        <p>${totalField.value}</p>
       </div>
     </div>
   );

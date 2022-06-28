@@ -10,6 +10,7 @@ import AdditionalAngler from './AdditionalAngler';
 import Calculation from './Calculation';
 import DaysTypeSelect from './DaysTypeSelect';
 import ExperienceSelect from './ExperienceSelect';
+import GiftCard from './GiftCard';
 import SelectDateTime from './SelectDateTime';
 
 const SubReservationSection = ({ pondData }) => {
@@ -38,7 +39,7 @@ const SubReservationSection = ({ pondData }) => {
         .then(() => {
           dispatch(updateUser());
         })
-        .catch(() => { });
+        .catch(() => {});
     }
   }, []);
 
@@ -87,6 +88,9 @@ const SubReservationSection = ({ pondData }) => {
               serviceFee: '3.52',
               total: 0,
               'additional-guests': 0,
+              giftCode: '',
+              'coupon-discount': 0.0,
+              'applied-discount': 0.0,
             }}
             validationSchema={yup.object({
               dayType: yup.string().required('Select a day type!'),
@@ -117,6 +121,8 @@ const SubReservationSection = ({ pondData }) => {
 
               <Calculation />
 
+              <GiftCard />
+
               {!user?.emailVerified && (
                 <div className="mb-2  font-trade-gothic-bold text-red-400">
                   Please{' '}
@@ -126,16 +132,16 @@ const SubReservationSection = ({ pondData }) => {
                   >
                     verify your email
                   </button>{' '}
-                  first to book the pond. Or, reload the page if you verified already.
+                  first to book the pond. Or, reload the page if you verified
+                  already.
                 </div>
               )}
 
               <button
                 type={user?.emailVerified ? 'submit' : 'button'}
-                className={`w-full py-2 lg:py-3 2xl:py-5 ${user?.emailVerified
-                  ? 'bg-secondary'
-                  : 'bg-gray-400'
-                  } rounded font-trade-gothic-bold text-white md:text-lg 2xl:text-2xl`}
+                className={`w-full py-2 lg:py-3 2xl:py-5 ${
+                  user?.emailVerified ? 'bg-secondary' : 'bg-gray-400'
+                } rounded font-trade-gothic-bold text-white md:text-lg 2xl:text-2xl`}
               >
                 Reserve
               </button>

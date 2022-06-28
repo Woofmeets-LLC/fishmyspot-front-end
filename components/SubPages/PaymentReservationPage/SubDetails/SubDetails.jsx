@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import SubDetailsItem from './SubDetailsItem';
 
@@ -89,13 +89,23 @@ const SubDetails = ({ title, step }) => {
             );
           })}
 
-        <div className="border-b border-b-highlight-1 pb-1 2xl:pb-3">
+        <div className="pb-1 2xl:pb-3">
           <SubDetailsItem
             item={'Service fees'}
             value={`$${parseFloat(+bookingData?.serviceFee).toFixed(2)}`}
           />
         </div>
-        <div className="mt-2 md:mt-3 2xl:mt-5">
+        {bookingData?.['applied-discount'] != 0 && (
+          <div className="pb-1 2xl:pb-3">
+            <SubDetailsItem
+              item={'Coupon Discount'}
+              value={`-$${parseFloat(
+                +bookingData?.['applied-discount']
+              ).toFixed(2)}`}
+            />
+          </div>
+        )}
+        <div className="border-t border-t-highlight-1 pt-3">
           <SubDetailsItem
             item={'Total'}
             value={`$${parseFloat(+bookingData?.total).toFixed(2)}`}
