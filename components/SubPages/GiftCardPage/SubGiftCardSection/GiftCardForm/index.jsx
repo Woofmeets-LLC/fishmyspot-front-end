@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { ClipLoader } from 'react-spinners';
 import useSWR from 'swr';
 import * as yup from 'yup';
 import { setGiftCardData } from '../../../../../store/slices/giftCardSlice';
@@ -34,6 +35,16 @@ const GiftCardForm = ({ step, setStep }) => {
     setStep(step + 1);
   };
 
+  if (!giftCardAmounts && !giftCardAmountError) {
+    return (
+      <div className="flex h-screen w-screen flex-wrap items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
+          <ClipLoader size={50} color={'#1971ff'} />
+          <h2 className="mt-2 w-full text-center font-semibold">Loading...</h2>
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       {giftCardAmounts?.length === 0 ? (

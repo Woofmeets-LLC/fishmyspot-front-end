@@ -19,13 +19,8 @@ const SubGiftCardRulesSection = () => {
               How does it work?
             </h2>
             <p>
-              Gift recipients will be notified of their egift via email. The
-              gift card amount will automatically be added to the Fishmyspot
-              account associated with the {`recipient's`} email as Fishmyspot
-              credits. If no Fishmyspot account exists, one will be created with
-              the
-              {`recipient's`} email. Credits can be redeemed by the recipient
-              during checkout on Fishmyspot.com
+              Gift recipients will be notified of their egift via email. Credits
+              can be redeemed by the recipient during checkout on Fishmyspot.com
             </p>
             <p className="py-6">
               Please Note: Gift Cards do not cover FishMySpot booking service
