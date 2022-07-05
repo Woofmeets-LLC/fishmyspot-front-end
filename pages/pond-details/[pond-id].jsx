@@ -56,6 +56,7 @@ const PondDetails = () => {
           )
         );
         setPondData(formattedData);
+        console.log({ formattedData });
       })
       .catch((err) => {
         setLoading(false);
@@ -70,12 +71,14 @@ const PondDetails = () => {
         image: pondImages?.[0],
       }}
     >
-      {loading ? (
-        <div className="my-10 flex flex-wrap items-center justify-center">
+      {loading && (
+        <div className="my-64 flex flex-wrap items-center justify-center">
           <ClipLoader size={50} color={'#1971ff'} />
           <h2 className="mt-2 w-full text-center font-semibold">Loading...</h2>
         </div>
-      ) : (
+      )}
+
+      {!loading && pondData?.id?.uuid && (
         <>
           <ViewImageModal
             pondImages={pondImages}
@@ -117,6 +120,14 @@ const PondDetails = () => {
             </div>
           </div>
         </>
+      )}
+
+      {!loading && !pondData?.id?.uuid && (
+        <div className="my-64 flex flex-wrap items-center justify-center">
+          <h1 className="w-full text-center text-4xl font-semibold">
+            No pond found!
+          </h1>
+        </div>
       )}
     </HomeLayout>
   );
