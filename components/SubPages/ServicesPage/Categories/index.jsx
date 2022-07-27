@@ -57,7 +57,6 @@ const Categories = ({ getQuery, state }) => {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.search) {
-      console.log('executing inside location search');
       const parsed = queryString.parse(window.location.search, {
         arrayFomate: 'comma',
       });

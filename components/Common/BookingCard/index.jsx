@@ -98,7 +98,7 @@ const BookingCard = ({
             }
           )
           .then(async (couponResult) => {
-            console.log({ couponResult, bookingData });
+            // console.log({ couponResult, bookingData });
             const promo_code = couponResult?.data?.promo;
             const user_name =
               bookingData?.relationships?.customer?.attributes?.profile

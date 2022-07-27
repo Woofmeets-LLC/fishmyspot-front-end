@@ -48,26 +48,6 @@ const TypeFish = ({ typeFish, setTypeFish, setIsQueryReady }) => {
     return () => window.removeEventListener('click', handleClick);
   }, [isDropDown]);
 
-<<<<<<< HEAD
-  const options = [
-    'Blackcrappie',
-    'Bluegill',
-    'Carp',
-    'Channelcatfish',
-    'Largemouthbass',
-    'Muskie',
-    'Northernpike',
-    'Sunfish',
-    'Smallmouthbass',
-    'Walleye',
-    'Whitecrappie',
-    'YellowPerch',
-    'Other',
-  ];
-
-  const typeFishAddOrRemove = (fishName) => {
-    setIsQueryReady(true);
-=======
   const options = {
     Blackcrappie: 'Black Crappie',
     Bluegill: 'Bluegill',
@@ -85,7 +65,6 @@ const TypeFish = ({ typeFish, setTypeFish, setIsQueryReady }) => {
   };
 
   const typeFishAddOrRemove = (fishName) => {
->>>>>>> 64652dd32cc0b9b3cb0ca7910c83d51088c4db35
     const findFish =
       typeFish?.length > 0
         ? typeFish?.find((fish) => fish === fishName)
@@ -107,6 +86,7 @@ const TypeFish = ({ typeFish, setTypeFish, setIsQueryReady }) => {
         };
       });
     }
+    setIsQueryReady(true);
   };
 
   return (
@@ -115,11 +95,7 @@ const TypeFish = ({ typeFish, setTypeFish, setIsQueryReady }) => {
         className="flex cursor-pointer items-center justify-between rounded-3xl border border-gray-300 bg-white py-1 px-3 font-trade-gothic text-base text-primary lg:py-2 lg:px-5"
         onClick={() => setIsDropDown(!isDropDown)}
       >
-<<<<<<< HEAD
-        Type fish
-=======
         Type of fish
->>>>>>> 64652dd32cc0b9b3cb0ca7910c83d51088c4db35
         {isDropDown ? <IoIosArrowUp /> : <IoIosArrowDown />}
       </div>
       <AnimatePresence>
@@ -132,11 +108,7 @@ const TypeFish = ({ typeFish, setTypeFish, setIsQueryReady }) => {
             ref={dropdown}
             className="absolute z-50 rounded-lg border-gray-100 bg-white pt-5 pl-4 pr-6 shadow"
           >
-<<<<<<< HEAD
-            {options?.map((option, i) => (
-=======
             {Object.keys(options)?.map((option, i) => (
->>>>>>> 64652dd32cc0b9b3cb0ca7910c83d51088c4db35
               <div
                 key={i}
                 className="mb-4 flex items-center space-x-3 font-trade-gothic-bold text-sm md:text-base"
@@ -156,11 +128,7 @@ const TypeFish = ({ typeFish, setTypeFish, setIsQueryReady }) => {
                   whileHover="hover"
                   className="cursor-pointer"
                 >
-<<<<<<< HEAD
-                  {option}
-=======
                   {options[option]}
->>>>>>> 64652dd32cc0b9b3cb0ca7910c83d51088c4db35
                 </motion.label>
               </div>
             ))}
