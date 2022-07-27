@@ -28,7 +28,6 @@ const Categories = ({ getQuery, state }) => {
 
   useEffect(() => {
     if (!firstTime && isQueryReady) {
-      console.log('executing !firstTime');
       if (state) {
         router.push(
           `/services/${state}?` +
@@ -77,10 +76,8 @@ const Categories = ({ getQuery, state }) => {
         };
       });
 
-      getQuery(parsedQuery);
-
       setIsQueryReady(true);
-      console.log('setqueryready');
+      getQuery(parsedQuery);
     }
     setFirstTime(false);
   }, []);
