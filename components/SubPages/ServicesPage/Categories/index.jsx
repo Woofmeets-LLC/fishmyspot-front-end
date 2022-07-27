@@ -77,6 +77,8 @@ const Categories = ({ getQuery, state }) => {
         };
       });
 
+      getQuery(parsedQuery);
+
       setIsQueryReady(true);
       console.log('setqueryready');
     }
