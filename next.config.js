@@ -32,6 +32,7 @@ module.exports = {
     // NEXT_STRIPE_PUBLISHABLE_KEY:
     //   'pk_test_51JDrfGL6dPTcqE42bUjVOMBz9IlrztzO3WQSLYuIsVaQik9uBgC5l3ubS3NngycpFfOZDAXHHBDzL9CghHFjkkzd00LKieQOlz',
     NEXT_STRIPE_PUBLISHABLE_KEY: 'pk_test_rbfLjGSEddnv5RHWU6hhPSBs',
+    BACKEND_URL: 'http://localhost:5000',
   },
   //add next image host name
   images: {

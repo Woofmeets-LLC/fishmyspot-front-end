@@ -12,7 +12,7 @@ const PaypalOnboardButton = () => {
 
   //   try {
   //     const res = await axios.post(
-  //       "https://fish-my-spot-backend-op74rtdzqa-uc.a.run.app/paypal/generate-signup-link",
+  //       "process.env.BACKEND_URL/paypal/generate-signup-link",
   //       {
   //         tracker_id: 1,
   //       }
