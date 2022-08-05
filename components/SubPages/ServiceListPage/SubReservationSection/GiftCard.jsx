@@ -12,16 +12,20 @@ const GiftCard = () => {
 
   const handleGiftCode = () => {
     setIsLoading(true);
-    axios(
-      `https://fish-my-spot-backend-op74rtdzqa-uc.a.run.app/giftcards/${field.value}`
-    )
+    axios(`${process.env.BACKEND_URL}/giftcards/${field.value}`)
       .then((res) => {
         setIsLoading(false);
-        if (res?.data?.amount > 0) {
-          setCouponApplied(true);
-          couponDiscountHelpers.setValue(res?.data?.amount);
+        if (res?.data?.valid) {
+          if (res?.data?.amount > 0) {
+            setCouponApplied(true);
+            couponDiscountHelpers.setValue(res?.data?.amount);
+          } else {
+            couponDiscountHelpers.setError(true);
+          }
         } else {
-          couponDiscountHelpers.setError(true);
+          helpers.setError(true);
+          helpers.setValue('', false);
+          setCouponApplied(false);
         }
       })
       .catch((err) => {

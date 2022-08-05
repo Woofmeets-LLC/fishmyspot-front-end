@@ -91,14 +91,11 @@ const BookingCard = ({
       })
       .then((res) => {
         axios
-          .post(
-            'https://fish-my-spot-backend-op74rtdzqa-uc.a.run.app/giftcards/approvetransaction',
-            {
-              transactionId: bookingData?.id?.uuid,
-            }
-          )
+          .post(`${process.env.BACKEND_URL}/giftcards/approvetransaction`, {
+            transactionId: bookingData?.id?.uuid,
+          })
           .then(async (couponResult) => {
-            console.log({ couponResult, bookingData });
+            // console.log({ couponResult, bookingData });
             const promo_code = couponResult?.data?.promo;
             const user_name =
               bookingData?.relationships?.customer?.attributes?.profile
@@ -106,7 +103,7 @@ const BookingCard = ({
             const pond_title =
               bookingData?.relationships?.listing?.attributes?.title;
             const promo_result = await axios.get(
-              `https://fish-my-spot-backend-op74rtdzqa-uc.a.run.app/giftcards/${promo_code}`
+              `${process.env.BACKEND_URL}/giftcards/${promo_code}`
             );
             const amount_left = promo_result?.data?.amount;
             const to_email = promo_result?.data?.email;

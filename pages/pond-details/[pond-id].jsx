@@ -56,7 +56,7 @@ const PondDetails = () => {
           )
         );
         setPondData(formattedData);
-        console.log({ formattedData });
+        // console.log({ formattedData });
       })
       .catch((err) => {
         setLoading(false);

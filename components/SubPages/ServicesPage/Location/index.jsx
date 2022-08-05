@@ -31,7 +31,12 @@ const hoverVariants = {
   },
 };
 
-const Location = ({ mileRange, setMileRange, handleMileClear }) => {
+const Location = ({
+  mileRange,
+  setMileRange,
+  handleMileClear,
+  setIsQueryReady,
+}) => {
   const [isDropDown, setIsDropDown] = useState(false);
   // create a React ref for the dropdown element
   const dropdown = useRef(null);
@@ -95,6 +100,7 @@ const Location = ({ mileRange, setMileRange, handleMileClear }) => {
   const onSliderChange = (mile) => {
     clearTimeout(timeout.current);
     setValue(mile);
+    setIsQueryReady(true);
     timeout.current = setTimeout(() => {
       setMileRange((prevState) => {
         return {

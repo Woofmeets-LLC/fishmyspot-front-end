@@ -70,19 +70,16 @@ const GiftCardCheckoutForm = ({ step, setStep, setIsError }) => {
           setIsError(true);
           setStep(step + 1);
         } else {
-          fetch(
-            'https://fish-my-spot-backend-op74rtdzqa-uc.a.run.app/giftcards/promo',
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                code: result?.paymentIntent?.id,
-                email: giftCardData?.recipientEmail,
-              }),
-            }
-          )
+          fetch(`${process.env.BACKEND_URL}/giftcards/promo`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              code: result?.paymentIntent?.id,
+              email: giftCardData?.recipientEmail,
+            }),
+          })
             .then((res) => res.json())
             .then((res) => {
               const data = {
