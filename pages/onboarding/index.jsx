@@ -12,7 +12,7 @@ const PaypalOnboardButton = () => {
 
   //   try {
   //     const res = await axios.post(
-  //       "http://localhost:5000/paypal/generate-signup-link",
+  //       "process.env.BACKEND_URL/paypal/generate-signup-link",
   //       {
   //         tracker_id: 1,
   //       }

@@ -15,6 +15,7 @@ const Categories = ({ getQuery, state }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [firstTime, setFirstTime] = useState(true);
+  const [isQueryReady, setIsQueryReady] = useState(false);
 
   const [query, setQuery] = useState({
     location: '',
@@ -26,7 +27,7 @@ const Categories = ({ getQuery, state }) => {
   });
 
   useEffect(() => {
-    if (!firstTime) {
+    if (!firstTime && isQueryReady) {
       if (state) {
         router.push(
           `/services/${state}?` +
@@ -74,23 +75,8 @@ const Categories = ({ getQuery, state }) => {
         };
       });
 
-      if (state) {
-        router.push(
-          `/services/${state}?` +
-            queryString.stringify(parsedQuery, {
-              arrayFormat: 'comma',
-              skipNull: true,
-            })
-        );
-      } else {
-        router.push(
-          `/services?` +
-            queryString.stringify(parsedQuery, {
-              arrayFormat: 'comma',
-              skipNull: true,
-            })
-        );
-      }
+      setIsQueryReady(true);
+      getQuery(parsedQuery);
     }
     setFirstTime(false);
   }, []);
@@ -139,16 +125,30 @@ const Categories = ({ getQuery, state }) => {
           mileRange={query.mile}
           setMileRange={setQuery}
           handleMileClear={handleMileClear}
+          setIsQueryReady={setIsQueryReady}
         />
       )}
       <PriceSlider
         priceRange={query.price}
         setPriceRange={setQuery}
         handlePriceClear={handlePriceClear}
+        setIsQueryReady={setIsQueryReady}
       />
-      <TypeFish typeFish={query.typeFish} setTypeFish={setQuery} />
-      <UserRating ratings={query.rating} setRatings={setQuery} />
-      <Experience experience={query.experience} setExperience={setQuery} />
+      <TypeFish
+        typeFish={query.typeFish}
+        setTypeFish={setQuery}
+        setIsQueryReady={setIsQueryReady}
+      />
+      <UserRating
+        ratings={query.rating}
+        setRatings={setQuery}
+        setIsQueryReady={setIsQueryReady}
+      />
+      <Experience
+        experience={query.experience}
+        setExperience={setQuery}
+        setIsQueryReady={setIsQueryReady}
+      />
     </div>
   );
 };

@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 const variants = {
   hidden: {
@@ -13,7 +13,7 @@ const variants = {
     transition: {
       delay: 0.2,
       duration: 1,
-      type: "spring",
+      type: 'spring',
       stiffness: 120,
     },
   },
@@ -24,13 +24,13 @@ const hoverVariants = {
     scale: 1.03,
     originX: 0,
     transition: {
-      type: "spring",
+      type: 'spring',
       stiffness: 200,
     },
   },
 };
 
-const Experience = ({ experience, setExperience }) => {
+const Experience = ({ experience, setExperience, setIsQueryReady }) => {
   const [isDropDown, setIsDropDown] = useState(false);
   // create a React ref for the dropdown element
   const dropdown = useRef(null);
@@ -43,12 +43,16 @@ const Experience = ({ experience, setExperience }) => {
         setIsDropDown(false);
       }
     }
-    window.addEventListener("click", handleClick);
+    window.addEventListener('click', handleClick);
     // clean up
-    return () => window.removeEventListener("click", handleClick);
+    return () => window.removeEventListener('click', handleClick);
   }, [isDropDown]);
 
-  const options = ["Pond Trawler/Metal Boat", "Campsite", "Additional Fisherman"];
+  const options = [
+    'Pond Trawler/Metal Boat',
+    'Campsite',
+    'Additional Fisherman',
+  ];
 
   const experienceAddOrRemove = (exp) => {
     const findExperience =
@@ -70,6 +74,7 @@ const Experience = ({ experience, setExperience }) => {
         };
       });
     }
+    setIsQueryReady(true);
   };
 
   return (
@@ -97,7 +102,7 @@ const Experience = ({ experience, setExperience }) => {
                 className="mb-4 flex items-center space-x-3 font-trade-gothic-bold text-sm md:text-base"
               >
                 <input
-                  type={"checkbox"}
+                  type={'checkbox'}
                   name={option}
                   id={option}
                   value={option}

@@ -40,10 +40,12 @@
     "react-spinners": "^0.11.0",
     "sharetribe-flex-integration-sdk": "^1.7.0",
     "sharetribe-flex-sdk": "^1.15.0",
+    "sharp": "^0.30.7",
     "slick-carousel": "^1.8.1",
     "slugify": "^1.6.5",
     "stripe": "^8.207.0",
     "swr": "^1.2.2",
+    "voucher-code-generator": "^1.3.0",
     "yarn": "^1.22.17",
     "yup": "^0.32.11"
   },
