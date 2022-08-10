@@ -3,7 +3,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import Slider from '../Slider';
 
-const PriceSlider = ({ priceRange, setPriceRange, handlePriceClear }) => {
+const PriceSlider = ({
+  priceRange,
+  setPriceRange,
+  handlePriceClear,
+  setIsQueryReady,
+}) => {
   const [isDropDown, setIsDropDown] = useState(false);
   // create a React ref for the dropdown element
   const dropdown = useRef(null);
@@ -27,6 +32,8 @@ const PriceSlider = ({ priceRange, setPriceRange, handlePriceClear }) => {
   const onSliderChange = (priceValue) => {
     clearTimeout(timeout.current);
     setValue(priceValue);
+    setIsQueryReady(true);
+
     timeout.current = setTimeout(() => {
       setPriceRange((prevState) => {
         return {

@@ -1,8 +1,8 @@
-import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
-import { FaStar } from "react-icons/fa";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { useRouter } from "next/router";
+import { AnimatePresence, motion } from 'framer-motion';
+import { useRouter } from 'next/router';
+import React, { useEffect, useRef, useState } from 'react';
+import { FaStar } from 'react-icons/fa';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 const variants = {
   hidden: {
@@ -15,7 +15,7 @@ const variants = {
     transition: {
       delay: 0.2,
       duration: 1,
-      type: "spring",
+      type: 'spring',
       stiffness: 120,
     },
   },
@@ -26,13 +26,13 @@ const hoverVariants = {
     scale: 1.03,
     originX: 0,
     transition: {
-      type: "spring",
+      type: 'spring',
       stiffness: 200,
     },
   },
 };
 
-const UserRating = ({ ratings, setRatings }) => {
+const UserRating = ({ ratings, setRatings, setIsQueryReady }) => {
   const router = useRouter();
   const [isDropDown, setIsDropDown] = useState(false);
   // create a React ref for the dropdown element
@@ -46,20 +46,21 @@ const UserRating = ({ ratings, setRatings }) => {
         setIsDropDown(false);
       }
     }
-    window.addEventListener("click", handleClick);
+    window.addEventListener('click', handleClick);
     // clean up
-    return () => window.removeEventListener("click", handleClick);
+    return () => window.removeEventListener('click', handleClick);
   }, [isDropDown]);
 
   const options = [
-    "One star",
-    "Two star",
-    "Three star",
-    "Four star",
-    "Five star",
+    'One star',
+    'Two star',
+    'Three star',
+    'Four star',
+    'Five star',
   ];
 
   const ratingsAddOrRemove = (rating) => {
+    setIsQueryReady(true);
     const findRating =
       ratings?.length > 0 ? ratings?.find((r) => r === rating) : undefined;
     if (findRating !== undefined) {
@@ -106,7 +107,7 @@ const UserRating = ({ ratings, setRatings }) => {
               >
                 <div className="col-span-1 mt-2">
                   <input
-                    type={"radio"}
+                    type={'radio'}
                     name={option}
                     id={option}
                     value={option}

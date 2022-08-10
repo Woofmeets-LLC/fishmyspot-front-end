@@ -22,7 +22,7 @@ const AdditionalAngler = () => {
         />
       </div>
       {experiencefield?.value?.['Additional Fisherman']?.checked && (
-        <span className="text-sm text-red-400">
+        <span className="text-sm text-amber-500">
           {`You will be charged $${experiencefield?.value?.['Additional Fisherman']?.price}`}
           {` `}
           per additional guests for additional fisherman addon

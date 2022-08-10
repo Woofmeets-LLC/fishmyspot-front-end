@@ -30,7 +30,7 @@ const hoverVariants = {
   },
 };
 
-const TypeFish = ({ typeFish, setTypeFish }) => {
+const TypeFish = ({ typeFish, setTypeFish, setIsQueryReady }) => {
   const [isDropDown, setIsDropDown] = useState(false);
   // create a React ref for the dropdown element
   const dropdown = useRef(null);
@@ -86,6 +86,7 @@ const TypeFish = ({ typeFish, setTypeFish }) => {
         };
       });
     }
+    setIsQueryReady(true);
   };
 
   return (
