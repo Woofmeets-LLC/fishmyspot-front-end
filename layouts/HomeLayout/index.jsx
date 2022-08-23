@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
@@ -126,6 +127,19 @@ const HomeLayout = ({
 
   return (
     <>
+      <Script
+        strategy="afterInteractive"
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=UA-132823088-1"
+      />
+      <Script strategy="afterInteractive" id="googletagmanager-tag">
+        {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-132823088-1');
+        `}
+      </Script>
       <Head>
         <title>{ogTags.title ? ogTags.title : title}</title>
         {Object.keys(ogTags)?.map((key) => {
