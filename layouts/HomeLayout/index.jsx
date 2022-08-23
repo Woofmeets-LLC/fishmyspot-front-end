@@ -127,6 +127,7 @@ const HomeLayout = ({
 
   return (
     <>
+      {/* Global site tag (gtag.js) - Google Analytics */}
       <Script
         strategy="afterInteractive"
         async
