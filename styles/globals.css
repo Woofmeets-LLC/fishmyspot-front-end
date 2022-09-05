@@ -246,56 +246,60 @@ Chrome
 }
 
 /* blogs style */
-.blog-details h1 {
+.blocks-renderer h1 {
   @apply text-3xl;
 }
 
-.blog-details h2 {
+.blocks-renderer h2 {
   @apply text-2xl;
 }
 
-.blog-details h3 {
+.blocks-renderer h3 {
   @apply text-xl;
 }
 
-.blog-details h4 {
+.blocks-renderer h4 {
   @apply text-lg;
 }
 
-.blog-details h5 {
+.blocks-renderer h5 {
   @apply text-lg;
 }
 
-.blog-details h6 {
+.blocks-renderer h6 {
   @apply text-base;
 }
 
-.blog-details ol li {
+.blocks-renderer ol li {
   @apply mb-2 list-decimal;
 }
 
-.blog-details ul li {
+.blocks-renderer ul li {
   @apply mb-2 list-disc;
 }
 
-.blog-details tbody tr td {
+.blocks-renderer tbody tr td {
   @apply border px-4 py-2 text-center;
 }
 
-.blog-details pre {
+.blocks-renderer pre {
   @apply mb-7 bg-gray-100 p-3 md:mb-10;
 }
 
-.blog-details blockquote footer {
+.blocks-renderer blockquote footer {
   @apply text-right;
 }
 
-.blog-details figure figcaption {
+.blocks-renderer figure figcaption {
   @apply p-2;
 }
 
-.blog-details a {
+.blocks-renderer a {
   @apply underline decoration-2 underline-offset-1;
+}
+
+.blocks-renderer p {
+  @apply leading-[2];
 }
 
 .feature-fishing-spot .slick-list {

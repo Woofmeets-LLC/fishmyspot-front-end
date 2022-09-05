@@ -1,3 +1,4 @@
+import BlocksRenderer from './BlocksRenderer';
 import CancellationCard from './CancellationCard';
 import Modal from './CustomModal/Modal';
 import DayHoursPicker from './FormElements/DayHoursPicker';
@@ -15,37 +16,36 @@ import LoginModal from './Modals/LoginModal';
 import ResetPasswordModal from './Modals/ResetPasswordModal';
 import SignUpModal from './Modals/SignUpModal';
 import PageHeader from './PageHeader';
-import PropertyCard from "./PropertyCard";
+import PropertyCard from './PropertyCard';
 import PurchaseCard from './PurchaseCard';
 import PurchaseOrCancellationCard from './PurchaseOrCancelationCard';
 import PageTitle from './StaticPageElements/PageTitle';
 import SectionTitleDescription from './StaticPageElements/SectionTitleDescription';
 import StatusButton from './StatusButton';
 
-
 export {
-    Modal,
-    SignUpModal,
-    LoginModal,
-    FormInput,
-    FormSelect,
-    FormRadioButtons,
-    FormOption,
-    FormCheckbox,
-    FormTextarea,
-    DayHoursPicker,
-    MultiStepForm,
-    BackBtn,
-    NextBtn,
-    ResetPasswordModal,
-    PropertyCard,
-    PurchaseCard,
-    CancellationCard,
-    PurchaseOrCancellationCard,
-    PageHeader,
-    ListItem,
-    StatusButton,
-    PageTitle,
-    SectionTitleDescription
+  Modal,
+  SignUpModal,
+  LoginModal,
+  FormInput,
+  FormSelect,
+  FormRadioButtons,
+  FormOption,
+  FormCheckbox,
+  FormTextarea,
+  DayHoursPicker,
+  MultiStepForm,
+  BackBtn,
+  NextBtn,
+  ResetPasswordModal,
+  PropertyCard,
+  PurchaseCard,
+  CancellationCard,
+  PurchaseOrCancellationCard,
+  PageHeader,
+  ListItem,
+  StatusButton,
+  PageTitle,
+  SectionTitleDescription,
+  BlocksRenderer,
 };
-

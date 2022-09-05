@@ -27,8 +27,8 @@ const Footer = () => {
               <h2 className="mb-2 font-trade-gothic-bold text-xl uppercase">
                 About
               </h2>
-              <Link href="/">
-                <a className="mb-2 block font-trade-gothic">Home</a>
+              <Link href="/resources">
+                <a className="mb-2 block font-trade-gothic">Resources</a>
               </Link>
               <Link href="/about">
                 <a className="mb-2 block font-trade-gothic">About</a>

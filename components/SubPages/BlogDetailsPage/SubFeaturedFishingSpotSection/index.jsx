@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import Slider from 'react-slick';
 import FishingSpotCard from './FishingSpotCard';
 
 const SubFeaturedFishingSpotSection = ({ featuredSpots }) => {
+  const [show, setShow] = useState(featuredSpots?.length || 0);
   const settings = {
     className: 'center',
     centerMode: false,
@@ -21,7 +23,7 @@ const SubFeaturedFishingSpotSection = ({ featuredSpots }) => {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
           initialSlide: 2,
         },
@@ -48,17 +50,31 @@ const SubFeaturedFishingSpotSection = ({ featuredSpots }) => {
             <span className="mt-4 inline-block h-[6px] w-[140px] rounded-full bg-secondary"></span>
           </div>
 
-          <Slider {...settings}>
-            {featuredSpots.map((featuredSpot) => (
-              <FishingSpotCard
-                key={featuredSpot?.id}
-                title={featuredSpot?.title}
-                img={featuredSpot?.image?.data?.attributes?.url}
-                description={featuredSpot?.description}
-                spotLink={featuredSpot?.spotLink}
-              />
-            ))}
-          </Slider>
+          {featuredSpots?.length > 2 ? (
+            <Slider {...settings}>
+              {featuredSpots.map((featuredSpot) => (
+                <FishingSpotCard
+                  key={featuredSpot?.id}
+                  title={featuredSpot?.title}
+                  img={featuredSpot?.image?.data?.attributes?.url}
+                  description={featuredSpot?.description}
+                  spotLink={featuredSpot?.spotLink}
+                />
+              ))}
+            </Slider>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3">
+              {featuredSpots.map((featuredSpot) => (
+                <FishingSpotCard
+                  key={featuredSpot?.id}
+                  title={featuredSpot?.title}
+                  img={featuredSpot?.image?.data?.attributes?.url}
+                  description={featuredSpot?.description}
+                  spotLink={featuredSpot?.spotLink}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
