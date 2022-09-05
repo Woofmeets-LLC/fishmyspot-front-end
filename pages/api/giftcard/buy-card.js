@@ -1,4 +1,5 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = eval('require')('stripe')(process.env.STRIPE_SECRET_KEY);
 export const config = {
   api: {
     bodyParser: true,
