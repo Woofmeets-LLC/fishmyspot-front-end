@@ -28,7 +28,7 @@ const BlogCard = ({ blog }) => {
         </div>
         <div className="flex items-center justify-center space-x-3 font-trade-gothic text-sm">
           <div className="flex items-center space-x-2">
-            <span className="text-gray-400">Publish</span>
+            <span className="text-gray-400">Published</span>
             <span className="text-highlight-3">
               {new Date(blog?.attributes?.createdAt)?.toDateString()}
             </span>
