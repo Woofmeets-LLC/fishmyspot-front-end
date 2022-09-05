@@ -1,4 +1,5 @@
 // const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+// eslint-disable-next-line no-eval
 const stripe = eval('require')('stripe')(process.env.STRIPE_SECRET_KEY);
 export const config = {
   api: {

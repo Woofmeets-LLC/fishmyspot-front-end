@@ -13,7 +13,7 @@ const SubResourcesSection = () => {
 
   return (
     <>
-      <SubResourcesBannerSection src={'/images/resource.jpg'} />
+      <SubResourcesBannerSection />
       <section className="bg-gray-50">
         <div className="container min-h-[350px] pt-16 pb-20 md:min-h-[500px]">
           {resources?.length === 0 ? (
