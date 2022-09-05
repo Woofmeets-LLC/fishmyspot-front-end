@@ -3,11 +3,11 @@ import ChecklistRenderer from '../CustomRenderer/ChecklistRenderer';
 import RawHTMLRenderer from '../CustomRenderer/RawHTMLRenderer';
 import WarningRenderer from '../CustomRenderer/WarningRenderer';
 
-const BlocksRenderer = ({ parseBlog }) => {
+const BlocksRenderer = ({ parseDetail }) => {
   return (
-    <div className="blog-details">
+    <div className="blocks-renderer">
       <Blocks
-        data={parseBlog}
+        data={parseDetail}
         renderers={{
           raw: RawHTMLRenderer,
           checklist: ChecklistRenderer,

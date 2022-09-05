@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import BlocksRenderer from './BlocksRenderer';
+import { BlocksRenderer } from '../../Common';
 import MoreBlogsSection from './MoreBlogsSection';
 import SubFeaturedFishingSpotSection from './SubFeaturedFishingSpotSection';
 import SubListedYourSpotSection from './SubListedYourSpotSection';
@@ -106,7 +106,7 @@ const SubBlogDetailsSection = ({ data: blogDetails }) => {
                 </div>
 
                 {/* Blocks renderer */}
-                <BlocksRenderer parseBlog={parseBlog} />
+                <BlocksRenderer parseDetail={parseBlog} />
               </div>
             </div>
             <div className="mx-auto hidden pt-10 lg:col-span-4 lg:block lg:pl-4">
