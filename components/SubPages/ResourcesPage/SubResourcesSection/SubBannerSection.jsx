@@ -1,9 +1,9 @@
-const SubResourcesBannerSection = ({ src }) => {
+const SubResourcesBannerSection = () => {
   return (
     <div
-      className="flex h-48 w-full flex-col items-center justify-center px-10 text-blue-400 md:h-80 xl:h-96"
+      className="flex h-48 w-full flex-col items-center justify-center px-10 text-secondary md:h-80 xl:h-96"
       style={{
-        background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(${src}) center/cover no-repeat`,
+        background: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/images/resource02.jpg") center/cover no-repeat`,
         gap: '1.5em',
       }}
     >
