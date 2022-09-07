@@ -81,7 +81,7 @@ const Footer = () => {
               <a className="mb-2 block font-trade-gothic">Terms of Service</a>
             </Link>
           </div>
-          <div className="col-span-full sm:mx-auto md:col-span-1 md:mx-0 lg:col-span-full lg:mx-auto xl:col-span-1">
+          <div className="col-span-full sm:mx-auto md:col-span-1 md:mx-0 lg:col-span-full lg:mx-auto xl:col-span-1 xl:mx-0">
             <h2 className="mb-2 font-trade-gothic-bold text-xl uppercase sm:text-center md:text-left lg:text-center xl:text-left">
               Follow us
             </h2>
@@ -131,19 +131,19 @@ const Footer = () => {
         </div>
 
         <hr className="mx-auto md:w-1/2" />
-        <div className="grid lg:grid-cols-12 lg:gap-2">
-          <div className="lg:col-span-3">
+        <div className="grid lg:grid-cols-12 lg:gap-2 xl:grid-cols-4 xl:gap-20">
+          <div className="lg:col-span-3 xl:col-span-1">
             <p className="py-2 text-center text-white lg:py-6 lg:text-left">
               1-844-446-3474
             </p>
           </div>
-          <div className="order-3 lg:order-2 lg:col-span-6">
+          <div className="order-3 lg:order-2 lg:col-span-6 xl:col-span-2">
             <div className="py-2 text-center text-white lg:py-6">
               &copy; 2018 – 2021 by FishMySpot
             </div>
           </div>
-          <div className="order-2 lg:order-3 lg:col-span-3">
-            <p className="text-center text-white lg:py-6 lg:text-left">
+          <div className="order-2 lg:order-3 lg:col-span-3 xl:col-span-1">
+            <p className="text-center text-white lg:py-6 lg:text-right xl:text-left">
               info@fishmyspot.com
             </p>
           </div>
