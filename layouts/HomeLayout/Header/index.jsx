@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { FaUserCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,6 +39,22 @@ const Header = () => {
 
   // Dispatch
   const dispatch = useDispatch();
+
+  const [isLimitedUser, setIsLimitedUser] = useState(false);
+
+  useEffect(() => {
+    getSdk()
+      .authInfo()
+      .then((authInfo) => {
+        if (
+          authInfo &&
+          authInfo?.isAnonymous === false &&
+          authInfo?.scopes?.[0] === 'user:limited'
+        ) {
+          setIsLimitedUser(true);
+        }
+      });
+  }, []);
 
   const createAccountLink = () => {
     const originURL = window.location.origin;
@@ -90,6 +106,13 @@ const Header = () => {
       <LoginModal />
       <Toaster />
       <header className="sticky top-0 z-[1000] bg-white shadow">
+        {isLimitedUser && (
+          <div className="bg-yellow-500 p-4 text-yellow-50">
+            <p className="text-center">
+              You are logged in as {user?.email} with limited functionalities!
+            </p>
+          </div>
+        )}
         <div className="container relative flex h-[70px] items-center 2xl:h-[85px] 3xl:h-[102px]">
           <Link href="/">
             <a>
