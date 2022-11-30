@@ -10,14 +10,11 @@ const CategorySection = ({ blogsCategory, setBlogsCategory, categories }) => {
           id="category"
           className="rounded border border-gray-200 py-1 px-3 font-trade-gothic text-xs text-blue-400 focus:outline-none"
           onChange={(e) => setBlogsCategory(e.target.value)}
+          value={blogsCategory}
         >
           <option value="">Select</option>
           {categories?.map((category) => (
-            <option
-              key={category.id}
-              value={category?.attributes?.name}
-              selected={blogsCategory === category?.attributes?.name}
-            >
+            <option key={category.id} value={category?.attributes?.name}>
               {category?.attributes?.name}
             </option>
           ))}

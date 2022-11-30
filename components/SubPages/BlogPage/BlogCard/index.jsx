@@ -2,9 +2,9 @@ import Link from 'next/link';
 
 const BlogCard = ({ blog }) => {
   const imgUrl = blog?.attributes?.featuredImage?.data?.attributes?.formats
-    ?.thumbnail?.url
-    ? blog?.attributes?.featuredImage?.data?.attributes?.formats?.thumbnail?.url
-    : blog?.attributes?.featuredImage?.data?.attributes?.formats?.small?.url;
+    ?.medium?.url
+    ? blog?.attributes?.featuredImage?.data?.attributes?.formats?.medium?.url
+    : blog?.attributes?.featuredImage?.data?.attributes?.url;
 
   return (
     <div className="relative flex h-full min-w-0 flex-col break-words rounded-md bg-white bg-clip-border shadow-md">
