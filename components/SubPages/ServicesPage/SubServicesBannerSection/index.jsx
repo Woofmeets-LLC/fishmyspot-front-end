@@ -35,7 +35,7 @@ const SubServicesBannerSection = ({ state }) => {
           />
         )}
         <div className="container z-50">
-          <div className="md:w-2/3">
+          <div className="md:w-2/3 mx-auto">
             <h1
               className="z-50 mb-4 font-food-truck text-xl uppercase leading-loose md:text-3xl lg:text-4xl 2xl:text-5xl"
               style={{
