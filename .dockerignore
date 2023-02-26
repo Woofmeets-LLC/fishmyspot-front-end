@@ -8,3 +8,8 @@
 
 /build
 /.git
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
