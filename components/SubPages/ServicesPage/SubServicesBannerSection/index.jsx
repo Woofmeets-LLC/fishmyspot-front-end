@@ -1,6 +1,6 @@
-import axios from 'axios';
-import Image from 'next/image';
-import useSWR from 'swr';
+import axios from "axios";
+import Image from "next/image";
+import useSWR from "swr";
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 const SubServicesBannerSection = ({ state }) => {
@@ -18,8 +18,8 @@ const SubServicesBannerSection = ({ state }) => {
         style={{
           background:
             // "linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url('/images/alabama.jpg') center/cover no-repeat",
-            'linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .20))',
-          gap: '1.5em',
+            "linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .20))",
+          gap: "1.5em",
         }}
       >
         <div className="absolute top-0 left-0 z-10 h-full w-full bg-black opacity-40"></div>
@@ -35,12 +35,12 @@ const SubServicesBannerSection = ({ state }) => {
           />
         )}
         <div className="container z-50">
-          <div className="md:w-2/3">
+          <div className="mx-auto text-center md:w-2/3">
             <h1
               className="z-50 mb-4 font-food-truck text-xl uppercase leading-loose md:text-3xl lg:text-4xl 2xl:text-5xl"
               style={{
-                'text-shadow':
-                  '0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0,0,0,0.08)',
+                "text-shadow":
+                  "0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0,0,0,0.08)",
               }}
             >
               {data && data?.data?.[0]?.attributes?.statePageHeader}
@@ -48,8 +48,8 @@ const SubServicesBannerSection = ({ state }) => {
             <p
               className="z-50 font-trade-gothic text-sm text-white lg:text-lg"
               style={{
-                'text-shadow':
-                  '0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0,0,0,0.08)',
+                "text-shadow":
+                  "0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0,0,0,0.08)",
               }}
             >
               {data && data?.data?.[0]?.attributes?.statePageDescription}
