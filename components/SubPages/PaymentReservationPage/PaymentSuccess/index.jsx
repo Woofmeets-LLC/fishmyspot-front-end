@@ -6,6 +6,9 @@ import { FormInput, FormTextarea } from '../../../Common';
 
 const PaymentSuccess = () => {
   const { user } = useSelector((state) => state.auth);
+  const handleSubmit = (values) => {
+    console.log({ values });
+  };
   return (
     <div className="mx-auto pt-3 md:w-2/3 md:pt-5 xl:pt-10">
       <div className="mb-7 rounded-xl py-5 px-5 shadow">
@@ -31,7 +34,7 @@ const PaymentSuccess = () => {
             name: yup.string().required('Name is required'),
             email: yup.string().required('Email is required'),
           })}
-          onSubmit={() => {}}
+          onSubmit={handleSubmit}
           enableReinitialize={true}
         >
           <Form>
