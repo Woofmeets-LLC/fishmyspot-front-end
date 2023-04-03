@@ -7,7 +7,6 @@ WORKDIR /opt/app/
 RUN yarn install --frozen-lockfile
 
 RUN yarn build
-RUN yarn postbuild
 
 EXPOSE 3000
 

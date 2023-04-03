@@ -3,7 +3,8 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.fishmyspot.com
+Host: https://fishmyspot.com
 
 # Sitemaps
-Sitemap: https://www.fishmyspot.com/sitemap.xml
+Sitemap: https://fishmyspot.com/sitemap.xml
+Sitemap: https://fishmyspot.com/server-sitemap.xml

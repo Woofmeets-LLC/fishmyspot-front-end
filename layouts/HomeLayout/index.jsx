@@ -189,6 +189,7 @@ const HomeLayout = ({
             />
           );
         })}
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
       </Head>
       {isLoading || guardChecking ? (
         <div className="flex h-screen w-screen flex-wrap items-center justify-center">

@@ -19,6 +19,7 @@ export async function getServerSideProps(ctx) {
       lastmod: new Date().toISOString(),
     });
   });
+  ctx.res.setHeader('Content-Type', 'application/xml');
 
   return getServerSideSitemapLegacy(ctx, fields);
 }
