@@ -11,6 +11,7 @@ import FormTextarea from './FormElements/FormTextarea';
 import MultiStepForm from './FormElements/MultiStepForm';
 import BackBtn from './FormElements/MultiStepForm/BackBtn';
 import NextBtn from './FormElements/MultiStepForm/NextBtn';
+import PhoneNumberInput from './FormElements/PhoneNumberInput';
 import ListItem from './ListItem';
 import LoginModal from './Modals/LoginModal';
 import ResetPasswordModal from './Modals/ResetPasswordModal';
@@ -28,6 +29,7 @@ export {
   SignUpModal,
   LoginModal,
   FormInput,
+  PhoneNumberInput,
   FormSelect,
   FormRadioButtons,
   FormOption,

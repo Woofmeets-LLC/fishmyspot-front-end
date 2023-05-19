@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormInput } from '../../../Common';
+import { FormInput, PhoneNumberInput } from '../../../Common';
 
 const PersonalInformation = () => {
   return (
@@ -19,15 +19,10 @@ const PersonalInformation = () => {
         />
       </div>
       <div className="grid grid-cols-2 gap-3 md:gap-4">
-        <FormInput
-          name="dateOfBirth"
-          label="Date of Birth"
-          type="date"
-        />
-        <FormInput
+        <FormInput name="dateOfBirth" label="Date of Birth" type="date" />
+        <PhoneNumberInput
           name="phone"
           label="Phone Number"
-          type="text"
           placeholder="Phone Number"
         />
       </div>
@@ -51,7 +46,7 @@ const PersonalInformation = () => {
       <div className="text-right">
         <button
           type="submit"
-          className="py-1 px-3 md:py-2 md:px-4 lg:px-5 2xl:py-3 2xl:px-6 text-base 2xl:text-lg text-white font-trade-gothic-bold bg-secondary rounded"
+          className="rounded bg-secondary py-1 px-3 font-trade-gothic-bold text-base text-white md:py-2 md:px-4 lg:px-5 2xl:py-3 2xl:px-6 2xl:text-lg"
         >
           Update
         </button>

@@ -61,7 +61,7 @@ const Header = () => {
     getSdk()
       .stripeAccountLinks.create({
         failureURL: originURL,
-        successURL: originURL + '/list-your-spot',
+        successURL: originURL + '/become-a-seller',
         type: 'account_onboarding',
         collect: 'currently_due',
       })
@@ -203,7 +203,7 @@ const Header = () => {
               className={`ml-auto flex h-[70px] w-auto transform items-center space-y-0 space-x-10 rounded border-0 bg-white px-2 py-2 transition 2xl:h-[85px] 3xl:h-[102px]`}
             >
               {user?.profile?.publicData?.account_type == 'owner' && (
-                <Link href="/list-your-spot">
+                <Link href="/become-a-seller">
                   <a
                     className={`hidden font-trade-gothic-bold text-primary md:inline-block 2xl:text-[18px]`}
                   >
@@ -265,7 +265,7 @@ const Header = () => {
                 className={`absolute top-[74px] right-[20px] block h-auto w-[150px] space-y-2 rounded border bg-white px-4 py-2 md:ml-auto md:w-auto`}
               >
                 {user?.profile?.publicData?.account_type == 'owner' && (
-                  <Link href="/list-your-spot">
+                  <Link href="/become-a-seller">
                     <a
                       className={`block font-trade-gothic-bold text-sm text-primary md:hidden md:text-base lg:text-base 2xl:text-[18px]`}
                     >
