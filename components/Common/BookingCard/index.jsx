@@ -12,6 +12,7 @@ const BookingCard = ({
   bookingData,
   status,
 }) => {
+  console.log({ bookingData });
   const [approveLoading, setApproveLoading] = useState(false);
   const [declineLoading, setDeclineLoading] = useState(false);
 
@@ -90,6 +91,10 @@ const BookingCard = ({
         params: {},
       })
       .then((res) => {
+        // console.log({ couponResult, bookingData, promo_result });
+        setBookingList((bookingList) =>
+          bookingList.filter((item) => item.id.uuid !== bookingData?.id?.uuid)
+        );
         axios
           .post(`${process.env.BACKEND_URL}/giftcards/approvetransaction`, {
             transactionId: bookingData?.id?.uuid,
@@ -152,12 +157,6 @@ const BookingCard = ({
               )
               .catch((err) => console.log(err));
 
-            // console.log({ couponResult, bookingData, promo_result });
-            setBookingList((bookingList) =>
-              bookingList.filter(
-                (item) => item.id.uuid !== bookingData?.id?.uuid
-              )
-            );
             setApproveLoading(false);
           })
           .catch((err) => {
@@ -342,6 +341,10 @@ const BookingCard = ({
         </div>
         <div className="order-first col-span-12 mt-4 sm:col-span-3 md:order-last md:mt-0">
           <StatusButton title={status} />
+          {bookingData?.attributes?.lastTransition ==
+          'transition/accept-by-operator' ? (
+            <div className="mt-1 text-xs"> by marketplace</div>
+          ) : null}
         </div>
       </div>
     </div>

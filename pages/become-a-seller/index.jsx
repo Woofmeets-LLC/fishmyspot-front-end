@@ -181,12 +181,11 @@ const ListYourPond = () => {
           </div>
           <p className="mb-4 text-xl font-semibold">Larissa Smith</p>
           <div className="inline-flex flex-col">
-            <button
-              type="submit"
-              className="rounded bg-secondary py-1 px-3 font-trade-gothic-bold text-base text-white shadow-black drop-shadow-md  md:py-2 md:px-4 lg:px-5 2xl:py-3 2xl:px-6 2xl:text-lg"
-            >
-              Schedule a Consultation
-            </button>
+            <Link href="/contact-us">
+              <a className="rounded bg-secondary py-1 px-3 font-trade-gothic-bold text-base text-white shadow-black drop-shadow-md  md:py-2 md:px-4 lg:px-5 2xl:py-3 2xl:px-6 2xl:text-lg">
+                Contact us
+              </a>
+            </Link>
             <span className="mt-3 mb-2 text-lg font-bold"> Or</span>
             <a
               className="inline-flex items-center justify-center gap-2 font-semibold underline"

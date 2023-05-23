@@ -1,0 +1,37 @@
+
+{{~#*inline "format-money"~}}
+{{money-amount money}} {{money.currency}}
+{{~/inline~}}
+
+{{~#*inline "format-date"~}}
+{{date date format="MMM dd, YYYY hh:mm a" tz="America/New_York"}}
+{{~/inline~}}
+
+
+<html>
+  <body>
+    
+
+{{#with transaction}}
+    
+        
+<pre>
+Hello, {{customer.display-name}}!
+  
+We received your request to fish 
+at {{listing.title}} 
+for {{> format-date date=booking.start}} (New York timezone GMT-4:00). 
+Hold tight- we are asking the fish if they want visitors.
+A confirmation or decline e-mail will be sent shortly.
+  
+Many Thanks,
+  
+The FishMySpot Team   
+<img src="https://fishmyspot.com/images/logo.png" alt="fms" style="height: 20px;" />
+</pre>
+   
+
+    {{/with}}
+
+     </body>
+</html>
