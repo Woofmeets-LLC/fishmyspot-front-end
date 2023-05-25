@@ -6,6 +6,7 @@ import ListItem from '../ListItem';
 import CreateReview from './CreateReview';
 
 const PurchaseCard = ({ setPurchaseList, purchaseData, status }) => {
+  console.log({ purchaseData });
   const convertAmountToFloat = (amount) =>
     parseFloat(+amount / 100 || 0).toFixed(2);
   const titleFormatter = (title) =>
@@ -137,6 +138,10 @@ const PurchaseCard = ({ setPurchaseList, purchaseData, status }) => {
         </div>
         <div className="order-first col-span-12 mt-4 sm:col-span-3 md:order-last md:mt-0">
           <StatusButton title={status} />
+          {purchaseData?.attributes?.lastTransition ==
+          'transition/accept-by-operator' ? (
+            <div className="mt-1 text-xs"> by marketplace</div>
+          ) : null}
         </div>
       </div>
     </div>

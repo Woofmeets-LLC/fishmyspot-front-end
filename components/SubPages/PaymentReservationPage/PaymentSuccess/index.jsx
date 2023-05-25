@@ -1,35 +1,13 @@
-import axios from 'axios';
 import { Form, Formik } from 'formik';
-import React, { useState } from 'react';
-import toast from 'react-hot-toast';
-import { FaTelegramPlane } from 'react-icons/fa';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { FormInput, FormTextarea } from '../../../Common';
 
 const PaymentSuccess = () => {
   const { user } = useSelector((state) => state.auth);
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const handleSubmit = (values) => {
-    setIsDisabled(true);
-    setIsLoading(true);
-    axios
-      .post('https://cms.fishmyspot.com/api/feedbacks', {
-        data: {
-          name: values.name,
-          email: values.email,
-          description: values.message,
-        },
-      })
-      .then((res) => {
-        toast.success('Feedback submitted successfully');
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log({ err });
-        setIsLoading(false);
-      });
+    console.log({ values });
   };
   return (
     <div className="mx-auto pt-3 md:w-2/3 md:pt-5 xl:pt-10">
@@ -81,24 +59,10 @@ const PaymentSuccess = () => {
 
             <div className="flex justify-end">
               <button
-                disabled={isDisabled}
+                className="rounded bg-secondary py-2 px-6 font-trade-gothic-bold text-lg text-primary 2xl:py-3"
                 type="submit"
-                className={`mt-3 inline-flex items-center gap-2 rounded-full ${
-                  isDisabled ? 'bg-gray-300' : 'bg-secondary'
-                } px-6 py-2 font-trade-gothic-bold`}
               >
-                {isLoading ? (
-                  <>
-                    <span className="flex w-7 animate-spin items-center justify-center">
-                      <span className="h-5 w-5 rounded-full border-t-2 border-b-2 border-primary"></span>
-                    </span>
-                    Submitting...
-                  </>
-                ) : (
-                  <>
-                    <FaTelegramPlane /> Submit{' '}
-                  </>
-                )}
+                Submit
               </button>
             </div>
           </Form>
