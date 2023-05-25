@@ -31,13 +31,13 @@ const WhyChooseFMS = () => {
         <h3 className="mb-5 text-center font-food-truck text-3xl text-primary md:mb-16 md:text-5xl">
           Partner with Fish My Spot
         </h3>
-        <div className="mx-auto grid gap-7 md:gap-16 lg:w-2/3 lg:grid-cols-2">
-          <div className="flex flex-col gap-7 md:gap-16">
+        <div className="mx-auto grid gap-7 lg:w-2/3 lg:grid-cols-2 lg:gap-16">
+          <div className="flex flex-col gap-7 lg:gap-16">
             {benefitsAsPartner?.slice(0, 2)?.map((benefit, index) => (
               <Benefit key={`benefit-${index + 1}`} {...benefit} />
             ))}
           </div>
-          <div className="flex flex-col gap-7 md:gap-16">
+          <div className="flex flex-col gap-7 lg:gap-16">
             {benefitsAsPartner?.slice(2, 4)?.map((benefit, index) => (
               <Benefit key={`benefit-${index + 3}`} {...benefit} />
             ))}
