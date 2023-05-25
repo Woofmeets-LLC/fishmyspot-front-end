@@ -136,13 +136,13 @@ const Header = () => {
                     : 'h-0 overflow-hidden py-0'
                 }`}
               >
-                <button
-                  onClick={() => !isLoggedIn && dispatch(setShowLoginModal())}
-                  type="button"
-                  className="block font-trade-gothic-bold text-primary md:inline-block 2xl:text-[18px]"
-                >
-                  List your spot +
-                </button>
+                <Link href="/pond-owners">
+                  <a
+                    className={`block font-trade-gothic-bold text-primary md:inline-block 2xl:text-[18px]`}
+                  >
+                    For Pond Owners
+                  </a>
+                </Link>
                 <Link href="/services">
                   <a
                     className={`block font-trade-gothic-bold text-primary md:inline-block 2xl:text-[18px]`}
