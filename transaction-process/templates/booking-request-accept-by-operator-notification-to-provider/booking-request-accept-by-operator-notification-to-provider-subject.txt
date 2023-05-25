@@ -1,0 +1,5 @@
+{{~#*inline "format-date"~}}
+{{date date format="MMM dd, YYYY"}}
+{{~/inline~}}
+
+Fish My Spot Marketplace Accepted Reservation For {{> format-date date=transaction.booking.start}}
