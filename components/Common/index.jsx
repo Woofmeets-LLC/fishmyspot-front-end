@@ -16,6 +16,8 @@ import ListItem from './ListItem';
 import LoginModal from './Modals/LoginModal';
 import ResetPasswordModal from './Modals/ResetPasswordModal';
 import SignUpModal from './Modals/SignUpModal';
+import SignUpForm from './Modals/SignUpModal/SignUpForm';
+import SignUpWrapper from './Modals/SignUpModal/SignUpWrapper';
 import PageHeader from './PageHeader';
 import PropertyCard from './PropertyCard';
 import PurchaseCard from './PurchaseCard';
@@ -23,9 +25,12 @@ import PurchaseOrCancellationCard from './PurchaseOrCancelationCard';
 import PageTitle from './StaticPageElements/PageTitle';
 import SectionTitleDescription from './StaticPageElements/SectionTitleDescription';
 import StatusButton from './StatusButton';
+import WantToSkipForms from './WantToSkipForms';
 
 export {
   Modal,
+  SignUpForm,
+  SignUpWrapper,
   SignUpModal,
   LoginModal,
   FormInput,
@@ -50,4 +55,5 @@ export {
   PageTitle,
   SectionTitleDescription,
   BlocksRenderer,
+  WantToSkipForms,
 };

@@ -3,11 +3,16 @@ import Link from 'next/link';
 import React from 'react';
 import { FormInput, FormOption, FormSelect, PhoneNumberInput } from '../..';
 
-const SignUpForm = () => {
+const SignUpForm = ({ mode }) => {
+  console.log({ disabled: mode == 'owner' ? true : false });
   const [field, meta, helpers] = useField('isAgree');
   return (
     <>
-      <div className="grid grid-cols-2 gap-4">
+      <div
+        className={`grid   ${
+          mode == 'owner' ? 'sm:grid-cols-2 sm:gap-4' : 'grid-cols-2 gap-4'
+        }`}
+      >
         <FormInput
           label="First Name"
           name="firstName"
@@ -19,13 +24,21 @@ const SignUpForm = () => {
           placeholder="Enter your last name"
         />
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div
+        className={`grid   ${
+          mode == 'owner' ? 'sm:grid-cols-2 sm:gap-4' : 'grid-cols-2 gap-4'
+        }`}
+      >
         <FormSelect label="Gender" name="gender">
           <FormOption title="Select gender" value="" />
           <FormOption title="Male" value="MALE" />
           <FormOption title="Female" value="FEMALE" />
         </FormSelect>
-        <FormSelect label="Account Type" name="type">
+        <FormSelect
+          disabled={mode == 'owner' ? true : false}
+          label="Account Type"
+          name="type"
+        >
           <FormOption title="Select a type" value="" />
           <FormOption title="Pond Owner" value="owner" />
           <FormOption title="Angler" value="angler" />
