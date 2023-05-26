@@ -58,6 +58,7 @@ const SignUpWrapper = ({ mode }) => {
           firstName: values?.firstName,
           lastName: values?.lastName,
           publicData: {
+            showReferralModal: true,
             gender: values?.gender,
             account_type: values?.type,
             email: values?.email,
