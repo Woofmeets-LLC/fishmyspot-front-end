@@ -1,8 +1,5 @@
-import axios from 'axios';
 import { Form, Formik } from 'formik';
-import React, { useState } from 'react';
-import toast from 'react-hot-toast';
-import { FaTelegramPlane } from 'react-icons/fa';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { FormInput, FormTextarea } from '../../../Common';
