@@ -4,7 +4,6 @@ import React from 'react';
 import { FormInput, FormOption, FormSelect, PhoneNumberInput } from '../..';
 
 const SignUpForm = ({ mode }) => {
-  console.log({ disabled: mode == 'owner' ? true : false });
   const [field, meta, helpers] = useField('isAgree');
   return (
     <>

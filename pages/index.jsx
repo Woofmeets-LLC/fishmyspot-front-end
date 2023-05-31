@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import SubClientReviewSection from '../components/SubPages/HomePage/SubClientReviewSection';
 import SubExploreFishMySpotByState from '../components/SubPages/HomePage/SubExploreFishMySpotByState';
 // import SubFeaturedSpotSection from "../components/SubPages/HomePage/SubFeaturedSpotSection";
+import HowDidHearModal from '../components/SubPages/HomePage/HowDidHearModal';
 import SubFeaturesSection from '../components/SubPages/HomePage/SubFeaturesSection';
 import SubFooterImageCard from '../components/SubPages/HomePage/SubFooterImageCard';
 import SubHeroSection from '../components/SubPages/HomePage/SubHeroSection';
@@ -25,6 +26,7 @@ const Home = () => {
       <SubListingYourSpotSection />
       <SubExploreFishMySpotByState />
       <SubFooterImageCard />
+      <HowDidHearModal />
     </HomeLayout>
   );
 };

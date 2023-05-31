@@ -1,8 +1,13 @@
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { getSdk } from '../../../../sharetribe/sharetribeSDK';
+import {
+  setCloseSignUpModal,
+  setShowLoginModal,
+} from '../../../../store/slices/modalsSlice';
 import SignUpForm from './SignUpForm';
 
 const SignUpWrapper = ({ mode }) => {
@@ -58,6 +63,7 @@ const SignUpWrapper = ({ mode }) => {
           firstName: values?.firstName,
           lastName: values?.lastName,
           publicData: {
+            showReferralModal: true,
             gender: values?.gender,
             account_type: values?.type,
             email: values?.email,
