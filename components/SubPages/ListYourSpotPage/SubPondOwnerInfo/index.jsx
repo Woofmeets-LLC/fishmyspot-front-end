@@ -1,36 +1,35 @@
-import { useField } from "formik";
-import React, { useState } from "react";
-import Autocomplete from "react-google-autocomplete";
-import { FormInput } from "../../../Common";
+import { useField } from 'formik';
+import React, { useState } from 'react';
+import Autocomplete from 'react-google-autocomplete';
+import { FormInput, PhoneNumberInput } from '../../../Common';
 
 const SubPondOwnerInfo = () => {
   const [addressError, setAddressError] = useState({
     isError: false,
-    message: "",
+    message: '',
   });
 
-  const [fullDayRateField] = useField({ name: "fullDayRate" });
+  const [fullDayRateField] = useField({ name: 'fullDayRate' });
 
-  const [firstNameField] = useField({ name: "firstName" });
-  const [lastNameField] = useField({ name: "lastName" });
+  const [firstNameField] = useField({ name: 'firstName' });
+  const [lastNameField] = useField({ name: 'lastName' });
   const [zipCodeField, zipCodeMeta, zipCodeHelpers] = useField({
-    name: "zipCode",
+    name: 'zipCode',
   });
   const [addressField, addressMeta, addressHelpers] = useField({
-    name: "address",
+    name: 'address',
   });
-  const [latLngField, latLngMeta, latLngHelpers] = useField({ name: "latLng" });
-  const [cityField, cityMeta, cityHelpers] = useField({ name: "city" });
-  const [stateField, stateMeta, stateHelpers] = useField({ name: "state" });
-
+  const [latLngField, latLngMeta, latLngHelpers] = useField({ name: 'latLng' });
+  const [cityField, cityMeta, cityHelpers] = useField({ name: 'city' });
+  const [stateField, stateMeta, stateHelpers] = useField({ name: 'state' });
 
   const getAddress = (place) => {
-    setAddressError({ isError: false, message: "" });
+    setAddressError({ isError: false, message: '' });
 
     addressHelpers.setValue(place.formatted_address);
     // cityHelpers.setValue("");
-    stateHelpers.setValue("");
-    zipCodeHelpers.setValue("");
+    stateHelpers.setValue('');
+    zipCodeHelpers.setValue('');
 
     let errorCount = 2;
     place.address_components.forEach((component) => {
@@ -38,16 +37,16 @@ const SubPondOwnerInfo = () => {
       //     cityHelpers.setValue(component?.short_name)
       //     errorCount--;
       // }
-      if (component.types[0] == "postal_code") {
+      if (component.types[0] == 'postal_code') {
         zipCodeHelpers.setValue(component?.short_name);
         errorCount--;
       }
-      if (component.types[0] == "administrative_area_level_1") {
+      if (component.types[0] == 'administrative_area_level_1') {
         stateHelpers.setValue(component?.short_name);
         errorCount--;
       }
       latLngHelpers.setValue({
-        _sdkType: "LatLng",
+        _sdkType: 'LatLng',
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng(),
       });
@@ -55,10 +54,10 @@ const SubPondOwnerInfo = () => {
     if (errorCount) {
       setAddressError({
         isError: true,
-        message: "Address is not valid. Select valid address!",
+        message: 'Address is not valid. Select valid address!',
       });
     } else {
-      setAddressError({ isError: false, message: "" });
+      setAddressError({ isError: false, message: '' });
     }
   };
 
@@ -96,14 +95,14 @@ const SubPondOwnerInfo = () => {
           Address
         </label>
         <Autocomplete
-          placeholder={"Enter Your Address"}
+          placeholder={'Enter Your Address'}
           className="m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding bg-no-repeat  px-3 py-[5px] font-trade-gothic text-base text-primary transition ease-in-out focus:outline-none"
           apiKey={process.env.GOOGLE_MAP_API_KEY}
           onPlaceSelected={(place) => {
-            getAddress(place, "address");
+            getAddress(place, 'address');
           }}
           options={{
-            types: "ALL",
+            types: 'ALL',
           }}
           defaultValue={addressField?.value}
         />
@@ -137,7 +136,11 @@ const SubPondOwnerInfo = () => {
         placeholder="Please enter email"
         disabled
       />
-      <FormInput name="phone" label="Phone" placeholder="Please enter phone" />
+      <PhoneNumberInput
+        name="phone"
+        label="Phone"
+        placeholder="Please enter phone"
+      />
     </div>
   );
 };

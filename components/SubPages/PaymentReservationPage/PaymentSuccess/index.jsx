@@ -1,5 +1,8 @@
+import axios from 'axios';
 import { Form, Formik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { FaTelegramPlane } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { FormInput, FormTextarea } from '../../../Common';
@@ -27,7 +30,6 @@ const PaymentSuccess = () => {
         setIsSubmitted(true);
       })
       .catch((err) => {
-        console.log({ err });
         setIsLoading(false);
       });
   };

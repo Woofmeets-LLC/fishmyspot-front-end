@@ -117,7 +117,7 @@ const PondDetails = () => {
               </div>
 
               {/* map */}
-              <ListingGoogleMap />
+              <ListingGoogleMap pondData={pondData} />
             </div>
           </div>
         </>

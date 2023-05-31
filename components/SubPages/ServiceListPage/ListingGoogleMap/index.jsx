@@ -16,32 +16,49 @@ const MyMapComponent = compose(
   }),
   withScriptjs,
   withGoogleMap
-)((props) => (
-  <GoogleMap
-    options={{
-      disableDefaultUI: true,
-      zoomControl: false,
-    }}
-    defaultZoom={14}
-    defaultCenter={{ lat: 23.810331, lng: 90.412521 }}
-  >
-    <Circle
-      center={{ lat: 23.810331, lng: 90.412521 }}
-      radius={500} // Adjust the radius value as needed (in meters)
-      options={{
-        fillColor: 'rgb(248 113 113)',
-        fillOpacity: 0.35,
-        strokeColor: '#FF0000',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-      }}
-    />
-  </GoogleMap>
-));
+)(({ pondData }) => {
+  return (
+    <React.StrictMode>
+      <GoogleMap
+        options={{
+          disableDefaultUI: true,
+          zoomControl: false,
+        }}
+        defaultZoom={15.3}
+        defaultCenter={{
+          lat: pondData?.attributes?.geolocation?.lat || 0,
+          lng: pondData?.attributes?.geolocation?.lng,
+        }}
+      >
+        <Circle
+          center={{
+            lat: pondData?.attributes?.geolocation?.lat || 0,
+            lng: pondData?.attributes?.geolocation?.lng,
+          }}
+          radius={200} // Adjust the radius value as needed (in meters)
+          options={{
+            fillColor: 'rgb(248 113 113)',
+            fillOpacity: 0.35,
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+          }}
+        />
+      </GoogleMap>
+    </React.StrictMode>
+  );
+});
 
 class ListingGoogleMap extends React.PureComponent {
   render() {
-    return <MyMapComponent />;
+    return (
+      <React.StrictMode>
+        <h2 className="mb-1 text-lg font-semibold text-primary md:text-xl xl:text-2xl">
+          Location:
+        </h2>
+        <MyMapComponent pondData={this.props?.pondData} />
+      </React.StrictMode>
+    );
   }
 }
 
