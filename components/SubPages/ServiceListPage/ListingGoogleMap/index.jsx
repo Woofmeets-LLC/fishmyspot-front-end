@@ -52,12 +52,12 @@ const MyMapComponent = compose(
 class ListingGoogleMap extends React.PureComponent {
   render() {
     return (
-      <React.StrictMode>
+      <>
         <h2 className="mb-1 text-lg font-semibold text-primary md:text-xl xl:text-2xl">
           Location:
         </h2>
         <MyMapComponent pondData={this.props?.pondData} />
-      </React.StrictMode>
+      </>
     );
   }
 }
