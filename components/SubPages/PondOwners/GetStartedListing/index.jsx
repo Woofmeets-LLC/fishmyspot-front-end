@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-const GetStartedListing = () => {
+const GetStartedListing = ({ isLoggedIn }) => {
   return (
     <section className="container">
       <div className="py-6 sm:py-8 md:py-10 lg:py-16 xl:py-20 2xl:py-32">
@@ -25,9 +25,9 @@ const GetStartedListing = () => {
               access. By sharing your spot, you provide local access to your
               community to fish. Join our community of pond owner!
             </p>
-            <Link href="#get-started">
+            <Link href={!isLoggedIn ? '#get-started' : '/list-your-spot'}>
               <a className="inline-block rounded bg-secondary py-2 px-3    text-white sm:py-2 sm:px-4 lg:py-3 lg:px-6  xl:text-xl">
-                Get Started
+                {!isLoggedIn ? 'Get Started' : 'Start Listing'}
               </a>
             </Link>
           </div>

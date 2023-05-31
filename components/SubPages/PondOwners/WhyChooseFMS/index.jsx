@@ -2,7 +2,7 @@
 import React from 'react';
 import Benefit from './Benefit';
 
-const WhyChooseFMS = () => {
+const WhyChooseFMS = ({ isLoggedIn }) => {
   const benefitsAsPartner = [
     {
       title: 'Save Time for What You Love',
@@ -45,10 +45,10 @@ const WhyChooseFMS = () => {
         </div>
         <div className="mt-10 text-center md:mt-16">
           <a
-            href="#get-started"
+            href={!isLoggedIn ? '#get-started' : '/list-your-spot'}
             className="rounded-full bg-primary px-8 py-3 font-trade-gothic text-lg text-white"
           >
-            Get Started
+            {!isLoggedIn ? 'Get Started' : 'Start Listing'}
           </a>
         </div>
       </div>
