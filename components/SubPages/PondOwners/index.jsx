@@ -5,6 +5,7 @@ import GetStartedListing from './GetStartedListing';
 import PondOwnersFAQ from './PondOwnersFAQ';
 import SignUpNow from './SignUpNow';
 import TrustedPartner from './TrustedPartner';
+import VideoSection from './VideoSection';
 import WhyChooseFMS from './WhyChooseFMS';
 
 const PondOwners = () => {
@@ -18,6 +19,7 @@ const PondOwners = () => {
       {!isLoggedIn ? <SignUpNow /> : null}
       <PondOwnersFAQ />
       <WantToSkipForms />
+      <VideoSection />
     </div>
   );
 };
