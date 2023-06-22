@@ -16,10 +16,10 @@ const PondOwners = () => {
       <TrustedPartner />
       <WhyChooseFMS isLoggedIn={isLoggedIn} />
       <GetStartedListing isLoggedIn={isLoggedIn} />
+      <VideoSection />
       {!isLoggedIn ? <SignUpNow /> : null}
       <PondOwnersFAQ />
       <WantToSkipForms />
-      <VideoSection />
     </div>
   );
 };
