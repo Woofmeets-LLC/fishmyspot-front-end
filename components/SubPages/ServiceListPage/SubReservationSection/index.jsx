@@ -100,7 +100,8 @@ const SubReservationSection = ({ pondData }) => {
                 .number()
                 .integer()
                 .min(0, 'Number of additional guests must be a positive number')
-                .required('Number of additional visitor required!'),
+                .max(4, '*4 maximum guests; add- on additional guests')
+                .required('A valid number of additional visitor required!'),
             })}
             onSubmit={(values, { setSubmitting }) => {
               dispatch(setBookingData(values));

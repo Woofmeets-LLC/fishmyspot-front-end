@@ -77,8 +77,9 @@ const ResetPassword = () => {
                   RESET PASSWORD
                 </h2>
                 <p className="mb-4 px-2 text-center font-trade-gothic 2xl:mb-6">
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut
+                  Create a unique password by adding a memorable phrase and
+                  numbers like your birthdate, plus random symbols for security.
+                  Voila!
                 </p>
                 <Formik
                   initialValues={initialValues}

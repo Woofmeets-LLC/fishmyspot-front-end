@@ -1,8 +1,8 @@
-import { Form, Formik } from "formik";
-import React, { Children, useState } from "react";
-import { useSelector } from "react-redux";
-import { BackBtn, NextBtn } from "../../../../Common";
-import { useRouter } from "next/router";
+import { Form, Formik } from 'formik';
+import { useRouter } from 'next/router';
+import React, { Children, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { BackBtn, NextBtn } from '../../../../Common';
 
 const SpotMultiStepForm = ({
   hideBackBtnAtEnd = false,
@@ -35,13 +35,13 @@ const SpotMultiStepForm = ({
         enableReinitialize={true}
         onSubmit={async (values, helpers) => {
           if (step === timelineArray.length - 1) {
-            localStorage.setItem("listingData", JSON.stringify(values));
-            localStorage.setItem("currentStep", step);
-            router.push("/list-your-spot");
+            localStorage.setItem('listingData', JSON.stringify(values));
+            localStorage.setItem('currentStep', step);
+            router.push('/list-your-spot');
           } else {
             // If we want to write custom logic for the next step then we have to write it here
             switch (timelineArray[step]) {
-              case "Price":
+              case 'Price':
                 isLoggedIn && setStep((s) => s + 1);
                 break;
 
@@ -85,12 +85,12 @@ const SpotMultiStepForm = ({
                   {!isLastStep &&
                     (stepControllerBtns.length > step ? (
                       <span className="inline-block">
-                        {" "}
+                        {' '}
                         {stepControllerBtns[step]?.next ? (
                           stepControllerBtns[step]?.next
                         ) : (
                           <NextBtn text="Next" isSubmitting={isSubmitting} />
-                        )}{" "}
+                        )}{' '}
                       </span>
                     ) : (
                       <NextBtn isSubmitting={isSubmitting} />
