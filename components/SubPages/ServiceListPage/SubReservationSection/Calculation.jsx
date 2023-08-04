@@ -2,11 +2,12 @@
 import { useField } from 'formik';
 import { useEffect } from 'react';
 
-const Calculation = () => {
+const Calculation = ({ pondData }) => {
   const [dayTypeField] = useField('dayType');
   const [dayRatesField] = useField('dayRates');
   const [experienceField] = useField('experience');
   const [serviceFeeField] = useField('serviceFee');
+  const [additionalGuestsField] = useField('additional-guests');
   const [additionalAnglerField] = useField('additional-guests');
   const [totalField, totalMeta, totalHelpers] = useField('total');
   const [couponDiscountField] = useField('coupon-discount');
@@ -117,6 +118,7 @@ const Calculation = () => {
         <p>Service fees</p>
         <p>${serviceFee}</p>
       </div>
+
       {appliedDiscount.value > 0.0 && (
         <div className="flex justify-between pb-2">
           <p>Coupon Discount</p>

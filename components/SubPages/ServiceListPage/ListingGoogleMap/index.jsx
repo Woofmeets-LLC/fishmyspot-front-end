@@ -35,7 +35,7 @@ const MyMapComponent = compose(
             lat: pondData?.attributes?.geolocation?.lat || 0,
             lng: pondData?.attributes?.geolocation?.lng,
           }}
-          radius={200} // Adjust the radius value as needed (in meters)
+          radius={60} // Adjust the radius value as needed (in meters)
           options={{
             fillColor: 'rgb(248 113 113)',
             fillOpacity: 0.35,

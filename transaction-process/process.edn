@@ -37,21 +37,6 @@
    :actions [{:name :action/stripe-confirm-payment-intent}],
    :from :state/pending-payment,
    :to :state/preauthorized}
-
-  {:name :transition/accept,
-   :actor :actor.role/provider,
-   :actions
-   [{:name :action/accept-booking}
-    {:name :action/stripe-capture-payment-intent}],
-   :from :state/preauthorized,
-   :to :state/accepted}
-  {:name :transition/accept-by-operator,
-   :actor :actor.role/operator,
-   :actions
-   [{:name :action/accept-booking}
-    {:name :action/stripe-capture-payment-intent}],
-   :from :state/preauthorized,
-   :to :state/accepted}
   {:name :transition/decline,
    :actor :actor.role/provider,
    :actions
@@ -60,6 +45,13 @@
     {:name :action/stripe-refund-payment}],
    :from :state/preauthorized,
    :to :state/declined}
+  {:name :transition/accept,
+   :actor :actor.role/provider,
+   :actions
+   [{:name :action/accept-booking}
+    {:name :action/stripe-capture-payment-intent}],
+   :from :state/preauthorized,
+   :to :state/accepted}
   {:name :transition/expire,
    :at
    {:fn/min
@@ -188,16 +180,6 @@
    :on :transition/accept,
    :to :actor.role/customer,
    :template :booking-request-accept-notification-to-customer}
-     {:name
-   :notification/booking-request-accept-by-operator-notification-to-customer,
-   :on :transition/accept-by-operator,
-   :to :actor.role/customer,
-   :template :booking-request-accept-notification-to-customer}
-     {:name
-   :notification/booking-request-accept-by-operator-notification-to-provider,
-   :on :transition/accept-by-operator,
-   :to :actor.role/provider,
-   :template :booking-request-accept-by-operator-notification-to-provider}
   {:name
    :notification/booking-request-cancel-by-provier-notification-to-customer,
    :on :transition/decline,

@@ -1,6 +1,6 @@
 import { useField } from 'formik';
 
-const AdditionalAngler = () => {
+const AdditionalAngler = ({ pondData }) => {
   const [field, meta] = useField('additional-guests');
   const [experiencefield, experienceMeta] = useField('experience');
 
