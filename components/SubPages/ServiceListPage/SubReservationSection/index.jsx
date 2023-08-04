@@ -65,6 +65,10 @@ const SubReservationSection = ({ pondData }) => {
       });
   };
 
+  const maxAdditionalGuest = pondData?.attributes?.publicData
+    ?.additionalGuestFee
+    ? 10
+    : 3;
   return (
     <div className="order-1 mx-auto w-full md:w-2/3 lg:order-2 lg:w-[420px] 2xl:w-[510px]">
       <div className="rounded-lg bg-white shadow-lg">
@@ -100,11 +104,17 @@ const SubReservationSection = ({ pondData }) => {
                 .number()
                 .integer()
                 .min(0, 'Number of additional guests must be a positive number')
-                .max(4, '*4 maximum guests; add- on additional guests')
+                .max(3, `*${3} maximum guests; add- on additional guests`)
                 .required('A valid number of additional visitor required!'),
             })}
             onSubmit={(values, { setSubmitting }) => {
-              dispatch(setBookingData(values));
+              dispatch(
+                setBookingData({
+                  ...values,
+                  perAdditionalGuestsFee:
+                    +pondData?.attributes?.publicData?.additionalGuestFee || 0,
+                })
+              );
               setTimeout(() => {
                 push('/payment-reservation');
               }, 1000);
@@ -118,9 +128,9 @@ const SubReservationSection = ({ pondData }) => {
               {/* Experience field */}
               <ExperienceSelect pondData={pondData} />
 
-              <AdditionalAngler />
+              <AdditionalAngler pondData={pondData} />
 
-              <Calculation />
+              <Calculation pondData={pondData} />
 
               <GiftCard />
 
