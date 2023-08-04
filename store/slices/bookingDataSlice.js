@@ -26,6 +26,7 @@ const bookingDataSlice = createSlice({
       state.dayType = action.payload.dayType;
       state.experience = action.payload.experience;
       state['additional-guests'] = action.payload['additional-guests'];
+      state.perAdditionalGuestsFee = action.payload.perAdditionalGuestsFee;
       state.time = action.payload.time;
       state.serviceFee = action.payload.serviceFee;
       state.total = action.payload.total;
