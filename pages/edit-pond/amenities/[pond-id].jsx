@@ -95,13 +95,15 @@ const AmenitiesEdit = () => {
     const updatingPondData = getSdk().ownListings.update({
       id: new UUID(query['pond-id']),
       publicData: {
+        additionalGuestFee: values?.additionalGuestFee
+          ? +values?.additionalGuestFee || 0
+          : 0,
         amenities,
         allAmenities,
         experiences,
         addOns: addOnsData,
       },
     });
-
     toast.promise(updatingPondData, {
       duration: 3000,
       loading: 'Pond listing data updating...',
@@ -129,6 +131,7 @@ const AmenitiesEdit = () => {
         <Formik
           enableReinitialize
           initialValues={{
+            additionalGuestFee: pondData?.publicData?.additionalGuestFee || '',
             amenities: {
               'Canoe/kayak': false,
               'Pavilion or Other Shelter': false,
