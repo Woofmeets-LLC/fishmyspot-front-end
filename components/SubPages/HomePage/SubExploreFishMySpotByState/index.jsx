@@ -7,7 +7,7 @@ const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 const SubExploreFishMySpotByState = () => {
   const { data: states, error } = useSwr(
-    'https://cms.fishmyspot.com/api/states?sort[0]=state&pagination[page]=1&pagination[pageSize]=100&populate=*',
+    'https://cms.fishmyspot.com/admin/api/states?sort[0]=state&pagination[page]=1&pagination[pageSize]=100&populate=*',
     fetcher
   );
 

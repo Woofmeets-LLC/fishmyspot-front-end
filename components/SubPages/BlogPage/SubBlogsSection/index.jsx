@@ -9,16 +9,16 @@ const fetcher = (url) => axios.get(url).then((res) => res.data.data);
 
 const SubBlogSection = () => {
   const { data: categories, error: categoryError } = useSwr(
-    'https://cms.fishmyspot.com/api/categories',
+    'https://cms.fishmyspot.com/admin/api/categories',
     fetcher
   );
   const [blogsCategory, setBlogsCategory] = useState('');
 
   const { data: blogs, error } = useSwr(
     blogsCategory !== ''
-      ? 'https://cms.fishmyspot.com/api/blogs?populate=*&filters[category][name][$eq]=' +
+      ? 'https://cms.fishmyspot.com/admin/api/blogs?populate=*&filters[category][name][$eq]=' +
           blogsCategory
-      : 'https://cms.fishmyspot.com/api/blogs?populate=*',
+      : 'https://cms.fishmyspot.com/admin/api/blogs?populate=*',
     fetcher
   );
 

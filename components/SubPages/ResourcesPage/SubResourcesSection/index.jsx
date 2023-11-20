@@ -7,7 +7,7 @@ const fetcher = (url) => axios.get(url).then((res) => res.data.data);
 
 const SubResourcesSection = () => {
   const { data: resources, error: resourcesError } = useSwr(
-    'https://cms.fishmyspot.com/api/resources?populate=*',
+    'https://cms.fishmyspot.com/admin/api/resources?populate=*',
     fetcher
   );
 
