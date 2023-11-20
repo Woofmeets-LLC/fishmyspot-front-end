@@ -10,7 +10,7 @@ module.exports = {
     STRIPE_SECRET_KEY:'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',
     STRIPE_PUBLISHABLE_KEY:'pk_live_51BZ1XoGrpoAD6ljCSzdn3lrmPbTqdGUJjPqJkwxY4KECWacyGf7FHIRl76jzR6pRZLNYqVgugWbRieXjamRuWVVp00uLiLJC8L',
     NEXT_STRIPE_PUBLISHABLE_KEY:'pk_live_51BZ1XoGrpoAD6ljCSzdn3lrmPbTqdGUJjPqJkwxY4KECWacyGf7FHIRl76jzR6pRZLNYqVgugWbRieXjamRuWVVp00uLiLJC8L',
-    BACKEND_URL: 'https://fish-my-spot-backend-op74rtdzqa-uc.a.run.app',
+    BACKEND_URL: 'https://be.fishmyspot.com/',
     CANONICAL_ROOT_URL: 'https://fishmyspot.com',
   },
   images: {
