@@ -24,7 +24,7 @@
     "editorjs-blocks-react-renderer": "^1.2.4",
     "formik": "^2.2.9",
     "framer-motion": "^6.2.6",
-    "logrocket": "^3.0.0",
+    "logrocket": "^3.0.1",
     "next": "^12.2.5",
     "next-share": "^0.13.0",
     "next-sitemap": "^4.0.6",
