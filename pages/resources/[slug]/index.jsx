@@ -13,7 +13,7 @@ const ResourceDetails = ({ data }) => {
 export async function getServerSideProps({ params: { slug } }) {
   const data = await axios
     .get(
-      `https://cms.fishmyspot.com/api/resources?filters\[slug\][$eq]=${slug}`
+      `https://cms.fishmyspot.com/admin/api/resources?filters\[slug\][$eq]=${slug}`
     )
     .then((res) => res.data.data);
   if (data.length === 0) {

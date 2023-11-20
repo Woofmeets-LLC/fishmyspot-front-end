@@ -32,7 +32,7 @@ const HowDidHearModal = () => {
     };
 
     axios
-      .post('https://cms.fishmyspot.com/api/onboarding-sources', {
+      .post('https://cms.fishmyspot.com/admin/api/onboarding-sources', {
         data: referralData,
       })
       .then(async (res) => {

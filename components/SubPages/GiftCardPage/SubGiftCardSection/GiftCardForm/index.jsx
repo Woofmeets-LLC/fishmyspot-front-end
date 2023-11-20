@@ -14,7 +14,7 @@ const fetcher = (url) => axios.get(url).then((res) => res.data.data);
 
 const GiftCardForm = ({ step, setStep }) => {
   const { data: giftCardAmounts, error: giftCardAmountError } = useSWR(
-    'https://cms.fishmyspot.com/api/gift-cards',
+    'https://cms.fishmyspot.com/admin/api/gift-cards',
     fetcher
   );
 

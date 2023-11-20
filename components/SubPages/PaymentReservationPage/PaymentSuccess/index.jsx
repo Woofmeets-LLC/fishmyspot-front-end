@@ -17,7 +17,7 @@ const PaymentSuccess = () => {
     setIsDisabled(true);
     setIsLoading(true);
     axios
-      .post('https://cms.fishmyspot.com/api/feedbacks', {
+      .post('https://cms.fishmyspot.com/admin/api/feedbacks', {
         data: {
           name: values.name,
           email: values.email,
