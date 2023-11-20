@@ -19,7 +19,7 @@ const BlogDetailsPage = ({ data }) => {
 export async function getServerSideProps({ params: { slug } }) {
   const data = await axios
     .get(
-      `https://cms.fishmyspot.com/api/blogs?filters\[slug\][$eq]=${slug}&populate[featuredImage]=*&populate[featuredSpots][populate]=*&populate[category]=*`
+      `https://cms.fishmyspot.com/admin/api/blogs?filters\[slug\][$eq]=${slug}&populate[featuredImage]=*&populate[featuredSpots][populate]=*&populate[category]=*`
     )
     .then((res) => res.data.data);
 
@@ -31,7 +31,7 @@ export async function getServerSideProps({ params: { slug } }) {
 
   const relatedBlogs = await axios
     .get(
-      `https://cms.fishmyspot.com/api/blogs?populate=*&filters[category][name][$eq]=${data?.[0]?.attributes?.category?.data?.attributes?.name}&filters[id][$ne]=${data?.[0]?.id}&fields[0]=title&fields[1]=author&fields[2]=slug&sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=10`
+      `https://cms.fishmyspot.com/admin/api/blogs?populate=*&filters[category][name][$eq]=${data?.[0]?.attributes?.category?.data?.attributes?.name}&filters[id][$ne]=${data?.[0]?.id}&fields[0]=title&fields[1]=author&fields[2]=slug&sort[0]=id:desc&pagination[page]=1&pagination[pageSize]=10`
     )
     .then((res) => res.data.data);
   data[0].relatedBlogs = relatedBlogs;

@@ -42,7 +42,7 @@ const SubFeaturedSpotSection = () => {
     ],
   };
   const { data: featuredSpots, error } = useSWR(
-    'https://cms.fishmyspot.com/api/featured-spots?populate=*',
+    'https://cms.fishmyspot.com/admin/api/featured-spots?populate=*',
     fetcher
   );
 

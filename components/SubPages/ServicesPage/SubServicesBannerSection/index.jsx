@@ -5,7 +5,7 @@ const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 const SubServicesBannerSection = ({ state }) => {
   const { data, error } = useSWR(
-    `https://cms.fishmyspot.com/api/states?populate=*&filters[state][$eq]=${state}`,
+    `https://cms.fishmyspot.com/admin/api/states?populate=*&filters[state][$eq]=${state}`,
     fetcher
   );
 
