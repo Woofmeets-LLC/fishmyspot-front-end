@@ -10,7 +10,7 @@ module.exports = {
     STRIPE_SECRET_KEY: 'sk_live_pv3IsAnFTk8Zo8htmjEGKNOq',
     STRIPE_PUBLISHABLE_KEY: 'pk_live_SwWuArAnBV4Qf7dUETKjgMNw',
     NEXT_STRIPE_PUBLISHABLE_KEY: 'pk_live_SwWuArAnBV4Qf7dUETKjgMNw',
-    BACKEND_URL: 'https://fish-my-spot-backend-op74rtdzqa-uc.a.run.app',
+    BACKEND_URL: 'https://be.fishmyspot.com/',
     CANONICAL_ROOT_URL: 'https://fishmyspot.com',
   },
   images: {
