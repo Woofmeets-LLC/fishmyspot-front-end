@@ -12,9 +12,9 @@ const ContactUs = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     const data = {
-      service_id: 'service_0z8txkg',
-      template_id: 'template_x5vkq6b',
-      user_id: 'D9WeGnhaGJceVldKx',
+      service_id: 'service_uipnw39',
+      template_id: 'template_lwnsazj',
+      user_id: 'DOHeqAAkS39RnKBWg',
       template_params: {
         from_name: values.name,
         to_name: 'FMS Admin',
