@@ -39,7 +39,7 @@ const HomeLayout = ({
   
 
   useEffect(() => {
-   LogRocket.init('fms/fishmyspot');
+   LogRocket.init('nxr0hm/fishmyspot-pond-oner');
   if (isLoggedIn) {
     LogRocket.identify(user?.id, {
       name: `${user?.profile?.firstName} ${user?.profile?.lastName}`,
