@@ -16,9 +16,9 @@ const SubBlogSection = () => {
 
   const { data: blogs, error } = useSwr(
     blogsCategory !== ''
-      ? 'https://cms.fishmyspot.com/api/blogs?populate=*&filters[category][name][$eq]=' +
+      ? 'https://cms.fishmyspot.com/admin/api/blogs?populate=*&filters[category][name][$eq]=' +
           blogsCategory
-      : 'https://cms.fishmyspot.com/api/blogs?populate=*',
+      : 'https://cms.fishmyspot.com/admin/api/blogs?populate=*',
     fetcher
   );
 

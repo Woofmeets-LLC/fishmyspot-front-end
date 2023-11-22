@@ -3,7 +3,7 @@ import { getServerSideSitemapLegacy } from 'next-sitemap';
 import { getServerSdk } from '../../api-util/sdk';
 export async function getServerSideProps(ctx) {
   // Method to source urls from cms
-  const blogs = await axios.get('https://cms.fishmyspot.com/api/blogs');
+  const blogs = await axios.get('https://cms.fishmyspot.com/admin/api/blogs');
   const fields = [];
   blogs.data.data.forEach((blog) => {
     fields.push({
