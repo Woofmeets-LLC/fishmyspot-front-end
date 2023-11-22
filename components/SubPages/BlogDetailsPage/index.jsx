@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { BlocksRenderer } from '../../Common';
+import { default as Markdown } from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import MoreBlogsSection from './MoreBlogsSection';
 import SubFeaturedFishingSpotSection from './SubFeaturedFishingSpotSection';
 import SubListedYourSpotSection from './SubListedYourSpotSection';
@@ -61,7 +62,7 @@ const SubBlogDetailsSection = ({ data: blogDetails }) => {
   //   );
   // }
   console.log('blog Details', blogDetails);
-  const parseBlog = JSON.parse(blogDetails?.attributes?.description);
+  // const parseBlog = JSON.parse(blogDetails?.attributes?.description);
 
   return (
     <>
@@ -108,7 +109,13 @@ const SubBlogDetailsSection = ({ data: blogDetails }) => {
                 </div>
 
                 {/* Blocks renderer */}
-                <BlocksRenderer parseDetail={parseBlog} />
+                {/* <BlocksRenderer parseDetail={parseBlog} /> */}
+
+                <div className="mb-4 p-4">
+                  <Markdown remarkPlugins={[remarkGfm]}>
+                    {blogDetails?.attributes?.description}
+                  </Markdown>
+                </div>
               </div>
             </div>
             <div className="mx-auto hidden pt-10 lg:col-span-4 lg:block lg:pl-4">
