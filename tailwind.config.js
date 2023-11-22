@@ -1,9 +1,11 @@
+/** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./layouts/**/*.{js,ts,jsx,tsx}",
-    "./stories/**/*.{js,ts,jsx,tsx}",
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './layouts/**/*.{js,ts,jsx,tsx}',
+    './stories/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     screens: {
@@ -18,26 +20,27 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        "food-truck": ['food-truck', 'sans-serif'],
-        "trade-gothic": ['trade-gothic', 'sans-serif'],
-        "trade-gothic-bold": ['trade-gothic-bold', 'sans-serif'],
+        'food-truck': ['food-truck', 'sans-serif'],
+        'trade-gothic': ['trade-gothic', 'sans-serif'],
+        'trade-gothic-bold': ['trade-gothic-bold', 'sans-serif'],
       },
       colors: {
         primary: '#304E6B',
         secondary: '#F7BE32',
-        "highlight-1": '#243746',
-        "highlight-2": '#65947E',
-        "highlight-3": '#7BAED4',
+        'highlight-1': '#243746',
+        'highlight-2': '#65947E',
+        'highlight-3': '#7BAED4',
       },
       gridTemplateRows: {
-        '9': 'repeat(9, minmax(0, 1fr))',
-        '13': 'repeat(13, minmax(0, 1fr))',
-        '17': 'repeat(17, minmax(0, 1fr))',
-        '26': 'repeat(26, minmax(0, 1fr))',
-      }
+        9: 'repeat(9, minmax(0, 1fr))',
+        13: 'repeat(13, minmax(0, 1fr))',
+        17: 'repeat(17, minmax(0, 1fr))',
+        26: 'repeat(26, minmax(0, 1fr))',
+      },
     },
   },
   plugins: [
+    require('@tailwindcss/typography'),
     function ({ addComponents }) {
       addComponents({
         '.container': {
@@ -82,4 +85,4 @@ module.exports = {
       });
     },
   ],
-}
+};

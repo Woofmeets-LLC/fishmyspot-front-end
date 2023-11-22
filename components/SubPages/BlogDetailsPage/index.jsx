@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { BlocksRenderer } from '../../Common';
+import { default as Markdown } from 'react-markdown';
 import MoreBlogsSection from './MoreBlogsSection';
 import SubFeaturedFishingSpotSection from './SubFeaturedFishingSpotSection';
 import SubListedYourSpotSection from './SubListedYourSpotSection';
@@ -60,7 +60,11 @@ const SubBlogDetailsSection = ({ data: blogDetails }) => {
   //     </div>
   //   );
   // }
-  const parseBlog = JSON.parse(blogDetails?.attributes?.description);
+
+  // commenting the parse content as the content is returning string, thus there is nothing to parse 
+  
+  // const parseBlog = JSON.parse(blogDetails?.attributes?.description);
+
   return (
     <>
       <section className="bg-gray-50">
@@ -106,7 +110,12 @@ const SubBlogDetailsSection = ({ data: blogDetails }) => {
                 </div>
 
                 {/* Blocks renderer */}
-                <BlocksRenderer parseDetail={parseBlog} />
+                {/* <BlocksRenderer parseDetail={parseBlog} /> */}
+
+                {/* New Blocks Rendere using Markdown instead of react-render-js package */}
+                <div className="prose mb-4 p-4 lg:prose-xl">
+                  <Markdown>{blogDetails?.attributes?.description}</Markdown>
+                </div>
               </div>
             </div>
             <div className="mx-auto hidden pt-10 lg:col-span-4 lg:block lg:pl-4">
