@@ -60,7 +60,9 @@ const SubBlogDetailsSection = ({ data: blogDetails }) => {
   //     </div>
   //   );
   // }
+  console.log('blog Details', blogDetails);
   const parseBlog = JSON.parse(blogDetails?.attributes?.description);
+
   return (
     <>
       <section className="bg-gray-50">
