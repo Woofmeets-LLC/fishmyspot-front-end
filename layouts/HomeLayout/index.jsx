@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react-hooks/exhaustive-deps */
 
+import LogRocket from 'logrocket';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
@@ -35,18 +36,23 @@ const HomeLayout = ({
   const { push } = useRouter();
 
   // This is for initializing the log rocket SDK
+  
 
-  // useEffect(() => {
-  //  LogRocket.init('7rp2z0/fishmyspot');
-  // if (isLoggedIn) {
-  //   LogRocket.identify(user?.id, {
-  //     name: `${user?.profile?.firstName} ${user?.profile?.lastName}`,
-  //     email: user?.email,
-  // Add your own custom user variables here, ie:
-  // account_type: user?.profile?.publicData?.account_type,
-  //   });
-  // }
-  // }, []);
+  useEffect(() => {
+   LogRocket.init('nxr0hm/fishmyspot-pond-oner');
+  if (isLoggedIn) {
+    LogRocket.identify(user?.id, {
+      name: `${user?.profile?.firstName} ${user?.profile?.lastName}`,
+      email: user?.email,
+  account_type: user?.profile?.publicData?.account_type,
+    });
+  }
+  }, []);
+  useEffect(() => {
+    if (user?.data?.data?.data) {
+      identifyLogRocketUser(user?.data?.data?.data);
+    }
+  }, [user?.data?.data?.data]);
 
   useEffect(() => {
     // It will update user data in redux in every reload if user is logged in

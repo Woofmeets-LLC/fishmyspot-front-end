@@ -6,13 +6,6 @@ Create a Merge Request in Gitlab. Source Branch is your feature branch. Target b
 
 Title of the Merge Request will be [Jira-Ticket Number - Feature] ex. RR-34 Bug Fix Input Fields.
 
-Description should include link to Jira Ticket
-
-Assignee should be [Assign to Me]
-
-If the work is Front-End related, add all Front-End Engineers and Wasfi as reviewers.
-
-If the work is Back-End related, add all Back-End Engineers and Wasfi as reviewers.
 
 Make sure delete source branch is checked
 
