@@ -45,7 +45,6 @@
     "react-slick": "^0.28.1",
     "react-spinners": "^0.11.0",
     "recompose": "^0.30.0",
-    "remark-gfm": "^4.0.0",
     "sharetribe-flex-integration-sdk": "^1.7.0",
     "sharetribe-flex-sdk": "^1.15.0",
     "sharp": "^0.30.7",
@@ -60,6 +59,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@digitalroute/cz-conventional-changelog-for-jira": "^7.3.0",
+    "@tailwindcss/typography": "^0.5.10",
     "autoprefixer": "^10.4.2",
     "babel-loader": "^8.2.4",
     "commitizen": "^4.2.4",

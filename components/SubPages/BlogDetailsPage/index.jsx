@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { default as Markdown } from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import MoreBlogsSection from './MoreBlogsSection';
 import SubFeaturedFishingSpotSection from './SubFeaturedFishingSpotSection';
 import SubListedYourSpotSection from './SubListedYourSpotSection';
@@ -61,7 +60,9 @@ const SubBlogDetailsSection = ({ data: blogDetails }) => {
   //     </div>
   //   );
   // }
-  console.log('blog Details', blogDetails);
+
+  // commenting the parse content as the content is returning string, thus there is nothing to parse 
+  
   // const parseBlog = JSON.parse(blogDetails?.attributes?.description);
 
   return (
@@ -111,10 +112,9 @@ const SubBlogDetailsSection = ({ data: blogDetails }) => {
                 {/* Blocks renderer */}
                 {/* <BlocksRenderer parseDetail={parseBlog} /> */}
 
-                <div className="mb-4 p-4">
-                  <Markdown remarkPlugins={[remarkGfm]}>
-                    {blogDetails?.attributes?.description}
-                  </Markdown>
+                {/* New Blocks Rendere using Markdown instead of react-render-js package */}
+                <div className="prose mb-4 p-4 lg:prose-xl">
+                  <Markdown>{blogDetails?.attributes?.description}</Markdown>
                 </div>
               </div>
             </div>
