@@ -83,9 +83,9 @@ const GiftCardCheckoutForm = ({ step, setStep, setIsError }) => {
             .then((res) => res.json())
             .then((res) => {
               const data = {
-                service_id: 'service_0z8txkg',
-                template_id: 'template_f48yvbp',
-                user_id: 'D9WeGnhaGJceVldKx',
+                service_id: 'service_uipnw39',
+                template_id: 'template_5stxrdp',
+                user_id: 'DOHeqAAkS39RnKBWg',
                 template_params: {
                   from_name: giftCardData?.name,
                   reply_to: giftCardData?.recipientEmail,
