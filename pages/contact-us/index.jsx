@@ -61,8 +61,7 @@ const ContactUs = () => {
                 <div className="w-full">
                   <button
                     type="submit"
-                    className="inline-block w-full rounded bg-secondary py-3 px-4 font-trade-gothic-bold text-white"
-                  >
+                    className="inline-block w-full rounded bg-secondary py-3 px-4 font-trade-gothic-bold text-white">
                     Send
                   </button>
                 </div>
