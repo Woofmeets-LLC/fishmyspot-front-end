@@ -7,14 +7,11 @@
   "prettier.singleQuote": true,
   "javascript.validate.enable": false, //disable all built-in syntax checking
   "editor.codeActionsOnSave": {
-    "source.fixAll.markdownlint": true,
-    // For ESLint
-    "source.fixAll.eslint": true,
-    // For TSLint
-    "source.fixAll.tslint": true,
-    // For Stylelint
-    "source.fixAll.stylelint": true,
-    "source.organizeImports": true
+    "source.fixAll.markdownlint": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.tslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
+    "source.organizeImports": "explicit"
   },
   // emmet
   "emmet.triggerExpansionOnTab": true,

@@ -139,7 +139,7 @@ const Footer = () => {
           </div>
           <div className="order-3 lg:order-2 lg:col-span-6 xl:col-span-2">
             <div className="py-2 text-center text-white lg:py-6">
-              &copy; 2018 – 2021 by FishMySpot
+              &copy; 2018 – 2021 by Algosolver
             </div>
           </div>
           <div className="order-2 lg:order-3 lg:col-span-3 xl:col-span-1">
