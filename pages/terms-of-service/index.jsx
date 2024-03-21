@@ -13,18 +13,18 @@ const TermsOfService = () => {
           <p>
             These Terms of Service govern your use of the website located at {" "}
             <Link href={"/"}>
-              <a>https://fishmyspot.com</a>
-            </Link> and any related services provided by FishMySpot.
+              <a>https://algosolver.com</a>
+            </Link> and any related services provided by Algosolver.
           </p>
           <p>
             By accessing {" "}
             <Link href={"/"}>
-              <a>https://fishmyspot.com</a>
+              <a>https://algosolver.com</a>
             </Link>
             , you agree to abide by these Terms of
             Service and to comply with all applicable laws and regulations. If you do not
             agree with these Terms of Service, you are prohibited from using or
-            accessing this website or using any other services provided by FishMySpot.
+            accessing this website or using any other services provided by Algosolver.
           </p>
           <p>
             We, FishMySpot, reserve the right to review and amend any of these Terms
