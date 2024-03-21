@@ -134,7 +134,7 @@ const Footer = () => {
         <div className="grid lg:grid-cols-12 lg:gap-2 xl:grid-cols-4 xl:gap-20">
           <div className="lg:col-span-3 xl:col-span-1">
             <p className="py-2 text-center text-white lg:py-6 lg:text-left">
-              1-844-446-3474
+              1-347-849-7449
             </p>
           </div>
           <div className="order-3 lg:order-2 lg:col-span-6 xl:col-span-2">
@@ -144,7 +144,7 @@ const Footer = () => {
           </div>
           <div className="order-2 lg:order-3 lg:col-span-3 xl:col-span-1">
             <p className="text-center text-white lg:py-6 lg:text-right xl:text-left">
-              info@fishmyspot.com
+              admin@algosolver.com
             </p>
           </div>
         </div>
